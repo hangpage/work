@@ -1,0 +1,25 @@
+.marginLoop(@n, @i:1) when (@i < @n){
+  :global(.mt@{i}){
+    margin-top: @i px !important;
+  }
+  :global(.ml@{i}){
+    margin-left: @i px !important;
+  }
+  :global(.mr@{i}){
+    margin-right: @i px !important;
+  }
+  :global(.mb@{i}){
+    margin-bottom: @i px !important;
+  }
+  .marginLoop(@n, (@i + 1));
+}
+.fontLoop(@n, @i:1) when (@i < @n){
+  :global(.font@{i}){
+    font-size: @i px !important;
+  }
+  .fontLoop(@n, (@i + 1));
+}
+
+.marginLoop(100);
+.fontLoop(30);
+

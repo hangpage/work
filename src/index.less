@@ -1,0 +1,53 @@
+@main-width:1200px;
+
+:global{
+  .my-layout{
+    overflow: hidden;
+    .ant-layout-content {
+      padding: 0;
+    }
+  }
+  .w{
+    margin: 0 auto;
+    width: @main-width;
+    .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+      background:linear-gradient(90deg,rgba(0,172,175,1),rgba(11,158,160,1),rgba(13,114,184,1),rgba(0,169,193,1),rgba(7,113,187,1));
+      width: 120px;
+      text-align: center;
+    }
+    .ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item > a{
+      color:rgba(102,102,102,1);
+    }
+  }
+  .flex-width-space-between{
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer {
+    position: relative;
+    p {
+      font-size: 14px;
+      margin-bottom: 17px !important;
+    }
+
+    p:last-child {
+      font-size: 12px;
+    }
+
+    .logo {
+      position: absolute;
+      left: 0;
+    }
+    .ant-layout-footer{
+      height:153px;
+      background:rgba(51,51,51,1) !important;
+      color: #999;
+      padding-top: 40px;
+      padding-bottom: 38px;
+      text-align: center;
+    }
+  }
+ .stage{
+   margin-top: 79px;
+ }
+}

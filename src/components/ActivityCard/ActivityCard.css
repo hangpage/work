@@ -1,0 +1,35 @@
+.title {
+  font-size: 20px;
+  color: #1F82C2;
+  flex: 1;
+}
+.card {
+  border-radius: 4px;
+  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
+  width: 361px;
+  height: 357px;
+}
+.desc {
+  padding: 20px;
+  height: 132px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(153, 153, 153, 0.1);
+  border-top: none;
+}
+.time {
+  font-size: 14px;
+  color: #999999;
+  margin-right: 87px;
+}
+.read {
+  font-size: 16px;
+}
+.card img {
+  width: 100%;
+  height: 225px;
+}
+.card p {
+  margin-bottom: 0;
+}
+/*# sourceMappingURL=ActivityCard.css.map */

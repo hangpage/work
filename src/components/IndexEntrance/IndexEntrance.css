@@ -1,0 +1,14 @@
+.card {
+  width: 204px;
+  height: 192px;
+  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
+  border-radius: 4px;
+  text-align: center;
+}
+.card img {
+  margin-top: 49px;
+}
+.card p {
+  margin-top: 21px;
+}
+/*# sourceMappingURL=IndexEntrance.css.map */

@@ -1,0 +1,51 @@
+:global .my-layout {
+  overflow: hidden;
+}
+:global .my-layout .ant-layout-content {
+  padding: 0;
+}
+:global .w {
+  margin: 0 auto;
+  width: 1200px;
+}
+:global .w .ant-menu.ant-menu-dark .ant-menu-item-selected,
+:global .w .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background: linear-gradient(90deg, #00acaf, #0b9ea0, #0d72b8, #00a9c1, #0771bb);
+  width: 120px;
+  text-align: center;
+}
+:global .w .ant-menu-dark .ant-menu-item,
+:global .w .ant-menu-dark .ant-menu-item-group-title,
+:global .w .ant-menu-dark .ant-menu-item > a {
+  color: #666666;
+}
+:global .flex-width-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+:global .footer {
+  position: relative;
+}
+:global .footer p {
+  font-size: 14px;
+  margin-bottom: 17px !important;
+}
+:global .footer p:last-child {
+  font-size: 12px;
+}
+:global .footer .logo {
+  position: absolute;
+  left: 0;
+}
+:global .footer .ant-layout-footer {
+  height: 153px;
+  background: #333333 !important;
+  color: #999;
+  padding-top: 40px;
+  padding-bottom: 38px;
+  text-align: center;
+}
+:global .stage {
+  margin-top: 79px;
+}
+/*# sourceMappingURL=index.css.map */
