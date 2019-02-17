@@ -1,13 +1,25 @@
+.color-linear {
+  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
+  -webkit-background-clip: text;
+  color: transparent;
+}
 .title {
   font-size: 20px;
-  color: #1F82C2;
+  color: #333333 !important;
   flex: 1;
 }
 .card {
   border-radius: 4px;
-  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
   width: 361px;
   height: 357px;
+}
+.card:hover .desc {
+  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
+}
+.card:hover .title {
+  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
+  -webkit-background-clip: text;
+  color: transparent;
 }
 .desc {
   padding: 20px;
@@ -28,8 +40,26 @@
 .card img {
   width: 100%;
   height: 225px;
+  min-height: 225px;
 }
 .card p {
   margin-bottom: 0;
+  color: #999999;
+}
+.bigcard {
+  height: 400px;
+  width: 550px;
+}
+.bigcard img {
+  width: 550px;
+  height: 309px;
+  min-height: 309px;
+}
+.bigcard .desc {
+  height: 92px;
+}
+.bigcard p {
+  margin-bottom: 0;
+  color: #999999;
 }
 /*# sourceMappingURL=ActivityCard.css.map */

@@ -1,0 +1,35 @@
+.searchInput {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  width: 700px;
+  background: rgba(153, 153, 153, 0.08);
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  padding: 0 57px;
+}
+.searchInput img {
+  position: absolute;
+  right: 23px;
+  top: 10px;
+  cursor: pointer;
+}
+.searchInput input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: transparent;
+}
+.searchInput input:focus {
+  outline: none;
+  border: none !important;
+  box-shadow: none !important;
+}
+.searchInput .close {
+  position: absolute;
+  left: 22px;
+  top: 17px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=SearchButton.css.map */

@@ -1,0 +1,61 @@
+@import "variable";
+.marginLoop(@n, @i:1) when (@i < @n){
+  :global .mt@{i}{
+    margin-top: unit(@i,px) !important;
+  }
+  :global .ml@{i}{
+    margin-left: unit(@i,px ) !important;
+  }
+  :global .mr@{i}{
+    margin-right: unit(@i,px) !important;
+  }
+  :global .mb@{i}{
+    margin-bottom: unit(@i,px) !important;
+  }
+  :global .pb@{i}{
+    padding-bottom: unit(@i,px) !important;
+  }
+  :global .pt@{i}{
+    padding-top: unit(@i,px) !important;
+  }
+  :global .pl@{i}{
+    padding-left: unit(@i,px) !important;
+  }
+  :global .pr@{i}{
+    padding-right: unit(@i,px) !important;
+  }
+  .marginLoop(@n, (@i + 1));
+}
+.fontLoop(@n, @i:1) when (@i < @n){
+  :global(.font@{i}){
+    font-size: unit(@i,px) !important;
+  }
+  .fontLoop(@n, (@i + 1));
+}
+
+.borderRadiusLoop(@n, @i:1) when (@i < @n){
+  :global(.br@{i}){
+    border-radius: unit(@i,px) !important;
+  }
+  .borderRadiusLoop(@n, (@i + 1));
+}
+
+.marginLoop(100);
+.fontLoop(30);
+.borderRadiusLoop(10);
+
+:global{
+   .bg-white{
+     background: @white;
+   }
+  .text-align{
+    text-align: center;
+  }
+  .height6line{
+    height:6px;
+    border:6px solid rgba(153,153,153,1);
+    opacity:0.1;
+    width: 100%;
+  }
+}
+

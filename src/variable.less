@@ -1,0 +1,33 @@
+@light-gray: #999999;
+@deep-gray: #666666;
+@white:#ffffff;
+@secondBgColor: #FAFAFA;
+@opacity999: rgba(153, 153, 153, 0.1);
+@linear-main: linear-gradient(90deg, rgba(0,172,175,0.9), rgba(7,113,187,0.9));
+@light-gray-border: 1px solid rgba(153, 153, 153, 0.2);
+.color-linear-to-right{
+  background:linear-gradient(to right, rgba(7,113,187,1) ,rgba(0,172,175,1));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear-to-bottom{
+  background:linear-gradient(to bottom, rgba(7,113,187,1) ,rgba(0,172,175,1));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear{
+  background:linear-gradient(to right, rgba(0,172,175,1), rgba(7,113,187,1));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.bg-linear-to-bottom{
+  background:linear-gradient(to bottom, rgba(7,113,187,1), rgba(0,172,175,1));
+}
+
+.bg-linear-to-right{
+  background:linear-gradient(to right, rgba(0,172,175,1), rgba(7,113,187,1));
+}
+.border-linear{
+  border-image: -webkit-linear-gradient( #00ACAF ,#0771BB) 30 30;
+}

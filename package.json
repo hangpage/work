@@ -9,9 +9,17 @@
   "dependencies": {
     "antd": "^3.12.4",
     "babel-plugin-import": "^1.11.0",
+    "classnames": "^2.2.6",
     "dva": "^2.4.1",
+    "dva-loading": "^2.0.6",
+    "dva-model-extend": "^0.1.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "path-to-regexp": "latest",
+    "qs": "latest",
+    "prop-types": "latest",
+    "moment": "latest",
+    "lodash": "latest"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

@@ -1,0 +1,94 @@
+.color-linear-to-right {
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear-to-bottom {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.bg-linear-to-bottom {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+}
+.bg-linear-to-right {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+}
+.border-linear {
+  border-image: -webkit-linear-gradient(#00ACAF, #0771BB) 30 30;
+}
+.card {
+  padding: 30px 20px;
+  display: flex;
+  background: #ffffff;
+  margin: 39px 0;
+  border: 1px solid rgba(153, 153, 153, 0.2);
+}
+.card img {
+  width: 320px;
+  height: 205px;
+  border-radius: 4px;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+.card .right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.card .info {
+  font-size: 14px;
+  color: #999999;
+  margin-top: 17px;
+}
+.card .content {
+  margin-top: 17px;
+  border-top: 1px solid #999999;
+  color: #333333;
+  font-size: 14px;
+  flex-grow: 1;
+  margin-bottom: 15px;
+  padding-top: 5px;
+  line-height: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  max-height: 66px;
+}
+.card .title {
+  line-height: 28px;
+  font-size: 20px;
+  color: #333333;
+}
+.card .baoming {
+  display: inline-block;
+  width: 90px;
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  height: 40px;
+  line-height: 40px;
+  font-size: 22px;
+  text-align: center;
+  border-radius: 2px 0 0 2px;
+}
+.card .link {
+  color: #ffffff !important;
+}
+.card .daoshi {
+  display: inline-block;
+  border: 1px solid #0771BB;
+  color: #0771BB;
+  font-size: 22px;
+  width: 226px;
+  height: 40px;
+  line-height: 39px;
+  text-align: center;
+  border-left: none;
+}
+/*# sourceMappingURL=ReportCard.css.map */

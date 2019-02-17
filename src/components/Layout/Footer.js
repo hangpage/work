@@ -1,6 +1,6 @@
 import React from "react";
 import {Layout} from 'antd';
-import logo from './imgs/logo.png';
+import logo from './imgs/gray-logo.png';
 import Const from "../../utils/Const"
 
 

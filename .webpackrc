@@ -1,5 +1,12 @@
 {
   "extraBabelPlugins": [
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
-  ]
+  ],
+  "proxy": {
+      "/api": {
+        "target": "http://39.98.37.28/beili/",
+        "changeOrigin": true,
+        "pathRewrite": { "^/api" : "" }
+      }
+    }
 }

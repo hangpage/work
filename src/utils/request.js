@@ -22,6 +22,9 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
+  if(process.env.NODE_ENV === 'production'){
+    url = url.replace('/api', '');
+  }
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
