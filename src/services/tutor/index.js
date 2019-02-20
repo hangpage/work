@@ -9,10 +9,9 @@ import qs from 'qs';
 * @Author: zzhihang@hotmail.com 
 * @date: 2019/2/11 17:06
 */ 
-export function tutorDeclare(params){
-  return request(`/api/tutor/declare?${qs.stringify(params)}`,{
-    method: 'POST',
-    headers: new Headers(),
-    credentials: "include"
+export function tutorDeclare(formData){
+  return request('/api/tutor/declare',{
+    method: 'post',
+    body: formData
   });
 }

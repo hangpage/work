@@ -6,10 +6,9 @@
 import React from 'react';
 import {Form, Input, message, Row} from "antd";
 import {equalResultStatus} from "../../utils";
-import {parkingApply, repairApply} from "../../services/service";
+import {repairApply} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
-import {Upload} from "antd";
-import Icon from "antd/es/icon";
+import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 
 const Repair = ({form}) => {
@@ -37,7 +36,11 @@ const Repair = ({form}) => {
     form.validateFields((err, values) => {
       if (!err) {
         values.token = sessionStorage.getItem('token');
-        repairApply(values).then(({data}) => {
+        let formData = new FormData();
+        Object.keys(values).forEach((item) => {
+          formData.append(item, values[item]);
+        });
+        repairApply(formData).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
           } else {
@@ -90,12 +93,7 @@ const Repair = ({form}) => {
             colon={false}
           >
             {getFieldDecorator('pic')(
-              <Upload.Dragger name="pic">
-                <p className="ant-upload-drag-icon">
-                  <Icon type="camera"/>
-                </p>
-                <p className="ant-upload-text">点击上传</p>
-              </Upload.Dragger>
+              <ImageUpload/>
             )}
           </Form.Item>
         </Form>

@@ -38,3 +38,27 @@ export function userLeavePark(params={}){
     credentials: "include"
   });
 }
+export function userFindEntering(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findEntering?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+export function userEntering(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/entering?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+export function userFindSignActivity(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/activity/findSignActivity?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}

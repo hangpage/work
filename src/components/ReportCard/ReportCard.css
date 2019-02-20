@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: -webkit-linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
 }
 .card {
   padding: 30px 20px;
@@ -90,5 +90,11 @@
   line-height: 39px;
   text-align: center;
   border-left: none;
+}
+.card .daoshi span {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
 }
 /*# sourceMappingURL=ReportCard.css.map */

@@ -22,7 +22,7 @@ const Detail = ({data}) => {
           noTeacher={true}
         />
         <div className='competition-detail mb40' dangerouslySetInnerHTML={{__html: data.content}} />
-        <div className='height6line  mb40'></div>
+        <div className='height6line  mb40'/>
         <div className="sign-member">
           <p>已报名</p>
           <div className="member-box">

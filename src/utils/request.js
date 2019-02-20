@@ -23,7 +23,7 @@ function checkStatus(response) {
  */
 export default function request(url, options) {
   if(process.env.NODE_ENV === 'production'){
-    url = url.replace('/api', '');
+    url = url.replace('/api', '/beili');
   }
   return fetch(url, options)
     .then(checkStatus)

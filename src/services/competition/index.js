@@ -27,11 +27,11 @@ export function getTeamDetail(params){
 * @Author: zzhihang@hotmail.com 
 * @date: 2019/2/11 19:58
 */
-export function insertTeam(params){
-  return request(`/api/team/insertTeam?${qs.stringify(params)}`,{
-    method: 'POST',
-    headers: new Headers(),
-    credentials: "include"
+
+export function insertTeam(formData){
+  return request('/api/team/insertTeam',{
+    method: 'post',
+    body: formData
   });
 }
 
@@ -43,11 +43,11 @@ export function insertTeam(params){
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/11 19:58
  */
-export function insertProject(params){
-  return request(`/api/team/insertProject?${qs.stringify(params)}`,{
-    method: 'POST',
-    headers: new Headers(),
-    credentials: "include"
+
+export function insertProject(formData){
+  return request('/api/team/insertProject',{
+    method: 'post',
+    body: formData
   });
 }
 

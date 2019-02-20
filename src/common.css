@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: -webkit-linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
 }
 :global .mt1 {
   margin-top: 1px !important;
@@ -2523,5 +2523,23 @@
   border: 6px solid #999999;
   opacity: 0.1;
   width: 100%;
+}
+:global .icon-del {
+  background-image: url('./assets/icon/icon-shanchu.png');
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+}
+:global .icon-edit {
+  background-image: url('./assets/icon/icon-bianji.png');
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+}
+:global .icon-add {
+  background-image: url('./assets/icon/icon-tianjia.png');
+  display: inline-block;
+  height: 20px;
+  width: 20px;
 }
 /*# sourceMappingURL=common.css.map */

@@ -101,11 +101,11 @@ export function parkingApply(params){
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/12 12:37
  */
-export function repairApply(params){
-  return request(`/api/repair/appli?${qs.stringify(params)}`,{
-    method: 'POST',
-    headers: new Headers(),
-    credentials: "include"
+
+export function repairApply(formData){
+  return request('/api/repair/appli',{
+    method: 'post',
+    body: formData
   });
 }
 
@@ -118,6 +118,65 @@ export function repairApply(params){
  */
 export function serviceApply(params){
   return request(`/api/repair/appli?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/**
+ * @Description: 查询储物柜
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/12 12:37
+ */
+export function serviceQueryLockers(params = {}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/locker/findLockers?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/**
+ * @Description: 查询储物柜
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/12 12:37
+ */
+export function serviceLockerAppli(params = {}){
+  return request(`/api/locker/appli?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/**
+ * @Description: 查询储物柜
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/12 12:37
+ */
+export function serviceQueryMeeting(params = {}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/reservation/findMeetingRoom?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/**
+ * @Description: 查询储物柜
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/12 12:37
+ */
+export function serviceMeetingAppli(params = {}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api//reservation/reservation?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"

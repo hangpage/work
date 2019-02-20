@@ -1,5 +1,5 @@
 import React from 'react';
-import {Router, Route, Switch} from 'dva/router';
+import {Router, Route, Switch, Redirect} from 'dva/router';
 import Index from './routes/Index/Index';
 import Service from './routes/Service';
 import Competition from './routes/Competition';
@@ -15,6 +15,9 @@ import AppointVisit from "./routes/Index/AppointVisit";
 import Notice from "./routes/Notice";
 import NoticeDetail from "./routes/Notice/detail";
 import Park from "./routes/Park";
+import ParkStep1 from "./routes/Park/ParkStep1";
+import ParkStep2 from "./routes/Park/ParkStep2";
+import ParkStep3 from "./routes/Park/ParkStep3";
 import Activity from "./routes/Activity";
 import Find from "./routes/Find";
 import ActivityDetail from "./routes/Activity/Detail";
@@ -24,6 +27,7 @@ import Profile from "./routes/Home/profile";
 import Match from "./routes/Home/match";
 import Leave from "./routes/Home/leave";
 import Advise from "./routes/Home/advise";
+import Enter from "./routes/Home/enter";
 import ServiceParking from './routes/Service/parking';
 import Repair from './routes/Service/repair';
 import Lockers from './routes/Service/lockers';
@@ -108,6 +112,18 @@ const routes = [{
   component: Park,
   exact: 'exact'
 }, {
+  path: '/park/parkStep1',
+  component: ParkStep1,
+  exact: 'exact'
+},  {
+  path: '/park/parkStep2',
+  component: ParkStep2,
+  exact: 'exact'
+},  {
+  path: '/park/parkStep3',
+  component: ParkStep3,
+  exact: 'exact'
+}, {
   path: '/activity',
   component: Activity,
   exact: 'exact'
@@ -144,6 +160,10 @@ const routes = [{
   component: Advise,
   exact: 'exact'
 },{
+  path: '/home/enter',
+  component: Enter,
+  exact: 'exact'
+},{
   path: '/search',
   component: Search,
   exact: 'exact'
@@ -160,6 +180,7 @@ function RouterConfig({history}) {
               return <Route path={item.path} key={index} exact component={item.component}/>
             })}
           </App>
+          <Redirect to="/index" />
         </Switch>
       </div>
     </Router>

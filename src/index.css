@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: -webkit-linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
 }
 :global {
   /* For demo */
@@ -49,6 +49,21 @@
 }
 :global .ant-layout {
   background: #ffffff !important;
+}
+:global .ant-modal-footer {
+  text-align: center !important;
+}
+:global .ant-modal-close-x {
+  background-image: url('./assets/icon/icon-guanbi.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+:global .ant-modal-title {
+  text-align: center !important;
+  background: linear-gradient(to right, #00acaf, #0771bb) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+  font-weight: bold !important;
 }
 :global .ant-layout-header {
   box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
@@ -276,7 +291,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
-  border-image: -webkit-linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
 }
 :global .park-card img {
   width: 570px;
@@ -301,7 +316,6 @@
   line-height: 53px;
   border-bottom: 1px solid #999999;
   margin-bottom: 0;
-  padding-left: 18px;
 }
 :global .park-card .content .intro {
   color: #666666;
@@ -404,6 +418,7 @@
   background: rgba(153, 153, 153, 0.1);
   height: 60px;
   line-height: 60px;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.2);
   text-align: center;
   font-size: 24px;
 }
@@ -417,6 +432,7 @@
   width: 910px !important;
   justify-content: center;
   margin-left: 50px;
+  border: 1px solid rgba(153, 153, 153, 0.2) !important;
 }
 :global .footer {
   position: relative;
@@ -577,6 +593,65 @@
   line-height: 40px;
   display: inline-block;
 }
+:global .icon-add-box {
+  font-size: 20px;
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+:global .icon-add-box i {
+  margin-right: 10px;
+}
+:global .icon-add-box span {
+  padding-bottom: 2px;
+}
+:global .self-add {
+  height: 61px;
+  background: #f3f3f3;
+  border-radius: 4px;
+  line-height: 61px;
+  padding: 0 20px;
+}
+:global .self-add .item {
+  margin-right: 50px;
+  color: #666666;
+  font-size: 16px;
+}
+:global .self-add .title {
+  color: #666666;
+  font-size: 20px;
+}
+:global .self-add .reward {
+  color: #999999;
+  font-size: 16px;
+  margin-left: 119px;
+}
+:global .self-add .edit,
+:global .self-add .del {
+  font-size: 14px;
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-left: 4px;
+}
+:global .self-add .split {
+  display: inline-block;
+  width: 1px;
+  height: 21px;
+  border: 1px solid rgba(153, 153, 153, 0.2);
+  margin: 20px 20px;
+}
+:global .self-add .fr {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+:global .fr {
+  float: right;
+}
 :global .login-form-box {
   display: flex;
   justify-content: center;
@@ -667,14 +742,63 @@
   margin-top: 60px;
   font-size: 24px;
 }
-:global .competition div:nth-of-type(3n+2) {
-  margin: 0 60px;
-}
 :global .stage:last-child {
   margin-bottom: 78px;
   padding: 40px 20px;
   background: #FAFAFA;
   border-radius: 6px;
+}
+:global .bl-confirm {
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
+  border-radius: 6px;
+  text-align: center;
+  padding-bottom: 60px;
+  width: 690px;
+  margin: 0 auto;
+}
+:global .bl-confirm .title {
+  height: 80px;
+  line-height: 80px;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+}
+:global .bl-confirm .title span {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 24px;
+}
+:global .bl-confirm .border {
+  height: 6px;
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+  border-radius: 3px 3px 0 0;
+}
+:global .bl-confirm .content {
+  padding: 33px 30px 0;
+  line-height: 36px;
+  margin-bottom: 40px;
+  color: #666666;
+  font-size: 18px;
+  text-align: left;
+}
+:global .bl-confirm .btn {
+  width: 180px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 20px;
+}
+:global .bl-confirm .btn.bl {
+  background: rgba(153, 153, 153, 0.2);
+  color: #999999;
+}
+:global .bl-confirm .btn.br {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  margin-left: 165px;
+  color: #ffffff;
 }
 :global .light-gray {
   color: #999999 !important;
@@ -709,7 +833,7 @@
 }
 :global .bl-form .form-title {
   height: 60px;
-  background: linear-gradient(90deg, #00acaf, #0b9ea0, #0d72b8, #00a9c1, #0771bb);
+  background: linear-gradient(to right, #00acaf, #0771bb);
   border-radius: 8px 8px 0 0;
   font-weight: bold;
   color: #ffffff;
@@ -717,12 +841,23 @@
   text-align: center;
   line-height: 60px;
 }
+:global .bl-form .subheading {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
 :global .bl-form .form-name {
   position: relative;
   font-size: 24px;
   font-weight: bold;
   margin-top: 30px;
   text-align: center;
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 :global .bl-form .form-name:before {
   content: '';

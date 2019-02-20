@@ -5,15 +5,28 @@
  */
 import React from 'react';
 import Home from "./index";
+import {connect} from "dva";
+import {Link} from "dva/router";
+import HorizontalCard from "../../components/HorizontalCard/HorizontalCard";
 
-const Match = () => {
+const Match = ({activityData}) => {
   return (
     <Home>
       <div>
-        比赛啊
+        <div className="title-card"><span>我的比赛</span></div>
+        <div className='pl20 pr 20'>
+        {activityData.map((item, index) => {
+          return (
+            <Link key={index} to={`/competition/${item.id}?park=${item.park}`}>
+              <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime}
+                              title={item.title} count={item.count} desc={item.content} status={item.status}/>
+            </Link>
+          )
+        })}
+        </div>
       </div>
     </Home>
   );
 };
 
-export default Match;
+export default connect(({home}) => (home))(Match);

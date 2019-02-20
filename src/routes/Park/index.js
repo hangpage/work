@@ -5,30 +5,33 @@
  */
 import React from 'react';
 import {connect} from "dva";
-import config from '../../utils/config';
-import {Col, Row} from "antd";
+import {Col, Pagination, Row} from "antd";
+import {Link} from 'dva/router';
 
-const Index = ({list}) => {
+const Index = ({list, count}) => {
   return (
-    <div>
+    <div className='pt40 pb80'>
       <div className="w">
         <Row gutter={59}>
           {list.map((item, index) => {
             return (
               <Col key={index} span={12}>
-                <div className="park-card">
-                  <img src={`${config.Url}${item.pic}`} alt=""/>
-                  <div className="content">
-                    <p className='title'>{item.name}</p>
-                    <p className="intro">
-                      <span style={{fontWeight: 'bold'}}>介绍：</span>{item.intro}
-                    </p>
+                <Link to={`/park/parkStep1?id=${item.id}`}>
+                  <div className="park-card">
+                    <img src={`${item.pic}`} alt=""/>
+                    <div className="content">
+                      <p className='title'>{item.name}</p>
+                      <p className="intro">
+                        <span style={{fontWeight: 'bold'}}>介绍：</span>{item.intro}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </Col>
             )
           })}
         </Row>
+        <Pagination total={count}/>
       </div>
     </div>
   );

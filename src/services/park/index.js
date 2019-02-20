@@ -15,5 +15,36 @@ export function parkFindList(params){
     headers: new Headers(),
     credentials: "include"
   });
+
 }
+/**
+ * @Description: 入驻园区
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 17:06
+ */
+
+export function parkResidentTeam(formData){
+  return request('/api/residentTeam/save',{
+    method: 'post',
+    body: formData
+  });
+}
+/**
+ * @Description: 入驻园区
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 17:06
+ */
+export function parkSavePrincipal(params){
+  return request(`/api/residentTeam/savePrincipal?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+
 

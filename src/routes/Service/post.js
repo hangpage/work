@@ -6,7 +6,7 @@
 import React from 'react';
 import {Form, Input, message, Row} from "antd";
 import {equalResultStatus} from "../../utils";
-import {serviceApply} from "../../services/service";
+import {serviceDeclare} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 
 
@@ -35,7 +35,7 @@ const Post = ({form}) => {
     form.validateFields((err, values) => {
       if (!err) {
         values.token = sessionStorage.getItem('token');
-        serviceApply(values).then(({data}) => {
+        serviceDeclare(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
           } else {

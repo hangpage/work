@@ -5,14 +5,15 @@
  */
 import React from 'react';
 import styles from "./Competition.less";
+import Const from '../../utils/Const';
 
-const CompetitionCard = ({img, title, time, read}) => {
+const CompetitionCard = ({img, title, time, read, status}) => {
   return (
     <div>
       <div className={styles.card}>
         <img src={img} alt=""/>
         <div className={styles.desc}>
-          <span className={styles.status}>报名中</span>
+          <span className={styles.status}>{Const.MATCH_STATUS[status]}</span>
           <p className={styles.title}>{title}</p>
           <p>
             <span className={styles.time}>{time}</span>

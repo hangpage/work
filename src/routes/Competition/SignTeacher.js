@@ -4,16 +4,13 @@
  * @Date: 2019/2/3 12:53
  */
 import React from 'react';
-import {
-  Form, Input, Button,
-  Upload, Row, Col, Radio, DatePicker, message
-} from 'antd';
+import {Col, Form, Input, message, Radio, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
-import Icon from "antd/es/icon";
 import {equalResultStatus, getParams, reFormatParams} from "../../utils";
 import {tutorDeclare} from "../../services/tutor";
+import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 const {TextArea} = Input;
 
@@ -23,10 +20,14 @@ const TeamInfoWrite = ({form, history, location}) => {
   const submit = () => {
     validateFields((err, values) => {
       if (!err) {
-        let params = values;
+        let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
         params.mId = getParams(location.search).mId;
-        tutorDeclare(reFormatParams(values)).then(({data}) => {
+        let formData = new FormData();
+        Object.keys(params).forEach((item) => {
+          formData.append(item, params[item]);
+        });
+        tutorDeclare(formData).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success(data.message);
             history.push({
@@ -51,17 +52,14 @@ const TeamInfoWrite = ({form, history, location}) => {
             </div>
             <Form>
               <Form.Item
-                label="学生证或身份证"
-                labelCol={{span: 12}}
+                label="照片"
+                labelCol={{span: 24}}
                 wrapperCol={{span: 6}}
               >
-                {getFieldDecorator('diploma')(
-                  <Upload.Dragger name="diploma">
-                    <p className="ant-upload-drag-icon">
-                      <Icon type="camera"/>
-                    </p>
-                    <p className="ant-upload-text">点击上传</p>
-                  </Upload.Dragger>
+                {getFieldDecorator('diploma', {
+                  rules: [{required: true, message: '必填项'}],
+                })(
+                 <ImageUpload/>
                 )}
               </Form.Item>
               <Row gutter={138}>
@@ -69,7 +67,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="姓名"
                   >
-                    {getFieldDecorator('principal')(
+                    {getFieldDecorator('principal', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <Input placeholder='请输入姓名'/>
                     )}
                   </Form.Item>
@@ -78,7 +78,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="性别"
                   >
-                    {getFieldDecorator('gendar')(
+                    {getFieldDecorator('gendar', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <Radio.Group>
                         <Radio value={Const.Man}>男</Radio>
                         <Radio value={Const.Woman}>女</Radio>
@@ -90,7 +92,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="手机"
                   >
-                    {getFieldDecorator('phone')(
+                    {getFieldDecorator('phone', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <Input placeholder='请输入手机号码'/>
                     )}
                   </Form.Item>
@@ -99,7 +103,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="教育背景(专业)"
                   >
-                    {getFieldDecorator('profession')(
+                    {getFieldDecorator('profession', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <ComboBox placeholder='请选择所学专业' url='/dict/findType?type=profession'/>
                     )}
                   </Form.Item>
@@ -108,7 +114,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="最高学历院校"
                   >
-                    {getFieldDecorator('educations')(
+                    {getFieldDecorator('educations', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <Input placeholder='请输入最高学历院校'/>
                     )}
                   </Form.Item>
@@ -117,7 +125,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="职称"
                   >
-                    {getFieldDecorator('jobTitle')(
+                    {getFieldDecorator('jobTitle', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <Input placeholder='请输入职称'/>
                     )}
                   </Form.Item>
@@ -126,7 +136,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="职业资格"
                   >
-                    {getFieldDecorator('professional')(
+                    {getFieldDecorator('professional', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <Input placeholder='请输入职业资格'/>
                     )}
                   </Form.Item>
@@ -135,8 +147,10 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="现在任职单位"
                   >
-                    {getFieldDecorator('education')(
-                      <ComboBox placeholder='请输入现在任职单位' url='/dict/findType?type=education'/>
+                    {getFieldDecorator('education', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
+                      <Input placeholder='请输入现在任职单位'/>
                     )}
                   </Form.Item>
                 </Col>
@@ -144,7 +158,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="学校"
                   >
-                    {getFieldDecorator('professional')(
+                    {getFieldDecorator('professional', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <ComboBox placeholder='请选择学校' url='/dict/findType?type=school'/>
                     )}
                   </Form.Item>
@@ -153,7 +169,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="行业"
                   >
-                    {getFieldDecorator('professional')(
+                    {getFieldDecorator('professional', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
                       <ComboBox placeholder='请选择行业' url='/dict/findType?type=industry'/>
                     )}
                   </Form.Item>
@@ -165,7 +183,7 @@ const TeamInfoWrite = ({form, history, location}) => {
                 wrapperCol={{span: 24}}
               >
                 {getFieldDecorator('financing', {
-                  rules: [{message: '请输入主要经历...'}],
+                  rules: [{required: true, message: '必填项'}],
                 })(
                   <TextArea placeholder='请输入主要经历...' style={{height: 240}}/>
                 )}
