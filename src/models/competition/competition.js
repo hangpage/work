@@ -1,14 +1,16 @@
-import {findList} from "../../services/competition";
+import {findList, matchGet} from "../../services/competition";
 import {model} from "../../utils/model";
 import modelExtend from 'dva-model-extend'
-import {pathMatchRegexp} from "../../utils";
+import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
+import {message} from "antd";
 
 export default modelExtend(model, {
 
   namespace: 'competition',
 
   state: {
-    list: []
+    list: [],
+    data: {}
   },
 
   subscriptions: {
@@ -18,6 +20,11 @@ export default modelExtend(model, {
           dispatch({
             type: 'queryCompetitionList'
           })
+        }else if(pathMatchRegexp('/competition/:id', location.pathname)){
+          const match = pathMatchRegexp('/competition/:id', location.pathname);
+          if (match) {
+            dispatch({ type: 'queryDetail', payload: { id: match[1], park: getParams(location.search).park } })
+          }
         }
       })
     },
@@ -25,17 +32,29 @@ export default modelExtend(model, {
 
   effects: {
     *queryCompetitionList({ payload }, { call, put }) {
-      const {data} = yield call(findList);
+      const {data} = yield call(findList, payload);
       if(data){
         yield put({
           type: 'updateState',
           payload: {
             list: data.data.list,
             count: data.data.count,
-            pageSize: data.data.pageSize,
             pageNo: data.data.pageNo
           }
         });
+      }
+    },
+    *queryDetail({ payload }, { call, put }){
+      const {data} = yield  call(matchGet, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'save',
+          payload: {
+            data: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
       }
     },
   },

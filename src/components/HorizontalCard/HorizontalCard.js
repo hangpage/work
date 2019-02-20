@@ -19,7 +19,7 @@ const HorizontalCard = ({img, title, time, count, status, desc, style}) => {
             <span style={{marginRight: 30}}>{time}</span>
             <span>已报名：<span className="deep-gray">{count}</span></span>
           </p>
-          <p className='desc' dangerouslySetInnerHTML={{__html: desc}} />
+          <p className='desc' />
         </div>
       </div>
     </div>

@@ -14,6 +14,10 @@ function checkStatus(response) {
   throw error;
 }
 
+function handleData(data) {
+  return {data};
+}
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -28,6 +32,6 @@ export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON)
-    .then(data => ({ data }))
+    .then(handleData)
     .catch(err => ({ err }));
 }

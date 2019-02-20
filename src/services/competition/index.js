@@ -59,7 +59,8 @@ export function insertProject(formData){
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/11 19:58
  */
-export function matchGet(params){
+export function matchGet(params={}){
+  params.token = sessionStorage.getItem('token');
   return request(`/api/match/get?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),

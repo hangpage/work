@@ -9,9 +9,10 @@ export default {
   namespace: 'home',
 
   state: {
-    data: {},
+    data: {}, //用户信息
     enterData: [],
-    activityData: []
+    activityData: [],
+    teamInfo: {}
   },
 
   subscriptions: {

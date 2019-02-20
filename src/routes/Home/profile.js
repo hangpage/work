@@ -10,6 +10,7 @@ import Const from "../../utils/Const";
 import {connect} from "dva";
 import {equalResultStatus} from "../../utils";
 import {userUpdateInfo} from "../../services/user";
+import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 
 const Profile = ({form, data}) => {
@@ -46,6 +47,19 @@ const Profile = ({form, data}) => {
       <div>
         <div className="title-card"><span>个人资料</span></div>
         <Form>
+          <Form.Item
+            {...formItemLayout}
+            label="头像"
+          >
+            {getFieldDecorator('img', {
+              rules: [{
+                required: true, message: '请输入姓名!',
+              }],
+              initialValue: data.img
+            })(
+              <ImageUpload/>
+            )}
+          </Form.Item>
           <Form.Item
             {...formItemLayout}
             label="姓名"
@@ -131,8 +145,8 @@ const Profile = ({form, data}) => {
             {...formItemLayout}
             label="简介"
           >
-            {getFieldDecorator('remarks', {
-              initialValue: data.remarks
+            {getFieldDecorator('intro', {
+              initialValue: data.intro
             })(
               <Input.TextArea placeholder='输入您的简介...'/>
             )}

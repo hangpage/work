@@ -5,13 +5,13 @@
  */
 import React from 'react';
 import {message, Row} from 'antd';
-import BackButton from "../../components/BackButton/BackButton";
-import {equalResultStatus, getParams} from "../../utils";
-import {insertTeam} from "../../services/competition";
-import CompanyInfo from "../../components/CompanyInfo/CompanyInfo";
+import BackButton from "../../../components/BackButton/BackButton";
+import {equalResultStatus, getParams} from "../../../utils";
+import InfoForm from '../../../components/CompanyInfo/CompanyInfo'
+import {insertTeam} from "../../../services/competition";
 
 
-class TeamInfoWrite extends React.Component {
+class CompanyInfo extends React.Component {
   constructor(props) {
     super(props);
     this.ref = React.createRef();
@@ -42,17 +42,14 @@ class TeamInfoWrite extends React.Component {
   };
 
   render() {
-    const {location} = this.props;
     return (
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
-        <div className='w mt39 bg-white pb80'>
+        <div className='w bg-white pb80'>
           <div className='bl-form'>
-            <div className='form-title'>报名</div>
-            <CompanyInfo matchId={getParams(location.search).mId} wrappedComponentRef={(form) => this.ref = form}/>
+            <InfoForm matchId='' wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
-            <BackButton text='取消'/>
-            <div className='main-button' onClick={this.submit}>下一步</div>
+            <div className='main-button' onClick={this.submit} style={{width: 600}}>保存</div>
           </Row>
         </div>
       </div>
@@ -60,4 +57,4 @@ class TeamInfoWrite extends React.Component {
   }
 };
 
-export default TeamInfoWrite;
+export default CompanyInfo;

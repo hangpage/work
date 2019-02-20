@@ -13,16 +13,31 @@ const Detail = ({data}) => {
       <div className="w">
         <ReportCard
           time={data.createTime}
-          read={data.joinCount}
+          read={data.pageViews}
           title={data.name}
           content={data.content}
           mId={data.id}
           reportLink={`/team_info_write?mId=${data.id}`}
+          img={data.pic}
         />
         <div className='competition-detail' dangerouslySetInnerHTML={{__html: data.content}} />
+        <div className='height6line  mb40'/>
+        <div className="sign-member">
+          <p>已报名</p>
+          <div className="member-box">
+            {data.joinTeams && data.joinTeams.map((item, index) => {
+              return (
+                <li key={index}>
+                  <img src={item.pic} alt=""/>
+                  <span>{item.name}</span>
+                </li>
+              )
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default connect(({competitionDetail}) => (competitionDetail))(Detail);
+export default connect(({competition}) => (competition))(Detail);

@@ -2519,8 +2519,17 @@
   text-align: center;
 }
 :global .height6line {
-  height: 6px;
   border: 6px solid #999999;
+  opacity: 0.1;
+  width: 100%;
+}
+:global .height4line {
+  border: 4px solid #999999;
+  opacity: 0.1;
+  width: 100%;
+}
+:global .height12line {
+  border: 12px solid #999999;
   opacity: 0.1;
   width: 100%;
 }

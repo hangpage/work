@@ -17,7 +17,7 @@ const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink
           <span>{time}</span>
           <span className='ml20'>{read}人阅读</span>
         </div>
-        <p className={styles.content} dangerouslySetInnerHTML={{__html: content}} />
+        <p className={styles.content} />
         <div>
           <div className={styles.baoming}><Link className={styles.link} to={reportLink}>报名</Link></div>
           {!noTeacher ? <div className={styles.daoshi}><Link to={`/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}

@@ -248,6 +248,64 @@
 :global .ant-carousel .slick-slide img {
   height: 100%;
 }
+:global .team-body .main-title {
+  height: 80px;
+  line-height: 80px;
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+}
+:global .team-box {
+  background: url("./assets/team-bg.png");
+  height: 505px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 109px;
+  color: #ffffff;
+}
+:global .team-box .border {
+  height: 116px;
+  width: 116px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  padding: 4px;
+}
+:global .team-box .avatar {
+  height: 108px;
+  width: 108px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+:global .team-box .avatar img {
+  height: 100%;
+  width: 100%;
+}
+:global .team-box .nick-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+:global .team-box .desc {
+  font-size: 16px;
+  margin-top: 14px;
+}
+:global .team-box .edit {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  width: 140px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 15px;
+  border: 1px solid #0D72B8;
+  cursor: pointer;
+  margin-top: 20px;
+}
 :global .sign-member {
   background: rgba(153, 153, 153, 0.1);
   margin-bottom: 80px;
@@ -265,6 +323,12 @@
 }
 :global .sign-member .member-box {
   display: flex;
+}
+:global .sign-member .member-box img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
 }
 :global .sign-member .member-box li {
   display: inline-block;

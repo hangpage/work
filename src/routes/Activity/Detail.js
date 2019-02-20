@@ -15,7 +15,7 @@ const Detail = ({data}) => {
         <ReportCard
           time={data.createTime}
           read={data.pageViews}
-          title={data.name}
+          title={data.title}
           content={data.content}
           img={config.URL + data.pic}
           reportLink={`/activity/${data.id}/report?id=${data.id}`}

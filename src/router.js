@@ -28,12 +28,14 @@ import Match from "./routes/Home/match";
 import Leave from "./routes/Home/leave";
 import Advise from "./routes/Home/advise";
 import Enter from "./routes/Home/enter";
+import Team from "./routes/Home/team";
 import ServiceParking from './routes/Service/parking';
 import Repair from './routes/Service/repair';
 import Lockers from './routes/Service/lockers';
 import Search from './routes/Search';
 import Meeting from './routes/Service/meeting';
 import Post from './routes/Service/post';
+import NoMatch from './routes/404/404';
 
 const routes = [{
   path: '/login',
@@ -164,6 +166,10 @@ const routes = [{
   component: Enter,
   exact: 'exact'
 },{
+  path: '/home/team',
+  component: Team,
+  exact: 'exact'
+},{
   path: '/search',
   component: Search,
   exact: 'exact'
@@ -180,7 +186,7 @@ function RouterConfig({history}) {
               return <Route path={item.path} key={index} exact component={item.component}/>
             })}
           </App>
-          <Redirect to="/index" />
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>

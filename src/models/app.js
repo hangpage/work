@@ -39,7 +39,7 @@ export default {
     *query({ payload }, { call, put }) {
       const {data} = yield call(userGetInfo);
       if(equalResultStatus(data)){
-        sessionStorage.setItem('user', data.data);
+        sessionStorage.setItem('user', JSON.stringify(data.data));
         yield put({
           type: 'updateState',
           payload: {

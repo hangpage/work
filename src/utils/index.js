@@ -27,7 +27,7 @@ export function equalResultStatus(data){
 export function reFormatParams(map) {
   let queryData = cloneDeep(map);
   for (let p in queryData) {
-    if (typeof queryData[p] !== 'boolean' && !queryData[p]) {
+    if (typeof queryData[p] !== 'boolean' && typeof queryData[p] !== 'number' && !queryData[p]) {
       queryData[p] = '';
     } else {
       if (queryData[p] instanceof moment) {

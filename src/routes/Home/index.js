@@ -16,6 +16,10 @@ const HomeList = [{
   icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
   url: '/profile'
 },{
+  title: '团队档案',
+  icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
+  url: '/team'
+},{
   title: '我的比赛',
   icon: require('../../assets/icon/home/icon-default-bisai.png'),
   url: '/match'

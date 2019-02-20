@@ -1,13 +1,13 @@
 /**
- * @Description: 园区入驻第3步
+ * @Description: 个人中心团队信息
  * @Author: zzhihang@hotmail.com
  * @Date: 2019/2/18 20:12
  */
 import React from 'react';
 import {Form, message, Row} from 'antd';
-import {equalResultStatus, getParams} from "../../utils";
-import {parkResidentTeam} from "../../services/park";
-import TeamInfo from "../../components/TeamInfo/TeamInfo";
+import {equalResultStatus, getParams} from "../../../utils";
+import {parkResidentTeam} from "../../../services/park";
+import TeamInfo from "../../../components/TeamInfo/TeamInfo";
 
 
 class ParkStep3 extends React.Component {
@@ -44,9 +44,8 @@ class ParkStep3 extends React.Component {
   render() {
     return (
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
-        <div className='w mt39 bg-white pb80'>
+        <div className='w bg-white pb80'>
           <div className='bl-form'>
-            <div className='form-title'>填写公司与项目信息</div>
             <TeamInfo wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>

@@ -235,6 +235,66 @@
     }
   }
 
+  .team-body{
+    .main-title{
+      height: 80px;
+      line-height: 80px;
+      .color-linear-to-bottom();
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  .team-box{
+    background: url("./assets/team-bg.png");
+    height: 505px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 109px;
+    color: @white;
+    .border{
+      height: 116px;
+      width: 116px;
+      border-radius: 50%;
+      .bg-linear-to-right();
+      padding: 4px;
+    }
+    .avatar{
+      height: 108px;
+      width: 108px;
+      border-radius: 50%;
+      overflow: hidden;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .nick-name{
+      font-size:24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .desc{
+      font-size: 16px;
+      margin-top: 14px;
+    }
+    .edit{
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      width: 140px;
+      height: 30px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 15px;
+      border: 1px solid #0D72B8;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  }
+
   .sign-member{
     background: rgba(153, 153, 153, 0.1);
     margin-bottom: 80px;
@@ -249,6 +309,12 @@
     }
     .member-box{
       display: flex;
+      img{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
       li{
         display: inline-block;
         height: 113px;

@@ -54,6 +54,15 @@ export function userEntering(params={}){
     credentials: "include"
   });
 }
+
+export function userRefuse(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/refuse?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
 export function userFindSignActivity(params={}){
   params.token = sessionStorage.getItem('token');
   return request(`/api/activity/findSignActivity?${qs.stringify(params)}`,{
