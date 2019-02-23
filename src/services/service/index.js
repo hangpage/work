@@ -41,7 +41,7 @@ export function findService(params){
  * @date: 2019/2/12 12:37
  */
 export function serviceGet(params){
-  return request(`/api/service/get?${qs.stringify(params)}`,{
+  return request(`/api/service/getServiceBy?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"
@@ -55,7 +55,8 @@ export function serviceGet(params){
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/11 17:06
  */
-export function serviceDeclare(params){
+export function serviceDeclare(params={}){
+  params.token = sessionStorage.getItem('token');
   return request(`/api/service/declare?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
@@ -86,8 +87,9 @@ export function reservationPark(params){
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/12 12:37
  */
-export function parkingApply(params){
-  return request(`/api/reservation/park?${qs.stringify(params)}`,{
+export function parkingApply(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/carLicense/appli?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"

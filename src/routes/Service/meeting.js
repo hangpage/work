@@ -1,26 +1,26 @@
 /**
- * @Description: 储物柜申请
+ * @Description: 会议室申请
  * @Author: zzhihang@hotmail.com
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import {Checkbox, DatePicker, Form, message, Row, Radio} from "antd";
+import {DatePicker, Form, message, Radio, Row} from "antd";
 import {equalResultStatus} from "../../utils";
-import {serviceLockerAppli, serviceQueryLockers, serviceQueryMeeting} from "../../services/service";
+import {serviceMeetingAppli, serviceQueryMeeting} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 import TimePicker from "antd/es/time-picker";
 import moment from "moment";
 
 
 const formItemLayout = {
-  labelCol: {
-    xs: {span: 24},
-    sm: {span: 8},
-  },
-  wrapperCol: {
-    xs: {span: 24},
-    sm: {span: 8},
-  },
+  // labelCol: {
+  //   xs: {span: 24},
+  //   sm: {span: 8},
+  // },
+  // wrapperCol: {
+  //   xs: {span: 24},
+  //   sm: {span: 8},
+  // },
   colon: false
 };
 
@@ -54,9 +54,7 @@ class Lockers extends React.Component{
       endTime: ''
     }
   }
-  queryMettingRoom = () => {
-    const {form, history} = this.props;
-    const {getFieldDecorator} = form;
+  queryMeetingRoom = () => {
     let params = {};
     params.busiDate = this.state.busiDate;
     params.startTime = this.state.startTime;
@@ -80,7 +78,7 @@ class Lockers extends React.Component{
     this.setState({
       [field]: moment(e).format(format)
     },(() => {
-      this.queryMettingRoom();
+      this.queryMeetingRoom();
     }))
   };
 
@@ -92,10 +90,10 @@ class Lockers extends React.Component{
       if (!err) {
         values.token = sessionStorage.getItem('token');
         values.busiDate = moment(values.busiDate).format('YYYY-MM-DD');
-        values.startTime = moment(values.startTime).format('HH:mm');
-        values.endTime = moment(values.endTime).format('HH:mm');
+        values.startTime = moment(values.startTime).format('HH:mm:ss');
+        values.endTime = moment(values.endTime).format('HH:mm:ss');
         values.roomNum = values.roomNum[0];
-        serviceLockerAppli(values).then(({data}) => {
+        serviceMeetingAppli(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
             history.push({
@@ -116,7 +114,7 @@ class Lockers extends React.Component{
 
     return (
       <div className='second-bg'>
-        <div className="w bg-white br6 mt39 mb80 pb60 pt60">
+        <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
           <Form>
             {INPUT_LIST.map((item, index) => {
               if(item.type === 'timepicker'){
@@ -151,8 +149,8 @@ class Lockers extends React.Component{
               colon={false}
             >
               {getFieldDecorator('roomNum')(
-                <Radio.Group>
-                  {list.map((item) => <Radio value={item.id}>{item.name}</Radio>)}
+                <Radio.Group className='bl-label'>
+                  {list.map((item, index) => <Radio key={index} value={item.id}>{item.name}</Radio>)}
                 </Radio.Group>
               )}
             </Form.Item>

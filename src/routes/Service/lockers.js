@@ -6,6 +6,7 @@
 import React from 'react';
 import {Form, message, Row} from "antd";
 import {equalResultStatus} from "../../utils";
+import Const from '../../utils/Const';
 import {serviceLockerAppli, serviceQueryLockers} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 import Radio from "antd/es/radio";
@@ -57,7 +58,7 @@ class Lockers extends React.Component{
 
     return (
       <div className='second-bg'>
-        <div className="w bg-white br6 mt39 mb80 pb60 pt60">
+        <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
           <Form>
             <Form.Item
               label="选择储物柜"
@@ -65,8 +66,8 @@ class Lockers extends React.Component{
               wrapperCol={{span: 8}}
               colon={false}
             >
-            {getFieldDecorator('locker')(
-              <Radio.Group>
+            {getFieldDecorator('locker', Const.RULE)(
+              <Radio.Group className='bl-label'>
                 {list.map((item, index) => <Radio key={index} value={item.id}>{item.name}</Radio>)}
               </Radio.Group>
             )}

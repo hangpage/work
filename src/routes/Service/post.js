@@ -10,17 +10,17 @@ import {serviceDeclare} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 
 
-const Post = ({form}) => {
+const Post = ({form, history}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
-    labelCol: {
-      xs: {span: 24},
-      sm: {span: 8},
-    },
-    wrapperCol: {
-      xs: {span: 24},
-      sm: {span: 8},
-    },
+    // labelCol: {
+    //   xs: {span: 24},
+    //   sm: {span: 8},
+    // },
+    // wrapperCol: {
+    //   xs: {span: 24},
+    //   sm: {span: 8},
+    // },
     colon: false
   };
 
@@ -34,10 +34,10 @@ const Post = ({form}) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        values.token = sessionStorage.getItem('token');
         serviceDeclare(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
+            history.push('/service')
           } else {
             message.error(data.message);
           }
@@ -48,15 +48,15 @@ const Post = ({form}) => {
 
   const INPUT_LIST = [{
     label: '联系人',
-    field: 'roomNum'
+    field: 'name'
   }, {
     label: '联系电话',
-    field: 'position'
+    field: 'phone'
   }];
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pb60 pt60">
+      <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
         <Form>
           {INPUT_LIST.map((item, index) => {
             return (
@@ -75,15 +75,13 @@ const Post = ({form}) => {
             {...formItemLayout}
             label="服务内容"
           >
-            {getFieldDecorator('content', {
-              RULE
-            })(
-              <Input.TextArea placeholder='请输入服务内容' style={{height: 360}}/>
+            {getFieldDecorator('content', RULE)(
+              <Input.TextArea placeholder='请输入服务内容...' style={{height: 360}}/>
             )}
           </Form.Item>
         </Form>
         <Row type='flex' justify='space-around'>
-          <BackButton text='取消'/>
+          <BackButton />
           <div className='main-button' onClick={submit}>提交</div>
         </Row>
       </div>

@@ -38,6 +38,23 @@
     text-align: center !important;
     .color-linear() !important;
     font-weight: bold !important;
+    font-size: 24px !important;
+  }
+
+  .normal-upload{
+    width:72px;
+    height:23px;
+    display: inline-block;
+    border-radius:4px;
+    .bg-linear-to-bottom();
+    font-size: 14px;
+    text-align: center;
+    line-height: 23px;
+    vertical-align: bottom;
+    .ant-upload{
+      color: @white !important;
+      line-height: 1 !important;
+    }
   }
 
   .ant-layout-header {
@@ -227,11 +244,12 @@
   /* For demo */
   .ant-carousel .slick-slide {
     text-align: center;
-    height: 729px;
-    line-height: 729px;
+    height: 729px !important;
     overflow: hidden;
     img{
-      height: 100%;
+      width: 100%;
+      height: 729px;
+      min-height: 729px;
     }
   }
 
@@ -527,7 +545,28 @@
     width: 240px;
     height: 300px;
     position: relative;
-
+    background-size: 238px;
+    background-repeat: no-repeat;
+    .mask{
+      position: absolute;
+      top: 0;
+      right: 2px;
+      left: 0;
+      z-index: 999;
+      bottom: 0;
+    }
+    .img{
+      width: 238px;
+      height: 300px;
+    }
+    &:nth-of-type(2) .img{
+      width: 240px;
+    }
+    &:hover{
+      .mask{
+        background: rgba(31, 129, 194, 0.8);
+      }
+    }
     .icon {
       position: absolute;
       top: 76px;
@@ -576,6 +615,40 @@
       font-size: 24px;
       text-align: center;
       z-index: 999;
+    }
+  }
+
+
+  .service-detail-card{
+    display: flex;
+    img{
+      width: 300px;
+      height: 222px;
+      flex-shrink: 0;
+    }
+    .right{
+      padding: 20px 0 20px 20px;
+      border: 1px solid @opacity9992;
+      h1{
+        line-height: 68px !important;
+        border-bottom: 1px solid @opacity9992;;
+        color: #333333 !important;
+        span{
+          margin-left: 28px;
+          .color-linear-to-right();
+        }
+      }
+      .btn{
+        width: 140px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        color: @white;
+        .bg-linear-to-right();
+        border-radius:4px;
+        font-size: 22px;
+        margin-top: 66px;
+      }
     }
   }
 
@@ -642,6 +715,32 @@
     line-height: 50px;
   }
 
+  .sign-list{
+    background: rgba(153, 153, 153, 0.1);
+    margin-top: 58px;
+    .title{
+      line-height: 85px;
+      text-align: center;
+      .color-linear();
+      font-weight: bold;
+      font-size: 26px;
+    }
+    .item{
+      height: 77px;
+      line-height: 77px;
+      padding: 0 148px 0 168px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(153,153,153,0.2);
+      color: @light-gray;
+      font-size: 22px;
+      span{
+        color: @deep-gray;
+      }
+    }
+  }
+
   .main-button {
     width: 240px;
     height: 50px;
@@ -677,6 +776,11 @@
     span{
       padding-bottom: 2px;
     }
+  }
+
+  .icon-box{
+    display: flex;
+    align-items: center;
   }
 
   .self-add{
@@ -977,4 +1081,82 @@
     }
   }
 
+  .form-bl{
+
+    .ant-form-item{
+      margin-bottom: 38px !important;
+      &:last-child{
+        margin-bottom: 60px !important;
+      }
+    }
+    .ant-row{
+      display: flex;
+      justify-content: center;
+      .ant-form-item-children{
+        width: 100%;
+      }
+      .ant-form-item-label{
+        width: 166px;
+        padding-right: 50px;
+        color: #333333;
+        font-size: 20px;
+        text-align: right;
+        label{
+          float: right;
+        }
+      }
+      .ant-form-item-control-wrapper{
+        width: 482px;
+      }
+      .ant-form-item-control{
+        min-height: 50px;
+        line-height: 50px;
+      }
+      .ant-input, .ant-time-picker-input{
+        height: 50px;
+        border: 1px solid #999 !important;
+        color: #999 !important;
+      }
+    }
+
+    .ant-time-picker-panel-input-wrap{
+      padding: 19px 2px 11px 12px !important;
+      .ant-time-picker-panel-clear-btn{
+        top: 19px !important;
+      }
+    }
+    .ant-time-picker{
+      width: 181px;
+    }
+
+    .ant-calendar-input-wrap{
+      height: 50px;
+      padding: 14px 10px;
+    }
+  }
+
+  .bl-label{
+    .ant-radio{
+      display: none !important;
+    }
+    .ant-radio-wrapper{
+      margin-right: 33px;
+      margin-bottom: 19px;
+      span{
+        display: inline-block;
+        padding: 10px 20px;
+        border:1px solid rgba(240,240,240,1);
+        border-radius:4px;
+        text-align: center;
+        font-size: 18px;
+        color: @light-gray;
+      }
+      &.ant-radio-wrapper-checked{
+        .bg-linear-to-right() !important;
+        span{
+          color: @white ;
+        }
+      }
+    }
+  }
 }

@@ -17,19 +17,23 @@ export default {
       history.listen((location) => {
         switch (location.pathname) {
           case '/index':
-            dispatch({ type: 'save', payload: { headerMenuSelectedKeys: ['0']} });
+            dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['0']} });
             break;
           case '/find':
-            dispatch({ type: 'save', payload: { headerMenuSelectedKeys: ['1']} });
+            dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['1']} });
             break;
           case '/service':
-            dispatch({ type: 'save', payload: { headerMenuSelectedKeys: ['2']} });
+            dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['2']} });
             break;
         }
-        if(pathMatchRegexp('/index', location.pathname)){
-          dispatch({
-            type: 'query'
-          })
+        if(sessionStorage.getItem('token')){
+          if(pathMatchRegexp('/index', location.pathname)){
+            dispatch({type: 'query'})
+          }else{//防止在其他页面刷新丢失app model 导致用户头像不显示
+            if(location.pathname.indexOf('login') === -1){
+              dispatch({type: 'ifUserInfoExist'})
+            }
+          }
         }
       })
     },
@@ -48,6 +52,14 @@ export default {
         });
       }else{
         message.error(data.message);
+      }
+    },
+    *ifUserInfoExist({ payload }, { call, put, select }) {
+      const app = yield select(state => state.app);
+      if(!Object.keys(app.user).length){
+        yield put({
+          type: 'query'
+        })
       }
     },
   },

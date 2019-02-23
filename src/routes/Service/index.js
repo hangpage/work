@@ -50,10 +50,12 @@ const Index = ({list, count}) => {
             return (
               <Col key={index}>
                 <Link to={item.link}>
-                  <div className="service-card">
-                    <img src={item.img} alt=""/>
-                    <img className='icon' src={item.icon} alt=""/>
-                    <p>{item.text}</p>
+                  <div className="service-card" style={{backgroundImage: `url(${item.img})`}}>
+                    <div className="mask">
+                      {/*<img className='img' src={item.img} alt=""/>*/}
+                      <img className='icon' src={item.icon} alt=""/>
+                      <p>{item.text}</p>
+                    </div>
                   </div>
                 </Link>
               </Col>

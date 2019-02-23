@@ -13,13 +13,15 @@
     "dva": "^2.4.1",
     "dva-loading": "^2.0.6",
     "dva-model-extend": "^0.1.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "path-to-regexp": "latest",
-    "qs": "latest",
-    "prop-types": "latest",
+    "lodash": "latest",
     "moment": "latest",
-    "lodash": "latest"
+    "path-to-regexp": "latest",
+    "prop-types": "latest",
+    "qs": "latest",
+    "react": "^16.2.0",
+    "react-amap": "^1.2.8",
+    "react-amap-plugin-geolocation": "0.0.2",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

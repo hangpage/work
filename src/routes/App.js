@@ -11,6 +11,7 @@ moment.locale('zh-cn');
 const {Content} = Layout;
 
 const App = ({children, location}) => {
+  //TODO 考虑APP全局app model 进行登录token校验
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;

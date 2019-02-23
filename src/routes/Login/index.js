@@ -33,8 +33,8 @@ class NormalLoginForm extends React.Component {
             this.props.history.push({
               pathname: '/index',
             });
-            //sessionStorage.setItem('token', data.token);
-            sessionStorage.setItem('token', '3b23e376ec432158a77f2e88396a98eb716ad086');
+            sessionStorage.setItem('token', data.token);
+            //sessionStorage.setItem('token', '3b23e376ec432158a77f2e88396a98eb716ad086');
           }else{
             message.error(data.message);
           }

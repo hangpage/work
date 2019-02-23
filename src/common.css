@@ -2533,6 +2533,12 @@
   opacity: 0.1;
   width: 100%;
 }
+:global .height1line {
+  height: 1px;
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  width: 100%;
+  opacity: 0.2;
+}
 :global .icon-del {
   background-image: url('./assets/icon/icon-shanchu.png');
   display: inline-block;
@@ -2550,5 +2556,11 @@
   display: inline-block;
   height: 20px;
   width: 20px;
+}
+:global .icon-qiandao {
+  background-image: url('./assets/icon/icon-qiandao.png');
+  display: inline-block;
+  height: 18px;
+  width: 18px;
 }
 /*# sourceMappingURL=common.css.map */

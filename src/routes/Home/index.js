@@ -4,13 +4,14 @@
  * @Date: 2019/2/17 11:23
  */
 import React from 'react';
-import { Menu, Layout } from 'antd';
+import {Menu, Layout, Modal} from 'antd';
 import IdCard from "../../components/IdCard/IdCard";
 import {connect} from "dva";
 import {Link, Router, Route} from "dva/router";
 import Profile from "./profile";
 import createHistory from 'history/createHashHistory';
 import Match from "./match";
+import Sign from "./sign";
 const HomeList = [{
   title: '个人资料',
   icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
@@ -53,7 +54,23 @@ const HomeList = [{
   url: '/about'
 }];
 
-const Index = ({data, match, children}) => {
+const Index = ({data, match, children, modalVisible, dispatch}) => {
+  const onSignClick = () => {
+    dispatch({
+      type: 'home/updateState',
+      payload: {
+        modalVisible: true
+      }
+    })
+  };
+  const onCancelClick = () => {
+    dispatch({
+      type: 'home/updateState',
+      payload: {
+        modalVisible: false
+      }
+    })
+  };
   return (
     <div className='w bl-home pt40 pb80'>
       <Layout>
@@ -61,8 +78,12 @@ const Index = ({data, match, children}) => {
           <IdCard
             photo={data.img}
             name={data.nickName}
-            autograph={data.remarks}
+            autograph={data.intro}
+            onSignClick={onSignClick}
           />
+          {modalVisible ? (<Modal visible={modalVisible} title='签到' width={800} footer={null} onCancel={onCancelClick}>
+            <Sign />
+          </Modal>) : null}
           <Menu
             style={{ width: 240,marginTop: 10 }}
             defaultSelectedKeys={['0']}

@@ -5,15 +5,15 @@
  */
 import React from 'react';
 import Home from './index';
-import {Form, Input, message, Radio} from "antd";
+import {Avatar, Form, Input, message, Radio} from "antd";
 import Const from "../../utils/Const";
 import {connect} from "dva";
 import {equalResultStatus} from "../../utils";
 import {userUpdateInfo} from "../../services/user";
-import ImageUpload from "../../components/FileUpload/ImageUpload";
+import NormalUpload from "../../components/FileUpload/NormalUpload";
 
 
-const Profile = ({form, data}) => {
+const Profile = ({form, data, dispatch}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
     labelCol: {
@@ -42,24 +42,37 @@ const Profile = ({form, data}) => {
     });
   };
 
+  const avatarChange = (e) => {
+    userUpdateInfo({img: e}).then(({data}) => {
+      if(equalResultStatus(data)){
+        message.success('修改成功');
+        dispatch({
+          type: 'home/query'
+        })
+      }else{
+        message.error(data.message);
+      }
+    });
+  };
+
   return (
     <Home>
       <div>
         <div className="title-card"><span>个人资料</span></div>
         <Form>
-          <Form.Item
-            {...formItemLayout}
-            label="头像"
-          >
+          <div className="text-align mt40 mb50">
             {getFieldDecorator('img', {
               rules: [{
                 required: true, message: '请输入姓名!',
               }],
               initialValue: data.img
             })(
-              <ImageUpload/>
+              <div>
+                <Avatar size={90} src={data.img}/>
+                <NormalUpload text='修改头像' onChange={avatarChange} style={{verticalAlign: 'bottom', marginLeft: 10}}/>
+              </div>
             )}
-          </Form.Item>
+          </div>
           <Form.Item
             {...formItemLayout}
             label="姓名"

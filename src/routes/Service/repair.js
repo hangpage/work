@@ -14,14 +14,14 @@ import ImageUpload from "../../components/FileUpload/ImageUpload";
 const Repair = ({form}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
-    labelCol: {
-      xs: {span: 24},
-      sm: {span: 8},
-    },
-    wrapperCol: {
-      xs: {span: 24},
-      sm: {span: 8},
-    },
+    // labelCol: {
+    //   xs: {span: 24},
+    //   sm: {span: 8},
+    // },
+    // wrapperCol: {
+    //   xs: {span: 24},
+    //   sm: {span: 8},
+    // },
     colon: false
   };
 
@@ -61,7 +61,7 @@ const Repair = ({form}) => {
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pb60 pt60">
+      <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
         <Form>
           {INPUT_LIST.map((item, index) => {
             return (
@@ -98,7 +98,7 @@ const Repair = ({form}) => {
           </Form.Item>
         </Form>
         <Row type='flex' justify='space-around'>
-          <BackButton text='取消'/>
+          <BackButton text='返回'/>
           <div className='main-button' onClick={submit}>提交</div>
         </Row>
       </div>

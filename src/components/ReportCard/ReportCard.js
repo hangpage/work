@@ -7,7 +7,7 @@ import React from 'react';
 import styles from './ReportCard.less';
 import {Link} from "dva/router";
 
-const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink}) => {
+const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink, btnName='报名'}) => {
   return (
     <div className={styles.card}>
       <img src={img} alt=""/>
@@ -19,7 +19,7 @@ const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink
         </div>
         <p className={styles.content} />
         <div>
-          <div className={styles.baoming}><Link className={styles.link} to={reportLink}>报名</Link></div>
+          <div className={styles.baoming}><Link className={styles.link} to={reportLink}>{btnName}</Link></div>
           {!noTeacher ? <div className={styles.daoshi}><Link to={`/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}
         </div>
       </div>

@@ -13,14 +13,14 @@ import BackButton from "../../components/BackButton/BackButton";
 const Parking = ({form}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
-    labelCol: {
-      xs: {span: 24},
-      sm: {span: 8},
-    },
-    wrapperCol: {
-      xs: {span: 24},
-      sm: {span: 8},
-    },
+    // labelCol: {
+    //   xs: {span: 24},
+    //   sm: {span: 8},
+    // },
+    // wrapperCol: {
+    //   xs: {span: 24},
+    //   sm: {span: 8},
+    // },
     colon: false
   };
 
@@ -53,15 +53,15 @@ const Parking = ({form}) => {
     field: 'phone'
   }, {
     label: '车型',
-    field: 'phone'
+    field: 'model'
   }, {
     label: '车牌号',
-    field: 'phone'
+    field: 'carNumber'
   }];
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pb60 pt60">
+      <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
         <Form>
           {INPUT_LIST.map((item, index) => {
             return (

@@ -8,7 +8,7 @@ import Home from './index';
 import {DatePicker, Form, Input, message, Radio} from "antd";
 import Const from "../../utils/Const";
 import {equalResultStatus} from "../../utils";
-import {userLeavePark} from "../../services/user";
+import {userFeedBack, userLeavePark} from "../../services/user";
 
 
 const Leave = ({form}) => {
@@ -35,7 +35,7 @@ const Leave = ({form}) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        userLeavePark(values).then(({data}) => {
+        userFeedBack(values).then(({data}) => {
           if(equalResultStatus(data)){
             message.success('申请成功');
           }else{
@@ -63,7 +63,7 @@ const Leave = ({form}) => {
             {...formItemLayout}
             label="联系方式"
           >
-            {getFieldDecorator('name', RULE)(
+            {getFieldDecorator('phone', RULE)(
               <Input placeholder='请输入联系方式'/>
             )}
           </Form.Item>
@@ -71,7 +71,7 @@ const Leave = ({form}) => {
             {...formItemLayout}
             label="问题建议"
           >
-            {getFieldDecorator('reason', {
+            {getFieldDecorator('content', {
               RULE
             })(
               <Input.TextArea placeholder='请输入您宝贵的问题与建议...' style={{height: 360}}/>

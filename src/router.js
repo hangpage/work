@@ -36,6 +36,7 @@ import Search from './routes/Search';
 import Meeting from './routes/Service/meeting';
 import Post from './routes/Service/post';
 import NoMatch from './routes/404/404';
+import ScrollToTop from "./components/ScrollTop";
 
 const routes = [{
   path: '/login',
@@ -69,11 +70,11 @@ const routes = [{
   path: '/service/type/lockers',
   component: Lockers,
   exact: 'exact'
-},{
+}, {
   path: '/service/type/meeting',
   component: Meeting,
   exact: 'exact'
-},{
+}, {
   path: '/service/type/post',
   component: Post,
   exact: 'exact'
@@ -117,11 +118,11 @@ const routes = [{
   path: '/park/parkStep1',
   component: ParkStep1,
   exact: 'exact'
-},  {
+}, {
   path: '/park/parkStep2',
   component: ParkStep2,
   exact: 'exact'
-},  {
+}, {
   path: '/park/parkStep3',
   component: ParkStep3,
   exact: 'exact'
@@ -141,35 +142,35 @@ const routes = [{
   path: '/find',
   component: Find,
   exact: 'exact'
-},{
+}, {
   path: '/home',
   component: Home,
   exact: 'exact'
-},{
+}, {
   path: '/home/profile',
   component: Profile,
   exact: 'exact'
-},{
+}, {
   path: '/home/match',
   component: Match,
   exact: 'exact'
-},{
+}, {
   path: '/home/leave',
   component: Leave,
   exact: 'exact'
-},{
+}, {
   path: '/home/advise',
   component: Advise,
   exact: 'exact'
-},{
+}, {
   path: '/home/enter',
   component: Enter,
   exact: 'exact'
-},{
+}, {
   path: '/home/team',
   component: Team,
   exact: 'exact'
-},{
+}, {
   path: '/search',
   component: Search,
   exact: 'exact'
@@ -178,17 +179,19 @@ const routes = [{
 function RouterConfig({history}) {
   return (
     <Router history={history}>
-      <div style={{height: '100%'}}>
-        <Switch>
-          <Route path='/login' component={Login} exact/>
-          <App>
-            {routes.map((item, index) => {
-              return <Route path={item.path} key={index} exact component={item.component}/>
-            })}
-          </App>
-          <Route component={NoMatch} />
-        </Switch>
-      </div>
+      <ScrollToTop>
+        <div style={{height: '100%'}}>
+          <Switch>
+            <Route path='/login' component={Login} exact/>
+            <App>
+              {routes.map((item, index) => {
+                return <Route path={item.path} key={index} exact component={item.component}/>
+              })}
+            </App>
+            <Route component={NoMatch}/>
+          </Switch>
+        </div>
+      </ScrollToTop>
     </Router>
   );
 }

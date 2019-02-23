@@ -9,7 +9,8 @@ export default {
 
   state: {
     list: [],
-    detail: {}
+    detail: {},
+    modalVisible: false
   },
 
   subscriptions: {
@@ -50,7 +51,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            data: data.data
+            detail: data.data
           }
         })
       }else{

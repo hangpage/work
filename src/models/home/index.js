@@ -12,7 +12,8 @@ export default {
     data: {}, //用户信息
     enterData: [],
     activityData: [],
-    teamInfo: {}
+    teamInfo: {},
+    modalVisible: false
   },
 
   subscriptions: {

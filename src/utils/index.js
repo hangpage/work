@@ -13,7 +13,7 @@ export function pathMatchRegexp(regexp, pathname) {
 * @Author: zzhihang@hotmail.com
 * @date: 2019/2/10 17:42
 */
-export function equalResultStatus(data){
+export function equalResultStatus(data={}){
   return data.statusMsg === 'success';
 }
 

@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import {connect} from "dva";
+import {Link} from "dva/router";
 import {Tabs} from "antd";
 import CompanyInfo from "./team/company_info";
 import FinancingInfo from "./team/financing_info";
@@ -22,7 +23,9 @@ const Team = ({data, location}) => {
         </div>
         <div className="nick-name">{data.nickName}</div>
         <div className="desc">{data.intro}</div>
-        <div className="edit">编辑个人资料</div>
+        <Link to='/home/profile'>
+          <div className="edit">编辑个人资料</div>
+        </Link>
       </div>
       <div className="w">
         <div className="main-title">团队档案</div>

@@ -1,6 +1,4 @@
 import dva from 'dva';
-import createHistory from 'history/createHashHistory';
-import createLoading from 'dva-loading';
 import './index.css';
 import './common.css';
 import './cover.css';
@@ -9,7 +7,7 @@ import './cover.css';
 const app = dva();
 
 // 2. Plugins
-app.use(createLoading());
+// app.use(createLoading());
 
 // 3. Model
 app.model(require('./models/competition/competition').default);
