@@ -1,5 +1,5 @@
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
-import {findType, serviceGet} from "../../services/service";
+import {carLicenseGet, findType, serviceGet} from "../../services/service";
 import {noticeGet} from "../../services/notice";
 import {message} from "antd";
 
@@ -10,7 +10,8 @@ export default {
   state: {
     list: [],
     detail: {},
-    modalVisible: false
+    modalVisible: false,
+    parkRecordList: []
   },
 
   subscriptions: {
@@ -25,6 +26,8 @@ export default {
           if (match) {
             dispatch({type: 'get', payload: {id: match[1], token: sessionStorage.getItem('token')}})
           }
+        }else if (pathMatchRegexp('/service/type/parking/record', location.pathname)) {
+          dispatch({type: 'queryParkingRecord'})
         }
       })
     },
@@ -41,6 +44,17 @@ export default {
             count: data.data.count,
             pageSize: data.data.pageSize,
             pageNo: data.data.pageNo
+          }
+        });
+      }
+    },
+    *queryParkingRecord({ payload }, { call, put }) {
+      const {data} = yield call(carLicenseGet);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            parkRecordList: data.data
           }
         });
       }

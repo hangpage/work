@@ -18,17 +18,18 @@ export function parkFindList(params){
 
 }
 /**
- * @Description: 入驻园区
+ * @Description: 入驻园区第一步接口
  * @Param:
  * @return:
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/11 17:06
  */
 
-export function parkResidentTeam(formData){
-  return request('/api/residentTeam/save',{
-    method: 'post',
-    body: formData
+export function parkResidentTeam(params){
+  return request(`/api/residentTeam/save?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
   });
 }
 /**

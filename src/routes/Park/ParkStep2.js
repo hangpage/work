@@ -27,9 +27,7 @@ class ParkStep2 extends React.Component {
     parkResidentTeam(reFormatParams(params)).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
-        history.push({
-          pathname: '/park/parkStep3?rtId=' + params.rtId,
-        });
+        history.push('/park/parkStep3?rtId=' + params.rtId);
       } else {
         message.error(data.message);
       }

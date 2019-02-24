@@ -42,6 +42,12 @@ Const.MATCH_STATUS = {
   12: '比赛结束',
 };
 
+Const.CHE_WEI_SHEN_QING_STATUS = {
+  0: '审核中',
+  1: '已通过',
+  2: '已拒绝',
+};
+
 Const.ENTER_STATUS = {
   0: '未确认',
   1: '已同意入驻'

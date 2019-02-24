@@ -4,12 +4,10 @@
  * @Date: 2019/2/3 12:53
  */
 import React from 'react';
-import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
-import BackButton from "../../components/BackButton/BackButton";
+import {Col, DatePicker, Form, Input, Radio, Row} from 'antd';
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
-import {equalResultStatus, getParams, reFormatParams} from "../../utils";
-import {insertTeam} from "../../services/competition";
+import {reFormatParams} from "../../utils";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 const {TextArea} = Input;
@@ -295,7 +293,7 @@ class CompanyInfo extends React.Component {
                       {getFieldDecorator('matchSchoolId', {
                         rules: [{required: true, message: '请选择'}],
                       })(
-                        <ComboBox placeholder='请选择所学专业' url={`/team/findMatchSchool?mId=${matchId}`}/>
+                        <ComboBox nameProp='name' valueProp='id' placeholder='请选择所学专业' url={`/team/findMatchSchool?mId=${matchId}`}/>
                       )}
                     </Form.Item>
                   </Col>

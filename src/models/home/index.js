@@ -1,8 +1,6 @@
-import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
-import {noticeFindList, noticeGet} from "../../services/notice";
-import {activityGet} from "../../services/activity";
+import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
-import {userFindEntering, userFindSignActivity, userGetInfo} from "../../services/user";
+import {queryResidentTeamInfo, userFindEntering, userFindSignActivity, userGetInfo} from "../../services/user";
 
 export default {
 
@@ -38,12 +36,17 @@ export default {
               break;
           }
         }
+        if(pathMatchRegexp('/home/team', location.pathname)){
+          dispatch({
+            type: 'queryTeamInfo'
+          })
+        }
       })
     },
   },
 
   effects: {
-    * query({payload}, {call, put}) {
+    *query({payload}, {call, put}) {
       const {data} = yield call(userGetInfo);
       if (data) {
         yield put({
@@ -74,6 +77,19 @@ export default {
           type: 'updateState',
           payload: {
             activityData: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *queryTeamInfo({ payload }, { call, put }) {
+      const {data} = yield call(queryResidentTeamInfo, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            teamInfo: data.data
           }
         })
       }else{

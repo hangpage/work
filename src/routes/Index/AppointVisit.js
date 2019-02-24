@@ -29,9 +29,7 @@ const TeamInfoWrite = ({form, history, location}) => {
         reservationPark(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('预约成功！');
-            history.push({
-              pathname: '/index',
-            });
+            history.push('/index');
           } else {
             message.error(data.message);
           }

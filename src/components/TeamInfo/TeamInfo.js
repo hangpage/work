@@ -4,13 +4,12 @@
  * @Date: 2019/2/18 20:12
  */
 import React from 'react';
-import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
-import {equalResultStatus, getParams, reFormatParams} from "../../utils";
+import {Col, DatePicker, Form, Input, Radio, Row} from 'antd';
+import {reFormatParams} from "../../utils";
 import Const from "../../utils/Const";
 import ComboBox from "../../components/ComboBox";
 import Modal from './component/step3Modal';
 import {cloneDeep} from 'lodash';
-import {parkResidentTeam} from "../../services/park";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 

@@ -14,6 +14,7 @@ import ServiceDetail from "./routes/Service/detail";
 import AppointVisit from "./routes/Index/AppointVisit";
 import Notice from "./routes/Notice";
 import NoticeDetail from "./routes/Notice/detail";
+import ArticleDetail from "./routes/Article/index";
 import Park from "./routes/Park";
 import ParkStep1 from "./routes/Park/ParkStep1";
 import ParkStep2 from "./routes/Park/ParkStep2";
@@ -37,6 +38,7 @@ import Meeting from './routes/Service/meeting';
 import Post from './routes/Service/post';
 import NoMatch from './routes/404/404';
 import ScrollToTop from "./components/ScrollTop";
+import ApplicationRecord from "./routes/Service/application_record";
 
 const routes = [{
   path: '/login',
@@ -63,6 +65,10 @@ const routes = [{
   component: ServiceParking,
   exact: 'exact'
 }, {
+  path: '/service/type/parking/record',
+  component: ApplicationRecord,
+  exact: 'exact'
+},  {
   path: '/service/type/repair',
   component: Repair,
   exact: 'exact'
@@ -111,6 +117,10 @@ const routes = [{
   component: NoticeDetail,
   exact: 'exact'
 }, {
+  path: '/article/:id',
+  component: ArticleDetail,
+  exact: 'exact'
+},  {
   path: '/park',
   component: Park,
   exact: 'exact'

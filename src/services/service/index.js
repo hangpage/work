@@ -97,6 +97,22 @@ export function parkingApply(params={}){
 }
 
 /**
+ * @Description: 获取车位申请记录
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/12 12:37
+ */
+export function carLicenseGet(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/carLicense/get?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/**
  * @Description: 报修
  * @Param:
  * @return:

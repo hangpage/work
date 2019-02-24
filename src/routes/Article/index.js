@@ -10,18 +10,18 @@ import FabulousButton from "../../components/Button/FabulousButton";
 import {dynamicAwesome, dynamicComment, dynamicReport} from "../../services/dynamic";
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import Comment from "../../components/Commet/Comment";
-import Modal from '../Article/component/Modal';
+import Modal from './component/Modal';
 import {cloneDeep} from "lodash";
 
-const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
-  const hideModal = () => {dispatch({ type: 'notice/updateState', payload: {modalVisible: false} })};
-  const getArticleDetail = () => {dispatch({ type: 'notice/get', payload: {id: pathMatchRegexp('/notice/:id', location.pathname)[1]}})};
+const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
+  const hideModal = () => {dispatch({ type: 'article/updateState', payload: {modalVisible: false} })};
+  const getArticleDetail = () => {dispatch({ type: 'article/get', payload: {id: pathMatchRegexp('/article/:id', location.pathname)[1]}})};
 
   const onAwesomeClick = () => {
-    const match = pathMatchRegexp('/notice/:id', location.pathname);
+    const match = pathMatchRegexp('/article/:id', location.pathname);
     dynamicAwesome({
       msgId: match[1],
-      type: '5',
+      type: '1',
     }).then(({data}) => {
       if(equalResultStatus(data)){
         getArticleDetail();
@@ -47,30 +47,30 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
   };
 
   const onCommentDetailClick = (e, id) => {
-      const list = cloneDeep(commentShowChildrenList);
-      list.push(id);
-      dispatch({
-        type: 'notice/updateState',
-        payload: {
-          commentShowChildrenList: list
-        }
-      })
+    const list = cloneDeep(commentShowChildrenList);
+    list.push(id);
+    dispatch({
+      type: 'article/updateState',
+      payload: {
+        commentShowChildrenList: list
+      }
+    })
   };
 
   const onCommentClick = () => {
-    const match = pathMatchRegexp('/notice/:id', location.pathname);
+    const match = pathMatchRegexp('/article/:id', location.pathname);
     if(!comment){
       return message.error('请输入评论内容');
     }
     dynamicComment({
       msgId: match[1],
-      type: '5',
+      type: '1',
       content: comment
     }).then(({data}) => {
       if(equalResultStatus(data)){
         message.success('评论成功');
         dispatch({
-          type: 'notice/updateState',
+          type: 'article/updateState',
           payload: {
             comment: ''
           }
@@ -84,7 +84,7 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
 
   const onReportClick = (e, id) => {
     dispatch({
-      type: 'notice/updateState',
+      type: 'article/updateState',
       payload: {
         modalVisible: true,
         currentMsgId: id,
@@ -97,7 +97,7 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
   const onTextareaChange = (e) => {
     const value = e.currentTarget.value;
     dispatch({
-      type: 'notice/updateState',
+      type: 'article/updateState',
       payload: {
         comment: value
       }
@@ -106,7 +106,7 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
 
   const onReplyClick = (e, id, replyWho) =>  {
     dispatch({
-      type: 'notice/updateState',
+      type: 'article/updateState',
       payload: {
         modalVisible: true,
         replyWho: replyWho,
@@ -186,10 +186,10 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
                            onReplyClick={(e) => onReplyClick(e, item.id, item.nickName)}
                            commentCount={item.commontList.length}
                            onReportClick={(e) => {onReportClick(e, item.id)}}
+                           onCommentDetailClick={(e) => {onCommentDetailClick(e, item.id)}}
                            onAwesomeClick={(e) => {onCommentAwesomeClick(e, item.id)}}
                            userImg={item.userImg}
                            content={item.content}
-                           onCommentDetailClick={(e) => {onCommentDetailClick(e, item.id)}}
                   />
                   {commentShowChildrenList.indexOf(item.id) !== -1 && item.commontList.length ?
                     <div className='ml84 mr20' style={{background: '#F3F3F3'}}>
@@ -209,16 +209,16 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
                           />
                         ))
                       }
-                    </div> : ''}
+                  </div> : ''}
                 </div>
               )
             }
           )}
           {modalVisible && <Modal {...modalProps} replyWho={replyWho} placeHolder={placeHolder}/>}
-      </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default connect(({notice}) => (notice))(Detail);
+export default connect(({article}) => (article))(Detail);

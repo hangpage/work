@@ -10,7 +10,7 @@ import Const from "../../utils/Const";
 import ComboBox from "../../components/ComboBox";
 import Modal from './component/modal';
 import {cloneDeep} from 'lodash';
-import {parkSavePrincipal} from "../../services/park";
+import {parkResidentTeam} from "../../services/park";
 
 const {TextArea} = Input;
 
@@ -87,12 +87,10 @@ class ParkStep1 extends React.Component {
         }
         params.grandPrize = array.join(';');
         params.registeredTime = params.registeredTime + ' 00:00:00';
-        parkSavePrincipal(params).then(({data}) => {
+        parkResidentTeam(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
-            history.push({
-              pathname: '/park/parkStep2?rtId=' + data.data,
-            });
+            history.push('/park/parkStep2?rtId=' + data.data);
           } else {
             message.error(data.message);
           }

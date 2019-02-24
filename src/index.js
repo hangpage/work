@@ -16,6 +16,7 @@ app.model(require('./models/service/serviceList').default);
 app.model(require('./models/app').default);
 app.model(require('./models/index').default);
 app.model(require('./models/notice').default);
+app.model(require('./models/article').default);
 app.model(require('./models/park/park').default);
 app.model(require('./models/activity').default);
 app.model(require('./models/home').default);

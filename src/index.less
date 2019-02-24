@@ -207,6 +207,19 @@
     }
   }
 
+  .comment-list{
+    border: 1px solid @opacity9992;
+    margin-bottom: 80px;
+    padding-bottom: 59px;
+  }
+
+  .park-record{
+    border-bottom: 4px solid @opacity999;
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+
   .dianzan{
     font-size: 24px;
     color: @deep-gray;
@@ -751,6 +764,7 @@
     text-align: center;
     line-height: 50px;
     display: inline-block;
+    cursor: pointer;
   }
   .main-small-button{
     padding: 0 26px;
@@ -762,6 +776,7 @@
     text-align: center;
     line-height: 40px;
     display: inline-block;
+    cursor: pointer;
   }
 
   .icon-add-box{
@@ -1081,13 +1096,31 @@
     }
   }
 
-  .form-bl{
+  .form-next{
+    height: 59px;
+    line-height: 59px;
+    text-align: right;
+    padding-right: 44px;
+    margin-top: 59px;
+    font-size: 20px;
+    .color-linear-to-right();
+    border-top: 1px solid @opacity9992;
+    .icon-jinrujilu{
+      vertical-align: middle;
+      margin-bottom: 4px;
+      margin-left: 16px;
+    }
+  }
 
+  .form-bl{
     .ant-form-item{
       margin-bottom: 38px !important;
       &:last-child{
         margin-bottom: 60px !important;
       }
+    }
+    .back-button, .main-button{
+      width: 180px;
     }
     .ant-row{
       display: flex;

@@ -1,0 +1,66 @@
+@import "../../variable.less";
+.card{
+  display: flex;
+  padding: 34px 15px 0 19px;
+}
+
+.detail{
+  flex-grow: 1;
+  padding-left: 18px;
+}
+.action{
+  display: flex;
+  line-height: 1;
+  align-items: center;
+}
+
+.name{
+  font-size: 16px;
+  color: #333333;
+}
+
+.reply{
+  font-size: 14px;
+  .color-linear-to-right();
+  cursor: pointer;
+  margin-left: 51px;
+}
+
+.actionBox{
+  flex-grow: 1;
+  text-align: right;
+}
+
+.report{
+  .color-linear-to-right();
+  font-size: 14px;
+  cursor: pointer;
+}
+.actionBtn{
+  height: 19px;
+  line-height: 19px;
+  padding-right: 18px;
+  color: @light-gray;
+  cursor: pointer;
+  border-right: 1px solid rgba(153,153,153,0.4);
+  margin-right: 18px;
+}
+
+.time{
+  color: @light-gray;
+  font-size: 14px;
+  line-height: 42px;
+}
+
+.content{
+  font-size: 14px;
+  color: @light-gray;
+  padding-bottom: 27px;
+  border-bottom: 1px solid @opacity999;
+}
+
+.replyText{
+  margin: 0 10px;
+  color: @light-gray;
+  font-size: 14px;
+}

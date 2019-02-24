@@ -6,7 +6,7 @@
 import React from 'react';
 import {Form, message, Row} from 'antd';
 import {equalResultStatus, getParams} from "../../utils";
-import {parkResidentTeam} from "../../services/park";
+import {parkResidentTeam, parkSavePrincipal} from "../../services/park";
 import TeamInfo from "../../components/TeamInfo/TeamInfo";
 
 
@@ -32,9 +32,7 @@ class ParkStep3 extends React.Component {
     parkResidentTeam(formData).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
-        history.push({
-          pathname: '/index',
-        });
+        history.push('/index');
       } else {
         message.error(data.message);
       }

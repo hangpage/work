@@ -112,7 +112,23 @@ export function userSign(params={}){
 */
 export function userSignList(params={}){
   params.token = sessionStorage.getItem('token');
-  return request(`/api//user/signList?${qs.stringify(params)}`,{
+  return request(`/api/user/signList?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/** 
+* @Description: 查询团队信息
+* @Param:  
+* @return:  
+* @Author: zzhihang@hotmail.com 
+* @date: 2019/2/24 21:41
+*/
+export function queryResidentTeamInfo(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/residentTeam/findResidentTeam?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"

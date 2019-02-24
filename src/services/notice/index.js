@@ -18,7 +18,8 @@ export function slideShow(params) {
 }
 
 
-export function noticeGet(params){
+export function noticeGet(params={}){
+  params.token = sessionStorage.getItem('token');
   return request(`/api/notice/get?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),

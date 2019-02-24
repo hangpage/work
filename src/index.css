@@ -225,6 +225,17 @@
   font-size: 14px;
   line-height: 28px;
 }
+:global .comment-list {
+  border: 1px solid rgba(153, 153, 153, 0.2);
+  margin-bottom: 80px;
+  padding-bottom: 59px;
+}
+:global .park-record {
+  border-bottom: 4px solid rgba(153, 153, 153, 0.1);
+}
+:global .park-record:last-child {
+  border-bottom: none;
+}
 :global .dianzan {
   font-size: 24px;
   color: #666666;
@@ -743,6 +754,7 @@
   text-align: center;
   line-height: 50px;
   display: inline-block;
+  cursor: pointer;
 }
 :global .main-small-button {
   padding: 0 26px;
@@ -754,6 +766,7 @@
   text-align: center;
   line-height: 40px;
   display: inline-block;
+  cursor: pointer;
 }
 :global .icon-add-box {
   font-size: 20px;
@@ -1045,11 +1058,32 @@
 :global .bl-form .form-input-item {
   margin-top: 58px;
 }
+:global .form-next {
+  height: 59px;
+  line-height: 59px;
+  text-align: right;
+  padding-right: 44px;
+  margin-top: 59px;
+  font-size: 20px;
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  border-top: 1px solid rgba(153, 153, 153, 0.2);
+}
+:global .form-next .icon-jinrujilu {
+  vertical-align: middle;
+  margin-bottom: 4px;
+  margin-left: 16px;
+}
 :global .form-bl .ant-form-item {
   margin-bottom: 38px !important;
 }
 :global .form-bl .ant-form-item:last-child {
   margin-bottom: 60px !important;
+}
+:global .form-bl .back-button,
+:global .form-bl .main-button {
+  width: 180px;
 }
 :global .form-bl .ant-row {
   display: flex;

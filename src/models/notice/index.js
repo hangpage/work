@@ -9,7 +9,13 @@ export default {
 
   state: {
     list: [],
-    data: {}
+    data: {},
+    commentList: [],
+    comment: '',
+    modalVisible: false,
+    modalTitle: '',
+    placeHolder: '',
+    commentShowChildrenList: []
   },
 
   subscriptions: {
@@ -50,7 +56,8 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            data: data.data
+            data: data.data,
+            commentList: data.data.commontList
           }
         })
       }else{

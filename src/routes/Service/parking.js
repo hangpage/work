@@ -8,6 +8,7 @@ import {Form, Input, message, Row} from "antd";
 import {equalResultStatus} from "../../utils";
 import {parkingApply} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
+import {Link} from "dva/router";
 
 
 const Parking = ({form}) => {
@@ -61,7 +62,7 @@ const Parking = ({form}) => {
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
+      <div className="w bg-white br6 mt39 mb80 pt60 form-bl">
         <Form>
           {INPUT_LIST.map((item, index) => {
             return (
@@ -81,6 +82,11 @@ const Parking = ({form}) => {
           <BackButton text='取消'/>
           <div className='main-button' onClick={submit}>提交</div>
         </Row>
+        <div className='form-next'>
+          <Link to='/service/type/parking/record'>
+            申请记录<i className='icon-jinrujilu'/>
+          </Link>
+        </div>
       </div>
     </div>
   );
