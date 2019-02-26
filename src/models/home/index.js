@@ -1,6 +1,13 @@
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
-import {queryResidentTeamInfo, userFindEntering, userFindSignActivity, userGetInfo} from "../../services/user";
+import {
+  queryResidentTeamInfo, userFindAwesome, userFindComment,
+  userFindEntering, userFindServiceAppli,
+  userFindSignActivity,
+  userFineMeetingRoom,
+  userGetInfo, userLockers, userRepair
+} from "../../services/user";
+import {noticeFindList} from "../../services/notice";
 
 export default {
 
@@ -11,7 +18,14 @@ export default {
     enterData: [],
     activityData: [],
     teamInfo: {},
-    modalVisible: false
+    modalVisible: false,
+    service: [],
+    repair: [],
+    room: [],
+    locker: [],
+    system: [],
+    awesome: [],
+    comment: []
   },
 
   subscriptions: {
@@ -40,6 +54,15 @@ export default {
           dispatch({
             type: 'queryTeamInfo'
           })
+        }else if(pathMatchRegexp('/home/service', location.pathname)){
+          dispatch({type: 'userFineMeetingRoom'});
+          dispatch({type: 'userLockers'});
+          dispatch({type: 'userRepair'});
+          dispatch({type: 'userFindServiceAppli'})
+        }else if(pathMatchRegexp('/home/message', location.pathname)){
+          dispatch({type: 'userFindSystem'});
+          dispatch({type: 'userFindComment'});
+          dispatch({type: 'userFindAwesome'});
         }
       })
     },
@@ -89,7 +112,98 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            teamInfo: data.data
+            teamInfo: data.data[0]
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userFineMeetingRoom({ payload }, { call, put }) {
+      const {data} = yield call(userFineMeetingRoom, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            room: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userLockers({ payload }, { call, put }) {
+      const {data} = yield call(userLockers, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            locker: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userRepair({ payload }, { call, put }) {
+      const {data} = yield call(userRepair, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            repair: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userFindServiceAppli({ payload }, { call, put }) {
+      const {data} = yield call(userFindServiceAppli, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            service: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userFindComment({ payload }, { call, put }) {
+      const {data} = yield call(userFindComment, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            comment: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userFindSystem({ payload }, { call, put }) {
+      const {data} = yield call(noticeFindList, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            system: data.data.list
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userFindAwesome({ payload }, { call, put }) {
+      const {data} = yield call(userFindAwesome, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            awesome: data.data
           }
         })
       }else{

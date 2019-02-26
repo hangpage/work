@@ -31,7 +31,7 @@ class CompanyInfo extends React.Component {
     return params;
   };
   render() {
-    const {form, matchId=''} = this.props;
+    const {form, matchId='', initialValueMap={}} = this.props;
     const {getFieldDecorator} = form;
     return (
       <div>
@@ -45,8 +45,9 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label="公司名称"
                     >
-                      {getFieldDecorator('name', {
+                      {getFieldDecorator('companyName', {
                         rules: [{required: true, message: '请输入公司名称'}],
+                        initialValue: initialValueMap.companyName
                       })(
                         <Input placeholder='请输入公司名称'/>
                       )}
@@ -58,6 +59,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('employees', {
                         rules: [{required: true, message: '请输入职工人数'}],
+                        initialValue: initialValueMap.employees
                       })(
                         <Input placeholder='请输入职工人数'/>
                       )}
@@ -69,6 +71,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('area', {
                         rules: [{required: true, message: '请输入办公面积'}],
+                        initialValue: initialValueMap.area
                       })(
                         <Input placeholder='请输入办公面积'/>
                       )}
@@ -80,6 +83,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('income', {
                         rules: [{required: true, message: '请输入年收入'}],
+                        initialValue: initialValueMap.income
                       })(
                         <Input placeholder='请输入年收入'/>
                       )}
@@ -91,6 +95,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('tax', {
                         rules: [{required: true, message: '请输入税收金额'}],
+                        initialValue: initialValueMap.tax
                       })(
                         <Input placeholder='请输入税收金额'/>
                       )}
@@ -102,6 +107,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('industry', {
                         rules: [{required: true, message: '请选择所属行业'}],
+                        initialValue: initialValueMap.industry
                       })(
                         <ComboBox placeholder='请选择所属行业' url='/dict/findType?type=industry'/>
                       )}
@@ -113,6 +119,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('address', {
                         rules: [{required: true, message: '请填写地址'}],
+                        initialValue: initialValueMap.address
                       })(
                         <Input placeholder='请填写地址' />
                       )}
@@ -124,6 +131,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('registeredCapital', {
                         rules: [{required: true, message: '请填写'}],
+                        initialValue: initialValueMap.registeredCapital
                       })(
                         <Input placeholder='请输入注册资金'/>
                       )}
@@ -135,6 +143,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('proportionOfFunds', {
                         rules: [{required: true, message: '请填写'}],
+                        initialValue: initialValueMap.proportionOfFunds
                       })(
                         <Input placeholder='请输入所占注册资金比例'/>
                       )}
@@ -146,6 +155,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('isOnPark', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.isOnPark
                       })(
                         <Radio.Group>
                           <Radio value={Const.Yes}>是</Radio>
@@ -163,6 +173,7 @@ class CompanyInfo extends React.Component {
                 >
                   {getFieldDecorator('intro', {
                     rules: [{required: true, message: '请填写'}],
+                    initialValue: initialValueMap.intro
                   })(
                     <TextArea placeholder='请输入团队简要介绍...' style={{height: 240}}/>
                   )}
@@ -174,6 +185,7 @@ class CompanyInfo extends React.Component {
                 >
                   {getFieldDecorator('business', {
                     rules: [{required: true, message: '请填写'}],
+                    initialValue: initialValueMap.business
                   })(
                     <TextArea placeholder='请输入团队主营业务...' style={{height: 240}}/>
                   )}
@@ -185,6 +197,7 @@ class CompanyInfo extends React.Component {
                 >
                   {getFieldDecorator('businessRegistration', {
                     rules: [{required: true, message: '请填写'}],
+                    initialValue: initialValueMap.businessRegistration
                   })(
                     <TextArea placeholder='请输入团队工商注册情况...' style={{height: 240}}/>
                   )}
@@ -201,6 +214,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('pic', {
                         rules: [{required: true, message: '请上传照片'}],
+                        initialValue: initialValueMap.pic
                       })(
                         <ImageUpload />
                       )}
@@ -212,6 +226,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('principal', {
                         rules: [{required: true, message: '请输入姓名'}],
+                        initialValue: initialValueMap.principal
                       })(
                         <Input placeholder='请输入姓名'/>
                       )}
@@ -223,6 +238,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('gendar', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.gendar
                       })(
                         <Radio.Group>
                           <Radio value={Const.Man}>男</Radio>
@@ -237,6 +253,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('birth', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.birth
                       })(
                         <DatePicker/>
                       )}
@@ -248,6 +265,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('idCard', {
                         rules: [{required: true, message: '请输入'}],
+                        initialValue: initialValueMap.idCard
                       })(
                         <Input placeholder='请输入身份证号'/>
                       )}
@@ -259,6 +277,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('householdRegistration', {
                         rules: [{required: true, message: '请输入'}],
+                        initialValue: initialValueMap.householdRegistration
                       })(
                         <Input placeholder='请输入户籍所在地'/>
                       )}
@@ -270,6 +289,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('educations', {
                         rules: [{required: true, message: '请输入'}],
+                        initialValue: initialValueMap.educations
                       })(
                         <Input placeholder='请输入学历'/>
                       )}
@@ -281,6 +301,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('profession', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.profession
                       })(
                         <ComboBox placeholder='请选择所学专业' url='/dict/findType?type=profession'/>
                       )}
@@ -292,6 +313,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('matchSchoolId', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.matchSchoolId
                       })(
                         <ComboBox nameProp='name' valueProp='id' placeholder='请选择所学专业' url={`/team/findMatchSchool?mId=${matchId}`}/>
                       )}
@@ -303,6 +325,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('education', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.education
                       })(
                         <Input placeholder='请输入最高学历院校'/>
                       )}
@@ -314,6 +337,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('isOnSchool', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.isOnSchool
                       })(
                         <Radio.Group>
                           <Radio value={Const.Yes}>是</Radio>
@@ -328,6 +352,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('admissionTime', {
                         rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.admissionTime
                       })(
                         <DatePicker/>
                       )}
@@ -339,6 +364,7 @@ class CompanyInfo extends React.Component {
                     >
                       {getFieldDecorator('diploma', {
                         rules: [{required: true, message: '请上传'}],
+                        initialValue: initialValueMap.diploma
                       })(
                         <ImageUpload />
                       )}

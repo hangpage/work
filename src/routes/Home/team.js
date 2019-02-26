@@ -12,7 +12,7 @@ import FinancingInfo from "./team/financing_info";
 import TeamInfo from "./team/team_info";
 import MemberInfo from "./team/member_info";
 
-const Team = ({data, location}) => {
+const Team = ({teamInfo, location, data}) => {
   return (
     <div className='team-body'>
       <div className="team-box">
@@ -32,19 +32,19 @@ const Team = ({data, location}) => {
         <div>
           <Tabs>
             <Tabs.TabPane tab='公司与项目信息' key='0'>
-              <CompanyInfo/>
+              <CompanyInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='融资情况' key='1'>
-              <FinancingInfo/>
+              <FinancingInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='团队信息' key='2'>
-              <TeamInfo/>
+              <TeamInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='个人详情（负责人）' key='3'>
-              <CompanyInfo/>
+              <CompanyInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='个人详情（成员）' key='4'>
-              <MemberInfo/>
+              <MemberInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
 
           </Tabs>

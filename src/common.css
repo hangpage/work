@@ -2539,6 +2539,15 @@
   width: 100%;
   opacity: 0.2;
 }
+:global .colorblue {
+  color: #1F81C2 !important;
+}
+:global .color666 {
+  color: #666666;
+}
+:global .color999 {
+  color: #999999;
+}
 :global .icon-del {
   background-image: url('./assets/icon/icon-shanchu.png');
   display: inline-block;
@@ -2598,5 +2607,17 @@
   display: inline-block;
   width: 15px;
   height: 14px;
+}
+:global .icon-message {
+  background-image: url('./assets/icon/icon-xitongxiaoxi-weidu.png');
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+}
+:global .icon-message-yidu {
+  background-image: url('./assets/icon/icon-xitongxiaoxi-yidu.png');
+  display: inline-block;
+  width: 45px;
+  height: 45px;
 }
 /*# sourceMappingURL=common.css.map */

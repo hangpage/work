@@ -5,6 +5,9 @@
     background: #ffffff;
   }
 
+  div{
+    line-height: 1;
+  }
 
   #root {
     height: 100%;
@@ -218,6 +221,69 @@
     &:last-child{
       border-bottom: none;
     }
+  }
+
+  .room-card{
+    height: 139px;
+    background: @opacity999;
+    padding: 0 30px;
+    border-bottom: 12px solid @opacity999;
+    &:last-child{
+      border-bottom: none;
+    }
+    .top{
+      line-height: 69px;
+      font-size: 24px;
+      border-bottom: 1px solid @opacity999;
+      display: flex;
+      justify-content: space-between;
+    }
+    .status{
+      font-size: 20px;
+    }
+    .bottom{
+      line-height: 69px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .time{
+      font-size: 18px;
+      color:rgba(153,153,153,0.6);
+    }
+    .appoint-time{
+      color: @light-gray;
+      font-size: 20px;
+    }
+  }
+
+  .service-tab{
+    .ant-tabs-bar{
+      margin: 0 !important;
+    }
+    .ant-tabs-nav{
+      width: 100%;
+      &>div{
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+      }
+      .ant-tabs-tab{
+        flex: 1;
+        text-align: center;
+        line-height: 58px;
+        padding: 0;
+        &:hover{
+          color: initial;
+        }
+      }
+      .ant-tabs-tab-active{
+        .color-linear-to-right();
+      }
+    }
+  }
+
+  .ant-tabs-ink-bar{
+    .bg-linear-to-right();
   }
 
   .dianzan{

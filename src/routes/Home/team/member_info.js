@@ -5,9 +5,8 @@
  */
 import React from 'react';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
-import {equalResultStatus, getParams, reFormatParams} from "../../../utils";
-import {cloneDeep} from 'lodash';
-import {parkResidentTeam} from "../../../services/park";
+import {equalResultStatus, reFormatParams} from "../../../utils";
+import {parksaveMembers} from "../../../services/park";
 import ImageUpload from "../../../components/FileUpload/ImageUpload";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
@@ -97,8 +96,8 @@ class ParkStep3 extends React.Component {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
-        params.rtId = getParams(location.search).rtId;
-        parkResidentTeam(params).then(({data}) => {
+        params.id = this.props.teamInfo.id;
+        parksaveMembers(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
             history.push({

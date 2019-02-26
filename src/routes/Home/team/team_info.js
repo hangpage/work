@@ -5,12 +5,12 @@
  */
 import React from 'react';
 import {Form, message, Row} from 'antd';
-import {equalResultStatus, getParams} from "../../../utils";
+import {equalResultStatus} from "../../../utils";
 import {parkResidentTeam} from "../../../services/park";
 import TeamInfo from "../../../components/TeamInfo/TeamInfo";
 
 
-class ParkStep3 extends React.Component {
+class Team extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -18,23 +18,15 @@ class ParkStep3 extends React.Component {
 
 
   submit = () => {
-    const {history, location} = this.props;
     const params = this.ref.getTeamInfoData();
     if (!Object.keys(params).length) {
       return message.error('请填写必填项！');
     }
     params.token = sessionStorage.getItem('token');
-    params.rtId = getParams(location.search).rtId;
-    let formData = new FormData();
-    Object.keys(params).forEach((item) => {
-      formData.append(item, params[item]);
-    });
-    parkResidentTeam(formData).then(({data}) => {
+    params.id = this.props.teamInfo.id;
+    parkResidentTeam(params).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
-        history.push({
-          pathname: '/index',
-        });
       } else {
         message.error(data.message);
       }
@@ -46,7 +38,7 @@ class ParkStep3 extends React.Component {
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
         <div className='w bg-white pb80'>
           <div className='bl-form'>
-            <TeamInfo wrappedComponentRef={(form) => this.ref = form}/>
+            <TeamInfo initialValueMap={this.props.teamInfo} wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
             <div className='main-button' onClick={this.submit} style={{width: 600}}>提交</div>
@@ -57,4 +49,4 @@ class ParkStep3 extends React.Component {
   }
 }
 
-export default Form.create()(ParkStep3);
+export default Form.create()(Team);

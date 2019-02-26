@@ -27,9 +27,11 @@ import Home from "./routes/Home";
 import Profile from "./routes/Home/profile";
 import Match from "./routes/Home/match";
 import Leave from "./routes/Home/leave";
+import Message from "./routes/Home/message";
 import Advise from "./routes/Home/advise";
 import Enter from "./routes/Home/enter";
 import Team from "./routes/Home/team";
+import ServiceTab from "./routes/Home/service";
 import ServiceParking from './routes/Service/parking';
 import Repair from './routes/Service/repair';
 import Lockers from './routes/Service/lockers';
@@ -181,6 +183,14 @@ const routes = [{
   component: Team,
   exact: 'exact'
 }, {
+  path: '/home/message',
+  component: Message,
+  exact: 'exact'
+}, {
+  path: '/home/service',
+  component: ServiceTab,
+  exact: 'exact'
+},{
   path: '/search',
   component: Search,
   exact: 'exact'

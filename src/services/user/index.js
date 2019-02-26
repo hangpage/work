@@ -134,3 +134,74 @@ export function queryResidentTeamInfo(params={}){
     credentials: "include"
   });
 }
+
+/** 
+* @Description: 查询用户申请储物柜
+* @Param:  
+* @return:  
+* @Author: zzhihang@hotmail.com 
+* @date: 2019/2/26 15:46
+*/
+export function userLockers(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findLockerByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/**
+ * @Description: 查询用户报修服务
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/26 15:46
+ */
+export function userRepair(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findRepairByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/** 
+* @Description: 查询用户申请服务
+* @Param:  
+* @return:  
+* @Author: zzhihang@hotmail.com 
+* @date: 2019/2/26 15:48
+*/ 
+export function userFindServiceAppli(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findServiceAppliByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+export function userFineMeetingRoom(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findMeetingRoomByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+export function userFindComment(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/dynamic/findCommontByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+export function userFindAwesome(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/dynamic/findAwesomeByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}

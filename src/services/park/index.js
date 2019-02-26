@@ -46,6 +46,20 @@ export function parkSavePrincipal(params){
     credentials: "include"
   });
 }
+/**
+ * @Description: 入驻园区
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 17:06
+ */
+export function parksaveMembers(params){
+  return request(`/api/residentTeam/saveMembers?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
 
 
 

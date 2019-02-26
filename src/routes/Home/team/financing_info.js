@@ -6,8 +6,9 @@
 import React from 'react';
 import {Form, message, Row} from 'antd';
 import {equalResultStatus, getParams, reFormatParams} from "../../../utils";
-import {parkSavePrincipal} from "../../../services/park";
+import {parkResidentTeam, parkSavePrincipal} from "../../../services/park";
 import FinancingInfo from "../../../components/FinancingInfo/FinancingInfo";
+import TeamInfo from "../../../components/TeamInfo/TeamInfo";
 
 class ParkStep2 extends React.Component {
   constructor(props) {
@@ -22,8 +23,8 @@ class ParkStep2 extends React.Component {
       return message.error('请填写必填项！');
     }
     params.token = sessionStorage.getItem('token');
-    params.rtId = getParams(location.search).rtId;
-    parkSavePrincipal(reFormatParams(params)).then(({data}) => {
+    params.id = this.props.teamInfo.id;
+    parkResidentTeam(reFormatParams(params)).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
         history.push({
@@ -43,7 +44,7 @@ class ParkStep2 extends React.Component {
             <div className="text-align mt40">
               <span className="form-name">融资情况</span>
             </div>
-            <FinancingInfo wrappedComponentRef={(form) => this.ref = form}/>
+            <FinancingInfo initialValueMap={this.props.teamInfo} wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
             <div className='main-button' onClick={this.submit} style={{width: 600}}>保存</div>

@@ -1,0 +1,52 @@
+@import "../../variable.less";
+.card{
+  border-bottom: 12px solid @opacity999;
+  background: @opacity999;
+  &:last-child{
+    border-bottom: none;
+  }
+}
+.top{
+  font-size: 20px;
+  height: 70px;
+  padding-top: 31px;
+  padding-left: 30px;
+  padding-right: 30px;
+  line-height: 1;
+  border-bottom: 1px solid @opacity999;
+  display: flex;
+  justify-content: space-between;
+}
+.time{
+  font-size: 18px;
+  color:rgba(153,153,153,0.6);
+}
+.middle{
+  padding: 20px 30px 0;
+  font-size: 20px;
+  color: @deep-gray;
+}
+.name{
+  padding-right: 46px;
+  border-right: 1px solid @opacity9994;
+}
+.phone{
+  color: @light-gray;
+  margin-left: 43px;
+}
+.bottom{
+  min-height: 78px;
+  color: @deep-gray;
+  font-size: 20px;
+  display: flex;
+  padding: 29px 30px 0;
+}
+.title{
+  font-weight: bold;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.content{
+  flex: 1;
+}

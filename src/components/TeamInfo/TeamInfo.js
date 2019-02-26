@@ -13,47 +13,6 @@ import {cloneDeep} from 'lodash';
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 
-const list1 = [{
-  label: '姓名',
-  field: 'principalStr'
-}, {
-  label: '性别',
-  field: 'gendar',
-  type: 'radio',
-  options: Const.GENDAR_OPTIONS
-}, {
-  label: '学校',
-  field: 'studySchool'
-}, {
-  label: '专业',
-  field: 'studyProfession'
-}, {
-  label: '学历',
-  field: 'education'
-}, {
-  label: '毕业时间',
-  field: 'graduationTime',
-  type: 'datepicker'
-}, {
-  label: '生源地',
-  field: 'householdRegistration',
-}, {
-  label: '政治面貌',
-  field: 'politicalStatus',
-}, {
-  label: '联系电话',
-  field: 'phone',
-}, {
-  label: '微信',
-  field: 'QQ',
-}, {
-  label: 'QQ',
-  field: 'QQ',
-}, {
-  label: '邮箱',
-  field: 'email',
-},];
-
 class TeamInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -133,6 +92,55 @@ class TeamInfo extends React.Component {
   };
 
   render() {
+    const {initialValueMap} = this.props;
+    const list1 = [{
+      label: '姓名',
+      field: 'principalStr',
+      initialValue: initialValueMap.principalStr
+    }, {
+      label: '性别',
+      field: 'gendar',
+      type: 'radio',
+      options: Const.GENDAR_OPTIONS,
+      initialValue: initialValueMap.gendar
+    }, {
+      label: '学校',
+      field: 'studySchool',
+      initialValue: initialValueMap.studySchool
+    }, {
+      label: '专业',
+      field: 'studyProfession',
+      initialValue: initialValueMap.studyProfession
+    }, {
+      label: '学历',
+      field: 'education',
+      initialValue: initialValueMap.education
+    }, {
+      label: '毕业时间',
+      field: 'graduationTime',
+      type: 'datepicker',
+      initialValue: initialValueMap.graduationTime
+    }, {
+      label: '生源地',
+      field: 'householdRegistration',
+      initialValue: initialValueMap.householdRegistration
+    }, {
+      label: '政治面貌',
+      field: 'politicalStatus',
+      initialValue: initialValueMap.politicalStatus
+    }, {
+      label: '联系电话',
+      field: 'phone',
+      initialValue: initialValueMap.phone
+    }, {
+      label: 'QQ/微信',
+      field: 'QQ',
+      initialValue: initialValueMap.QQ
+    }, {
+      label: '邮箱',
+      field: 'email',
+      initialValue: initialValueMap.email
+    },];
     const modalProps = {
       visible: this.state.modalVisible,
       modalItem: this.state.modalItem,
@@ -149,16 +157,16 @@ class TeamInfo extends React.Component {
         <Form>
           <Row gutter={138}>
             {list1.map((item, index) => {
-              var comp = <Input placeholder={`请输入${item.label}`}/>;
+              var comp = <Input placeholder={`请输入${item.label}`} initialValue={item.initialValue}/>;
               if (item.type === 'select') {
-                comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
+                comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''} initialValue={item.initialValue}/>;
               } else if (item.type === 'datepicker') {
-                comp = <DatePicker placeholder={`请选择${item.label}`}/>;
+                comp = <DatePicker placeholder={`请选择${item.label}`} initialValue={item.initialValue}/>;
               } else if (item.type === 'radio') {
                 comp =
                   (<Radio.Group>
                     {item.options.map((option, oindex) => <Radio key={oindex}
-                                                                 value={option.value}>{option.text}</Radio>)}
+                                                                 value={option.value} initialValue={item.initialValue}>{option.text}</Radio>)}
                   </Radio.Group>)
               }
               return (

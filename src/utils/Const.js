@@ -53,4 +53,10 @@ Const.ENTER_STATUS = {
   1: '已同意入驻'
 };
 
+Const.SERVICE_STATUS = {
+  0: '审核中',
+  1: '已通过',
+  2: '已拒绝',
+};
+
 export default Const;

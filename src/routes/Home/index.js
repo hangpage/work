@@ -31,7 +31,7 @@ const HomeList = [{
 },{
   title: '我的消息',
   icon: require('../../assets/icon/home/icon-default-xiaoxi.png'),
-  url: '/info'
+  url: '/message'
 },{
   title: '浏览历史',
   icon: require('../../assets/icon/home/icon-default-liulanlishi.png'),

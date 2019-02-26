@@ -29,6 +29,9 @@
 :global html {
   background: #ffffff;
 }
+:global div {
+  line-height: 1;
+}
 :global #root {
   height: 100%;
 }
@@ -235,6 +238,66 @@
 }
 :global .park-record:last-child {
   border-bottom: none;
+}
+:global .room-card {
+  height: 139px;
+  background: rgba(153, 153, 153, 0.1);
+  padding: 0 30px;
+  border-bottom: 12px solid rgba(153, 153, 153, 0.1);
+}
+:global .room-card:last-child {
+  border-bottom: none;
+}
+:global .room-card .top {
+  line-height: 69px;
+  font-size: 24px;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+:global .room-card .status {
+  font-size: 20px;
+}
+:global .room-card .bottom {
+  line-height: 69px;
+  display: flex;
+  justify-content: space-between;
+}
+:global .room-card .time {
+  font-size: 18px;
+  color: rgba(153, 153, 153, 0.6);
+}
+:global .room-card .appoint-time {
+  color: #999999;
+  font-size: 20px;
+}
+:global .service-tab .ant-tabs-bar {
+  margin: 0 !important;
+}
+:global .service-tab .ant-tabs-nav {
+  width: 100%;
+}
+:global .service-tab .ant-tabs-nav > div {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+:global .service-tab .ant-tabs-nav .ant-tabs-tab {
+  flex: 1;
+  text-align: center;
+  line-height: 58px;
+  padding: 0;
+}
+:global .service-tab .ant-tabs-nav .ant-tabs-tab:hover {
+  color: initial;
+}
+:global .service-tab .ant-tabs-nav .ant-tabs-tab-active {
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+:global .ant-tabs-ink-bar {
+  background: linear-gradient(to right, #00acaf, #0771bb);
 }
 :global .dianzan {
   font-size: 24px;
