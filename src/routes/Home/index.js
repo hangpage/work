@@ -25,6 +25,10 @@ const HomeList = [{
   icon: require('../../assets/icon/home/icon-default-bisai.png'),
   url: '/match'
 },{
+  title: '我的活动',
+  icon: require('../../assets/icon/home/icon-default-bisai.png'),
+  url: '/activity'
+},{
   title: '我的服务',
   icon: require('../../assets/icon/home/icon-default-fuwu.png'),
   url: '/service'

@@ -34,10 +34,11 @@ class ActivityList extends Component {
 
   render() {
     const {list, count} = this.state;
+    const {linkTo='activity'} = this.props;
     const comps = list.map((item, index) => {
       return (
         <Col span={8} key={index}>
-          <Link to={`activity/${item.id}`}>
+          <Link to={`${linkTo}/${item.id}`}>
             <ActivityCard
               key={index}
               img={`${config.URL}${item.pic}`}

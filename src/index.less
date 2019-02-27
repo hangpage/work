@@ -5,12 +5,71 @@
     background: #ffffff;
   }
 
-  div{
-    line-height: 1;
-  }
-
   #root {
     height: 100%;
+  }
+
+  .score{
+    background: #f5f5f5;
+    .top{
+      text-align: center;
+      border-bottom: 4px solid @opacity999;
+      padding-top: 32px;
+      padding-bottom: 28px;
+      h1{
+        color: #3333;
+        font-size: 26px;
+        margin-bottom: 17px !important;
+      }
+      h2{
+        .color-linear-to-right();
+        font-size: 20px;
+        margin-bottom: 28px;
+      }
+    }
+    .score-card{
+      background: @white;
+      margin: 30px 20px 40px;
+      h4{
+        line-height: 57px !important;
+        font-size: 20px;
+        text-align: center;
+      }
+      .content{
+        padding: 29px 20px;
+        color: @deep-gray;
+        line-height:30px;
+        font-size: 16px;
+        border-top: 2px solid @opacity999;
+        border-bottom: 2px solid @opacity999;
+        margin: 0;
+      }
+    }
+    .bottom{
+      height: 81px;
+      background: @white;
+      display: flex;
+      padding-left: 20px;
+      align-items: center;
+    }
+    .pingfen{
+      .color-linear-to-right();
+      font-size: 22px;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+    input{
+      width: 120px;
+      height: 44px;
+    }
+    .total-score{
+      padding: 50px 20px 60px;
+      .score-form{
+        padding: 30px 20px;
+        background: @white;
+        box-shadow:0 2px 8px 0 rgba(31,130,194,0.3);
+      }
+    }
   }
 
   .ellipsis1{

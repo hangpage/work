@@ -6,8 +6,21 @@
 import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
+import {getParams} from "../../utils";
 
-const Detail = ({data}) => {
+const Detail = ({data, location, match}) => {
+  const params = getParams(location.search);
+  let link = `/team_info_write?mId=${data.id}`;
+  let btnName = '报名';
+  if(params.from === 'home'){
+    btnName = '查看比赛进度';
+    if(params.isTutor === '1'){
+      link = `${match.url}/score`;
+    }else{
+      link = `${match.url}/progress?status=${params.status}`;
+    }
+  }
+
   return (
     <div className='second-bg'>
       <div className="w">
@@ -17,7 +30,8 @@ const Detail = ({data}) => {
           title={data.name}
           content={data.content}
           mId={data.id}
-          reportLink={`/team_info_write?mId=${data.id}`}
+          reportLink={link}
+          btnName={btnName}
           img={data.pic}
         />
         <div className='competition-detail' dangerouslySetInnerHTML={{__html: data.content}} />

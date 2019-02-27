@@ -29,11 +29,74 @@
 :global html {
   background: #ffffff;
 }
-:global div {
-  line-height: 1;
-}
 :global #root {
   height: 100%;
+}
+:global .score {
+  background: #f5f5f5;
+}
+:global .score .top {
+  text-align: center;
+  border-bottom: 4px solid rgba(153, 153, 153, 0.1);
+  padding-top: 32px;
+  padding-bottom: 28px;
+}
+:global .score .top h1 {
+  color: #3333;
+  font-size: 26px;
+  margin-bottom: 17px !important;
+}
+:global .score .top h2 {
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 20px;
+  margin-bottom: 28px;
+}
+:global .score .score-card {
+  background: #ffffff;
+  margin: 30px 20px 40px;
+}
+:global .score .score-card h4 {
+  line-height: 57px !important;
+  font-size: 20px;
+  text-align: center;
+}
+:global .score .score-card .content {
+  padding: 29px 20px;
+  color: #666666;
+  line-height: 30px;
+  font-size: 16px;
+  border-top: 2px solid rgba(153, 153, 153, 0.1);
+  border-bottom: 2px solid rgba(153, 153, 153, 0.1);
+  margin: 0;
+}
+:global .score .bottom {
+  height: 81px;
+  background: #ffffff;
+  display: flex;
+  padding-left: 20px;
+  align-items: center;
+}
+:global .score .pingfen {
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 22px;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+:global .score input {
+  width: 120px;
+  height: 44px;
+}
+:global .score .total-score {
+  padding: 50px 20px 60px;
+}
+:global .score .total-score .score-form {
+  padding: 30px 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
 }
 :global .ellipsis1 {
   overflow: hidden;

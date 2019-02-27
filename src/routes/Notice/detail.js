@@ -13,7 +13,7 @@ import Comment from "../../components/Commet/Comment";
 import Modal from '../Article/component/Modal';
 import {cloneDeep} from "lodash";
 
-const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
+const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
   const hideModal = () => {dispatch({ type: 'notice/updateState', payload: {modalVisible: false} })};
   const getArticleDetail = () => {dispatch({ type: 'notice/get', payload: {id: pathMatchRegexp('/notice/:id', location.pathname)[1]}})};
 
@@ -48,7 +48,11 @@ const Detail = ({data, location, placeHolder,commentShowChildrenList, comment, c
 
   const onCommentDetailClick = (e, id) => {
       const list = cloneDeep(commentShowChildrenList);
-      list.push(id);
+      if(list.indexOf(id) !== -1){
+        list.splice(list.indexOf(id) , 1);
+      }else{
+        list.push(id);
+      }
       dispatch({
         type: 'notice/updateState',
         payload: {

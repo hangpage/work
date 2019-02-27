@@ -1,8 +1,9 @@
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
 import {
+  aboutUs,
   queryResidentTeamInfo, userFindAwesome, userFindComment,
-  userFindEntering, userFindServiceAppli,
+  userFindEntering, userFindMatch, userFindServiceAppli,
   userFindSignActivity,
   userFineMeetingRoom,
   userGetInfo, userLockers, userRepair
@@ -17,6 +18,7 @@ export default {
     data: {}, //用户信息
     enterData: [],
     activityData: [],
+    matchData: [],
     teamInfo: {},
     modalVisible: false,
     service: [],
@@ -25,7 +27,8 @@ export default {
     locker: [],
     system: [],
     awesome: [],
-    comment: []
+    comment: [],
+    aboutUs: {}
   },
 
   subscriptions: {
@@ -45,7 +48,7 @@ export default {
               break;
             case '/home/match':
               dispatch({
-                type: 'findActivity'
+                type: 'userFindMatch'
               });
               break;
           }
@@ -63,6 +66,10 @@ export default {
           dispatch({type: 'userFindSystem'});
           dispatch({type: 'userFindComment'});
           dispatch({type: 'userFindAwesome'});
+        }else if(pathMatchRegexp('/home/about', location.pathname)){
+          dispatch({type: 'aboutUs'});
+        }else if(pathMatchRegexp('/home/activity', location.pathname)){
+          dispatch({type: 'userFindActivity'});
         }
       })
     },
@@ -93,7 +100,20 @@ export default {
         message.error(data.message);
       }
     },
-    *findActivity({ payload }, { call, put }) {
+    *userFindMatch({ payload }, { call, put }) {
+      const {data} = yield call(userFindMatch, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            matchData: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *userFindActivity({ payload }, { call, put }) {
       const {data} = yield call(userFindSignActivity, payload);
       if(equalResultStatus(data)){
         yield put({
@@ -204,6 +224,19 @@ export default {
           type: 'updateState',
           payload: {
             awesome: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *aboutUs({ payload }, { call, put }) {
+      const {data} = yield call(aboutUs, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            aboutUs: data.data
           }
         })
       }else{

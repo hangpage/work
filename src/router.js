@@ -30,7 +30,10 @@ import Leave from "./routes/Home/leave";
 import Message from "./routes/Home/message";
 import Advise from "./routes/Home/advise";
 import Enter from "./routes/Home/enter";
+import ViewHistory from "./routes/Home/history";
+import MyActivity from "./routes/Home/activity";
 import Team from "./routes/Home/team";
+import Abount from "./routes/Home/about";
 import ServiceTab from "./routes/Home/service";
 import ServiceParking from './routes/Service/parking';
 import Repair from './routes/Service/repair';
@@ -41,6 +44,8 @@ import Post from './routes/Service/post';
 import NoMatch from './routes/404/404';
 import ScrollToTop from "./components/ScrollTop";
 import ApplicationRecord from "./routes/Service/application_record";
+import Score from "./routes/Competition/score";
+import Progress from "./routes/Competition/progress";
 
 const routes = [{
   path: '/login',
@@ -95,6 +100,14 @@ const routes = [{
   component: CompetitionDetail,
   exact: 'exact'
 }, {
+  path: '/competition/:id/score',
+  component: Score,
+  exact: 'exact'
+}, {
+  path: '/competition/:id/progress',
+  component: Progress,
+  exact: 'exact'
+},{
   path: '/team_info_write',
   component: TeamInfoWrite,
   exact: 'exact'
@@ -179,8 +192,20 @@ const routes = [{
   component: Enter,
   exact: 'exact'
 }, {
+  path: '/home/history',
+  component: ViewHistory,
+  exact: 'exact'
+}, {
+  path: '/home/activity',
+  component: MyActivity,
+  exact: 'exact'
+}, {
   path: '/home/team',
   component: Team,
+  exact: 'exact'
+},  {
+  path: '/home/about',
+  component: Abount,
   exact: 'exact'
 }, {
   path: '/home/message',

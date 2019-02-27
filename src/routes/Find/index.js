@@ -21,7 +21,7 @@ const Index = () => {
             <ActivityList url='/api/activity/findList'/>
           </Tabs.TabPane>
           <Tabs.TabPane tab='创业动态' key={2}>
-            <ActivityList url='/api/article/findList'/>
+            <ActivityList url='/api/article/findList' linkTo='article'/>
           </Tabs.TabPane>
         </Tabs>
       </div>

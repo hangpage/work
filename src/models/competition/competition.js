@@ -1,4 +1,4 @@
-import {findList, matchGet} from "../../services/competition";
+import {findList, getTeamDetail, matchGet} from "../../services/competition";
 import {model} from "../../utils/model";
 import modelExtend from 'dva-model-extend'
 import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
@@ -10,7 +10,8 @@ export default modelExtend(model, {
 
   state: {
     list: [],
-    data: {}
+    data: {},
+    teamDetail: {}
   },
 
   subscriptions: {
@@ -24,6 +25,11 @@ export default modelExtend(model, {
           const match = pathMatchRegexp('/competition/:id', location.pathname);
           if (match) {
             dispatch({ type: 'queryDetail', payload: { id: match[1], park: getParams(location.search).park } })
+          }
+        }else if(pathMatchRegexp('/competition/:id/score', location.pathname)){
+          const match = pathMatchRegexp('/competition/:id/score', location.pathname);
+          if (match) {
+            dispatch({ type: 'getTeamDetail', payload: { id: match[1] } })
           }
         }
       })
@@ -51,6 +57,19 @@ export default modelExtend(model, {
           type: 'save',
           payload: {
             data: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *getTeamDetail({ payload }, { call, put }){
+      const {data} = yield  call(getTeamDetail, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'save',
+          payload: {
+            teamDetail: data.data || {}
           }
         })
       }else{

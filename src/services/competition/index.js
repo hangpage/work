@@ -12,7 +12,8 @@ export function findList(params) {
 * @Author: zzhihang@hotmail.com 
 * @date: 2019/2/11 17:06
 */ 
-export function getTeamDetail(params){
+export function getTeamDetail(params={}){
+  params.token = sessionStorage.getItem('token');
   return request(`/api/team/getTeamDetail?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
@@ -62,6 +63,22 @@ export function insertProject(formData){
 export function matchGet(params={}){
   params.token = sessionStorage.getItem('token');
   return request(`/api/match/get?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/**
+ * @Description: 获取比赛详情
+ * @Param: id：比赛id
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 19:58
+ */
+export function saveScore(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/tutor/score?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"

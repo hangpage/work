@@ -87,6 +87,16 @@ export function userFindSignActivity(params={}){
     credentials: "include"
   });
 }
+
+export function userFindMatch(params={}){
+  params.token = sessionStorage.getItem('token');
+  params.joined = 1;
+  return request(`/api/match/findList?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
 /** 
 * @Description: 用户签到 
 * @Param:
@@ -200,6 +210,21 @@ export function userFindComment(params={}){
 export function userFindAwesome(params={}){
   params.token = sessionStorage.getItem('token');
   return request(`/api/dynamic/findAwesomeByToken?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+/** 
+* @Description: 获取关于我们
+* @Param:  
+* @return:  
+* @Author: zzhihang@hotmail.com 
+* @date: 2019/2/27 19:16
+*/ 
+
+export function aboutUs(){
+  return request(`/api/info/aboutUs`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"

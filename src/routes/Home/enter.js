@@ -41,7 +41,7 @@ const Profile = ({enterData}) => {
   return (
     <Home>
       <div>
-        <div className="title-card"><span>个人资料</span></div>
+        <div className="title-card"><span>入驻管理</span></div>
         {enterData.map((item) => {
           return (
             <div className="bl-confirm mt42">
