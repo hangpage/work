@@ -11,6 +11,7 @@ import CompanyInfo from "./team/company_info";
 import FinancingInfo from "./team/financing_info";
 import TeamInfo from "./team/team_info";
 import MemberInfo from "./team/member_info";
+import LeaderInfo from "./team/leader_info";
 
 const Team = ({teamInfo, location, data}) => {
   return (
@@ -41,7 +42,7 @@ const Team = ({teamInfo, location, data}) => {
               <TeamInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='个人详情（负责人）' key='3'>
-              <CompanyInfo teamInfo={teamInfo}/>
+              <LeaderInfo teamInfo={teamInfo}/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='个人详情（成员）' key='4'>
               <MemberInfo teamInfo={teamInfo}/>

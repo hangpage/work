@@ -1,14 +1,13 @@
 /**
- * @Description: 园区入驻第2步
+ * @Description: 更新团队融资信息
  * @Author: zzhihang@hotmail.com
  * @Date: 2019/2/18 20:12
  */
 import React from 'react';
 import {Form, message, Row} from 'antd';
-import {equalResultStatus, getParams, reFormatParams} from "../../../utils";
-import {parkResidentTeam, parkSavePrincipal} from "../../../services/park";
+import {equalResultStatus, reFormatParams} from "../../../utils";
 import FinancingInfo from "../../../components/FinancingInfo/FinancingInfo";
-import TeamInfo from "../../../components/TeamInfo/TeamInfo";
+import {updateTeamInfo} from "../../../services/competition";
 
 class ParkStep2 extends React.Component {
   constructor(props) {
@@ -17,19 +16,15 @@ class ParkStep2 extends React.Component {
   }
 
   submit = () => {
-    const {history, location} = this.props;
     const params = this.ref.getTeamInfoData();
     if(!Object.keys(params).length){
       return message.error('请填写必填项！');
     }
     params.token = sessionStorage.getItem('token');
     params.id = this.props.teamInfo.id;
-    parkResidentTeam(reFormatParams(params)).then(({data}) => {
+    updateTeamInfo(reFormatParams(params)).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
-        history.push({
-          pathname: '/park/parkStep2?rtId=' + params.rtId,
-        });
       } else {
         message.error(data.message);
       }

@@ -14,8 +14,8 @@ const CompetitionCard = ({img, title, time, read, status}) => {
         <img src={img} alt=""/>
         <div className={styles.desc}>
           <span className={styles.status}>{Const.MATCH_STATUS[status]}</span>
-          <p className={styles.title}>{title}</p>
-          <p>
+          <p className={styles.title} style={{"WebkitBoxOrient": "vertical"}}>{title}</p>
+          <p style={{marginTop: 14}}>
             <span className={styles.time}>{time}</span>
             <span className={styles.read}>已报名：<span className="deep-gray">{read}</span></span>
           </p>

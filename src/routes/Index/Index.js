@@ -74,11 +74,13 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
           })}
         </Carousel>
         <Link to='/notice'>
-          <div className="info-public">
-            <img src={pl} alt="" className='mr28'/>
-            <img src={laba} alt="" className='mr21'/>
-            <p>{noticeContent.content}</p>
-            <img src={jinru} alt=""/>
+          <div className='info-public-box'>
+           <div className="info-public">
+             <img src={pl} alt="" className='mr28'/>
+             <img src={laba} alt="" className='mr21'/>
+             <p>{noticeContent.content}</p>
+             <img src={jinru} alt=""/>
+           </div>
           </div>
         </Link>
       </div>

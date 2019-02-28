@@ -1,7 +1,7 @@
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
 import {
-  aboutUs,
+  aboutUs, historyActivity, historyMatch,
   queryResidentTeamInfo, userFindAwesome, userFindComment,
   userFindEntering, userFindMatch, userFindServiceAppli,
   userFindSignActivity,
@@ -28,7 +28,9 @@ export default {
     system: [],
     awesome: [],
     comment: [],
-    aboutUs: {}
+    aboutUs: {},
+    historyMatch: [],
+    historyActivity: []
   },
 
   subscriptions: {
@@ -70,6 +72,9 @@ export default {
           dispatch({type: 'aboutUs'});
         }else if(pathMatchRegexp('/home/activity', location.pathname)){
           dispatch({type: 'userFindActivity'});
+        }else if(pathMatchRegexp('/home/history', location.pathname)){
+          dispatch({type: 'historyMatch'});
+          dispatch({type: 'historyActivity'});
         }
       })
     },
@@ -123,6 +128,32 @@ export default {
           }
         })
       }else{
+        message.error(data.message);
+      }
+    },
+    *historyActivity({ payload }, { call, put }) {
+      const {data} = yield call(historyActivity, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            historyActivity: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *historyMatch({ payload }, { call, put }) {
+      const {data} = yield call(historyMatch, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            historyMatch: data.data
+          }
+        })
+      }else {
         message.error(data.message);
       }
     },

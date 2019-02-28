@@ -22,6 +22,18 @@
 .border-linear {
   border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
 }
+.ellipsis1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ellipsis2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 :global {
   /* For demo */
 }
@@ -98,11 +110,6 @@
   background: #ffffff;
   box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
 }
-:global .ellipsis1 {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
 :global h1,
 :global h2,
 :global h3,
@@ -131,6 +138,7 @@
   color: transparent !important;
   font-weight: bold !important;
   font-size: 24px !important;
+  line-height: initial !important;
 }
 :global .normal-upload {
   width: 72px;
@@ -542,6 +550,14 @@
   margin-top: 14px;
   padding-right: 17px;
 }
+:global .info-public-box {
+  height: 60px;
+  width: 1200px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  transform: translateY(-34px);
+}
 :global .info-public {
   height: 60px;
   width: 1200px;
@@ -549,12 +565,11 @@
   color: #666666;
   font-size: 18px;
   background: #FBFBFB;
-  border-radius: 12px;
-  overflow: hidden;
   display: flex;
   align-items: center;
   padding-right: 20px;
-  transform: translateY(-34px);
+  border: 1px solid;
+  border-image: linear-gradient(0deg, rgba(0, 166, 189, 0.14), rgba(7, 111, 183, 0.14)) 1 1;
 }
 :global .info-public p {
   flex: 1;

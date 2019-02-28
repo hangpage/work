@@ -50,175 +50,218 @@ import Progress from "./routes/Competition/progress";
 const routes = [{
   path: '/login',
   component: Login,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '登录'
 }, {
   path: '/index',
   component: Index,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '首页'
 }, {
   path: '/service',
   component: Service,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '服务'
 }, {
   path: '/service/:id',
   component: ServiceList,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '服务列表'
 }, {
   path: '/service/:id/detail',
   component: ServiceDetail,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '服务详情'
 }, {
   path: '/service/type/parking',
   component: ServiceParking,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '车位申请'
 }, {
   path: '/service/type/parking/record',
   component: ApplicationRecord,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '申请记录'
 },  {
   path: '/service/type/repair',
   component: Repair,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '报修申请'
 }, {
   path: '/service/type/lockers',
   component: Lockers,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '储物柜申请'
 }, {
   path: '/service/type/meeting',
   component: Meeting,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '会议室申请'
 }, {
   path: '/service/type/post',
   component: Post,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '服务申请'
 }, {
   path: '/competition',
   component: Competition,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '比赛'
 }, {
   path: '/competition/:id',
   component: CompetitionDetail,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '比赛详情'
 }, {
   path: '/competition/:id/score',
   component: Score,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '比赛打分'
 }, {
   path: '/competition/:id/progress',
   component: Progress,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '比赛进度'
 },{
   path: '/team_info_write',
   component: TeamInfoWrite,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '团队信息填写'
 }, {
   path: '/project_info_write',
   component: ProjectInfoWrite,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '项目信息填写'
 }, {
   path: '/sign_teacher',
   component: SignTeacher,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '成为导师'
 }, {
   path: '/appoint',
   component: AppointVisit,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '预约参观'
 }, {
   path: '/notice',
   component: Notice,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '公告'
 }, {
   path: '/notice/:id',
   component: NoticeDetail,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '公告详情'
 }, {
   path: '/article/:id',
   component: ArticleDetail,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '文章详情'
 },  {
   path: '/park',
   component: Park,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '园区入驻'
 }, {
   path: '/park/parkStep1',
   component: ParkStep1,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '第一步'
 }, {
   path: '/park/parkStep2',
   component: ParkStep2,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '第二步'
 }, {
   path: '/park/parkStep3',
   component: ParkStep3,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '第三步'
 }, {
   path: '/activity',
   component: Activity,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '活动列表'
 }, {
   path: '/activity/:id',
   component: ActivityDetail,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '活动详情'
 }, {
   path: '/activity/:id/report',
   component: ActivityReport,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '活动报名'
 }, {
   path: '/find',
   component: Find,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '发现'
 }, {
   path: '/home',
   component: Home,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '主页'
 }, {
   path: '/home/profile',
   component: Profile,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '个人信息'
 }, {
   path: '/home/match',
   component: Match,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '我的比赛'
 }, {
   path: '/home/leave',
   component: Leave,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '离园'
 }, {
   path: '/home/advise',
   component: Advise,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '建议'
 }, {
   path: '/home/enter',
   component: Enter,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '我的入驻'
 }, {
   path: '/home/history',
   component: ViewHistory,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '浏览历史'
 }, {
   path: '/home/activity',
   component: MyActivity,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: '我的活动'
 }, {
   path: '/home/team',
   component: Team,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: ''
 },  {
   path: '/home/about',
   component: Abount,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: ''
 }, {
   path: '/home/message',
   component: Message,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: ''
 }, {
   path: '/home/service',
   component: ServiceTab,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: ''
 },{
   path: '/search',
   component: Search,
-  exact: 'exact'
+  exact: 'exact',
+  breadcrumbName: ''
 }];
 
 function RouterConfig({history}) {

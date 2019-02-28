@@ -86,3 +86,19 @@ export function saveScore(params={}){
 }
 
 
+/**
+* @Description: 更新团队档案信息
+* @Param:
+* @return:
+* @Author: zzhihang@hotmail.com
+* @date: 2019/2/28 23:31
+*/
+
+export function updateTeamInfo(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/dataUpdate/save?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}

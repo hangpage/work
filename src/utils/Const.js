@@ -19,6 +19,14 @@ Const.YesOrNoOptions = [{
   value: Const.No
 }];
 
+Const.HaveOrNot = [{
+  text: '有',
+  value: Const.Yes
+},{
+  text: '无',
+  value: Const.No
+}];
+
 Const.GENDAR_OPTIONS = [{
   text: '男',
   value: Const.Man

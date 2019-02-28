@@ -230,3 +230,37 @@ export function aboutUs(){
     credentials: "include"
   });
 }
+
+/** 
+* @Description: 获取历史浏览活动
+* @Param:  
+* @return:  
+* @Author: zzhihang@hotmail.com 
+* @date: 2019/2/28 22:50
+*/
+export function historyActivity(params={}){
+  params.type = 1;
+  params.token = sessionStorage.getItem('token');
+  return request(`/api//user/findBrowsingHistory?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/**
+* @Description: 获取历史浏览比赛
+* @Param:
+* @return:
+* @Author: zzhihang@hotmail.com
+* @date: 2019/2/28 22:50
+*/
+export function historyMatch(params={}){
+  params.type = 3;
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findBrowsingHistory?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}

@@ -71,15 +71,12 @@ const list3 = [{
 }, {
   label: '学历',
   field: 'QQ',
-  type: 'datepicker'
 }, {
   label: '户籍地址',
   field: 'QQ',
-  type: 'datepicker'
 }, {
   label: '常用地址',
   field: 'QQ',
-  type: 'datepicker'
 }];
 
 class ParkStep3 extends React.Component {

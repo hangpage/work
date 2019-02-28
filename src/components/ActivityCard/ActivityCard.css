@@ -1,3 +1,39 @@
+.color-linear-to-right {
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear-to-bottom {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.bg-linear-to-bottom {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+}
+.bg-linear-to-right {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+}
+.border-linear {
+  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+}
+.ellipsis1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ellipsis2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .color-linear {
   background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
   -webkit-background-clip: text;
@@ -6,7 +42,11 @@
 .title {
   font-size: 20px;
   color: #333333 !important;
-  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .card {
   border-radius: 4px;
@@ -17,6 +57,7 @@
   box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
 }
 .card:hover .title {
+  background: linear-gradient(to right, #00acaf, #0771bb);
   background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
   -webkit-background-clip: text;
   color: transparent;

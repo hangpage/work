@@ -5,8 +5,9 @@
  */
 import React from 'react';
 import {Tabs} from "antd";
-import Room from "./service/room";
 import Home from "./index";
+import Match from "./history/match";
+import Activity from "./history/activity";
 
 const History = () => {
   return (
@@ -15,10 +16,10 @@ const History = () => {
         <div className="title-card"><span>浏览历史</span></div>
         <Tabs className='service-tab'>
           <Tabs.TabPane tab='活动' key='0'>
-            <Room/>
+            <Activity/>
           </Tabs.TabPane>
           <Tabs.TabPane tab='创业大赛' key='1'>
-            <Room/>
+            <Match/>
           </Tabs.TabPane>
         </Tabs>
       </Home>
