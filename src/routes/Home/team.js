@@ -33,19 +33,19 @@ const Team = ({teamInfo, location, data}) => {
         <div>
           <Tabs>
             <Tabs.TabPane tab='公司与项目信息' key='0'>
-              <CompanyInfo teamInfo={teamInfo}/>
+              <CompanyInfo/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='融资情况' key='1'>
-              <FinancingInfo teamInfo={teamInfo}/>
+              <FinancingInfo/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='团队信息' key='2'>
-              <TeamInfo teamInfo={teamInfo}/>
+              <TeamInfo/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='个人详情（负责人）' key='3'>
-              <LeaderInfo teamInfo={teamInfo}/>
+              <LeaderInfo/>
             </Tabs.TabPane>
             <Tabs.TabPane tab='个人详情（成员）' key='4'>
-              <MemberInfo teamInfo={teamInfo}/>
+              <MemberInfo/>
             </Tabs.TabPane>
 
           </Tabs>

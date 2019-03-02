@@ -9,10 +9,12 @@ import {equalResultStatus, reFormatParams} from "../../../utils";
 import {parkSavePrincipal} from "../../../services/park";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
-import {cloneDeep} from "lodash";
+import {cloneDeep, isEqual} from "lodash";
 import StudyModal from './component/study_experience';
 import PrizeModal from './component/prize_situation';
 import WorkModal from './component/work_experience';
+import moment from "moment";
+import {connect} from "dva";
 
 
 class Team extends React.Component {
@@ -64,6 +66,15 @@ class Team extends React.Component {
     })
   };
 
+
+  componentDidMount() {
+    const data = cloneDeep(this.props.leaderAndMemberINfo);
+    data.birth = data.birth ? moment(data.birth) : '';
+    data.date = data.date ? moment(data.date) : '';
+    this.props.form.setFieldsValue(data);
+  }
+
+
   onOk = (data) => {
     let membersStr = cloneDeep(this.state['data' + this.state.currentModal]);
     const {currentModal} = this.state;
@@ -108,102 +119,76 @@ class Team extends React.Component {
   };
 
   render() {
-    const {initialValueMap={}} = this.props;
     const list1 = [{
       label: '项目名称',
       field: 'projectName',
-      initialValue: initialValueMap.principalStr
-    }, {
-      label: '日期',
-      field: 'date',
-      type: 'radio',
-      options: Const.GENDAR_OPTIONS,
-      initialValue: initialValueMap.gendar
     }, {
       label: '姓名',
       field: 'name',
-      initialValue: initialValueMap.studySchool
     }, {
       label: '性别',
       field: 'gendar',
-      initialValue: initialValueMap.studyProfession
+      options: Const.GENDAR_OPTIONS,
+      type: 'radio',
     },{
       label: '出生日期',
       field: 'birth',
       type: 'datepicker',
-      initialValue: initialValueMap.education
     }, {
       label: '民族',
       field: 'nationality',
-      initialValue: initialValueMap.education
     },{
       label: '婚姻情况',
       field: 'marriage',
       type: 'radio',
       options: Const.HaveOrNot,
-      initialValue: initialValueMap.phone
     },{
       label: '政治面貌',
       field: 'politicalStatus',
-      initialValue: initialValueMap.phone
     },{
       label: '籍贯',
       field: 'birthplace',
-      initialValue: initialValueMap.phone
     },{
       label: '户籍',
       field: 'householdRegistration',
-      initialValue: initialValueMap.phone
     },{
       label: '留学经历',
       field: 'studyAbroad',
       type: 'radio',
       options: Const.HaveOrNot,
-      initialValue: initialValueMap.phone
     },{
       label: '身份证号',
       field: 'idCard',
-      initialValue: initialValueMap.phone
     },{
       label: '曾用名',
       field: 'usedName',
-      initialValue: initialValueMap.phone
     },{
       label: '最高学历',
       field: 'education',
-      initialValue: initialValueMap.phone
     },{
       label: '邮箱',
       field: 'email',
-      initialValue: initialValueMap.phone
     },{
       label: '常用名',
       field: 'commonName',
-      initialValue: initialValueMap.phone
     },{
       label: '毕业时间',
       field: 'graduationTime',
-      initialValue: initialValueMap.phone
     },{
       label: 'QQ/微信',
       field: 'QQ',
-      initialValue: initialValueMap.phone
     },{
       label: '本人电话',
       field: 'phone',
-      initialValue: initialValueMap.phone
     },{
       label: '紧急联系人',
       field: 'emergencyContact',
-      initialValue: initialValueMap.phone
     },{
       label: '户籍地址',
       field: 'household_address',
-      initialValue: initialValueMap.phone
     },{
       label: '在京地址',
       field: 'address',
-      initialValue: initialValueMap.phone
     }];
 
     const list2 = [{
@@ -211,55 +196,41 @@ class Team extends React.Component {
       field: 'principalStr',
       type: 'radio',
       options: Const.GENDAR_OPTIONS,
-      initialValue: initialValueMap.principalStr
     }, {
       label: '姓名',
       field: 'gendar',
-      initialValue: initialValueMap.gendar
     }, {
       label: '工作单位',
       field: 'studySchool',
-      initialValue: initialValueMap.studySchool
     }, {
       label: '职务',
       field: 'studyProfession',
-      initialValue: initialValueMap.studyProfession
     },{
       label: '目前所在地',
       field: 'education',
-      type: 'datepicker',
-      initialValue: initialValueMap.education
     }, {
       label: '联系电话',
       field: 'education',
-      initialValue: initialValueMap.education
     },{
       label: '关系',
       field: 'principalStr',
       type: 'radio',
       options: Const.GENDAR_OPTIONS,
-      initialValue: initialValueMap.principalStr
     }, {
       label: '姓名',
       field: 'gendar',
-      initialValue: initialValueMap.gendar
     }, {
       label: '工作单位',
       field: 'studySchool',
-      initialValue: initialValueMap.studySchool
     }, {
       label: '职务',
       field: 'studyProfession',
-      initialValue: initialValueMap.studyProfession
     },{
       label: '目前所在地',
       field: 'education',
-      type: 'datepicker',
-      initialValue: initialValueMap.education
     }, {
       label: '联系电话',
       field: 'education',
-      initialValue: initialValueMap.education
     }];
 
     const modalProps = {
@@ -283,16 +254,16 @@ class Team extends React.Component {
               <Form>
                 <Row gutter={138}>
                   {list1.map((item, index) => {
-                    var comp = <Input placeholder={`请输入${item.label}`} initialValue={item.initialValue}/>;
+                    var comp = <Input placeholder={`请输入${item.label}`}/>;
                     if (item.type === 'select') {
-                      comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''} initialValue={item.initialValue}/>;
+                      comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
                     } else if (item.type === 'datepicker') {
-                      comp = <DatePicker placeholder={`请选择${item.label}`} initialValue={item.initialValue}/>;
+                      comp = <DatePicker placeholder={`请选择${item.label}`}/>;
                     } else if (item.type === 'radio') {
                       comp =
                         (<Radio.Group>
                           {item.options.map((option, oindex) => <Radio key={oindex}
-                                                                       value={option.value} initialValue={item.initialValue}>{option.text}</Radio>)}
+                                                                       value={option.value}>{option.text}</Radio>)}
                         </Radio.Group>)
                     }
                     return (
@@ -420,16 +391,16 @@ class Team extends React.Component {
                 <div className='subheading'>家庭情况及社会关系</div>
                 <Row gutter={138}>
                   {list2.map((item, index) => {
-                    var comp = <Input placeholder={`请输入${item.label}`} initialValue={item.initialValue}/>;
+                    var comp = <Input placeholder={`请输入${item.label}`}/>;
                     if (item.type === 'select') {
-                      comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''} initialValue={item.initialValue}/>;
+                      comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
                     } else if (item.type === 'datepicker') {
-                      comp = <DatePicker placeholder={`请选择${item.label}`} initialValue={item.initialValue}/>;
+                      comp = <DatePicker placeholder={`请选择${item.label}`}/>;
                     } else if (item.type === 'radio') {
                       comp =
                         (<Radio.Group>
                           {item.options.map((option, oindex) => <Radio key={oindex}
-                                                                       value={option.value} initialValue={item.initialValue}>{option.text}</Radio>)}
+                                                                       value={option.value}>{option.text}</Radio>)}
                         </Radio.Group>)
                     }
                     return (
@@ -493,4 +464,4 @@ class Team extends React.Component {
   }
 }
 
-export default Form.create()(Team);
+export default connect(({home}) => (home))(Form.create()(Team));

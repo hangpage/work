@@ -9,6 +9,7 @@ import {
   userGetInfo, userLockers, userRepair
 } from "../../services/user";
 import {noticeFindList} from "../../services/notice";
+import {queryLeaderAndMemberInfo} from "../../services/park";
 
 export default {
 
@@ -29,6 +30,7 @@ export default {
     awesome: [],
     comment: [],
     aboutUs: {},
+    leaderAndMemberINfo: {},
     historyMatch: [],
     historyActivity: []
   },
@@ -56,9 +58,8 @@ export default {
           }
         }
         if(pathMatchRegexp('/home/team', location.pathname)){
-          dispatch({
-            type: 'queryTeamInfo'
-          })
+          dispatch({type: 'queryTeamInfo'})
+          dispatch({type: 'queryLeaderAndMemberInfo'})
         }else if(pathMatchRegexp('/home/service', location.pathname)){
           dispatch({type: 'userFineMeetingRoom'});
           dispatch({type: 'userLockers'});
@@ -163,7 +164,20 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            teamInfo: data.data[0]
+            teamInfo: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
+      }
+    },
+    *queryLeaderAndMemberInfo({ payload }, { call, put }) {
+      const {data} = yield call(queryLeaderAndMemberInfo, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            leaderAndMemberINfo: data.data
           }
         })
       }else{

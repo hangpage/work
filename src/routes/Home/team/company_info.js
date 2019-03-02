@@ -4,14 +4,15 @@
  * @Date: 2019/2/3 12:53
  */
 import React from 'react';
-import {Form, Col, DatePicker, Input, message, Radio, Row} from 'antd';
+import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
-import {insertTeam, updateTeamInfo} from "../../../services/competition";
-import {cloneDeep} from "lodash";
+import {cloneDeep, isEqual} from "lodash";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import Modal from './component/prize_situation';
-import {login} from "../../../services/login";
+import moment from "moment";
+import {connect} from "dva";
+import {parkResidentTeam} from "../../../services/park";
 
 const list1 = [{
   label: '项目名称',
@@ -62,6 +63,19 @@ class CompanyInfo extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (!isEqual(this.props.teamInfo, nextProps.teamInfo)) {
+      const data = cloneDeep(nextProps.teamInfo);
+      data.registeredTime = moment(data.registeredTime);
+      if(data.membersStr){
+        data.isJudge = 1;
+      }else{
+        data.isJudge = 0;
+      }
+      this.props.form.setFieldsValue(data)
+    }
+  }
+
   showModal = () => {
     this.setState({
       modalVisible: true,
@@ -76,7 +90,8 @@ class CompanyInfo extends React.Component {
         let params = reFormatParams(values);
         params.id = this.props.teamInfo.id;
         params.token = sessionStorage.getItem('token');
-        updateTeamInfo(params).then(({data}) => {
+        params.registeredTime = params.registeredTime + ' 00:00:00';
+        parkResidentTeam(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
           } else {
@@ -276,7 +291,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='总人数'
                     >
-                      {getFieldDecorator('peopleCount', Const.RULE)(
+                      {getFieldDecorator('people_count', Const.RULE)(
                         <Input placeholder='请输入总人数'/>
                       )}
                     </Form.Item>
@@ -290,7 +305,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='博士生'
                     >
-                      {getFieldDecorator('inDoctorsCount', Const.RULE)(
+                      {getFieldDecorator('doctor', Const.RULE)(
                         <Input placeholder='请输入博士生数量'/>
                       )}
                     </Form.Item>
@@ -299,7 +314,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='硕士生'
                     >
-                      {getFieldDecorator('inMastersCount', Const.RULE)(
+                      {getFieldDecorator('master', Const.RULE)(
                         <Input placeholder='请输入硕士生数量'/>
                       )}
                     </Form.Item>
@@ -308,7 +323,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='本科生'
                     >
-                      {getFieldDecorator('inUndergraduatesCount', Const.RULE)(
+                      {getFieldDecorator('bachelor', Const.RULE)(
                         <Input placeholder='请输入本科生数量'/>
                       )}
                     </Form.Item>
@@ -317,7 +332,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='专科生'
                     >
-                      {getFieldDecorator('inSpecialistsCount', Const.RULE)(
+                      {getFieldDecorator('specialist', Const.RULE)(
                         <Input placeholder='请输入专科生数量'/>
                       )}
                     </Form.Item>
@@ -326,7 +341,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='总人数'
                     >
-                      {getFieldDecorator('teamAcount', Const.RULE)(
+                      {getFieldDecorator('count', Const.RULE)(
                         <Input placeholder='请输入总人数'/>
                       )}
                     </Form.Item>
@@ -391,4 +406,4 @@ class CompanyInfo extends React.Component {
   }
 };
 
-export default Form.create()(CompanyInfo);
+export default connect(({home}) => (home))(Form.create()(CompanyInfo));

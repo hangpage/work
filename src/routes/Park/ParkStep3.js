@@ -17,21 +17,27 @@ class ParkStep3 extends React.Component {
   }
 
 
-  submit = () => {
+  submit = () => {debugger
     const {history, location} = this.props;
     const params = this.ref.getTeamInfoData();
     if (!Object.keys(params).length) {
       return message.error('请填写必填项！');
     }
-    params.token = sessionStorage.getItem('token');
-    params.rtId = getParams(location.search).rtId;
-    let formData = new FormData();
-    Object.keys(params).forEach((item) => {
-      formData.append(item, params[item]);
+    const principalStr = [];
+    const array = Object.keys(params);
+    array.forEach((item) => {
+      if(item !== 'memberStr'){
+        principalStr.push(params[item]);
+      }
     });
-    parkResidentTeam(formData).then(({data}) => {
+    const subData = {};
+    subData.token = sessionStorage.getItem('token');
+    subData.id = getParams(location.search).rtId;
+    subData.principalStr = principalStr.join(',');
+    subData.memberStr = params.membersStr;
+    parkResidentTeam(subData).then(({data}) => {
       if (equalResultStatus(data)) {
-        message.success('保存成功');
+        message.success('入驻成功');
         history.push('/index');
       } else {
         message.error(data.message);

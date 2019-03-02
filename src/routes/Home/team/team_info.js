@@ -11,6 +11,8 @@ import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import {cloneDeep} from "lodash";
 import Modal from './component/step3Modal';
+import moment from "moment";
+import {connect} from "dva";
 
 
 class Team extends React.Component {
@@ -98,34 +100,34 @@ class Team extends React.Component {
     });
   };
 
+  componentDidMount() {
+    const data = cloneDeep(this.props.leaderAndMemberINfo);
+    data.birth = data.birth ? moment(data.birth) : '';
+    data.date = data.date ? moment(data.date) : '';
+    this.props.form.setFieldsValue(data);
+  }
+
   render() {
-    const {initialValueMap={}} = this.props;
     const list1 = [{
       label: '姓名',
       field: 'principalStr',
-      initialValue: initialValueMap.principalStr
     }, {
       label: '性别',
       field: 'gendar',
       type: 'radio',
       options: Const.GENDAR_OPTIONS,
-      initialValue: initialValueMap.gendar
     }, {
       label: '所在院校',
       field: 'studySchool',
-      initialValue: initialValueMap.studySchool
     }, {
       label: '所学专业',
       field: 'studyProfession',
-      initialValue: initialValueMap.studyProfession
     }, {
       label: '学历',
       field: 'education',
-      initialValue: initialValueMap.education
     },{
       label: '联系电话',
       field: 'phone',
-      initialValue: initialValueMap.phone
     }];
     const modalProps = {
       visible: this.state.modalVisible,
@@ -146,16 +148,16 @@ class Team extends React.Component {
               <Form>
                 <Row gutter={138}>
                   {list1.map((item, index) => {
-                    var comp = <Input placeholder={`请输入${item.label}`} initialValue={item.initialValue}/>;
+                    var comp = <Input placeholder={`请输入${item.label}`}/>;
                     if (item.type === 'select') {
-                      comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''} initialValue={item.initialValue}/>;
+                      comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
                     } else if (item.type === 'datepicker') {
-                      comp = <DatePicker placeholder={`请选择${item.label}`} initialValue={item.initialValue}/>;
+                      comp = <DatePicker placeholder={`请选择${item.label}`}/>;
                     } else if (item.type === 'radio') {
                       comp =
                         (<Radio.Group>
                           {item.options.map((option, oindex) => <Radio key={oindex}
-                                                                       value={option.value} initialValue={item.initialValue}>{option.text}</Radio>)}
+                                                                       value={option.value}>{option.text}</Radio>)}
                         </Radio.Group>)
                     }
                     return (
@@ -216,4 +218,4 @@ class Team extends React.Component {
   }
 }
 
-export default Form.create()(Team);
+export default connect(({home}) => (home))(Form.create()(Team));

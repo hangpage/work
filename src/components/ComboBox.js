@@ -9,6 +9,7 @@ class ComboBox extends React.Component {
       super(props);
       this.state = {
         dataSource: [],
+        value: ''
       }
   }
 
@@ -33,6 +34,12 @@ class ComboBox extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.setState({
+      value: nextProps.value
+    })
+  }
+
   handleChange = (value) => {
     const onChange = this.props.onChange;
     this.setState({
@@ -55,6 +62,7 @@ class ComboBox extends React.Component {
                   allowClear={this.props.allowClear || true}
                   showSearch={this.props.showSearch || true}
                   filterOption={this.filterOption}
+                  value={this.state.value}
                   style={{width: '100%'}}
                   placeholder={this.props.placeholder || '请选择'}
                   dropdownMatchSelectWidth={true}>

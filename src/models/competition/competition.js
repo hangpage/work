@@ -29,7 +29,7 @@ export default modelExtend(model, {
         }else if(pathMatchRegexp('/competition/:id/score', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/score', location.pathname);
           if (match) {
-            dispatch({ type: 'getTeamDetail', payload: { id: match[1] } })
+            dispatch({ type: 'getTeamDetail', payload: { mId: match[1] } })
           }
         }
       })

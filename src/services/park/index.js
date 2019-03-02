@@ -53,7 +53,7 @@ export function parkSavePrincipal(params){
  * @Author: zzhihang@hotmail.com
  * @date: 2019/2/11 17:06
  */
-export function parksaveMembers(params){
+export function parkSaveMembers(params){
   return request(`/api/residentTeam/saveMembers?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
@@ -62,4 +62,20 @@ export function parksaveMembers(params){
 }
 
 
+/** 
+* @Description: 查询个人信息（负责人 成员）
+* @Param:  
+* @return:  
+* @Author: zzhihang@hotmail.com 
+* @date: 2019/3/2 0:37
+*/
 
+
+export function queryLeaderAndMemberInfo(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/residentTeam/findPrincipal?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}

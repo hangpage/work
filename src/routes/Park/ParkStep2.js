@@ -23,11 +23,11 @@ class ParkStep2 extends React.Component {
       return message.error('请填写必填项！');
     }
     params.token = sessionStorage.getItem('token');
-    params.rtId = getParams(location.search).rtId;
+    params.id = getParams(location.search).rtId;
     parkResidentTeam(reFormatParams(params)).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
-        history.push('/park/parkStep3?rtId=' + params.rtId);
+        history.push('/park/parkStep3?rtId=' + params.id);
       } else {
         message.error(data.message);
       }

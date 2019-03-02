@@ -26,7 +26,7 @@ const list1 = [{
   field: 'privateLending'
 }, {
   label: '风险投资（w）',
-  field: 'ventureVapital'
+  field: 'ventureCapital'
 }, {
   label: '银行借贷（w）',
   field: 'bankLending'
@@ -38,13 +38,13 @@ const list1 = [{
   field: 'angelInvestment'
 }, {
   label: 'A轮融资金额（w）',
-  field: 'A'
+  field: 'a'
 }, {
   label: 'B轮融资金额（w）',
-  field: 'B'
+  field: 'b'
 }, {
   label: 'C轮融资金额（w）',
-  field: 'C'
+  field: 'c'
 }, {
   label: '其他融资金额（w）',
   field: 'other'

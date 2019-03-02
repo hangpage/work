@@ -7,7 +7,8 @@ import React from 'react';
 import {Form, message, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
 import FinancingInfo from "../../../components/FinancingInfo/FinancingInfo";
-import {updateTeamInfo} from "../../../services/competition";
+import {connect} from "dva";
+import {parkResidentTeam} from "../../../services/park";
 
 class ParkStep2 extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ParkStep2 extends React.Component {
     }
     params.token = sessionStorage.getItem('token');
     params.id = this.props.teamInfo.id;
-    updateTeamInfo(reFormatParams(params)).then(({data}) => {
+    parkResidentTeam(reFormatParams(params)).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
       } else {
@@ -30,6 +31,10 @@ class ParkStep2 extends React.Component {
       }
     })
   };
+
+  componentDidMount() {
+    this.ref.props.form.setFieldsValue(this.props.teamInfo)
+  }
 
   render() {
     return (
@@ -39,7 +44,7 @@ class ParkStep2 extends React.Component {
             <div className="text-align mt40">
               <span className="form-name">融资情况</span>
             </div>
-            <FinancingInfo initialValueMap={this.props.teamInfo} wrappedComponentRef={(form) => this.ref = form}/>
+            <FinancingInfo wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
             <div className='main-button' onClick={this.submit} style={{width: 600}}>保存</div>
@@ -50,4 +55,4 @@ class ParkStep2 extends React.Component {
   }
 }
 
-export default Form.create()(ParkStep2);
+export default connect(({home}) => (home))(Form.create()(ParkStep2));

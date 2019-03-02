@@ -6,10 +6,11 @@
 import React from 'react';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
-import {parksaveMembers} from "../../../services/park";
+import {parkSaveMembers} from "../../../services/park";
 import ImageUpload from "../../../components/FileUpload/ImageUpload";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
+import {connect} from "dva";
 
 
 const list1 = [{
@@ -94,7 +95,7 @@ class ParkStep3 extends React.Component {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
         params.id = this.props.teamInfo.id;
-        parksaveMembers(params).then(({data}) => {
+        parkSaveMembers(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
             history.push({
@@ -232,4 +233,5 @@ class ParkStep3 extends React.Component {
   }
 }
 
-export default Form.create()(ParkStep3);
+
+export default connect(({home}) => (home))(Form.create()(ParkStep3));
