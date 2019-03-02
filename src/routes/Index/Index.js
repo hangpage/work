@@ -105,8 +105,8 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
            </Row>
          </div>
        </div>
+        <IndexTitle title='创业大赛' alias='competition'/>
         <div className="stage">
-          <IndexTitle title='创业大赛' alias='competition'/>
             <Row type='flex' gutter={58}>
               {competitionList.map((item, index) => {
                 return (
@@ -121,8 +121,8 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
               }
             </Row>
         </div>
+        <IndexTitle title='创业动态' alias='dynamic'/>
         <div className="stage">
-          <IndexTitle title='创业动态' alias='dynamic'/>
           <Row type='flex' gutter={60}>
             {articleList.map((item, index) => {
               return (

@@ -14,12 +14,15 @@
   border-radius: 4px;
   width: 361px;
   height: 357px;
+  img{
+    border-radius:4px 4px 0 0;
+  }
   &:hover{
     .desc{
       box-shadow:0 2px 8px 0 rgba(31,130,194,0.3);
     }
     .title{
-      .color-linear();
+      .color-linear() !important;
     }
   }
 }
@@ -31,6 +34,7 @@
   flex-direction: column;
   border:1px solid rgba(153, 153, 153, 0.1);
   border-top: none;
+  border-radius: 0 0 4px 4px;
 
 }
 
@@ -61,13 +65,30 @@
 .bigcard{
   height: 400px;
   width: 550px;
+  border-radius: 6px;
+  &:hover{
+    .desc{
+      box-shadow:0 2px 8px 0 rgba(31,130,194,0.3);
+    }
+    .title{
+      .color-linear() !important;
+    }
+  }
+  .title{
+    .ellipsis1();
+    line-height: 21px;
+    display: initial;
+  }
   img{
     width:550px;
     height:309px;
     min-height: 309px;
+    border-radius:6px 6px 0 0;
   }
   .desc{
     height: 92px;
+    padding: 19px 19px 0;
+    border-radius: 0 0 6px 6px;
   }
   p{
     margin-bottom: 0;

@@ -1,0 +1,31 @@
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgba(102, 102, 102, 1);
+  margin-bottom: 4px;
+}
+
+.alias {
+  color: rgba(153, 153, 144, 0.7);
+  letter-spacing: 5px;
+  position: relative;
+  line-height: 20px;
+  font-size: 18px;
+  &:before, &:after{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    width: 45px;
+    margin-top: 3px;
+    border-top: 1px dashed transparent;
+    background: linear-gradient(white,white) padding-box,
+    repeating-linear-gradient(to right, rgba(153, 153, 144, 0.3), rgba(153, 153, 144, 0.3) 10%, white 10%, white 20%);
+  }
+  &:before{
+    left: -51px;
+  }
+  &:after{
+    right: -51px;
+  }
+}

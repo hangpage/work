@@ -7,17 +7,13 @@ const ActivityCard = ({img, title, time, read, size=''}) => {
       <img src={img} alt=""/>
       <div className={styles.desc}>
         <p className={styles.title} style={{"WebkitBoxOrient": "vertical"}}>{title}</p>
-        <p>
+        <p style={{marginTop: 7}}>
           <span className={styles.time}>{time}</span>
           <span className={styles.read}>阅读量：<span className={'deep-gray'}>{read}</span></span>
         </p>
       </div>
     </div>
   );
-};
-
-ActivityCard.propTypes = {
-
 };
 
 export default ActivityCard;

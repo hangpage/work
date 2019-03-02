@@ -5,12 +5,17 @@
  */
 import React from 'react';
 import icon from '../../assets/index/jiantou.png';
+import styles from './IndexTitle.less';
 
 const IndexTitle = ({title, alias}) => {
   return (
-    <div style={{textAlign: 'center', marginBottom: 60}}>
-      <h6 style={{fontSize:'30px', fontWeight: 'bold', color:'rgba(102,102,102,1)', marginBottom: '4px'}}>{title}</h6>
-      <p style={{color:'rgba(153,153,144,1)', letterSpacing: '5px', marginBottom: 5}}>{alias}</p>
+    <div style={{textAlign: 'center', marginBottom: 50, marginTop: 79}}>
+      <h6 className={styles.title}>{title}</h6>
+      <p style={{textAlign: 'center', marginBottom: 6, marginTop: 3}}>
+        <span className={styles.alias}>
+          {alias}
+        </span>
+      </p>
       <img src={icon} alt=""/>
     </div>
   );

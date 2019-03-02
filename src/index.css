@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 .ellipsis1 {
   overflow: hidden;
@@ -520,7 +520,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 :global .park-card img {
   width: 570px;
@@ -694,8 +694,11 @@
   padding-bottom: 38px;
   text-align: center;
 }
-:global .stage {
-  margin-top: 79px;
+:global .ant-back-top-content {
+  background: #00acaf !important;
+}
+:global .ant-back-top-content:hover {
+  background: #0771bb !important;
 }
 :global .competition {
   display: flex;
@@ -1072,7 +1075,7 @@
   border-radius: 6px;
 }
 :global .bl-confirm {
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
   box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
   border-radius: 6px;
   text-align: center;

@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 .ellipsis1 {
   overflow: hidden;
@@ -105,6 +105,6 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 /*# sourceMappingURL=ReportCard.css.map */

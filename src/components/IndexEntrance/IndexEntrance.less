@@ -1,9 +1,17 @@
+@import "../../variable.less";
 .card{
   width: 204px;
   height: 192px;
-  box-shadow:0 2px 8px 0 rgba(31,130,194,0.3);
   border-radius:4px;
   text-align: center;
+  border:1px solid rgba(153,153,153,0.2);
+  &:hover{
+    border: none;
+    border-bottom: 4px solid transparent;
+    box-shadow:0 2px 8px 0 rgba(31,130,194,0.3);
+    .border-linear();
+
+  }
 }
 .card img{
   margin-top: 49px;

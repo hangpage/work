@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './IndexEntrance.less';
 
 const IndexEntrance = ({icon, text}) => {
@@ -15,11 +14,6 @@ const IndexEntrance = ({icon, text}) => {
         <p>{text}</p>
       </div>
     )
-};
-
-
-IndexEntrance.propTypes = {
-
 };
 
 export default IndexEntrance;

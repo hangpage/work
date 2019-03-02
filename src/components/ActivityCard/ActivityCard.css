@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 .ellipsis1 {
   overflow: hidden;
@@ -53,14 +53,17 @@
   width: 361px;
   height: 357px;
 }
+.card img {
+  border-radius: 4px 4px 0 0;
+}
 .card:hover .desc {
   box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
 }
 .card:hover .title {
-  background: linear-gradient(to right, #00acaf, #0771bb);
-  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
-  -webkit-background-clip: text;
-  color: transparent;
+  background: linear-gradient(to right, #00acaf, #0771bb) !important;
+  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9)) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
 }
 .desc {
   padding: 20px;
@@ -69,6 +72,7 @@
   flex-direction: column;
   border: 1px solid rgba(153, 153, 153, 0.1);
   border-top: none;
+  border-radius: 0 0 4px 4px;
 }
 .time {
   font-size: 14px;
@@ -90,14 +94,34 @@
 .bigcard {
   height: 400px;
   width: 550px;
+  border-radius: 6px;
+}
+.bigcard:hover .desc {
+  box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
+}
+.bigcard:hover .title {
+  background: linear-gradient(to right, #00acaf, #0771bb) !important;
+  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9)) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+.bigcard .title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 21px;
+  display: initial;
 }
 .bigcard img {
   width: 550px;
   height: 309px;
   min-height: 309px;
+  border-radius: 6px 6px 0 0;
 }
 .bigcard .desc {
   height: 92px;
+  padding: 19px 19px 0;
+  border-radius: 0 0 6px 6px;
 }
 .bigcard p {
   margin-bottom: 0;

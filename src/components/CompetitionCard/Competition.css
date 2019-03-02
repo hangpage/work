@@ -20,7 +20,7 @@
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
 .border-linear {
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 .ellipsis1 {
   overflow: hidden;
@@ -52,17 +52,19 @@
   width: 361px;
   height: 357px;
   position: relative;
+  overflow: hidden;
 }
 .card:hover p {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
-  border-image: linear-gradient(#00ACAF, #0771BB) 30 30;
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
 .card img {
   width: 100%;
   min-width: 360px;
   min-height: 225px;
+  border-radius: 4px;
 }
 .card p {
   margin-bottom: 0;
