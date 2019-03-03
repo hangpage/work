@@ -22,7 +22,7 @@ const Profile = ({form, data, dispatch}) => {
     },
     wrapperCol: {
       xs: {span: 24},
-      sm: {span: 8},
+      sm: {span: 12},
     },
     colon: false
   };
@@ -59,7 +59,7 @@ const Profile = ({form, data, dispatch}) => {
     <Home>
       <div>
         <div className="title-card"><span>个人资料</span></div>
-        <Form>
+        <Form layout='horizontal' className='form-bl' style={{paddingLeft: 120}}>
           <div className="text-align mt40 mb50">
             {getFieldDecorator('img', {
               rules: [{

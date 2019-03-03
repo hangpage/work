@@ -41,9 +41,6 @@ class ParkStep2 extends React.Component {
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
         <div className='w bg-white pb80'>
           <div className='bl-form'>
-            <div className="text-align mt40">
-              <span className="form-name">融资情况</span>
-            </div>
             <FinancingInfo wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>

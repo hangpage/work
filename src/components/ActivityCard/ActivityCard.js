@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './ActivityCard.less';
 
-const ActivityCard = ({img, title, time, read, size=''}) => {
+const ActivityCard = ({img, title, time, read, size='', style}) => {
   return (
-    <div className={styles[`${size}card`]}>
+    <div style={style} className={styles[`${size}card`]}>
       <img src={img} alt=""/>
       <div className={styles.desc}>
         <p className={styles.title} style={{"WebkitBoxOrient": "vertical"}}>{title}</p>

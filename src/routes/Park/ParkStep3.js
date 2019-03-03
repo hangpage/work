@@ -17,7 +17,7 @@ class ParkStep3 extends React.Component {
   }
 
 
-  submit = () => {debugger
+  submit = () => {
     const {history, location} = this.props;
     const params = this.ref.getTeamInfoData();
     if (!Object.keys(params).length) {
@@ -51,6 +51,9 @@ class ParkStep3 extends React.Component {
         <div className='w mt39 bg-white pb80'>
           <div className='bl-form'>
             <div className='form-title'>填写公司与项目信息</div>
+            <div className="text-align mt40">
+              <span className="form-name">团队情况</span>
+            </div>
             <TeamInfo wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>

@@ -5,10 +5,9 @@
  */
 import React from 'react';
 import Home from './index';
-import {DatePicker, Form, Input, message, Radio} from "antd";
-import Const from "../../utils/Const";
+import {Form, Input, message} from "antd";
 import {equalResultStatus} from "../../utils";
-import {userFeedBack, userLeavePark} from "../../services/user";
+import {userFeedBack} from "../../services/user";
 
 
 const Leave = ({form}) => {
@@ -50,7 +49,7 @@ const Leave = ({form}) => {
     <Home>
       <div>
         <div className="title-card"><span>意见反馈</span></div>
-        <Form>
+        <Form className='pt40'>
           <Form.Item
             {...formItemLayout}
             label="联系人"
@@ -74,7 +73,7 @@ const Leave = ({form}) => {
             {getFieldDecorator('content', {
               RULE
             })(
-              <Input.TextArea placeholder='请输入您宝贵的问题与建议...' style={{height: 360}}/>
+              <Input.TextArea placeholder='请输入您宝贵的问题与建议...' style={{height: 210}}/>
             )}
           </Form.Item>
         </Form>

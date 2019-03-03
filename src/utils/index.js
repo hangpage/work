@@ -38,6 +38,15 @@ export function reFormatParams(map) {
   return queryData;
 }
 
+export function convertStringToRangeDate(stringDate, split='~') {
+  if(typeof stringDate === 'string'){
+    const array = stringDate.split(split);
+    return [moment(array[0]), moment(array[1])];
+  }
+  return stringDate;
+}
+
+
 
 export function getParams(paramString){
   let params = {};

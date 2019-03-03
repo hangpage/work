@@ -10,7 +10,7 @@ import {getParams} from "../../utils";
 
 const Detail = ({data, location, match}) => {
   const params = getParams(location.search);
-  let link = `/team_info_write?mId=${data.id}`;
+  let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
   let btnName = '报名';
   if(params.from === 'home'){
     btnName = '查看比赛进度';

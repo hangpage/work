@@ -22,6 +22,13 @@
 .border-linear {
   border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
+.timeline-circle {
+  background: linear-gradient(90deg, #00acaf, #0b9ea0, #0d72b8, #00a9c1, #0771bb);
+  opacity: 0.5;
+}
+.timeline-small-circle {
+  background: linear-gradient(90deg, rgba(0, 172, 175, 0.8), rgba(11, 158, 160, 0.8), rgba(13, 114, 184, 0.8), rgba(0, 169, 193, 0.8), rgba(7, 113, 187, 0.8));
+}
 .ellipsis1 {
   overflow: hidden;
   white-space: nowrap;
@@ -170,6 +177,7 @@
   overflow: hidden;
   margin-left: 15px;
   margin-right: 18px;
+  border: 1px solid #1F81C2;
 }
 :global .ant-layout-header .nickname {
   color: #1F81C2;
@@ -178,15 +186,10 @@
 :global .ant-layout-header .search {
   margin-left: 100px;
   cursor: pointer;
+  margin-right: 35px;
 }
 :global .ant-pagination {
   text-align: center !important;
-}
-:global .my-layout {
-  overflow: hidden;
-}
-:global .my-layout .ant-layout-content {
-  padding: 0;
 }
 :global .card {
   padding: 29px 20px;
@@ -243,7 +246,10 @@
 }
 :global .w .ant-menu-dark.ant-menu-horizontal > .ant-menu-item {
   width: 120px;
-  margin-right: 62px;
+  margin-right: 42px;
+}
+:global .w .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:last-child {
+  margin-right: 0;
 }
 :global .w .ant-menu.ant-menu-dark .ant-menu-item-selected > a {
   color: #ffffff !important;
@@ -278,6 +284,11 @@
 }
 :global .notice-box .notice .time {
   font-size: 14px;
+}
+:global .notice-box .notice:hover p {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 :global .article-box {
   padding: 30px 20px 40px;
@@ -360,7 +371,7 @@
   flex: 1;
   text-align: center;
   line-height: 58px;
-  padding: 0;
+  padding: 0 !important;
 }
 :global .service-tab .ant-tabs-nav .ant-tabs-tab:hover {
   color: initial;
@@ -410,8 +421,11 @@
 }
 :global .ant-carousel .slick-slide img {
   width: 100%;
-  height: 729px;
-  min-height: 729px;
+  height: 729px !important;
+  min-height: 729px !important;
+}
+:global .result-search:focus {
+  box-shadow: none !important;
 }
 :global .team-body .main-title {
   height: 80px;
@@ -677,8 +691,12 @@
   font-size: 14px;
   margin-bottom: 17px !important;
 }
+:global .footer p:nth-of-type(2) {
+  transform: translateX(-23px);
+}
 :global .footer p:last-child {
   font-size: 12px;
+  color: rgba(153, 153, 153, 0.6);
 }
 :global .footer .logo {
   position: absolute;
@@ -752,6 +770,7 @@
   align-items: center;
   border-radius: 6px;
   overflow: hidden;
+  background: rgba(0, 12, 23, 0.5);
   background-size: 100% 100%;
   position: relative;
 }
@@ -1022,6 +1041,9 @@
   overflow: hidden;
   border-radius: 0 8px 8px 0;
 }
+:global .login-form-box .login-right .ant-form-item {
+  margin: 0 !important;
+}
 :global .login-form-box .login-right .login-form {
   margin-top: 30px;
 }
@@ -1069,7 +1091,6 @@
   font-size: 24px;
 }
 :global .stage:last-child {
-  margin-bottom: 78px;
   padding: 40px 20px;
   background: #FAFAFA;
   border-radius: 6px;
@@ -1222,35 +1243,30 @@
   margin-bottom: 4px;
   margin-left: 16px;
 }
-:global .form-bl .ant-form-item {
-  margin-bottom: 38px !important;
+:global .ant-modal-body .ant-form-item:last-child {
+  margin-bottom: 0 !important;
 }
-:global .form-bl .ant-form-item:last-child {
-  margin-bottom: 60px !important;
+:global .form-bl .ant-form-item {
+  margin-bottom: 28px !important;
 }
 :global .form-bl .back-button,
 :global .form-bl .main-button {
   width: 180px;
-}
-:global .form-bl .ant-row {
-  display: flex;
-  justify-content: center;
 }
 :global .form-bl .ant-row .ant-form-item-children {
   width: 100%;
 }
 :global .form-bl .ant-row .ant-form-item-label {
   width: 166px;
-  padding-right: 50px;
+  padding-right: 26px;
   color: #333333;
   font-size: 20px;
   text-align: right;
 }
 :global .form-bl .ant-row .ant-form-item-label label {
   float: right;
-}
-:global .form-bl .ant-row .ant-form-item-control-wrapper {
-  width: 482px;
+  font-size: 20px;
+  color: #333 !important;
 }
 :global .form-bl .ant-row .ant-form-item-control {
   min-height: 50px;
@@ -1259,7 +1275,7 @@
 :global .form-bl .ant-row .ant-input,
 :global .form-bl .ant-row .ant-time-picker-input {
   height: 50px;
-  border: 1px solid #999 !important;
+  border: 1px solid rgba(153, 153, 153, 0.1) !important;
   color: #999 !important;
 }
 :global .form-bl .ant-time-picker-panel-input-wrap {
@@ -1274,6 +1290,19 @@
 :global .form-bl .ant-calendar-input-wrap {
   height: 50px;
   padding: 14px 10px;
+}
+:global .border-colorful {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, rgba(25, 176, 199, 0.4), rgba(247, 163, 157, 0.4), rgba(247, 198, 196, 0.4), rgba(33, 203, 188, 0.4), rgba(251, 124, 58, 0.4), rgba(82, 224, 217, 0.4), rgba(31, 129, 194, 0.4)) 1 1;
+}
+:global .service-form-wrapper {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, rgba(25, 176, 199, 0.4), rgba(247, 163, 157, 0.4), rgba(247, 198, 196, 0.4), rgba(33, 203, 188, 0.4), rgba(251, 124, 58, 0.4), rgba(82, 224, 217, 0.4), rgba(31, 129, 194, 0.4)) 1 1;
+  background: white;
+  border-radius: 6px;
+  margin-top: 39px;
+  margin-bottom: 80px;
+  padding: 60px 275px;
 }
 :global .bl-label .ant-radio {
   display: none !important;
@@ -1296,5 +1325,43 @@
 }
 :global .bl-label .ant-radio-wrapper.ant-radio-wrapper-checked span {
   color: #ffffff;
+}
+:global .btn-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 180px;
+}
+:global .ant-upload-select-picture-card i {
+  font-size: 32px;
+  color: #999;
+}
+:global .ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  color: #999;
+}
+:global .ant-upload-list-picture-card .ant-upload-list-item {
+  width: 160px !important;
+  height: 180px !important;
+}
+:global .ant-upload.ant-upload-select-picture-card {
+  width: 160px !important;
+  height: 180px !important;
+}
+:global .ant-tabs-nav .ant-tabs-tab {
+  padding: 30px 40px !important;
+  transition: none !important;
+}
+:global .ant-tabs-nav .ant-tabs-tab:hover {
+  background: linear-gradient(to right, #0771bb, #00acaf) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+:global .ant-tabs-nav .ant-tabs-tab-active {
+  background: linear-gradient(to right, #0771bb, #00acaf) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+:global .ant-tabs-bar {
+  margin-bottom: 40px !important;
 }
 /*# sourceMappingURL=index.css.map */

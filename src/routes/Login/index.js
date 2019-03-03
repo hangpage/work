@@ -30,8 +30,8 @@ class NormalLoginForm extends React.Component {
         login(values).then(({data}) => {
           if(equalResultStatus(data)){
             message.success('登录成功');
-            this.props.history.push('/index');
             sessionStorage.setItem('token', data.token);
+            this.props.history.push('/index');
             //sessionStorage.setItem('token', '3b23e376ec432158a77f2e88396a98eb716ad086');
           }else{
             message.error(data.message);

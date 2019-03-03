@@ -13,14 +13,14 @@ import BackButton from "../../components/BackButton/BackButton";
 const Post = ({form, history}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
-    // labelCol: {
-    //   xs: {span: 24},
-    //   sm: {span: 8},
-    // },
-    // wrapperCol: {
-    //   xs: {span: 24},
-    //   sm: {span: 8},
-    // },
+    labelCol: {
+      xs: {span: 24},
+      sm: {span: 8},
+    },
+    wrapperCol: {
+      xs: {span: 24},
+      sm: {span: 16},
+    },
     colon: false
   };
 
@@ -56,7 +56,7 @@ const Post = ({form, history}) => {
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
+      <div className="w service-form-wrapper form-bl">
         <Form>
           {INPUT_LIST.map((item, index) => {
             return (

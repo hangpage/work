@@ -2,11 +2,22 @@ import {Col, DatePicker, Form, Input, Modal, Radio, Row} from "antd";
 import React from "react";
 import ComboBox from "../../../../components/ComboBox";
 import Const from "../../../../utils/Const";
-import moment from "moment";
+import {convertStringToRangeDate} from "../../../../utils";
 
 
 const {RangePicker} = DatePicker;
 
+const formItemLayout = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
+  colon: false
+};
 
 @Form.create()
 class StudyExperience extends React.Component{
@@ -18,46 +29,43 @@ class StudyExperience extends React.Component{
         return
       }
       const data = getFieldsValue();
-      data.f2 = moment(data.f2[0]).format('YYYY-MM-DD') + '~' + moment(data.f2[1]).format('YYYY-MM-DD');
-      if(itemKey){
-        data.itemKey = itemKey;
-      }
+      data.itemKey = itemKey;
       onOk(data)
     })
   };
   render() {
     const { form, modalItem, ...modalProps} = this.props;
     const {getFieldDecorator} = form;
-
+    modalItem && modalItem.date && (modalItem.date = convertStringToRangeDate(modalItem.date));
     const list1 = [{
       label: '阶段',
-      field: 'f1',
-      initialValue: modalItem.f1
+      field: 'state',
+      initialValue: modalItem.state
     }, {
       label: '时间',
-      field: 'f2',
+      field: 'date',
       type: 'rangepicker',
-      initialValue: modalItem.f2
+      initialValue: modalItem.date
     }, {
       label: '学校',
-      field: 'f3',
-      initialValue: modalItem.f3
+      field: 'school',
+      initialValue: modalItem.school
     }, {
       label: '专业',
-      field: 'f4',
-      initialValue: modalItem.f4
+      field: 'profession',
+      initialValue: modalItem.profession
     },{
       label: '学习形式',
-      field: 'f5',
-      initialValue: modalItem.f5
+      field: 'learningForm',
+      initialValue: modalItem.learningForm
     }, {
       label: '学历',
-      field: 'f6',
-      initialValue: modalItem.f6
+      field: 'education',
+      initialValue: modalItem.education
     }, {
       label: '证明人及电话',
-      field: 'f7',
-      initialValue: modalItem.f7
+      field: 'witness',
+      initialValue: modalItem.witness
     }];
     return (
       <Modal
@@ -67,8 +75,12 @@ class StudyExperience extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form>
+        <div style={{transform: 'translateY(-40px)'}}>
+        <div style={{lineHeight: '57px', textAlign: 'center', fontSize: 18, color: '#333'}}>添加三个阶段</div>
+        <div className="height4line mb39" style={{marginLeft: '-30px', marginRight: '-30px'}}/>
+        <Form layout='horizontal' className='form-bl'>
           <Row>
+            <Col span={24}>
             {list1.map((item, index) => {
               var comp = <Input placeholder={`请输入${item.label}`}/>;
               if (item.type === 'select') {
@@ -85,19 +97,26 @@ class StudyExperience extends React.Component{
                   </Radio.Group>)
               }
               return (
-                <Col span={24} key={index}>
                   <Form.Item
                     label={item.label}
+                    {...formItemLayout}
+                    key={index}
                   >
-                    {getFieldDecorator(`${item.field}`, Const.RULE)(
+                    {getFieldDecorator(`${item.field}`, {
+                      rules: [{
+                        required: true, message: '此处为必填项!',
+                      }],
+                      initialValue: item.initialValue,
+                    })(
                       comp
                     )}
                   </Form.Item>
-                </Col>
               )
             })}
+            </Col>
           </Row>
         </Form>
+      </div>
       </Modal>
     )
   }

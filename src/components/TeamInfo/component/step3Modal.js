@@ -29,6 +29,19 @@ const list1 = [{
   field: 'phone',
 }];
 
+
+const formItemLayout = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
+  colon: false
+};
+
 @Form.create()
 class Step3Modal extends React.Component{
   handleOk = () => {
@@ -56,8 +69,9 @@ class Step3Modal extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form>
+        <Form layout='horizontal' className='form-bl'>
           <Row>
+            <Col span={24}>
             {list1.map((item, index) => {
               var comp = <Input placeholder={`请输入${item.label}`}/>;
               if (item.type === 'select') {
@@ -72,18 +86,19 @@ class Step3Modal extends React.Component{
                   </Radio.Group>)
               }
               return (
-                <Col span={24} key={index}>
                   <Form.Item
                     label={item.label}
+                    key={index}
+                    {...formItemLayout}
                   >
                     {getFieldDecorator(`${item.field}`, Const.RULE)(
                       comp
                     )}
                   </Form.Item>
-                </Col>
               )
             })}
-          </Row>
+                </Col>
+                </Row>
         </Form>
       </Modal>
     )

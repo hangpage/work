@@ -154,7 +154,7 @@ class ParkStep1 extends React.Component {
             <div className='form-title'>填写公司与项目信息</div>
             <div className="form-content">
               <Form>
-                <Row gutter={138}>
+                <Row gutter={136}>
                   {list1.map((item, index) => {
                     var comp = <Input placeholder={`请输入${item.label}`}/>;
                     if (item.type === 'select') {
@@ -182,7 +182,7 @@ class ParkStep1 extends React.Component {
                   })}
                   <Col span={24}>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
-                      <label htmlFor="">大赛名称及获奖等级情况</label>
+                      <label htmlFor="" style={{float: 'left'}}>大赛名称及获奖等级情况</label>
                       <span onClick={this.showModal} className='fr icon-add-box'><i
                         className='icon-add'/><span>添加</span></span>
                     </div>
@@ -249,9 +249,7 @@ class ParkStep1 extends React.Component {
                   labelCol={{span: 12}}
                   wrapperCol={{span: 24}}
                 >
-                  {getFieldDecorator('qualification', {
-                    rules: [{message: '请输入企业资质'}],
-                  })(
+                  {getFieldDecorator('qualification',  Const.RULE)(
                     <TextArea placeholder='请输入企业资质...' style={{height: 240}}/>
                   )}
                 </Form.Item>
@@ -260,9 +258,7 @@ class ParkStep1 extends React.Component {
                   labelCol={{span: 12}}
                   wrapperCol={{span: 24}}
                 >
-                  {getFieldDecorator('businnessScope', {
-                    rules: [{message: '请输入经营范围'}],
-                  })(
+                  {getFieldDecorator('businnessScope',  Const.RULE)(
                     <TextArea placeholder='请输入经营范围...' style={{height: 240}}/>
                   )}
                 </Form.Item>
@@ -271,9 +267,7 @@ class ParkStep1 extends React.Component {
                   labelCol={{span: 12}}
                   wrapperCol={{span: 24}}
                 >
-                  {getFieldDecorator('projectIntro', {
-                    rules: [{message: '请输入项目简介'}],
-                  })(
+                  {getFieldDecorator('projectIntro',  Const.RULE)(
                     <TextArea placeholder='成立时间、主营业务、主要产品和服务用途、特点及研发进度；项目运营情况，营业额及盈利情况，限200字' style={{height: 240}}
                               maxLength={200}/>
                   )}
@@ -283,9 +277,7 @@ class ParkStep1 extends React.Component {
                   labelCol={{span: 12}}
                   wrapperCol={{span: 24}}
                 >
-                  {getFieldDecorator('businessModel', {
-                    rules: [{message: '请输入商业模式'}],
-                  })(
+                  {getFieldDecorator('businessModel',  Const.RULE)(
                     <TextArea placeholder='包括产品定位、目标群体、盈利模式、商业壁垒、内容资源、渠道资源、技术资源和客户资源等，限200字' style={{height: 240}}
                               maxLength={200}/>
                   )}
@@ -295,9 +287,7 @@ class ParkStep1 extends React.Component {
                   labelCol={{span: 12}}
                   wrapperCol={{span: 24}}
                 >
-                  {getFieldDecorator('wants', {
-                    rules: [{message: '请输入入驻需求'}],
-                  })(
+                  {getFieldDecorator('wants',  Const.RULE)(
                     <TextArea placeholder='申请工位数量、融资、培训等特殊需求说明，限100字' style={{height: 240}} maxLength={100}/>
                   )}
                 </Form.Item>

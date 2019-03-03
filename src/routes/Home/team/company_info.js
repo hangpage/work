@@ -67,8 +67,20 @@ class CompanyInfo extends React.Component {
     if (!isEqual(this.props.teamInfo, nextProps.teamInfo)) {
       const data = cloneDeep(nextProps.teamInfo);
       data.registeredTime = moment(data.registeredTime);
-      if(data.membersStr){
+      if(data.grandPrize){
+        const array = data.grandPrize.split(';');
+        const grandPrize = [];
+        array.forEach((item) => {
+            const _array = item.split(',');
+          grandPrize.push({
+              match: _array[0],
+              rate: _array[1]
+            })
+        });
         data.isJudge = 1;
+        this.setState({
+          grandPrize
+        })
       }else{
         data.isJudge = 0;
       }
@@ -85,12 +97,20 @@ class CompanyInfo extends React.Component {
   submit = () => {
     const {form} = this.props;
     const {validateFields} = form;
+    const {grandPrize} = this.state;
     validateFields((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.id = this.props.teamInfo.id;
         params.token = sessionStorage.getItem('token');
         params.registeredTime = params.registeredTime + ' 00:00:00';
+        const array = [];
+        if(grandPrize.length){
+          grandPrize.forEach((item) => {
+            array.push(item.match + ',' + item.rate);
+          })
+        }
+        params.grandPrize = array.join(';');
         parkResidentTeam(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
@@ -152,10 +172,12 @@ class CompanyInfo extends React.Component {
     const {getFieldDecorator} = this.props.form;
     return (
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
-        <div className='w mt39 bg-white pb80'>
+        <div className='w bg-white pb80'>
           <div className='bl-form'>
-            <div className='form-title'>填写公司与项目信息</div>
             <div className="form-content">
+              <div className="text-align mb58">
+                <span className="form-name">公司信息</span>
+              </div>
               <Form>
                 <Row gutter={138}>
                   {list1.map((item, index) => {
@@ -291,7 +313,7 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label='总人数'
                     >
-                      {getFieldDecorator('people_count', Const.RULE)(
+                      {getFieldDecorator('peopleCount', Const.RULE)(
                         <Input placeholder='请输入总人数'/>
                       )}
                     </Form.Item>
@@ -353,7 +375,7 @@ class CompanyInfo extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('qualification', {
-                    rules: [{message: '请输入企业资质'}],
+                    rules: [{required: true, message: '请输入企业资质'}],
                   })(
                     <TextArea placeholder='请输入企业资质...' style={{height: 240}}/>
                   )}
@@ -364,7 +386,7 @@ class CompanyInfo extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('businnessScope', {
-                    rules: [{message: '请输入经营范围'}],
+                    rules: [{required: true, message: '请输入经营范围'}],
                   })(
                     <TextArea placeholder='请输入经营范围...' style={{height: 240}}/>
                   )}
@@ -375,7 +397,7 @@ class CompanyInfo extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('projectIntro', {
-                    rules: [{message: '请输入项目简介'}],
+                    rules: [{required: true, message: '请输入项目简介'}],
                   })(
                     <TextArea placeholder='成立时间、主营业务、主要产品和服务用途、特点及研发进度；项目运营情况，营业额及盈利情况，限200字' style={{height: 240}}
                               maxLength={200}/>
@@ -387,7 +409,7 @@ class CompanyInfo extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('businessModel', {
-                    rules: [{message: '请输入商业模式'}],
+                    rules: [{required: true, message: '请输入商业模式'}],
                   })(
                     <TextArea placeholder='包括产品定位、目标群体、盈利模式、商业壁垒、内容资源、渠道资源、技术资源和客户资源等，限200字' style={{height: 240}}
                               maxLength={200}/>

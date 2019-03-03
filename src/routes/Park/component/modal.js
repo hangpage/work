@@ -1,6 +1,19 @@
 import {Col, Form, Input, Modal, Row} from "antd";
 import React from "react";
 
+
+const formItemLayout = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
+  colon: false
+};
+
 @Form.create()
 class AddModal extends React.Component{
   handleOk = () => {
@@ -28,11 +41,12 @@ class AddModal extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form>
+        <Form layout='horizontal' className='form-bl'>
           <Row>
             <Col span={24}>
               <Form.Item
                 label='大赛名称'
+                {...formItemLayout}
               >
                 {getFieldDecorator('match', {
                   initialValue: modalItem.match,
@@ -45,6 +59,7 @@ class AddModal extends React.Component{
               </Form.Item>
               <Form.Item
                 label='获奖等级'
+                {...formItemLayout}
               >
                 {getFieldDecorator('rate', {
                   initialValue: modalItem.rate,

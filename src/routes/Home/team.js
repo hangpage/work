@@ -28,29 +28,32 @@ const Team = ({teamInfo, location, data}) => {
           <div className="edit">编辑个人资料</div>
         </Link>
       </div>
-      <div className="w">
-        <div className="main-title">团队档案</div>
-        <div>
-          <Tabs>
-            <Tabs.TabPane tab='公司与项目信息' key='0'>
-              <CompanyInfo/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab='融资情况' key='1'>
-              <FinancingInfo/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab='团队信息' key='2'>
-              <TeamInfo/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab='个人详情（负责人）' key='3'>
-              <LeaderInfo/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab='个人详情（成员）' key='4'>
-              <MemberInfo/>
-            </Tabs.TabPane>
-
-          </Tabs>
+      <div className="bg-white">
+        <div className="w main-title">
+          团队档案
         </div>
       </div>
+        <div>
+          <div className="w">
+            <Tabs>
+              <Tabs.TabPane tab='公司与项目信息' key='0'>
+                <CompanyInfo/>
+              </Tabs.TabPane>
+              <Tabs.TabPane tab='融资情况' key='1'>
+                <FinancingInfo/>
+              </Tabs.TabPane>
+              <Tabs.TabPane tab='团队信息' key='2'>
+                <TeamInfo/>
+              </Tabs.TabPane>
+              <Tabs.TabPane tab='个人详情（负责人）' key='3'>
+                <LeaderInfo/>
+              </Tabs.TabPane>
+              <Tabs.TabPane tab='个人详情（成员）' key='4'>
+                <MemberInfo/>
+              </Tabs.TabPane>
+            </Tabs>
+          </div>
+        </div>
     </div>
   );
 };

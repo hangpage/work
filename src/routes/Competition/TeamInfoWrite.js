@@ -32,7 +32,7 @@ class TeamInfoWrite extends React.Component {
     insertTeam(formData).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
-        history.push('/project_info_write?mId=' + params.mId);
+        history.push(`/competition/${params.mId}/project_info_write?mId=${params.mId}`);
       } else {
         message.error(data.message);
       }

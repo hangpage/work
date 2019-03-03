@@ -7,11 +7,10 @@ import React from 'react';
 import {connect} from "dva";
 import Modal from "./component/modal";
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
-import {serviceDeclare, serviceQueryMeeting} from "../../services/service";
+import {serviceDeclare} from "../../services/service";
 import {message} from "antd";
 
 const Detail = ({detail, modalVisible, dispatch, location,}) => {
-  console.log(location)
   const onBtnClick = () => {
     dispatch({
       type: 'service/updateState',
@@ -60,7 +59,7 @@ const Detail = ({detail, modalVisible, dispatch, location,}) => {
           <img src={detail.img} alt=""/>
           <div className="right">
             <h1>中信银行<span>{detail.service}</span></h1>
-            <div className='btn' onClick={onBtnClick}>申请服务</div>
+            <div className='btn' style={{cursor: 'pointer'}} onClick={onBtnClick}>申请服务</div>
             <Modal {...modalProps}/>
           </div>
         </div>

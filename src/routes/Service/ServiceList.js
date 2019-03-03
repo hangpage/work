@@ -6,16 +6,15 @@
 import React from 'react';
 import {connect} from "dva";
 import config from '../../utils/config';
-import {Col, Pagination, Row} from "antd";
+import {Col, Empty, Pagination, Row} from "antd";
 import {Link} from 'dva/router';
 
 const ServiceList = ({list, count, match}) => {
-  console.log()
   return (
     <div className='w'>
       <div className="service-list-card mt40">
         <Row type='flex'>
-          {list.map((item, index) => {
+          {list.length ? list.map((item, index) => {
             return (
               <Col span={6} key={index}>
                 <Link to={`${match.url}/detail`}>
@@ -29,7 +28,7 @@ const ServiceList = ({list, count, match}) => {
                 </Link>
               </Col>
             )
-          })}
+          }) : <Empty/>}
         </Row>
         <Pagination total={count} className='mt10 mb80'/>
       </div>

@@ -8,15 +8,28 @@ const {RangePicker} = DatePicker;
 
 const list1 = [{
   label: '起止年月',
-  field: 'f1',
+  field: 'date',
   type: 'rangepicker',
 },  {
   label: '单位/项目',
-  field: 'f2'
+  field: 'unit'
 }, {
   label: '担任职务',
-  field: 'f3'
+  field: 'position'
 }];
+
+
+const formItemLayout = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
+  colon: false
+};
 
 @Form.create()
 class WorkExperience extends React.Component{
@@ -45,8 +58,9 @@ class WorkExperience extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form layout='horizontal'>
+        <Form layout='horizontal' className='form-bl'>
           <Row>
+            <Col span={24}>
             {list1.map((item, index) => {
               var comp = <Input placeholder={`请输入${item.label}`}/>;
               if (item.type === 'select') {
@@ -54,7 +68,7 @@ class WorkExperience extends React.Component{
               } else if (item.type === 'datepicker') {
                 comp = <DatePicker placeholder={`请选择${item.label}`}/>;
               } else if(item.type === 'rangepicker'){
-                comp = <RangePicker placeholder={`请选择${item.label}`}/>
+                comp = <RangePicker />
               }else if (item.type === 'radio') {
                 comp =
                   (<Radio.Group>
@@ -63,28 +77,29 @@ class WorkExperience extends React.Component{
                   </Radio.Group>)
               }
               return (
-                <Col span={24} key={index}>
                   <Form.Item
+                    key={index}
+                    {...formItemLayout}
                     label={item.label}
                   >
                     {getFieldDecorator(`${item.field}`, Const.RULE)(
                       comp
                     )}
                   </Form.Item>
-                </Col>
               )
             })}
             <Form.Item
               label="主要工作"
-              wrapperCol={{span: 24}}
+              {...formItemLayout}
             >
-              {getFieldDecorator('businessModel', {
+              {getFieldDecorator('content', {
                 rules: [{message: '请输入主要工作'}],
               })(
                 <Input.TextArea placeholder='请输入主要工作' style={{height: 240}}
                           maxLength={200}/>
               )}
             </Form.Item>
+            </Col>
           </Row>
         </Form>
       </Modal>

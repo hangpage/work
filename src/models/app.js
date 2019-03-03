@@ -1,6 +1,8 @@
 import {equalResultStatus, pathMatchRegexp} from "../utils";
 import {userGetInfo} from "../services/user";
 import {message} from 'antd';
+import {articleFindList} from "../services/article";
+import {activityFindList} from "../services/activity";
 
 export default {
 
@@ -62,6 +64,30 @@ export default {
         })
       }
     },
+    *search({payload}, { call, put, select }){
+      const article = yield call(articleFindList).data;
+      if(equalResultStatus(article)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            articleFindList: article.data,
+          }
+        })
+      }else{
+        message.error(article.message)
+      }
+      const activity = yield call(activityFindList).data;
+      if(equalResultStatus(activity)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            activityFindList: activity.data,
+          }
+        })
+      }else{
+        message.error(article.message)
+      }
+    }
   },
 
   reducers: {

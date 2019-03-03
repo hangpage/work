@@ -22,6 +22,13 @@
 .border-linear {
   border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
 }
+.timeline-circle {
+  background: linear-gradient(90deg, #00acaf, #0b9ea0, #0d72b8, #00a9c1, #0771bb);
+  opacity: 0.5;
+}
+.timeline-small-circle {
+  background: linear-gradient(90deg, rgba(0, 172, 175, 0.8), rgba(11, 158, 160, 0.8), rgba(13, 114, 184, 0.8), rgba(0, 169, 193, 0.8), rgba(7, 113, 187, 0.8));
+}
 .ellipsis1 {
   overflow: hidden;
   white-space: nowrap;
@@ -90,6 +97,7 @@
 .card p {
   margin-bottom: 0;
   color: #999999;
+  min-height: 57px;
 }
 .bigcard {
   height: 400px;

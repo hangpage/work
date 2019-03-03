@@ -33,7 +33,7 @@ import Enter from "./routes/Home/enter";
 import ViewHistory from "./routes/Home/history";
 import MyActivity from "./routes/Home/activity";
 import Team from "./routes/Home/team";
-import Abount from "./routes/Home/about";
+import About from "./routes/Home/about";
 import ServiceTab from "./routes/Home/service";
 import ServiceParking from './routes/Service/parking';
 import Repair from './routes/Service/repair';
@@ -123,17 +123,17 @@ const routes = [{
   exact: 'exact',
   breadcrumbName: '比赛进度'
 },{
-  path: '/team_info_write',
+  path: '/competition/:id/team_info_write',
   component: TeamInfoWrite,
   exact: 'exact',
   breadcrumbName: '团队信息填写'
 }, {
-  path: '/project_info_write',
+  path: '/competition/:id/project_info_write',
   component: ProjectInfoWrite,
   exact: 'exact',
   breadcrumbName: '项目信息填写'
 }, {
-  path: '/sign_teacher',
+  path: '/competition/:id/sign_teacher',
   component: SignTeacher,
   exact: 'exact',
   breadcrumbName: '成为导师'
@@ -244,7 +244,7 @@ const routes = [{
   breadcrumbName: ''
 },  {
   path: '/home/about',
-  component: Abount,
+  component: About,
   exact: 'exact',
   breadcrumbName: ''
 }, {

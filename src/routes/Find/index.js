@@ -11,11 +11,11 @@ import ActivityList from "../../components/ActivityList/ActivityList";
 
 const Index = () => {
   return (
-    <div>
+    <div className='bg-white pb80'>
       <div style={{width: '100%'}}>
         <img style={{width: '100%'}} src={bannerFaxian} alt=""/>
       </div>
-      <div className="w mb80">
+      <div className="w">
         <Tabs>
           <Tabs.TabPane tab='活动' key={1}>
             <ActivityList url='/api/activity/findList'/>

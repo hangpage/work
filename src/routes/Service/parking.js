@@ -14,14 +14,14 @@ import {Link} from "dva/router";
 const Parking = ({form}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
-    // labelCol: {
-    //   xs: {span: 24},
-    //   sm: {span: 8},
-    // },
-    // wrapperCol: {
-    //   xs: {span: 24},
-    //   sm: {span: 8},
-    // },
+    labelCol: {
+      xs: {span: 24},
+      sm: {span: 8},
+    },
+    wrapperCol: {
+      xs: {span: 24},
+      sm: {span: 16},
+    },
     colon: false
   };
 
@@ -62,7 +62,7 @@ const Parking = ({form}) => {
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pt60 form-bl">
+      <div className="w service-form-wrapper form-bl">
         <Form>
           {INPUT_LIST.map((item, index) => {
             return (

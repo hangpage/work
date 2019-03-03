@@ -20,7 +20,7 @@ const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink
         <p className={styles.content} />
         <div>
           <div className={styles.baoming}><Link className={styles.link} to={reportLink}>{btnName}</Link></div>
-          {!noTeacher ? <div className={styles.daoshi}><Link to={`/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}
+          {!noTeacher ? <div className={styles.daoshi}><Link to={`/competition/${mId}/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}
         </div>
       </div>
     </div>

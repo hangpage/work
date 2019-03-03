@@ -26,16 +26,9 @@ class AddModal extends React.Component{
         placeHolder=''
       >
         <Form>
-          <Row>
-            <Col span={24}>
-              <Form.Item
-              >
-                {getFieldDecorator('content')(
-                  <Input.TextArea placeholder={placeHolder} style={{height: 180}}/>
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
+          {getFieldDecorator('content')(
+            <Input.TextArea placeholder={placeHolder} className='bg-gray' style={{height: 180}}/>
+          )}
         </Form>
       </Modal>
     )

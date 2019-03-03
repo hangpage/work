@@ -19,12 +19,16 @@ const Progress = ({location}) => {
       array.push(Const.MATCH_STATUS[key]);
     }
   }
+  let pen = ' ';
+  if(params.status === '12'){
+    pen = ''
+  }
   return (
     <div className='w pt40 pb80'>
-      <div className="second-bg">
+      <div style={{background: '#f5f5f5'}}>
         <div style={{width: 470, paddingTop: 53, margin: '0 auto'}}>
-          <Timeline>
-            {array.map((item, key) => <Timeline.Item key={key}>{item}</Timeline.Item>)}
+          <Timeline pending={pen} pendingDot={<i/>}>
+            {array.map((item, key) => <Timeline.Item dot={<i className='icon-timeline-circle'/>} key={key}>{item}</Timeline.Item>)}
           </Timeline>
         </div>
       </div>

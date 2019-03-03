@@ -1,15 +1,15 @@
-import {Layout, Breadcrumb, Row, Col, Carousel} from 'antd';
-import banner from '../../assets/banner.png';
+import {Carousel, Col, Layout, Row} from 'antd';
 import pl from '../../assets/index/bg-zuo-gonhgao.png';
 import laba from '../../assets/icon/icon-gonggao.png';
 import jinru from '../../assets/icon/icon-jinru.png';
-import {ActivityCard, MyLayout, IndexEntrance} from "../../components";
+import {ActivityCard, IndexEntrance} from "../../components";
 import React from "react";
 import IndexTitle from "../../components/IndexTitle/IndexTitle";
 import CompetitionCard from "../../components/CompetitionCard/CompetitionCard";
 import {Link} from 'dva/router'
 import config from '../../utils/config';
 import {connect} from "dva";
+
 const {Content} = Layout;
 
 
@@ -33,7 +33,7 @@ const INDEX_ENTRANCE_LIST = [{
 
 const Index = ({competitionList, activityList, articleList, noticeContent, slideShowList}) => {
   return (
-    <div>
+    <div className='bg-white pb78'>
       <div style={{width: '100%'}}>
         <Carousel autoplay={true}>
           {slideShowList.map((item, index) => {
@@ -84,7 +84,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
           </div>
         </Link>
       </div>
-      <Content className='w'>
+      <div className='w'>
         <div className="flex-width-space-between" style={{marginTop: 75}}>
           {INDEX_ENTRANCE_LIST.map((item, index) => <Link to={item.link} key={index}><IndexEntrance key={index} icon={item.icon} text={item.text} /></Link>)}
         </div>
@@ -112,7 +112,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
                 return (
                   <Col key={index}>
                     <Link to={`/competition/${item.id}?park=${item.park}`}>
-                    <CompetitionCard title={item.name} img={`${config.URL}${item.pic}`} read={item.pageViews}
+                    <CompetitionCard title={item.name} img={`${item.pic}`} read={item.pageViews}
                                      time={item.createTime}/>
                     </Link>
                   </Col>
@@ -128,7 +128,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
               return (
                 <Col key={index}>
                   <Link to={`/article/${item.id}`}>
-                    <ActivityCard title={item.title} img={`${config.URL}${item.pic}`} read={item.pageViews}
+                    <ActivityCard title={item.title} img={`${item.pic}`} read={item.pageViews}
                                      time={item.createTime} size='big'/>
                   </Link>
                 </Col>
@@ -137,7 +137,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
             }
           </Row>
         </div>
-      </Content>
+      </div>
     </div>
   )
 };

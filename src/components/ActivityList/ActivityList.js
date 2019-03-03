@@ -45,6 +45,7 @@ class ActivityList extends Component {
               title={item.title}
               time={item.createTime}
               read={item.pageViews}
+              style={{marginBottom: 50}}
             />
           </Link>
         </Col>
@@ -55,7 +56,7 @@ class ActivityList extends Component {
         <Row gutter={59}>
           {comps}
         </Row>
-        <Pagination total={count} className='mt60'/>
+        <Pagination total={count} className='mt10'/>
       </div>
     );
   }

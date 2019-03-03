@@ -2,7 +2,6 @@ const Const = {};
 
 Const.COMPANY_ADDRESS = '北京市海淀区中关村';
 Const.COMPANY_CONTACT = '020-2395495';
-Const.COMPANY_COPYRIGHT = 'Copyright © 2015 BETOP All Rights Reserved | 京ICP备11017824号-4 | 版权所有：北京中关村智酷';
 Const.Yes = '1';
 Const.No = '0';
 Const.Man = '1';
@@ -10,6 +9,11 @@ Const.Woman = '2';
 Const.ZHENG_CHANG_CHU_FU = '1';
 Const.TI_QIAN_CHU_FU = '2';
 Const.RULE = {rules: [{ required: true, message: '此处为必填项!' }]};
+//1父子2父女3母子4母女
+Const.FU_ZI = '1';
+Const.FU_NV = '2';
+Const.MU_ZI = '3';
+Const.MU_NV = '4';
 
 Const.YesOrNoOptions = [{
   text: '是',
@@ -17,6 +21,22 @@ Const.YesOrNoOptions = [{
 },{
   text: '否',
   value: Const.No
+}];
+
+Const.FATHER_RELATION = [{
+  text: '父子',
+  value: Const.FU_ZI
+},{
+  text: '父女',
+  value: Const.FU_NV
+}];
+
+Const.MOTHER_RELATION = [{
+  text: '母子',
+  value: Const.MU_ZI
+},{
+  text: '母女',
+  value: Const.MU_NV
 }];
 
 Const.HaveOrNot = [{

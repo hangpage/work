@@ -14,14 +14,14 @@ import ImageUpload from "../../components/FileUpload/ImageUpload";
 const Repair = ({form}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
-    // labelCol: {
-    //   xs: {span: 24},
-    //   sm: {span: 8},
-    // },
-    // wrapperCol: {
-    //   xs: {span: 24},
-    //   sm: {span: 8},
-    // },
+    labelCol: {
+      xs: {span: 24},
+      sm: {span: 8},
+    },
+    wrapperCol: {
+      xs: {span: 24},
+      sm: {span: 16},
+    },
     colon: false
   };
 
@@ -61,8 +61,8 @@ const Repair = ({form}) => {
 
   return (
     <div className='second-bg'>
-      <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
-        <Form>
+      <div className="w service-form-wrapper form-bl">
+        <Form layout='horizontal'>
           {INPUT_LIST.map((item, index) => {
             return (
               <Form.Item
@@ -80,10 +80,8 @@ const Repair = ({form}) => {
             {...formItemLayout}
             label="故障描述"
           >
-            {getFieldDecorator('content', {
-              RULE
-            })(
-              <Input.TextArea placeholder='请简要的描述一下故障...' style={{height: 360}}/>
+            {getFieldDecorator('content', RULE)(
+              <Input.TextArea className='bg-gray' placeholder='请简要的描述一下故障...' style={{height: 360}}/>
             )}
           </Form.Item>
           <Form.Item
@@ -92,13 +90,13 @@ const Repair = ({form}) => {
             wrapperCol={{span: 8}}
             colon={false}
           >
-            {getFieldDecorator('pic')(
+            {getFieldDecorator('pic', RULE)(
               <ImageUpload/>
             )}
           </Form.Item>
         </Form>
         <Row type='flex' justify='space-around'>
-          <BackButton text='返回'/>
+          <BackButton/>
           <div className='main-button' onClick={submit}>提交</div>
         </Row>
       </div>

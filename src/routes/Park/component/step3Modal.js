@@ -17,7 +17,7 @@ const list1 = [{
 }, {
   label: '所学专业',
   field: 'studyProfession'
-},{
+}, {
   label: '毕业时间',
   field: 'studyDate',
   type: 'datepicker'
@@ -29,24 +29,38 @@ const list1 = [{
   field: 'phone',
 }];
 
+
+const formItemLayout = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
+  colon: false
+};
+
 @Form.create()
-class Step3Modal extends React.Component{
+class Step3Modal extends React.Component {
   handleOk = () => {
-    const { onOk, form, itemKey } = this.props;
-    const { validateFields, getFieldsValue } = form;
+    const {onOk, form, itemKey} = this.props;
+    const {validateFields, getFieldsValue} = form;
     validateFields(errors => {
       if (errors) {
         return
       }
       const data = getFieldsValue();
-      if(itemKey){
+      if (itemKey) {
         data.itemKey = itemKey;
       }
       onOk(data)
     })
   };
+
   render() {
-    const { form, modalItem, ...modalProps} = this.props;
+    const {form, modalItem, ...modalProps} = this.props;
     const {getFieldDecorator} = form;
     return (
       <Modal
@@ -56,33 +70,34 @@ class Step3Modal extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form>
+        <Form layout='horizontal' className='form-bl'>
           <Row>
-            {list1.map((item, index) => {
-              var comp = <Input placeholder={`请输入${item.label}`}/>;
-              if (item.type === 'select') {
-                comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
-              } else if (item.type === 'datepicker') {
-                comp = <DatePicker placeholder={`请选择${item.label}`}/>;
-              } else if (item.type === 'radio') {
-                comp =
-                  (<Radio.Group>
-                    {item.options.map((option, oindex) => <Radio key={oindex}
-                                                                 value={option.value}>{option.text}</Radio>)}
-                  </Radio.Group>)
-              }
-              return (
-                <Col span={24} key={index}>
+            <Col span={24} key={index}>
+              {list1.map((item, index) => {
+                var comp = <Input placeholder={`请输入${item.label}`}/>;
+                if (item.type === 'select') {
+                  comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
+                } else if (item.type === 'datepicker') {
+                  comp = <DatePicker placeholder={`请选择${item.label}`}/>;
+                } else if (item.type === 'radio') {
+                  comp =
+                    (<Radio.Group>
+                      {item.options.map((option, oindex) => <Radio key={oindex}
+                                                                   value={option.value}>{option.text}</Radio>)}
+                    </Radio.Group>)
+                }
+                return (
                   <Form.Item
                     label={item.label}
+                    {...formItemLayout}
                   >
                     {getFieldDecorator(`${item.field}`, Const.RULE)(
                       comp
                     )}
                   </Form.Item>
-                </Col>
-              )
-            })}
+                )
+              })}
+            </Col>
           </Row>
         </Form>
       </Modal>

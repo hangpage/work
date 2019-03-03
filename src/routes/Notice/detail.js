@@ -208,7 +208,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
                                    onAwesomeClick={(e) => {onCommentAwesomeClick(e, c.id)}}
                                    userImg={c.userImg}
                                    content={c.content}
-                                   replyToWhom={c.nickName}
+                                   replyToWhom={item.nickName}
                                    type='child'
                           />
                         ))

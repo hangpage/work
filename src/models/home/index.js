@@ -30,7 +30,7 @@ export default {
     awesome: [],
     comment: [],
     aboutUs: {},
-    leaderAndMemberINfo: {},
+    leaderAndMemberInfo: {},
     historyMatch: [],
     historyActivity: []
   },
@@ -58,7 +58,7 @@ export default {
           }
         }
         if(pathMatchRegexp('/home/team', location.pathname)){
-          dispatch({type: 'queryTeamInfo'})
+          dispatch({type: 'queryTeamInfo'});
           dispatch({type: 'queryLeaderAndMemberInfo'})
         }else if(pathMatchRegexp('/home/service', location.pathname)){
           dispatch({type: 'userFineMeetingRoom'});
@@ -177,7 +177,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            leaderAndMemberINfo: data.data
+            leaderAndMemberInfo: data.data
           }
         })
       }else{

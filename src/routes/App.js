@@ -32,7 +32,7 @@ const routes = [{
 }, {
   path: '/service/type/parking/record',
   breadcrumbName: '申请记录'
-},  {
+}, {
   path: '/service/type/repair',
   breadcrumbName: '报修申请'
 }, {
@@ -56,39 +56,42 @@ const routes = [{
 }, {
   path: '/competition/:id/progress',
   breadcrumbName: '比赛进度'
-},{
-  path: '/team_info_write',
-  breadcrumbName: '团队信息填写'
 }, {
-  path: '/project_info_write',
-  breadcrumbName: '项目信息填写'
+  path: '/competition/:id/team_info_write',
+  breadcrumbName: '报名'
 }, {
-  path: '/sign_teacher',
+  path: '/competition/:id/project_info_write',
+  breadcrumbName: '报名'
+}, {
+  path: '/competition/:id/sign_teacher',
   breadcrumbName: '成为导师'
 }, {
   path: '/appoint',
   breadcrumbName: '预约参观'
 }, {
   path: '/notice',
-  breadcrumbName: '公告'
+  breadcrumbName: '信息公示'
 }, {
   path: '/notice/:id',
-  breadcrumbName: '公告详情'
+  breadcrumbName: '公示详情'
+}, {
+  path: '/article',
+  breadcrumbName: '创业动态列表'
 }, {
   path: '/article/:id',
-  breadcrumbName: '文章详情'
-},  {
+  breadcrumbName: '创业动态详情'
+}, {
   path: '/park',
   breadcrumbName: '园区入驻'
 }, {
   path: '/park/parkStep1',
-  breadcrumbName: '第一步'
+  breadcrumbName: '填写公司与项目信息'
 }, {
   path: '/park/parkStep2',
-  breadcrumbName: '第二步'
+  breadcrumbName: '填写公司与项目信息'
 }, {
   path: '/park/parkStep3',
-  breadcrumbName: '第三步'
+  breadcrumbName: '填写公司与项目信息'
 }, {
   path: '/activity',
   breadcrumbName: '活动列表'
@@ -103,7 +106,7 @@ const routes = [{
   breadcrumbName: '发现'
 }, {
   path: '/home',
-  breadcrumbName: '主页'
+  breadcrumbName: '个人中心'
 }, {
   path: '/home/profile',
   breadcrumbName: '个人信息'
@@ -114,6 +117,7 @@ const routes = [{
   path: '/home/leave',
   breadcrumbName: '离园'
 }, {
+  path: '/home/advise',
   breadcrumbName: '建议'
 }, {
   path: '/home/enter',
@@ -127,7 +131,7 @@ const routes = [{
 }, {
   path: '/home/team',
   breadcrumbName: ''
-},  {
+}, {
   path: '/home/about',
   breadcrumbName: ''
 }, {
@@ -136,28 +140,25 @@ const routes = [{
 }, {
   path: '/home/service',
   breadcrumbName: ''
-},{
+}, {
   path: '/search',
   breadcrumbName: ''
 }];
+
+
+const URL_BLACK_LIST = ['/index', '/find', '/home', '/service', '/home/team', '/home/:type', '/search']; //不显示面包屑的页面url
 
 const App = ({children, location, match}) => {
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
-    console.log(url)
     return (
       <Breadcrumb.Item key={url}>
         <Link to={url}>
-          {
-            console.log(routes.find((_) => {
-              return pathMatchRegexp(url, _.path)
-            }))
-          }
           {routes.find((_) => {
-            return pathMatchRegexp(url, _.path)
+            return pathMatchRegexp(_.path, url)
           }) ? routes.find((_) => {
-            return pathMatchRegexp(url, _.path)
+            return pathMatchRegexp(_.path, url)
           }).breadcrumbName : ''}
         </Link>
       </Breadcrumb.Item>
@@ -171,18 +172,26 @@ const App = ({children, location, match}) => {
   )].concat(extraBreadcrumbItems);
 
   return (
-  <LocaleProvider locale={zh_CN}>
-    <Layout className="my-layout">
-      <MyLayout.Header />
-        {/*<Breadcrumb>*/}
-          {/*{breadcrumbItems}*/}
-        {/*</Breadcrumb>*/}
-        {children}
-      <BackTop />
-      <MyLayout.Footer />
-    </Layout>
-  </LocaleProvider>
-)
+    <LocaleProvider locale={zh_CN}>
+      <Layout className="my-layout">
+        <MyLayout.Header/>
+        {URL_BLACK_LIST.indexOf(location.pathname) === -1 &&
+          <div style={{background: '#fafafa', borderBottom: '1px solid rgba(153, 153, 153, 0.1)'}}>
+            <div className="w" style={{minHeight: '51px', lineHeight: '51px',}}>
+              <Breadcrumb>
+                {breadcrumbItems}
+              </Breadcrumb>
+            </div>
+          </div>
+        }
+        <Content>
+          {children}
+        </Content>
+        <BackTop/>
+        <MyLayout.Footer/>
+      </Layout>
+    </LocaleProvider>
+  )
 };
 
 export default App;

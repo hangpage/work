@@ -1,5 +1,6 @@
 import {Button, Icon, Upload,} from 'antd';
 import React from "react";
+import config from "../../utils/config";
 
 class Demo extends React.Component {
   state = {
@@ -35,7 +36,7 @@ class Demo extends React.Component {
 
     return (
       <div>
-        <Upload {...props} action='/api/upload/uploadFile' onChange={this.handleChange}>
+        <Upload {...props} action={config.UPLOAD_URL} onChange={this.handleChange}>
           <Button>
             <Icon type="upload"/> 如有附件，请上传
           </Button>

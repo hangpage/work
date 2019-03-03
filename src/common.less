@@ -46,8 +46,11 @@
 
 :global{
    .bg-white{
-     background: @white;
+     background: @white !important;
    }
+  .bg-gray{
+    background:@opacity999 !important;
+  }
   .text-align{
     text-align: center;
   }
@@ -59,7 +62,6 @@
   .height4line{
     border:4px solid rgba(153,153,153,1);
     opacity:0.1;
-    width: 100%;
   }
   .height12line{
     border:12px solid rgba(153,153,153,1);
@@ -81,6 +83,7 @@
   .color999{
     color: @light-gray;
   }
+
 }
 
 :global{
@@ -140,6 +143,12 @@
     width: 21px;
     height: 21px;
   }
+  .icon-camera{
+    background-image: url('./assets/icon/icon-zhaoxiangji.png');
+    display: inline-block;
+    width: 40px;
+    height: 31px;
+  }
 
   .icon-comment{
     background-image: url('./assets/icon/icon-pinglun.png');
@@ -158,6 +167,12 @@
     display: inline-block;
     width: 45px;
     height: 45px;
+  }
+  .icon-timeline-circle{
+    background-image: url('./assets/icon/icon-timeline-icon.png');
+    display: inline-block;
+    width: 16px;
+    height: 16px;
   }
 
 }

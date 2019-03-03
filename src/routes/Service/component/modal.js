@@ -1,6 +1,16 @@
 import {Col, Form, Input, Modal, Row} from "antd";
 import React from "react";
 
+const layout = {
+  labelCol: {
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    sm: {span: 16},
+  },
+  colon: false
+};
+
 @Form.create()
 class AddModal extends React.Component{
   handleOk = () => {
@@ -28,44 +38,40 @@ class AddModal extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form className='form-bl'>
-          <Row>
-            <Col span={24}>
-              <Form.Item
-                label='联系人'
-              >
-                {getFieldDecorator('name', {
-                  rules: [{
-                    required: true, message: '请输入联系人姓名'
-                  }]
-                })(
-                  <Input placeholder='请输入联系人姓名'/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label='联系电话'
-              >
-                {getFieldDecorator('phone', {
-                  rules: [{
-                    required: true, message: '请输入联系人电话'
-                  }]
-                })(
-                  <Input placeholder='请输入联系人电话'/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label='服务内容'
-              >
-                {getFieldDecorator('note', {
-                  rules: [{
-                    required: true, message: '请输入请输入服务内容'
-                  }]
-                })(
-                  <Input placeholder='请输入服务内容...'/>
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
+        <Form layout='horizontal' className='form-bl'>
+          <Form.Item {...layout}
+            label='联系人'
+          >
+            {getFieldDecorator('name', {
+              rules: [{
+                required: true, message: '请输入联系人姓名'
+              }]
+            })(
+              <Input placeholder='请输入联系人姓名'/>
+            )}
+          </Form.Item>
+          <Form.Item {...layout}
+            label='联系电话'
+          >
+            {getFieldDecorator('phone', {
+              rules: [{
+                required: true, message: '请输入联系人电话'
+              }]
+            })(
+              <Input placeholder='请输入联系人电话'/>
+            )}
+          </Form.Item>
+          <Form.Item {...layout}
+            label='服务内容'
+          >
+            {getFieldDecorator('note', {
+              rules: [{
+                required: true, message: '请输入请输入服务内容'
+              }]
+            })(
+              <Input.TextArea className='bg-gray' placeholder='请输入服务内容...' style={{height: 300}}/>
+            )}
+          </Form.Item>
         </Form>
       </Modal>
     )

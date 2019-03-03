@@ -1,18 +1,152 @@
+@import './variable.less';
 :global{
   .bl-form{
     .ant-form-item-label{
-      text-align: left !important;
-      float: initial !important;
       color: #333333 !important;
+      margin-bottom: 19px;
+      line-height: initial;
+      text-align: left;
     }
     .ant-form-item-label label{
       font-size: 20px !important;
+      line-height: initial;
     }
     .ant-form-item-label label:after{
       display: none;
+    }
+    textarea.ant-input{
+      min-height: 240px !important;
     }
   }
   a{
     color: #666666 !important;
   }
+  input.ant-input{
+    height: 50px !important;
+  }
+
+  .ant-form-vertical{
+    .ant-form-item-label{
+      padding: 0 !important;
+      margin-bottom: 19px !important;
+    }
+    .ant-form-item{
+      margin-bottom: 36px !important;
+    }
+  }
+
+  .my-layout{
+    height: 100%;
+  }
+
+  .ant-layout-content{
+    background: #FAFAFA;
+   min-height: initial !important;
+  }
+
+  .ant-modal-header{
+    padding: 8px 24px !important;
+    border-bottom: 1px solid @opacity9992;
+    text-align: center;
+  }
+
+  .ant-modal-title{
+    display: inline-block;
+  }
+
+  .ant-modal-body{
+    padding: 40px 30px !important;
+  }
+
+  .ant-modal-footer{
+    div{
+      display: flex;
+      justify-content: space-between;
+      width: 420px;
+      margin: 0 auto;
+      .ant-btn{
+        width: 120px;
+        height: 40px;
+        border-radius:8px;
+        font-size: 18px;
+        border: none;
+        &:first-child{
+          background: @opacity9992;
+          color: @light-gray;
+        }
+        &.ant-btn-primary{
+          .bg-linear-to-right();
+        }
+      }
+    }
+    padding: 20px 90px 60px !important;
+    border-top: none !important;
+  }
+
+  .ant-select-selection__rendered{
+    line-height: 50px !important;
+  }
+  .ant-select-selection--single{
+    height: 50px !important;
+  }
+
+  .ant-radio-wrapper span{
+    font-size: 16px;
+  }
+
+  .ant-form-item{
+    margin-bottom: 43px !important;
+  }
+
+  .ant-form-item-control-wrapper{
+    min-height: 50px;
+  }
+
+  .ant-form-explain{
+    position: absolute;
+  }
+
+  .ant-timeline-item{
+    height: 82px;
+  }
+
+  .ant-timeline-item-head{
+    height: 16px !important;
+    border: none !important;
+    width: 16px !important;
+    background: none !important;
+  }
+
+  .ant-timeline-item-tail{
+    left: 6px !important;
+    top: 16px !important;
+    border-left: 2px dashed rgba(0, 172, 175, 0.3) !important;
+  }
+
+  .ant-timeline-item-content{
+    padding-left: 19px;
+    width: 359px;
+  }
+
+  .ant-breadcrumb{
+    height: 51px;
+    line-height: 51px !important;
+    font-size: 12px;
+    color: #666;
+    &>span{
+      &:last-child{
+        .ant-breadcrumb-link{
+          a{
+            color: #4889ED!important;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-calendar-range-picker-separator{
+    vertical-align: initial !important;
+  }
+
 }

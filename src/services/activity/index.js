@@ -5,7 +5,8 @@ export function activityFindList(params) {
   return request(`/api/activity/findList?${qs.stringify(params)}`);
 }
 
-export function activityGet(params) {
+export function activityGet(params={}) {
+  params.token = sessionStorage.getItem('token');
   return request(`/api/activity/get?${qs.stringify(params)}`);
 }
 

@@ -1,15 +1,164 @@
+.color-linear-to-right {
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear-to-bottom {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.color-linear {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.bg-linear-to-bottom {
+  background: linear-gradient(to bottom, #0771bb, #00acaf);
+}
+.bg-linear-to-right {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+}
+.border-linear {
+  border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
+}
+.timeline-circle {
+  background: linear-gradient(90deg, #00acaf, #0b9ea0, #0d72b8, #00a9c1, #0771bb);
+  opacity: 0.5;
+}
+.timeline-small-circle {
+  background: linear-gradient(90deg, rgba(0, 172, 175, 0.8), rgba(11, 158, 160, 0.8), rgba(13, 114, 184, 0.8), rgba(0, 169, 193, 0.8), rgba(7, 113, 187, 0.8));
+}
+.ellipsis1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ellipsis2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 :global .bl-form .ant-form-item-label {
-  text-align: left !important;
-  float: initial !important;
   color: #333333 !important;
+  margin-bottom: 19px;
+  line-height: initial;
+  text-align: left;
 }
 :global .bl-form .ant-form-item-label label {
   font-size: 20px !important;
+  line-height: initial;
 }
 :global .bl-form .ant-form-item-label label:after {
   display: none;
 }
+:global .bl-form textarea.ant-input {
+  min-height: 240px !important;
+}
 :global a {
   color: #666666 !important;
+}
+:global input.ant-input {
+  height: 50px !important;
+}
+:global .ant-form-vertical .ant-form-item-label {
+  padding: 0 !important;
+  margin-bottom: 19px !important;
+}
+:global .ant-form-vertical .ant-form-item {
+  margin-bottom: 36px !important;
+}
+:global .my-layout {
+  height: 100%;
+}
+:global .ant-layout-content {
+  background: #FAFAFA;
+  min-height: initial !important;
+}
+:global .ant-modal-header {
+  padding: 8px 24px !important;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.2);
+  text-align: center;
+}
+:global .ant-modal-title {
+  display: inline-block;
+}
+:global .ant-modal-body {
+  padding: 40px 30px !important;
+}
+:global .ant-modal-footer {
+  padding: 20px 90px 60px !important;
+  border-top: none !important;
+}
+:global .ant-modal-footer div {
+  display: flex;
+  justify-content: space-between;
+  width: 420px;
+  margin: 0 auto;
+}
+:global .ant-modal-footer div .ant-btn {
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 18px;
+  border: none;
+}
+:global .ant-modal-footer div .ant-btn:first-child {
+  background: rgba(153, 153, 153, 0.2);
+  color: #999999;
+}
+:global .ant-modal-footer div .ant-btn.ant-btn-primary {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+}
+:global .ant-select-selection__rendered {
+  line-height: 50px !important;
+}
+:global .ant-select-selection--single {
+  height: 50px !important;
+}
+:global .ant-radio-wrapper span {
+  font-size: 16px;
+}
+:global .ant-form-item {
+  margin-bottom: 43px !important;
+}
+:global .ant-form-item-control-wrapper {
+  min-height: 50px;
+}
+:global .ant-form-explain {
+  position: absolute;
+}
+:global .ant-timeline-item {
+  height: 82px;
+}
+:global .ant-timeline-item-head {
+  height: 16px !important;
+  border: none !important;
+  width: 16px !important;
+  background: none !important;
+}
+:global .ant-timeline-item-tail {
+  left: 6px !important;
+  top: 16px !important;
+  border-left: 2px dashed rgba(0, 172, 175, 0.3) !important;
+}
+:global .ant-timeline-item-content {
+  padding-left: 19px;
+  width: 359px;
+}
+:global .ant-breadcrumb {
+  height: 51px;
+  line-height: 51px !important;
+  font-size: 12px;
+  color: #666;
+}
+:global .ant-breadcrumb > span:last-child .ant-breadcrumb-link a {
+  color: #4889ED !important;
+  font-weight: bold;
+}
+:global .ant-calendar-range-picker-separator {
+  vertical-align: initial !important;
 }
 /*# sourceMappingURL=cover.css.map */

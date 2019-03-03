@@ -129,6 +129,7 @@
       overflow: hidden;
       margin-left: 15px;
       margin-right: 18px;
+      border: 1px solid #1F81C2;
     }
     .nickname{
       color: #1F81C2;
@@ -137,6 +138,7 @@
     .search{
       margin-left: 100px;
       cursor: pointer;
+      margin-right: 35px;
     }
   }
 
@@ -144,13 +146,6 @@
     text-align: center !important;
   }
 
-  .my-layout {
-    overflow: hidden;
-
-    .ant-layout-content {
-      padding: 0;
-    }
-  }
   .card{
     padding: 29px 20px;
     background: @white;
@@ -207,7 +202,10 @@
 
     .ant-menu-dark.ant-menu-horizontal > .ant-menu-item{
       width: 120px;
-      margin-right: 62px;
+      margin-right: 42px;
+      &:last-child{
+        margin-right: 0;
+      }
     }
     .ant-menu.ant-menu-dark .ant-menu-item-selected > a{
       color: @white !important;
@@ -223,6 +221,7 @@
     display: flex;
     flex-wrap: wrap;
   }
+
 
   .notice-box{
     padding: 0 20px 38px;
@@ -242,6 +241,11 @@
       }
       .time{
         font-size: 14px;
+      }
+      &:hover{
+        p{
+          .color-linear();
+        }
       }
     }
   }
@@ -329,7 +333,7 @@
         flex: 1;
         text-align: center;
         line-height: 58px;
-        padding: 0;
+        padding: 0 !important;
         &:hover{
           color: initial;
         }
@@ -385,8 +389,14 @@
     overflow: hidden;
     img{
       width: 100%;
-      height: 729px;
-      min-height: 729px;
+      height: 729px !important;
+      min-height: 729px !important;
+    }
+  }
+
+  .result-search{
+    &:focus{
+      box-shadow: none !important;
     }
   }
 
@@ -654,10 +664,14 @@
     p {
       font-size: 14px;
       margin-bottom: 17px !important;
+      &:nth-of-type(2){
+        transform: translateX(-23px);
+      }
     }
 
     p:last-child {
       font-size: 12px;
+      color:rgba(153,153,153,0.6);
     }
 
     .logo {
@@ -741,6 +755,7 @@
     align-items: center;
     border-radius: 6px;
     overflow: hidden;
+    background: rgba(0, 12, 23, 0.5);
     background-size: 100% 100%;
     position: relative;
     img{
@@ -1026,6 +1041,9 @@
       overflow: hidden;
       border-radius: 0 8px 8px 0;
 
+      .ant-form-item{
+        margin: 0 !important;
+      }
       .login-form {
         margin-top: 30px;
       }
@@ -1084,7 +1102,6 @@
   }
 
   .stage:last-child {
-    margin-bottom: 78px;
     padding: 40px 20px;
     background: #FAFAFA;
     border-radius: 6px;
@@ -1247,34 +1264,34 @@
     }
   }
 
+  .ant-modal-body .ant-form-item{
+    &:last-child{
+      margin-bottom: 0 !important;
+    }
+  }
+
   .form-bl{
     .ant-form-item{
-      margin-bottom: 38px !important;
-      &:last-child{
-        margin-bottom: 60px !important;
-      }
+      margin-bottom: 28px !important;
     }
     .back-button, .main-button{
       width: 180px;
     }
     .ant-row{
-      display: flex;
-      justify-content: center;
       .ant-form-item-children{
         width: 100%;
       }
       .ant-form-item-label{
         width: 166px;
-        padding-right: 50px;
+        padding-right: 26px;
         color: #333333;
         font-size: 20px;
         text-align: right;
         label{
           float: right;
+          font-size: 20px;
+          color: #333 !important;
         }
-      }
-      .ant-form-item-control-wrapper{
-        width: 482px;
       }
       .ant-form-item-control{
         min-height: 50px;
@@ -1282,7 +1299,7 @@
       }
       .ant-input, .ant-time-picker-input{
         height: 50px;
-        border: 1px solid #999 !important;
+        border: 1px solid @opacity999 !important;
         color: #999 !important;
       }
     }
@@ -1302,6 +1319,21 @@
       padding: 14px 10px;
     }
   }
+
+  .border-colorful{
+    border:1px solid;
+    border-image:linear-gradient(45deg, rgba(25, 176, 199, 0.4), rgba(247, 163, 157, 0.4), rgba(247, 198, 196, 0.4), rgba(33, 203, 188, 0.4), rgba(251, 124, 58, 0.4), rgba(82, 224, 217, 0.4), rgba(31, 129, 194, 0.4)) 1 1;
+  }
+
+    .service-form-wrapper{
+      .border-colorful();
+      background: white;
+      border-radius: 6px;
+      margin-top: 39px;
+      margin-bottom: 80px;
+      padding: 60px 275px;
+    }
+
 
   .bl-label{
     .ant-radio{
@@ -1326,5 +1358,46 @@
         }
       }
     }
+  }
+
+  .btn-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 180px;
+  }
+
+  .ant-upload-select-picture-card i {
+    font-size: 32px;
+    color: #999;
+  }
+
+  .ant-upload-select-picture-card .ant-upload-text {
+    margin-top: 8px;
+    color: #999;
+  }
+
+  .ant-upload-list-picture-card .ant-upload-list-item{
+    width: 160px !important;
+    height: 180px !important;
+  }
+
+  .ant-upload.ant-upload-select-picture-card{
+    width: 160px !important;
+    height: 180px !important;
+  }
+
+  .ant-tabs-nav .ant-tabs-tab{
+    padding: 30px 40px !important;
+    transition: none !important;
+    &:hover{
+      .color-linear-to-right() !important;
+    }
+  }
+  .ant-tabs-nav .ant-tabs-tab-active{
+    .color-linear-to-right() !important;
+  }
+
+  .ant-tabs-bar{
+    margin-bottom: 40px !important;
   }
 }

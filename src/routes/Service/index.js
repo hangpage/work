@@ -40,7 +40,7 @@ const LIST = [{
 
 const Index = ({list, count}) => {
   return (
-    <div>
+    <div className='bg-white pb80'>
       <div style={{width: '100%'}}>
         <img style={{width: '100%'}} src={banner} alt=""/>
       </div>
@@ -79,7 +79,7 @@ const Index = ({list, count}) => {
             )
           })}
         </Row>
-        <Pagination total={count} className='mt60 mb80'/>
+        <Pagination total={count} className='mt60'/>
       </div>
     </div>
 

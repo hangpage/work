@@ -13,14 +13,14 @@ import moment from "moment";
 
 
 const formItemLayout = {
-  // labelCol: {
-  //   xs: {span: 24},
-  //   sm: {span: 8},
-  // },
-  // wrapperCol: {
-  //   xs: {span: 24},
-  //   sm: {span: 8},
-  // },
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
   colon: false
 };
 
@@ -114,8 +114,8 @@ class Lockers extends React.Component{
 
     return (
       <div className='second-bg'>
-        <div className="w bg-white br6 mt39 mb80 pb60 pt60 form-bl">
-          <Form>
+        <div className="w form-bl service-form-wrapper">
+          <Form layout='horizontal'>
             {INPUT_LIST.map((item, index) => {
               if(item.type === 'timepicker'){
                 return (
@@ -156,7 +156,7 @@ class Lockers extends React.Component{
             </Form.Item>
           </Form>
           <Row type='flex' justify='space-around'>
-            <BackButton text='取消'/>
+            <BackButton />
             <div className='main-button' onClick={this.submit}>提交</div>
           </Row>
         </div>

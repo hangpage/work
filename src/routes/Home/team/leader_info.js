@@ -6,7 +6,7 @@
 import React from 'react';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
-import {parkSavePrincipal} from "../../../services/park";
+import {parkSavePrincipal, saveStudyExperience, saveWorkExperience} from "../../../services/park";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import {cloneDeep, isEqual} from "lodash";
@@ -15,6 +15,123 @@ import PrizeModal from './component/prize_situation';
 import WorkModal from './component/work_experience';
 import moment from "moment";
 import {connect} from "dva";
+import ImageUpload from "../../../components/FileUpload/ImageUpload";
+
+
+const list1 = [{
+  label: '项目名称',
+  field: 'projectName',
+}, {
+  label: '姓名',
+  field: 'name',
+}, {
+  label: '性别',
+  field: 'gendar',
+  options: Const.GENDAR_OPTIONS,
+  type: 'radio',
+},{
+  label: '出生日期',
+  field: 'birth',
+  type: 'datepicker',
+}, {
+  label: '民族',
+  field: 'nationality',
+},{
+  label: '婚姻情况',
+  field: 'marriage',
+  type: 'radio',
+  options: Const.HaveOrNot,
+},{
+  label: '政治面貌',
+  field: 'politicalStatus',
+},{
+  label: '籍贯',
+  field: 'birthplace',
+},{
+  label: '户籍',
+  field: 'householdRegistration',
+},{
+  label: '留学经历',
+  field: 'studyAbroad',
+  type: 'radio',
+  options: Const.HaveOrNot,
+},{
+  label: '身份证号',
+  field: 'idCard',
+},{
+  label: '曾用名',
+  field: 'usedName',
+},{
+  label: '最高学历',
+  field: 'education',
+},{
+  label: '邮箱',
+  field: 'email',
+},{
+  label: '常用名',
+  field: 'commonName',
+},{
+  label: '毕业时间',
+  field: 'graduationTime',
+  type: 'datepicker'
+},{
+  label: 'QQ/微信',
+  field: 'QQ',
+},{
+  label: '本人电话',
+  field: 'phone',
+},{
+  label: '紧急联系人',
+  field: 'emergencyContact',
+},{
+  label: '户籍地址',
+  field: 'household_address',
+},{
+  label: '在京地址',
+  field: 'address',
+}];
+
+const list2 = [{
+  label: '关系',
+  field: 'f2',
+  type: 'radio',
+  options: Const.FATHER_RELATION,
+}, {
+  label: '姓名',
+  field: 'f1',
+}, {
+  label: '工作单位',
+  field: 'f3',
+}, {
+  label: '职务',
+  field: 'f4',
+},{
+  label: '目前所在地',
+  field: 'f5',
+}, {
+  label: '联系电话',
+  field: 'f6',
+},{
+  label: '关系',
+  field: 'm2',
+  type: 'radio',
+  options: Const.MOTHER_RELATION,
+}, {
+  label: '姓名',
+  field: 'm1',
+}, {
+  label: '工作单位',
+  field: 'm3',
+}, {
+  label: '职务',
+  field: 'm4',
+},{
+  label: '目前所在地',
+  field: 'm5',
+}, {
+  label: '联系电话',
+  field: 'm6',
+}];
 
 
 class Team extends React.Component {
@@ -24,9 +141,9 @@ class Team extends React.Component {
       m1: false,
       m2: false,
       m3: false,
-      data1: [],
-      data2: [],
-      data3: [],
+      prize: [],
+      studyExperience: [],
+      workExperience: [],
       modalItem: {},
       currentModal: null
     }
@@ -49,17 +166,42 @@ class Team extends React.Component {
   };
 
   onDel = (e, index, modalIndex) => {
-    let membersStr = cloneDeep(this.state['data' + modalIndex]);
-    membersStr.splice(index, 1);
-    this.setState({
-      ['data' + modalIndex]: membersStr,
-    })
+    let current = {};
+    if(modalIndex === 1){
+      current = cloneDeep(this.state.studyExperience);
+    }else if(modalIndex === 2){
+      current = cloneDeep(this.state.prize);
+    }else{
+      current = cloneDeep(this.state.workExperience);
+    }
+    current.splice(index, 1);
+    if(modalIndex === 1){
+      this.setState({
+        studyExperience: current,
+      });
+    }else if(modalIndex === 2){
+      this.setState({
+        prize: current,
+      });
+    }else{
+      this.setState({
+        workExperience: current,
+      });
+    }
+
   };
 
   onEdit = (index, modalIndex) => {
-    let membersStr = cloneDeep(this.state['data' + modalIndex]);
+    let current = {};
+    if(modalIndex === 1){
+      current = cloneDeep(this.state.studyExperience);
+    }else if(modalIndex === 2){
+      current = cloneDeep(this.state.prize);
+    }else{
+      current = cloneDeep(this.state.workExperience);
+    }
     this.setState({
-      modalItem: membersStr[index],
+      modalItem: current[index],
       currentModal: modalIndex,
       ['m' + modalIndex]: true,
       itemKey: index
@@ -68,45 +210,113 @@ class Team extends React.Component {
 
 
   componentDidMount() {
-    const data = cloneDeep(this.props.leaderAndMemberINfo);
+    const data = cloneDeep(this.props.leaderAndMemberInfo);
     data.birth = data.birth ? moment(data.birth) : '';
     data.date = data.date ? moment(data.date) : '';
     this.props.form.setFieldsValue(data);
+    this.setState({
+      studyExperience: data.study || [],
+      workExperience: data.work || []
+    })
   }
 
 
   onOk = (data) => {
-    let membersStr = cloneDeep(this.state['data' + this.state.currentModal]);
-    const {currentModal} = this.state;
-    if (data.itemKey >= 0) {
-      membersStr[data.itemKey] = reFormatParams(data);
-    } else {
-      membersStr.push(reFormatParams(data));
+    const params = cloneDeep(data);
+    if(this.state.currentModal === 1){
+      const studyExperience = cloneDeep(this.state.studyExperience);
+      params.date = moment(params.date[0]).format('YYYY-MM-DD') + '~' + moment(params.date[1]).format('YYYY-MM-DD');
+      if(data.itemKey >= 0){
+        studyExperience[data.itemKey] = params;
+      }else{
+        studyExperience.push(params);
+      }
+      this.setState({
+        studyExperience,
+        m1: false,
+        itemKey: undefined
+      })
+    }else if(this.state.currentModal === 2){
+      const prize = cloneDeep(this.state.prize);
+      if(data.itemKey >= 0){
+        prize[data.itemKey] = params;
+      }else{
+        prize.push(params);
+      }
+      this.setState({
+        prize,
+        m2: false,
+        itemKey: undefined
+      });
     }
-    this.setState({
-      ['data' + this.state.currentModal]: membersStr,
-      ['m' + currentModal]: false,
-    })
+    else if(this.state.currentModal === 3){
+      const workExperience = cloneDeep(this.state.workExperience);
+      params.date = moment(params.date[0]).format('YYYY-MM-DD') + '~' + moment(params.date[1]).format('YYYY-MM-DD');
+      if(data.itemKey >= 0){
+        workExperience[data.itemKey] = params;
+      }else{
+        workExperience.push(params);
+      }
+      this.setState({
+        workExperience,
+        m3: false,
+        itemKey: undefined
+      })
+    }
+  };
+
+  saveStudyExperience =() => {
+    const study = {};
+    study.experiences = this.state.studyExperience;
+    study.token = sessionStorage.getItem('token');
+    study.id = this.props.leaderAndMemberInfo.id;
+    saveStudyExperience(JSON.stringify(study)).then(({data}) => {
+      if(equalResultStatus(data)){
+        message.success('学习经历保存成功')
+      }else{
+        message.error(data.message);
+      }
+    });
+  };
+
+  saveWorkExperience =() => {
+    const work = {};
+    work.experiences = this.state.workExperience;
+    work.token = sessionStorage.getItem('token');
+    work.id = this.props.leaderAndMemberInfo.id;
+    saveWorkExperience(JSON.stringify(work)).then(({data}) => {
+        if(equalResultStatus(data)){
+          message.success('工作经历保存成功')
+        }else{
+          message.error(data.message);
+        }
+    });
   };
 
   submit = () => {
     const {form} = this.props;
     const {validateFields} = form;
-    const {membersStr} = this.state;
+    const {prize} = this.state;
+    this.saveStudyExperience();
+    this.saveWorkExperience();
     validateFields((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
-        params.id = this.props.teamInfo.id;
+        params.id = this.props.leaderAndMemberInfo.id;
+        const fArray = [params.f1, params.f2, params.f3, params.f4, params.f5, params.f6];
+        const mArray = [params.m1, params.m2, params.m3, params.m4, params.m5, params.m6];
+        params.familySituation = fArray.join(',') + ';' + mArray.join(',');
+        //TODO 暂时删除毕业时间字段
+        delete params.graduationTime;
+        params.birth = params.birth + ' 00:00:00';
         let array = [];
-        if (membersStr.length) {
-          membersStr.forEach((item) => {
-            array.push(item.name + ',' + item.gendar + ','
-              + item.studySchool + ',' + item.studyProfession
-              + ',' + item.studyDate+ ',' + item.studyEdu+ ',' + item.phone);
+        if(prize.length){
+          prize.forEach((item) => {
+            array.push(item.match + ',' + item.rate);
           })
         }
-        params.membersStr = array.join(';');
+        params.prize = array.join(';');
         parkSavePrincipal(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
@@ -119,120 +329,6 @@ class Team extends React.Component {
   };
 
   render() {
-    const list1 = [{
-      label: '项目名称',
-      field: 'projectName',
-    }, {
-      label: '姓名',
-      field: 'name',
-    }, {
-      label: '性别',
-      field: 'gendar',
-      options: Const.GENDAR_OPTIONS,
-      type: 'radio',
-    },{
-      label: '出生日期',
-      field: 'birth',
-      type: 'datepicker',
-    }, {
-      label: '民族',
-      field: 'nationality',
-    },{
-      label: '婚姻情况',
-      field: 'marriage',
-      type: 'radio',
-      options: Const.HaveOrNot,
-    },{
-      label: '政治面貌',
-      field: 'politicalStatus',
-    },{
-      label: '籍贯',
-      field: 'birthplace',
-    },{
-      label: '户籍',
-      field: 'householdRegistration',
-    },{
-      label: '留学经历',
-      field: 'studyAbroad',
-      type: 'radio',
-      options: Const.HaveOrNot,
-    },{
-      label: '身份证号',
-      field: 'idCard',
-    },{
-      label: '曾用名',
-      field: 'usedName',
-    },{
-      label: '最高学历',
-      field: 'education',
-    },{
-      label: '邮箱',
-      field: 'email',
-    },{
-      label: '常用名',
-      field: 'commonName',
-    },{
-      label: '毕业时间',
-      field: 'graduationTime',
-    },{
-      label: 'QQ/微信',
-      field: 'QQ',
-    },{
-      label: '本人电话',
-      field: 'phone',
-    },{
-      label: '紧急联系人',
-      field: 'emergencyContact',
-    },{
-      label: '户籍地址',
-      field: 'household_address',
-    },{
-      label: '在京地址',
-      field: 'address',
-    }];
-
-    const list2 = [{
-      label: '关系',
-      field: 'principalStr',
-      type: 'radio',
-      options: Const.GENDAR_OPTIONS,
-    }, {
-      label: '姓名',
-      field: 'gendar',
-    }, {
-      label: '工作单位',
-      field: 'studySchool',
-    }, {
-      label: '职务',
-      field: 'studyProfession',
-    },{
-      label: '目前所在地',
-      field: 'education',
-    }, {
-      label: '联系电话',
-      field: 'education',
-    },{
-      label: '关系',
-      field: 'principalStr',
-      type: 'radio',
-      options: Const.GENDAR_OPTIONS,
-    }, {
-      label: '姓名',
-      field: 'gendar',
-    }, {
-      label: '工作单位',
-      field: 'studySchool',
-    }, {
-      label: '职务',
-      field: 'studyProfession',
-    },{
-      label: '目前所在地',
-      field: 'education',
-    }, {
-      label: '联系电话',
-      field: 'education',
-    }];
-
     const modalProps = {
       visible: this.state['m' + this.state.currentModal],
       modalItem: this.state.modalItem,
@@ -240,7 +336,7 @@ class Team extends React.Component {
       onCancel: this.onCancel,
       onOk: this.onOk
     };
-    const {m1, m2, m3, data1, data2, data3} = this.state;
+    const {m1, m2, m3, workExperience, studyExperience, prize} = this.state;
     const {getFieldDecorator} = this.props.form;
     return (
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
@@ -278,21 +374,22 @@ class Team extends React.Component {
                       </Col>
                     )
                   })}
-                  <Col span={24}>
+                  <Col span={24} className='mb60'>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
-                      <label className='subheading'>学习经历</label>
+                      <label className='subheading' style={{color: '#333', fontWeight: 'normal', background: 'none'}}>学习经历</label>
                       <span onClick={(e) => {this.showModal(1)}} className='fr icon-add-box'><i
                         className='icon-add'/><span>添加</span></span>
                     </div>
-                    {data1.map((item, index) => {
+                    {studyExperience.map((item, index) => {
                       return (
                         <div  key={index}>
                           <div className='self-add'>
-                            <span className="item">{item.f1}</span>
-                            <span className="item">{item.f2}</span>
-                            <span className="item">{item.f3}</span>
-                            <span className="item">{item.f4}</span>
-                            <span className="item">{item.f5}</span>
+                            <span className="item">{item.state}</span>
+                            <span className="item">{item.date}</span>
+                            <span className="item">{item.school}</span>
+                            <span className="item">{item.profession}</span>
+                            <span className="item">{item.education}</span>
+                            <span className="item">{item.learningForm}</span>
                             <div className='fr' onClick={(e) => {
                               this.onDel(e, index, 1)
                             }}>
@@ -308,19 +405,19 @@ class Team extends React.Component {
                             </div>
                           </div>
                           <div className='self-add'>
-                            <span className="item">{item.f1}</span>
+                            <span className="item">证明人及电话：{item.witness}</span>
                           </div>
                         </div>
                       )
                     })}
                   </Col>
-                  <Col span={24}>
+                  <Col span={24} className='mb60'>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
-                      <label className='subheading'>获奖情况</label>
+                      <label className='subheading' style={{color: '#333', fontWeight: 'normal', background: 'none'}}>获奖情况</label>
                       <span onClick={(e) => {this.showModal(2)}} className='fr icon-add-box'><i
                         className='icon-add'/><span>添加</span></span>
                     </div>
-                    {data2.map((item, index) => {
+                    {prize.map((item, index) => {
                       return (
                         <div key={index}>
                           <div className='self-add'>
@@ -353,19 +450,19 @@ class Team extends React.Component {
                       )}
                     </Form.Item>
                   </Col>
-                  <Col span={24}>
+                  <Col span={24} className='mb60'>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
-                      <label className='subheading'>工作经历</label>
+                      <label className='subheading' style={{color: '#333', fontWeight: 'normal', background: 'none'}}>工作经历</label>
                       <span onClick={(e) => {this.showModal(3)}} className='fr icon-add-box'><i
                         className='icon-add'/><span>添加</span></span>
                     </div>
-                    {data3.map((item, index) => {
+                    {workExperience.map((item, index) => {
                       return (
                         <div  key={index}>
                           <div className='self-add'>
-                            <span className="item">{item.f1}</span>
-                            <span className="item">{item.f2}</span>
-                            <span className="item">{item.f3}</span>
+                            <span className="item">{item.date}</span>
+                            <span className="item">{item.unit}</span>
+                            <span className="item">{item.position}</span>
                             <div className='fr' onClick={(e) => {
                               this.onDel(e, index, 3)
                             }}>
@@ -381,7 +478,7 @@ class Team extends React.Component {
                             </div>
                           </div>
                           <div className='self-add'>
-                            <span className="item">主要工作：{item.f1}</span>
+                            <span className="item">主要工作：{item.content}</span>
                           </div>
                         </div>
                       )
@@ -422,7 +519,7 @@ class Team extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('socialRelationship', {
-                    rules: [{message: '请输入社会关系'}],
+                    rules: [{required: true, message: '请输入社会关系'}],
                   })(
                     <Input.TextArea placeholder='请输入社会关系' style={{height: 240}}
                               maxLength={200}/>
@@ -434,7 +531,7 @@ class Team extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('other', {
-                    rules: [{message: '请输入其他能力说明'}],
+                    rules: [{required: true, message: '请输入其他能力说明'}],
                   })(
                     <Input.TextArea placeholder='请输入其他能力说明' style={{height: 240}}
                                     maxLength={200}/>
@@ -446,13 +543,35 @@ class Team extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('entrepreneurialVision', {
-                    rules: [{message: '请输入创业愿景'}],
+                    rules: [{required: true, message: '请输入创业愿景'}],
                   })(
                     <Input.TextArea placeholder='请输入创业愿景' style={{height: 240}}
                                     maxLength={200}/>
                   )}
                 </Form.Item>
               </Form>
+                <Form.Item
+                  label='照片(一张)'
+                  labelCol={{span: 24}}
+                  wrapperCol={{span: 24}}
+                >
+                  {getFieldDecorator('pic', {
+                    rules: [{required: true, message: '请上传'}],
+                  })(
+                    <ImageUpload />
+                  )}
+                </Form.Item>
+                <Form.Item
+                  label='照片(学位/学历/学生证，可上传三张)'
+                  labelCol={{span: 24}}
+                  wrapperCol={{span: 24}}
+                >
+                  {getFieldDecorator('file', {
+                    rules: [{required: true, message: '请上传'}],
+                  })(
+                    <ImageUpload max={3}/>
+                  )}
+                </Form.Item>
             </div>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>

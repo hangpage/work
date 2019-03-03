@@ -6,10 +6,10 @@
 import React from 'react';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
-import {parkResidentTeam} from "../../../services/park";
+import {parkResidentTeam, parkSaveMembers} from "../../../services/park";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
-import {cloneDeep} from "lodash";
+import {cloneDeep, isEqual} from "lodash";
 import Modal from './component/step3Modal';
 import moment from "moment";
 import {connect} from "dva";
@@ -72,26 +72,20 @@ class Team extends React.Component {
   };
 
   submit = () => {
-    const {form} = this.props;
-    const {validateFields} = form;
-    const {membersStr} = this.state;
+    const {form, dispatch} = this.props;
+    const {validateFields, resetFields} = form;
     validateFields((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
-        params.id = this.props.teamInfo.id;
-        let array = [];
-        if (membersStr.length) {
-          membersStr.forEach((item) => {
-            array.push(item.name + ',' + item.gendar + ','
-              + item.studySchool + ',' + item.studyProfession
-              + ',' + item.studyDate+ ',' + item.studyEdu+ ',' + item.phone);
-          })
-        }
-        params.membersStr = array.join(';');
-        parkResidentTeam(params).then(({data}) => {
+        params.rtId = this.props.teamInfo.id;
+        parkSaveMembers(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
+            resetFields();
+            dispatch({
+              type: 'home/queryTeamInfo'
+            })
           } else {
             message.error(data.message);
           }
@@ -100,17 +94,28 @@ class Team extends React.Component {
     });
   };
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    if(!isEqual(this.props.teamInfo.members, nextProps.teamInfo.members)){
+      this.setState({
+        members: nextProps.teamInfo.members
+      })
+    }
+  }
+
   componentDidMount() {
-    const data = cloneDeep(this.props.leaderAndMemberINfo);
-    data.birth = data.birth ? moment(data.birth) : '';
-    data.date = data.date ? moment(data.date) : '';
-    this.props.form.setFieldsValue(data);
+     const data = cloneDeep(this.props.teamInfo);
+    // data.birth = data.birth ? moment(data.birth) : '';
+    // data.date = data.date ? moment(data.date) : '';
+    // this.props.form.setFieldsValue(data);
+    this.setState({
+      membersStr: data.members || []
+    })
   }
 
   render() {
     const list1 = [{
       label: '姓名',
-      field: 'principalStr',
+      field: 'name',
     }, {
       label: '性别',
       field: 'gendar',
@@ -123,8 +128,12 @@ class Team extends React.Component {
       label: '所学专业',
       field: 'studyProfession',
     }, {
+      label: '毕业时间',
+      field: 'studyDate',
+      type: 'datepicker'
+    }, {
       label: '学历',
-      field: 'education',
+      field: 'studyEdu',
     },{
       label: '联系电话',
       field: 'phone',
@@ -175,8 +184,8 @@ class Team extends React.Component {
                   <Col span={24}>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
                       <label className='subheading'>团队成员</label>
-                      <span onClick={this.showModal} className='fr icon-add-box'><i
-                        className='icon-add'/><span>添加</span></span>
+                      {/*<span onClick={this.showModal} className='fr icon-add-box'><i*/}
+                        {/*className='icon-add'/><span>添加</span></span>*/}
                     </div>
                     {membersStr.map((item, index) => {
                       return (

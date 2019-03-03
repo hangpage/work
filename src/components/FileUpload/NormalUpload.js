@@ -1,5 +1,6 @@
 import React from 'react';
 import {Upload} from "antd";
+import config from "../../utils/config";
 
 
 class ImageUpload extends React.Component {
@@ -30,7 +31,7 @@ class ImageUpload extends React.Component {
   render() {
     const {text='点击上传'} = this.props;
     return (
-      <Upload className='normal-upload' action='/api/upload/uploadFile' onChange={this.handleChange} showUploadList={false}>
+      <Upload className='normal-upload' action={config.UPLOAD_URL} onChange={this.handleChange} showUploadList={false}>
         {text}
       </Upload>
     )

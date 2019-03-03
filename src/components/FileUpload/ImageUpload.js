@@ -1,43 +1,88 @@
 import React from 'react';
-import {Upload} from "antd";
-import Icon from "antd/es/icon";
+import {Modal, Upload} from "antd";
+import config from "../../utils/config";
 
 
 class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: ''
-    }
+      previewVisible: false,
+      previewImage: '',
+      fileList: [],
+      multiFiles: []
+    };
   }
+
+  handleCancel = () => this.setState({ previewVisible: false })
+
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
+  };
+
 
   componentDidMount(){
 
   }
 
   handleChange = (info) => {
+    this.setState({
+      fileList: info.fileList
+    });
     if(info.file.response){
       const value = info.file.response.file;
       const onChange = this.props.onChange;
-      if (onChange) {
-        onChange(value);
+      if(this.props.max){
+          const files = this.state.multiFiles;
+          if(info.file.status === 'removed'){
+            files.splice(files.indexOf(value), 1);
+          }else{
+            files.push(value);
+          }
+          this.setState({multiFiles: files}, () => {
+            if(onChange){
+              onChange(this.state.multiFiles.join('|'));
+            }
+          });
+      }else{
+        if (onChange) {
+          onChange(value);
+        }
       }
       this.setState({
-        url: value
+        fileList: info.fileList
       });
     }
   };
 
   render() {
+    const { previewVisible, previewImage, fileList } = this.state;
+    const {max=1} = this.props;
+    const uploadButton = (
+      <div>
+        <i className='icon-camera'/>
+        <div className="ant-upload-text">点击上传图片</div>
+      </div>
+    );
     return (
-      <Upload.Dragger action='/api/upload/uploadFile' onChange={this.handleChange} showUploadList={false}>
-        <p className="ant-upload-drag-icon">
-          {!this.state.url && <Icon type="camera"/>}
-          <img style={{width: '100%'}} src={this.state.url} alt=""/>
-        </p>
-        <p className="ant-upload-text">点击上传</p>
-      </Upload.Dragger>
-    )
+      <div className="clearfix">
+        <Upload
+          action={config.UPLOAD_URL}
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
+        >
+          {fileList.length >= max ? null : uploadButton}
+        </Upload>
+        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </div>
+    );
   }
 }
 
