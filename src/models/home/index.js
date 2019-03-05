@@ -52,39 +52,87 @@ export default {
             type: 'query'
           })
         }
-        if (pathMatchRegexp('/home/:type', location.pathname)) {
-          switch (location.pathname) {
-            case '/home/enter':
-              dispatch({
-                type: 'findEntering'
-              });
-              break;
-            case '/home/match':
-              dispatch({
-                type: 'userFindMatch'
-              });
-              break;
-          }
-        }
-        if(pathMatchRegexp('/home/team', location.pathname)){
+        if(pathMatchRegexp('/home/profile', location.pathname)){
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['0']
+            }
+          })
+        }else if(pathMatchRegexp('/home/team', location.pathname)){
           dispatch({type: 'queryTeamInfo'});
-          dispatch({type: 'queryLeaderAndMemberInfo'})
+          dispatch({type: 'queryLeaderAndMemberInfo'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['1']
+            }
+          })
+        }else if(pathMatchRegexp('/home/match', location.pathname)){
+          dispatch({type: 'userFindMatch'});
+          dispatch({type: 'home/updateState',
+            payload: {
+              selectedKeys: ['2']
+            }
+          })
+        }else if(pathMatchRegexp('/home/activity', location.pathname)){
+          dispatch({type: 'userFindActivity'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['3']
+            }
+          })
         }else if(pathMatchRegexp('/home/service', location.pathname)){
           dispatch({type: 'userFineMeetingRoom'});
           dispatch({type: 'userLockers'});
           dispatch({type: 'userRepair'});
-          dispatch({type: 'userFindServiceAppli'})
+          dispatch({type: 'userFindServiceAppli'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['4']
+            }
+          })
         }else if(pathMatchRegexp('/home/message', location.pathname)){
           dispatch({type: 'userFindSystem'});
           dispatch({type: 'userFindComment'});
           dispatch({type: 'userFindAwesome'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['5']
+            }
+          })
         }else if(pathMatchRegexp('/home/about', location.pathname)){
           dispatch({type: 'aboutUs'});
-        }else if(pathMatchRegexp('/home/activity', location.pathname)){
-          dispatch({type: 'userFindActivity'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['10']
+            }
+          })
         }else if(pathMatchRegexp('/home/history', location.pathname)){
           dispatch({type: 'historyMatch'});
           dispatch({type: 'historyActivity'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['6']
+            }
+          })
+        }else if(pathMatchRegexp('/home/leave', location.pathname)){
+          dispatch({type: 'home/updateState',
+            payload: {
+              selectedKeys: ['7']
+            }
+          })
+        }else if(pathMatchRegexp('/home/enter', location.pathname)){
+          dispatch({type: 'findEntering'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['8']
+            }
+          })
+        }else if(pathMatchRegexp('/home/advise', location.pathname)){
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['9']
+            }
+          })
         }
       })
     },

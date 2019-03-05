@@ -75,7 +75,7 @@ const Post = ({form, history}) => {
             {...formItemLayout}
             label="服务内容"
           >
-            {getFieldDecorator('content', RULE)(
+            {getFieldDecorator('note', RULE)(
               <Input.TextArea placeholder='请输入服务内容...' style={{height: 360}}/>
             )}
           </Form.Item>

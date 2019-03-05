@@ -20,7 +20,11 @@ export default modelExtend(model, {
       history.listen(location => {
         if(pathMatchRegexp('/activity', location.pathname)){
           dispatch({
-            type: 'queryList'
+            type: 'queryList',
+            payload: {
+              pageNo: 1,
+              pageSize: 9
+            }
           })
         }else if(pathMatchRegexp('/activity/:id', location.pathname)){
           const match = pathMatchRegexp('/activity/:id', location.pathname);
@@ -34,15 +38,13 @@ export default modelExtend(model, {
 
   effects: {
     *queryList({ payload }, { call, put }) {
-      const {data} = yield call(activityFindList);
+      const {data} = yield call(activityFindList, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'updateState',
           payload: {
             list: data.data.list,
             count: data.data.count,
-            pageSize: data.data.pageSize,
-            pageNo: data.data.pageNo
           }
         });
       }else{

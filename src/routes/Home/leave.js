@@ -35,7 +35,9 @@ const Leave = ({form}) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        userLeavePark(reFormatParams(values)).then(({data}) => {
+        const params = reFormatParams(values);
+        params.inTime = params.inTime + ' 00:00:00';
+        userLeavePark(params).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
           } else {
@@ -53,23 +55,6 @@ const Leave = ({form}) => {
         <Form layout='horizontal' className='form-bl pt40' style={{paddingLeft: 120}}>
           <Row>
             <Col span={24}>
-              <Form.Item
-                {...formItemLayout}
-                label="申请人"
-              >
-                {getFieldDecorator('name', RULE)(
-                  <Input placeholder='请输入申请人姓名'/>
-                )}
-              </Form.Item>
-              <Form.Item
-                {...formItemLayout}
-                label="申请时间"
-              >
-                {getFieldDecorator('time', RULE)(
-                  <DatePicker format="YYYY-MM-DD"/>
-                )}
-              </Form.Item>
-              <div className="solid-line4 mb39" style={{marginLeft: -124}}/>
               <div className="subheading mb39">项目情况</div>
               <Form.Item
                 {...formItemLayout}

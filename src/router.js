@@ -15,6 +15,7 @@ import AppointVisit from "./routes/Index/AppointVisit";
 import Notice from "./routes/Notice";
 import NoticeDetail from "./routes/Notice/detail";
 import ArticleDetail from "./routes/Article/index";
+import ArticleList from "./routes/Article/ArticleList";
 import Park from "./routes/Park";
 import ParkStep1 from "./routes/Park/ParkStep1";
 import ParkStep2 from "./routes/Park/ParkStep2";
@@ -153,6 +154,11 @@ const routes = [{
   exact: 'exact',
   breadcrumbName: '公告详情'
 }, {
+  path: '/article',
+  component: ArticleList,
+  exact: 'exact',
+  breadcrumbName: '创业动态列表'
+},{
   path: '/article/:id',
   component: ArticleDetail,
   exact: 'exact',

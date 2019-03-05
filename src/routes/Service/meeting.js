@@ -4,11 +4,10 @@
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import {DatePicker, Form, message, Radio, Row} from "antd";
+import {Button, DatePicker, Form, message, Radio, Row, TimePicker} from "antd";
 import {equalResultStatus} from "../../utils";
 import {serviceMeetingAppli, serviceQueryMeeting} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
-import TimePicker from "antd/es/time-picker";
 import moment from "moment";
 
 
@@ -26,7 +25,7 @@ const formItemLayout = {
 
 const RULE = {
   rules: [{
-    required: true, message: '必填!',
+    required: true, message: '请选择!',
   }],
 };
 const INPUT_LIST = [{
@@ -51,7 +50,9 @@ class Lockers extends React.Component{
       list: [],
       busiDate: '',
       startTime: '',
-      endTime: ''
+      endTime: '',
+      startTimeOpen: false,
+      endTimeOpen: false,
     }
   }
   queryMeetingRoom = () => {
@@ -92,6 +93,12 @@ class Lockers extends React.Component{
         values.busiDate = moment(values.busiDate).format('YYYY-MM-DD');
         values.startTime = moment(values.startTime).format('HH:mm:ss');
         values.endTime = moment(values.endTime).format('HH:mm:ss');
+        if(Number(values.endTime.split(':')[0]) < Number(values.startTime.split(':')[0]) ||
+          (Number(values.endTime.split(':')[0]) === Number(values.startTime.split(':')[0])
+            && Number(values.endTime.split(':')[1]) < Number(values.startTime.split(':')[1]))
+        ){
+          return message.error('结束时间应选择开始时间之后！');
+        }
         values.roomNum = values.roomNum[0];
         serviceMeetingAppli(values).then(({data}) => {
           if (equalResultStatus(data)) {
@@ -107,6 +114,14 @@ class Lockers extends React.Component{
     });
   };
 
+  handleClose = (field) => this.setState({ [field + 'Open']: false });
+
+  handleOpenChange = (open, field) => {
+    this.setState({
+      [field+'Open']: open
+    });
+  };
+
   render(){
     const {list} = this.state;
     const {form} = this.props;
@@ -117,6 +132,7 @@ class Lockers extends React.Component{
         <div className="w form-bl service-form-wrapper">
           <Form layout='horizontal'>
             {INPUT_LIST.map((item, index) => {
+              const open = this.state[`${item.field}Open`]
               if(item.type === 'timepicker'){
                 return (
                   <Form.Item
@@ -125,7 +141,17 @@ class Lockers extends React.Component{
                     key={index}
                   >
                     {getFieldDecorator(`${item.field}`, RULE)(
-                      <TimePicker placeholder={`请选择${item.label}`} format={item.format} onChange={(e) => {this.setChooseTime(e, item.field)}}/>
+                      <TimePicker placeholder={`请选择${item.label}`}
+                                  format={item.format}
+                                  open={open}
+                                  onOpenChange={(open) => {this.handleOpenChange(open, item.field)}}
+                                  onChange={(e) => {this.setChooseTime(e, item.field)}}
+                                  addon={() => (
+                                    <Button className='time-picker-button' size="small" type="primary" onClick={() => {this.handleClose(item.field)}}>
+                                      完成
+                                    </Button>
+                                  )}
+                      />
                     )}
                   </Form.Item>
                 )

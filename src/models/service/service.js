@@ -1,4 +1,4 @@
-import {equalResultStatus, pathMatchRegexp} from "../../utils";
+import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
 import {carLicenseGet, findType, serviceGet} from "../../services/service";
 import {message} from "antd";
 
@@ -25,9 +25,10 @@ export default {
             }
           })
         }else if (pathMatchRegexp('/service/:id/detail', location.pathname)) {
+          const id = getParams(location.search).id;
           const match = pathMatchRegexp('/service/:id/detail', location.pathname);
           if (match) {
-            dispatch({type: 'get', payload: {id: match[1], token: sessionStorage.getItem('token')}})
+            dispatch({type: 'get', payload: {id: id, token: sessionStorage.getItem('token')}})
           }
         }else if (pathMatchRegexp('/service/type/parking/record', location.pathname)) {
           dispatch({type: 'queryParkingRecord'})

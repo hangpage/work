@@ -18,7 +18,7 @@ const ServiceList = ({list, count, match}) => {
             {list.length ? list.map((item, index) => {
               return (
                 <Col span={6} key={index}>
-                  <Link to={`${match.url}/detail`}>
+                  <Link to={`${match.url}/detail?id=${item.id}`}>
                     <div className="box">
                       <div className='img-box'>
                         <img src={`${config.URL}${item.pic}`} alt=""/>

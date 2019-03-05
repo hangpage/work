@@ -1366,4 +1366,10 @@
 :global .ant-tabs-bar {
   margin-bottom: 40px !important;
 }
+:global .time-picker-button {
+  background: linear-gradient(to right, #00acaf, #0771bb) !important;
+}
+:global .ant-empty {
+  margin-top: 45px !important;
+}
 /*# sourceMappingURL=index.css.map */

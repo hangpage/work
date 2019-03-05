@@ -91,7 +91,12 @@ class Step3Modal extends React.Component{
                     key={index}
                     {...formItemLayout}
                   >
-                    {getFieldDecorator(`${item.field}`, Const.RULE)(
+                    {getFieldDecorator(`${item.field}`, {
+                      initialValue: modalItem[item.field],
+                      rules: [{
+                        required: true, message: '此处为必填项'
+                      }]
+                    })(
                       comp
                     )}
                   </Form.Item>

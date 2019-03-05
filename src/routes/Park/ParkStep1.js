@@ -244,6 +244,106 @@ class ParkStep1 extends React.Component {
                     </Form.Item>
                   </Col>
                 </Row>
+                <div className="text-align mt80 mb58">
+                  <span className="form-name">入驻园区人员数量</span>
+                </div>
+                <Row gutter={138}>
+                  <Col span={12}>
+                    <Form.Item
+                      label='在校生'
+                    >
+                      {getFieldDecorator('student', Const.RULE)(
+                        <Input placeholder='请输入在校生数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='毕业生'
+                    >
+                      {getFieldDecorator('graduate', Const.RULE)(
+                        <Input placeholder='请输入毕业生数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='全职'
+                    >
+                      {getFieldDecorator('fullTime', Const.RULE)(
+                        <Input placeholder='请输入全职数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='兼职'
+                    >
+                      {getFieldDecorator('partTime', Const.RULE)(
+                        <Input placeholder='请输入兼职数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='总人数'
+                    >
+                      {getFieldDecorator('peopleCount', Const.RULE)(
+                        <Input placeholder='请输入总人数'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
+                <div className="text-align mt80 mb58">
+                  <span className="form-name">企业人员构成</span>
+                </div>
+                <Row gutter={138}>
+                  <Col span={12}>
+                    <Form.Item
+                      label='博士生'
+                    >
+                      {getFieldDecorator('doctor', Const.RULE)(
+                        <Input placeholder='请输入博士生数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='硕士生'
+                    >
+                      {getFieldDecorator('master', Const.RULE)(
+                        <Input placeholder='请输入硕士生数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='本科生'
+                    >
+                      {getFieldDecorator('bachelor', Const.RULE)(
+                        <Input placeholder='请输入本科生数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='专科生'
+                    >
+                      {getFieldDecorator('specialist', Const.RULE)(
+                        <Input placeholder='请输入专科生数量'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label='总人数'
+                    >
+                      {getFieldDecorator('count', Const.RULE)(
+                        <Input placeholder='请输入总人数'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                </Row>
                 <Form.Item
                   label="企业资质"
                   labelCol={{span: 12}}

@@ -10,7 +10,7 @@ import {Col, Pagination, Row} from "antd";
 import {Link} from "dva/router";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 
-const Index = ({list, count, match}) => {
+const Index = ({list, count, match, dispatch}) => {
   const comps = list.map((item, index) => {
     return (
       <Col span={8} key={index}>
@@ -26,12 +26,24 @@ const Index = ({list, count, match}) => {
       </Col>
     )
   });
+
+  const onPageChange = (pageNo, pageSize) => {
+    dispatch({
+      type: 'activity/queryList',
+      payload: {
+        pageNo,
+        pageSize
+      }
+    })
+  };
   return (
-    <div className='w' style={{marginTop: 40, marginBottom: 80}}>
-      <Row gutter={59}>
-        {comps}
-      </Row>
-      <Pagination total={count} className='mt60'/>
+    <div className="bg-white pt39 pb80">
+      <div className='w'>
+        <Row gutter={59}>
+          {comps}
+        </Row>
+        <Pagination total={count} onChange={onPageChange} pageSize={9} className='mt60'/>
+      </div>
     </div>
   );
 };
