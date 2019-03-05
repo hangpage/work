@@ -9,8 +9,9 @@ export default {
   namespace: 'app',
 
   state: {
-    headerMenuSelectedKeys: ['0'],
+    headerMenuSelectedKeys: ['1'],
     user: {},
+    searchParams: {},
     showSearch: false
   },
 

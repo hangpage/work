@@ -38,7 +38,16 @@ const LIST = [{
 }];
 
 
-const Index = ({list, count}) => {
+const Index = ({list, count, dispatch}) => {
+  const onPageChange = (pageNo, pageSize) => {
+    dispatch({
+      type: 'service/queryServiceList',
+      payload: {
+        pageNo,
+        pageSize
+      }
+    })
+  };
   return (
     <div className='bg-white pb80'>
       <div style={{width: '100%'}}>
@@ -79,7 +88,7 @@ const Index = ({list, count}) => {
             )
           })}
         </Row>
-        <Pagination total={count} className='mt60'/>
+        <Pagination total={count} className='mt60' onChange={onPageChange} pageSize={4}/>
       </div>
     </div>
 

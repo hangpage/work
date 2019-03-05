@@ -56,7 +56,7 @@ const HomeList = [{
   url: '/about'
 }];
 
-const Index = ({data, match, children, modalVisible, dispatch}) => {
+const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) => {
   const onSignClick = () => {
     dispatch({
       type: 'home/updateState',
@@ -73,6 +73,16 @@ const Index = ({data, match, children, modalVisible, dispatch}) => {
       }
     })
   };
+
+  const onMenuItemClick = (e) => {
+    dispatch({
+      type: 'home/updateState',
+      payload: {
+        selectedKeys: [e.key]
+      }
+    })
+  };
+
   return (
     <div className="bg-white pt40 pb80">
       <div className='w bl-home'>
@@ -90,11 +100,12 @@ const Index = ({data, match, children, modalVisible, dispatch}) => {
               </Modal>) : null}
             <Menu
               style={{width: 240, marginTop: 10}}
+              selectedKeys={selectedKeys}
               defaultSelectedKeys={['0']}
             >
               {HomeList.map((item, index) => {
                 return (
-                  <Menu.Item key={index}>
+                  <Menu.Item key={index} onClick={onMenuItemClick}>
                     <Link to={`/home${item.url}`}>
                       <img src={item.icon} alt="" style={{marginRight: 10}}/>
                       <span>{item.title}</span>

@@ -46,7 +46,7 @@ const routes = [{
   breadcrumbName: '服务申请'
 }, {
   path: '/competition',
-  breadcrumbName: '比赛'
+  breadcrumbName: '比赛列表'
 }, {
   path: '/competition/:id',
   breadcrumbName: '比赛详情'
@@ -148,7 +148,7 @@ const routes = [{
 
 const URL_BLACK_LIST = ['/index', '/find', '/home', '/service', '/home/team', '/home/:type', '/search']; //不显示面包屑的页面url
 
-const App = ({children, location, match}) => {
+const App = ({children, location}) => {
   const pathSnippets = location.pathname.split('/').filter(i => i);
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
@@ -175,15 +175,15 @@ const App = ({children, location, match}) => {
     <LocaleProvider locale={zh_CN}>
       <Layout className="my-layout">
         <MyLayout.Header/>
-        {URL_BLACK_LIST.indexOf(location.pathname) === -1 &&
-          <div style={{background: '#fafafa', borderBottom: '1px solid rgba(153, 153, 153, 0.1)'}}>
-            <div className="w" style={{minHeight: '51px', lineHeight: '51px',}}>
-              <Breadcrumb>
-                {breadcrumbItems}
-              </Breadcrumb>
-            </div>
+        {!URL_BLACK_LIST.some((url) => {
+          return !!pathMatchRegexp(url, location.pathname)
+        }) && (<div style={{background: '#fafafa', borderBottom: '1px solid rgba(153, 153, 153, 0.1)'}}>
+          <div className="w" style={{minHeight: '51px', lineHeight: '51px',}}>
+            <Breadcrumb>
+              {breadcrumbItems}
+            </Breadcrumb>
           </div>
-        }
+        </div>)}
         <Content>
           {children}
         </Content>

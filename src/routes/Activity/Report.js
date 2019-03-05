@@ -49,7 +49,7 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="姓名"
                   >
-                    {getFieldDecorator('principal', Const.RULE)(
+                    {getFieldDecorator('name', Const.RULE)(
                       <Input placeholder='请输入姓名'/>
                     )}
                   </Form.Item>

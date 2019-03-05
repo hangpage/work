@@ -58,7 +58,7 @@ const Detail = ({detail, modalVisible, dispatch, location,}) => {
         <div className="card service-detail-card">
           <img src={detail.img} alt=""/>
           <div className="right">
-            <h1>中信银行<span>{detail.service}</span></h1>
+            <h1>{detail.providerName}<span>{detail.service}</span></h1>
             <div className='btn' style={{cursor: 'pointer'}} onClick={onBtnClick}>申请服务</div>
             <Modal {...modalProps}/>
           </div>

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {Col, Pagination, Row} from "antd";
+import {Col, Pagination, Row, message} from "antd";
 import {Link} from "dva/router";
 import ActivityCard from "../ActivityCard/ActivityCard";
 import config from "../../utils/config";
 import {equalResultStatus} from "../../utils";
 import request from "../../utils/request";
+import * as qs from "qs";
 
 class ActivityList extends Component {
   constructor(props){
@@ -12,25 +13,59 @@ class ActivityList extends Component {
     this.state ={
       list: [],
       count: 0,
-      pageSize: 1,
-      pageNo: 30
+      pageNo: 1,
+      pageSize: 9
     }
   }
+
+  fetchData = (url, params) => {
+    const extraParams = this.props.params;
+    params = Object.assign({}, extraParams, params,{pageNo: this.state.pageNo, pageSize: this.state.pageSize});
+    return request(`${url}?${qs.stringify(params)}`);
+  };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.fetchData(nextProps.url, nextProps.params).then(({data}) => {
+      if(equalResultStatus(data)){
+        this.setState({
+          list: data.data.list,
+          count: data.data.count,
+        })
+      }else{
+        message.error(data.message);
+      }
+    })
+  }
+
   componentDidMount() {
     const {url} = this.props;
     if(url){
-      request(url).then(({data}) => {
+      this.fetchData(url, {pageNo: 1, pageSize: 9}).then(({data}) => {
         if(equalResultStatus(data)){
           this.setState({
             list: data.data.list,
             count: data.data.count,
-            pageSize: data.data.pageSize,
-            pageNo: data.data.pageNo
           })
+        }else{
+          message.error(data.message);
         }
       })
     }
   }
+
+  onPageChange = (pageNo, pageSize) => {
+    this.fetchData(this.props.url, {pageNo, pageSize}).then(({data}) => {
+      if(equalResultStatus(data)){
+        this.setState({
+          list: data.data.list,
+          count: data.data.count,
+          pageNo: pageNo
+        })
+      }else{
+        message.error(data.message);
+      }
+    });
+  };
 
   render() {
     const {list, count} = this.state;
@@ -56,7 +91,7 @@ class ActivityList extends Component {
         <Row gutter={59}>
           {comps}
         </Row>
-        <Pagination total={count} className='mt10'/>
+        <Pagination total={count} onChange={this.onPageChange} pageSize={9} className='mt10'/>
       </div>
     );
   }

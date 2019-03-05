@@ -11,7 +11,7 @@ import BackButton from "../../components/BackButton/BackButton";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 
-const Repair = ({form}) => {
+const Repair = ({form, history}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
     labelCol: {
@@ -43,6 +43,7 @@ const Repair = ({form}) => {
         repairApply(formData).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
+            history.push('/service')
           } else {
             message.error(data.message);
           }

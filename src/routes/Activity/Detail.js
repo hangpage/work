@@ -6,7 +6,6 @@
 import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
-import config from '../../utils/config'
 
 const Detail = ({data}) => {
   return (
@@ -17,7 +16,7 @@ const Detail = ({data}) => {
           read={data.pageViews}
           title={data.title}
           content={data.content}
-          img={config.URL + data.pic}
+          img={data.pic}
           reportLink={`/activity/${data.id}/report?id=${data.id}`}
           noTeacher={true}
         />
@@ -29,7 +28,7 @@ const Detail = ({data}) => {
             {data.signMembers.map((item, index) => {
               return (
                 <li key={index}>
-                  <img src={item.pic} alt=""/>
+                  <img src={item.img} alt=""/>
                   <span>{item.name}</span>
                 </li>
               )

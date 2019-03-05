@@ -7,7 +7,7 @@ import React from 'react';
 import Home from './index';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from "antd";
 import Const from "../../utils/Const";
-import {equalResultStatus} from "../../utils";
+import {equalResultStatus, reFormatParams} from "../../utils";
 import {userLeavePark} from "../../services/user";
 
 const formItemLayout = {
@@ -35,7 +35,7 @@ const Leave = ({form}) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        userLeavePark(values).then(({data}) => {
+        userLeavePark(reFormatParams(values)).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
           } else {
@@ -65,7 +65,7 @@ const Leave = ({form}) => {
                 {...formItemLayout}
                 label="申请时间"
               >
-                {getFieldDecorator('nickName', RULE)(
+                {getFieldDecorator('time', RULE)(
                   <DatePicker format="YYYY-MM-DD"/>
                 )}
               </Form.Item>
@@ -75,7 +75,7 @@ const Leave = ({form}) => {
                 {...formItemLayout}
                 label="公司名称"
               >
-                {getFieldDecorator('age', RULE)(
+                {getFieldDecorator('companyName', RULE)(
                   <Input placeholder='请输入公司名称'/>
                 )}
               </Form.Item>
@@ -135,6 +135,6 @@ const Leave = ({form}) => {
       </div>
     </Home>
   );
-}
+};
 
 export default Form.create()(Leave);

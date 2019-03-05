@@ -19,7 +19,11 @@ export default modelExtend(model, {
       history.listen(location => {
         if(pathMatchRegexp('/competition', location.pathname)){
           dispatch({
-            type: 'queryCompetitionList'
+            type: 'queryCompetitionList',
+            payload: {
+              pageSize: 9,
+              pageNo: 1
+            }
           })
         }else if(pathMatchRegexp('/competition/:id', location.pathname)){
           const match = pathMatchRegexp('/competition/:id', location.pathname);

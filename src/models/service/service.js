@@ -1,6 +1,5 @@
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {carLicenseGet, findType, serviceGet} from "../../services/service";
-import {noticeGet} from "../../services/notice";
 import {message} from "antd";
 
 export default {
@@ -19,7 +18,11 @@ export default {
       history.listen(location => {
         if(pathMatchRegexp('/service', location.pathname)){
           dispatch({
-            type: 'queryServiceList'
+            type: 'queryServiceList',
+            payload: {
+              pageNo: 1,
+              pageSize: 4
+            }
           })
         }else if (pathMatchRegexp('/service/:id/detail', location.pathname)) {
           const match = pathMatchRegexp('/service/:id/detail', location.pathname);
@@ -35,15 +38,13 @@ export default {
 
   effects: {
     *queryServiceList({ payload }, { call, put }) {
-      const {data} = yield call(findType);
+      const {data} = yield call(findType, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'updateState',
           payload: {
             list: data.data,
             count: data.data.count,
-            pageSize: data.data.pageSize,
-            pageNo: data.data.pageNo
           }
         });
       }
@@ -65,7 +66,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            detail: data.data
+            detail: data.data || {}
           }
         })
       }else{

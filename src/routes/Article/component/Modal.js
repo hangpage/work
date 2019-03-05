@@ -1,4 +1,4 @@
-import {Col, Form, Input, Modal, Row} from "antd";
+import {Form, Input, Modal} from "antd";
 import React from "react";
 
 @Form.create()

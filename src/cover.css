@@ -75,7 +75,7 @@
 }
 :global .ant-layout-content {
   background: #FAFAFA;
-  min-height: initial !important;
+  min-height: unset !important;
 }
 :global .ant-modal-header {
   padding: 8px 24px !important;
@@ -160,5 +160,12 @@
 }
 :global .ant-calendar-range-picker-separator {
   vertical-align: initial !important;
+}
+:global .ant-pagination-item-active {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+  border: none !important;
+}
+:global .ant-pagination-item-active a {
+  color: #ffffff !important;
 }
 /*# sourceMappingURL=cover.css.map */

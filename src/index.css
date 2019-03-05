@@ -857,7 +857,9 @@
 }
 :global .service-list-card .box .type {
   margin-top: 14px;
-  color: #0D72B8;
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
   display: inline-block;
   position: relative;
 }

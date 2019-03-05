@@ -54,6 +54,8 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
               case '5':
                 url = '/park/' + item.src;
                 break;
+              default:
+                url = '';
             }
             if(item.type === '1'){
               return (

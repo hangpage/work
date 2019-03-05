@@ -4,14 +4,13 @@
  * @date: 2019/1/22 23:42
  */
 import React from 'react';
-import {Link, routerRedux} from 'dva/router'
+import {Link, routerRedux, withRouter} from 'dva/router'
 import {Avatar, Layout, Menu} from "antd";
 import logo from "./imgs/logo.png";
 import searchIcon from '../../assets/icon/icon-search.png';
 import {connect} from "dva";
 import SearchButton from "../SearchButton/SearchButton";
 import {getParams} from "../../utils";
-import {withRouter} from "react-router";
 
 const LIST = [{
   text: '首页',
@@ -61,11 +60,16 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
 
 
   const onSearch = (e, value) => {
-    if(value === getParams(location.search).q){
-      return;
-    }
+    dispatch({
+      type: 'app/updateState',
+      payload: {
+        searchParams: {
+          title: value
+        }
+      }
+    });
     dispatch(routerRedux.push({
-      pathname: `/search?q=${value}`
+      pathname: '/search'
     }))
   };
 
@@ -94,11 +98,13 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
   return (
     <Layout.Header style={{height: 90, lineHeight: '90px', background: 'rgba(243,243,243,1)', padding: 0}}>
       <div className="w" style={{display: 'flex', alignItems: 'center'}}>
-        <img className='logo' src={logo} alt="" style={{marginRight: 176}}/>
+        <Link to='/index'>
+          <img className='logo' src={logo} alt="" style={{marginRight: 176}}/>
+        </Link>
         {!showSearch && <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={headerMenuSelectedKeys}
+          selectedKeys={headerMenuSelectedKeys}
           style={{lineHeight: '90px', height: '90px', background: 'transparent'}}
         >
           {LIST.map((item, index) => {
@@ -120,7 +126,7 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
           })}
         </Menu>}
         {!showSearch && <img className='search' src={searchIcon} onClick={onSearchClick} alt=""/>}
-        {showSearch && <SearchButton onCloseClick={onCloseClick} onSearchClick={onSearch}/>}
+        {showSearch && <SearchButton onCloseClick={onCloseClick} onPressEnter={onSearch} onSearchClick={onSearch}/>}
         <div onClick={goToPersonalCenter} style={{cursor: 'pointer'}}>
           <Avatar size={60} icon="user" src={user.img} style={{marginLeft: 12, marginRight: 3}}/>
           <span className='nickname'>{user.nickName}</span>

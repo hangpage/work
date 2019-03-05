@@ -45,9 +45,9 @@ class CompanyInfo extends React.Component {
                     <Form.Item
                       label="公司名称"
                     >
-                      {getFieldDecorator('companyName', {
+                      {getFieldDecorator('name', {
                         rules: [{required: true, message: '请输入公司名称'}],
-                        initialValue: initialValueMap.companyName
+                        initialValue: initialValueMap.name
                       })(
                         <Input placeholder='请输入公司名称'/>
                       )}

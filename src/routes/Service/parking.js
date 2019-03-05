@@ -11,7 +11,7 @@ import BackButton from "../../components/BackButton/BackButton";
 import {Link} from "dva/router";
 
 
-const Parking = ({form}) => {
+const Parking = ({form, history}) => {
   const {getFieldDecorator} = form;
   const formItemLayout = {
     labelCol: {
@@ -38,6 +38,9 @@ const Parking = ({form}) => {
         parkingApply(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('申请成功');
+            history.push({
+              pathname: '/service',
+            });
           } else {
             message.error(data.message);
           }

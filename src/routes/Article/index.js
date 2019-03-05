@@ -48,7 +48,11 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
 
   const onCommentDetailClick = (e, id) => {
     const list = cloneDeep(commentShowChildrenList);
-    list.push(id);
+    if(list.indexOf(id) !== -1){
+      list.splice(list.indexOf(id) , 1);
+    }else{
+      list.push(id);
+    }
     dispatch({
       type: 'article/updateState',
       payload: {
@@ -178,9 +182,8 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
         <div className='comment-list'>
           {commentList.map((item, index) => {
               return (
-                <div>
-                  <Comment key={index}
-                           nickName={item.nickName}
+                <div key={index}>
+                  <Comment nickName={item.nickName}
                            createTime={item.createTime}
                            awesomeCount={item.awesomeCount}
                            onReplyClick={(e) => onReplyClick(e, item.id, item.nickName)}

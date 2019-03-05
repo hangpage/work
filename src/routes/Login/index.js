@@ -5,10 +5,7 @@
  */
 import React from 'react';
 
-import {
-  Form, Icon, Input, Button, Checkbox,
-  message
-} from 'antd';
+import {Button, Form, Input, message} from 'antd';
 
 import img from '../../assets/login/img.png';
 import logo from '../../assets/login/logo.png';

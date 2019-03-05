@@ -11,40 +11,42 @@ import {Col, Pagination, Row} from "antd";
 import {Link} from "dva/router";
 
 const Index = ({list, count, pageSize, pageNo, match, dispatch}) => {
-  const comps = list.map((item, index) =>{
+  const comps = list.map((item, index) => {
     return (
       <Col span={8} key={index}>
-      <Link to={`${match.url}/${item.id}?park=${item.park}`}>
-        <CompetitionCard
-          key={index}
-          img={`${config.URL}${item.pic}`}
-          title={item.name}
-          time={item.createTime}
-          read={item.joinCount}
-          status={item.status}
-        />
-      </Link>
+        <Link to={`${match.url}/${item.id}?park=${item.park}`}>
+          <CompetitionCard
+            key={index}
+            img={`${config.URL}${item.pic}`}
+            title={item.name}
+            time={item.createTime}
+            read={item.joinCount}
+            status={item.status}
+          />
+        </Link>
       </Col>
     )
   });
 
   const onPageChange = (pageNo, pageSize) => {
-     dispatch({
-       type: 'competition/queryCompetitionList',
-       payload: {
-         pageNo,
-         pageSize
-       }
-     })
+    dispatch({
+      type: 'competition/queryCompetitionList',
+      payload: {
+        pageNo,
+        pageSize
+      }
+    })
   };
   return (
-    <div className='w' style={{marginTop: 40, marginBottom: 80}}>
-      <div className='competition'>
-        <Row gutter={60} style={{width: '100%'}}>
-        {comps}
-        </Row>
+    <div className="bg-white pt40 pb80">
+      <div className='w'>
+        <div className='competition'>
+          <Row gutter={60} style={{width: '100%'}}>
+            {comps}
+          </Row>
+        </div>
+        <Pagination total={count} onChange={onPageChange} pageSize={9}/>
       </div>
-      <Pagination total={count} onChange={onPageChange} pageSize={9}/>
     </div>
   );
 };

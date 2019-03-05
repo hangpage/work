@@ -1,12 +1,20 @@
 import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
 import {
-  aboutUs, historyActivity, historyMatch,
-  queryResidentTeamInfo, userFindAwesome, userFindComment,
-  userFindEntering, userFindMatch, userFindServiceAppli,
+  aboutUs,
+  historyActivity,
+  historyMatch,
+  queryResidentTeamInfo,
+  userFindAwesome,
+  userFindComment,
+  userFindEntering,
+  userFindMatch,
+  userFindServiceAppli,
   userFindSignActivity,
   userFineMeetingRoom,
-  userGetInfo, userLockers, userRepair
+  userGetInfo,
+  userLockers,
+  userRepair
 } from "../../services/user";
 import {noticeFindList} from "../../services/notice";
 import {queryLeaderAndMemberInfo} from "../../services/park";
@@ -17,6 +25,7 @@ export default {
 
   state: {
     data: {}, //用户信息
+    selectedKeys: ['0'],
     enterData: [],
     activityData: [],
     matchData: [],

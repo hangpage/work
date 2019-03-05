@@ -41,7 +41,7 @@
 
   .ant-layout-content{
     background: #FAFAFA;
-   min-height: initial !important;
+   min-height: unset !important;
   }
 
   .ant-modal-header{
@@ -147,6 +147,14 @@
 
   .ant-calendar-range-picker-separator{
     vertical-align: initial !important;
+  }
+
+  .ant-pagination-item-active{
+    .bg-linear-to-right();
+    border:none !important;
+    a{
+      color: @white !important;
+    }
   }
 
 }

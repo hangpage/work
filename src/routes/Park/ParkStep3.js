@@ -6,7 +6,7 @@
 import React from 'react';
 import {Form, message, Row} from 'antd';
 import {equalResultStatus, getParams} from "../../utils";
-import {parkResidentTeam, parkSavePrincipal} from "../../services/park";
+import {parkResidentTeam} from "../../services/park";
 import TeamInfo from "../../components/TeamInfo/TeamInfo";
 
 
