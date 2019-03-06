@@ -4,7 +4,7 @@ import React from "react";
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import {Link} from "dva/router";
+import {Link, withRouter} from "dva/router";
 import {pathMatchRegexp} from "../utils";
 
 moment.locale('zh-cn');
@@ -194,4 +194,4 @@ const App = ({children, location}) => {
   )
 };
 
-export default App;
+export default withRouter(App);

@@ -49,7 +49,6 @@ const Leave = ({form}) => {
   };
 
   return (
-    <Home>
       <div>
         <div className="title-card"><span>申请离园</span></div>
         <Form layout='horizontal' className='form-bl pt40' style={{paddingLeft: 120}}>
@@ -118,7 +117,6 @@ const Leave = ({form}) => {
           <div className="main-button" style={{width: 360}} onClick={handleSubmit}>申请</div>
         </div>
       </div>
-    </Home>
   );
 };
 

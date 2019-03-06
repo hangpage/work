@@ -4,7 +4,6 @@
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import Home from './index';
 import {Form, Input, message} from "antd";
 import {equalResultStatus} from "../../utils";
 import {userFeedBack} from "../../services/user";
@@ -46,7 +45,6 @@ const Leave = ({form}) => {
   };
 
   return (
-    <Home>
       <div>
         <div className="title-card"><span>意见反馈</span></div>
         <Form className='pt40'>
@@ -81,7 +79,6 @@ const Leave = ({form}) => {
           <div className="main-button" style={{width: 360}} onClick={handleSubmit}>提交</div>
         </div>
       </div>
-    </Home>
   );
 }
 

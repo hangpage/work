@@ -4,7 +4,6 @@
  * @Date: 2019/2/17 16:58
  */
 import React from 'react';
-import Home from "./index";
 import {connect} from "dva";
 import {Link} from "dva/router";
 import HorizontalCard from "../../components/HorizontalCard/HorizontalCard";
@@ -12,7 +11,6 @@ import {Empty} from "antd";
 
 const Match = ({activityData}) => {
   return (
-    <Home>
       <div>
         <div className="title-card"><span>我的活动</span></div>
         <div className='pl20 pr 20'>
@@ -26,7 +24,6 @@ const Match = ({activityData}) => {
           }) : <Empty/>}
         </div>
       </div>
-    </Home>
   );
 };
 

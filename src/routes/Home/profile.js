@@ -4,7 +4,6 @@
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import Home from './index';
 import {Avatar, Form, Input, message, Radio} from "antd";
 import Const from "../../utils/Const";
 import {connect} from "dva";
@@ -56,7 +55,6 @@ const Profile = ({form, data, dispatch}) => {
   };
 
   return (
-    <Home>
       <div>
         <div className="title-card"><span>个人资料</span></div>
         <Form layout='horizontal' className='form-bl' style={{paddingLeft: 120}}>
@@ -169,7 +167,6 @@ const Profile = ({form, data, dispatch}) => {
           <div className="main-button" style={{width: 360}} onClick={handleSubmit}>保存</div>
         </div>
       </div>
-    </Home>
   );
 }
 

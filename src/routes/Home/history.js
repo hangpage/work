@@ -5,14 +5,12 @@
  */
 import React from 'react';
 import {Tabs} from "antd";
-import Home from "./index";
 import Match from "./history/match";
 import Activity from "./history/activity";
 
 const History = () => {
   return (
     <div>
-      <Home>
         <div className="title-card"><span>浏览历史</span></div>
         <Tabs className='service-tab'>
           <Tabs.TabPane tab='活动' key='0'>
@@ -22,7 +20,6 @@ const History = () => {
             <Match/>
           </Tabs.TabPane>
         </Tabs>
-      </Home>
     </div>
   );
 };

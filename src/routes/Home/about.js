@@ -5,17 +5,14 @@
  */
 import React from 'react';
 import {connect} from "dva";
-import Home from "./index";
 
 const About = ({aboutUs}) => {
   return (
     <div >
-      <Home>
         <div >
           <div className="title-card"><span>关于我们</span></div>
           <div style={{padding: '40px 20px'}} dangerouslySetInnerHTML={{__html: aboutUs.content}}/>
         </div>
-      </Home>
     </div>
   );
 };

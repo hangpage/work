@@ -4,7 +4,6 @@
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import Home from './index';
 import {message} from "antd";
 import Const from "../../utils/Const";
 import {connect} from "dva";
@@ -39,7 +38,6 @@ const Profile = ({enterData}) => {
 
 
   return (
-    <Home>
       <div>
         <div className="title-card"><span>入驻管理</span></div>
         {enterData.map((item) => {
@@ -59,9 +57,7 @@ const Profile = ({enterData}) => {
             </div>
           )
         })}
-
       </div>
-    </Home>
   );
 }
 

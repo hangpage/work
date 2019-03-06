@@ -83,7 +83,7 @@ const routes = [{
   component: ApplicationRecord,
   exact: 'exact',
   breadcrumbName: '申请记录'
-},  {
+}, {
   path: '/service/type/repair',
   component: Repair,
   exact: 'exact',
@@ -123,7 +123,7 @@ const routes = [{
   component: Progress,
   exact: 'exact',
   breadcrumbName: '比赛进度'
-},{
+}, {
   path: '/competition/:id/team_info_write',
   component: TeamInfoWrite,
   exact: 'exact',
@@ -158,12 +158,12 @@ const routes = [{
   component: ArticleList,
   exact: 'exact',
   breadcrumbName: '创业动态列表'
-},{
+}, {
   path: '/article/:id',
   component: ArticleDetail,
   exact: 'exact',
   breadcrumbName: '文章详情'
-},  {
+}, {
   path: '/park',
   component: Park,
   exact: 'exact',
@@ -204,10 +204,22 @@ const routes = [{
   exact: 'exact',
   breadcrumbName: '发现'
 }, {
-  path: '/home',
-  component: Home,
+  path: '/search',
+  component: Search,
   exact: 'exact',
-  breadcrumbName: '主页'
+  breadcrumbName: ''
+}, {
+  path: '/home/team',
+  component: Team,
+  exact: 'exact',
+  breadcrumbName: ''
+},];
+
+const homeRoutes = [{
+  path: '/home',
+  component: Profile,
+  exact: 'exact',
+  breadcrumbName: '个人信息'
 }, {
   path: '/home/profile',
   component: Profile,
@@ -244,11 +256,6 @@ const routes = [{
   exact: 'exact',
   breadcrumbName: '我的活动'
 }, {
-  path: '/home/team',
-  component: Team,
-  exact: 'exact',
-  breadcrumbName: ''
-},  {
   path: '/home/about',
   component: About,
   exact: 'exact',
@@ -263,27 +270,47 @@ const routes = [{
   component: ServiceTab,
   exact: 'exact',
   breadcrumbName: ''
-},{
-  path: '/search',
-  component: Search,
-  exact: 'exact',
-  breadcrumbName: ''
 }];
+
+const HomeApp = () => {
+    return (
+      <Home>
+          <Switch>
+            {homeRoutes.map((item, index) => {
+              return (
+                <Route path={item.path} key={index} exact component={item.component}/>
+              )
+            })}
+          </Switch>
+      </Home>
+    )
+};
+
+const Apps = () => {
+  return (
+    <App>
+      <Switch>
+        {routes.map((item, index) => {
+          return (
+            <Route path={item.path} key={index} exact component={item.component}/>
+          )
+        })}
+        <Route path='/home' component={HomeApp}/>
+        <Route component={NoMatch}/>
+      </Switch>
+    </App>
+  )
+};
 
 function RouterConfig({history}) {
   return (
     <Router history={history}>
       <ScrollToTop>
         <div style={{height: '100%'}}>
-          <Switch>
-            <Route path='/login' component={Login} exact/>
-            <App>
-              {routes.map((item, index) => {
-                return <Route path={item.path} key={index} exact component={item.component}/>
-              })}
-            </App>
-            <Route component={NoMatch}/>
-          </Switch>
+         <Switch>
+           <Route path='/login' component={Login} exact/>
+           <Route path='/' component={Apps}/>
+         </Switch>
         </div>
       </ScrollToTop>
     </Router>
