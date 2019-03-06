@@ -16,7 +16,7 @@ const Match = ({historyMatch}) => {
         return (
           <Link key={index} to={`/competition/${item.id}`}>
             <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime}
-                            title={item.name} count={item.joinCount} desc={item.content} status={item.status}/>
+                            title={item.name} count={item.joinCount} desc={item.intro} status={item.status}/>
           </Link>
         )
       }) : <Empty/>}

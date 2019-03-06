@@ -7,7 +7,7 @@ import React from 'react';
 import styles from './ReportCard.less';
 import {Link} from "dva/router";
 
-const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink, btnName='报名'}) => {
+const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true}) => {
   return (
     <div className={styles.card}>
       <img src={img} alt=""/>
@@ -15,11 +15,11 @@ const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.info}>
           <span>{time}</span>
-          <span className='ml20'>{read}人阅读</span>
+          <span className='ml20'>{read || 0}人阅读</span>
         </div>
-        <p className={styles.content} />
+        <p className={styles.content} style={{"WebkitBoxOrient": "vertical"}}>{content}</p>
         <div>
-          <div className={styles.baoming}><Link className={styles.link} to={reportLink}>{btnName}</Link></div>
+          {allowReport && <div className={styles.baoming}><Link className={styles.link} to={reportLink}>{btnName}</Link></div>}
           {!noTeacher ? <div className={styles.daoshi}><Link to={`/competition/${mId}/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}
         </div>
       </div>

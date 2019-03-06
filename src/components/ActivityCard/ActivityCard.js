@@ -9,7 +9,7 @@ const ActivityCard = ({img, title, time, read, size='', style}) => {
         <p className={styles.title} style={{"WebkitBoxOrient": "vertical"}}>{title}</p>
         <p style={{marginTop: 7}}>
           <span className={styles.time}>{time}</span>
-          <span className={styles.read}>阅读量：<span className={'deep-gray'}>{read}</span></span>
+          <span className={styles.read}>阅读量：<span className={'deep-gray'}>{read || 0}</span></span>
         </p>
       </div>
     </div>

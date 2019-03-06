@@ -15,7 +15,7 @@ const Detail = ({data}) => {
           time={data.createTime}
           read={data.pageViews}
           title={data.title}
-          content={data.content}
+          content={data.intro}
           img={data.pic}
           reportLink={`/activity/${data.id}/report?id=${data.id}`}
           noTeacher={true}

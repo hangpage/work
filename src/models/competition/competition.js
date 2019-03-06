@@ -11,7 +11,8 @@ export default modelExtend(model, {
   state: {
     list: [],
     data: {},
-    teamDetail: {}
+    teamDetail: {},
+    count: 0
   },
 
   subscriptions: {

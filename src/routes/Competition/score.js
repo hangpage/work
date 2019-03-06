@@ -6,8 +6,7 @@
 import React from 'react';
 import {Form, Input, message} from "antd";
 import {connect} from "dva";
-import {equalResultStatus, getParams} from "../../utils";
-import {reservationPark} from "../../services/service";
+import {equalResultStatus} from "../../utils";
 import {saveScore} from "../../services/competition";
 
 
@@ -83,9 +82,9 @@ class Score extends React.Component {
     const {form, teamDetail} = this.props;
     const {getFieldDecorator} = form;
     return (
-      <div className="second-bg">
+      <div className="second-bg pt40">
         <div className='w'>
-          <div className="pb60 score mt80 mb80 ">
+          <div className="pb60 score mb80 ">
             <div className="top">
               <h1>北京理工大学国防科技园项目创新大赛</h1>
               <h2>项目名称：大气环保监测</h2>

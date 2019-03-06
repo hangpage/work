@@ -168,7 +168,7 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
           <div className="info">
             <span>{data.createTime}</span>
             <span className='ml38 mr38'>|</span>
-            <span>{data.pageViews}人阅读</span>
+            <span>{data.pageViews || 0}人阅读</span>
           </div>
           <div className="dash-line-gray mt27" />
           <div className='content' dangerouslySetInnerHTML={{__html: data.content}} />
@@ -192,6 +192,7 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
                            onCommentDetailClick={(e) => {onCommentDetailClick(e, item.id)}}
                            onAwesomeClick={(e) => {onCommentAwesomeClick(e, item.id)}}
                            userImg={item.userImg}
+                           isAwesome={item.isAwesome}
                            content={item.content}
                   />
                   {commentShowChildrenList.indexOf(item.id) !== -1 && item.commontList.length ?
@@ -207,7 +208,8 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
                                    onAwesomeClick={(e) => {onCommentAwesomeClick(e, c.id)}}
                                    userImg={c.userImg}
                                    content={c.content}
-                                   replyToWhom={c.nickName}
+                                   isAwesome={c.isAwesome}
+                                   replyToWhom={c.panickName}
                                    type='child'
                           />
                         ))

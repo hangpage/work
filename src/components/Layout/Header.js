@@ -10,7 +10,6 @@ import logo from "./imgs/logo.png";
 import searchIcon from '../../assets/icon/icon-search.png';
 import {connect} from "dva";
 import SearchButton from "../SearchButton/SearchButton";
-import {getParams} from "../../utils";
 
 const LIST = [{
   text: '首页',
@@ -64,8 +63,9 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
       type: 'app/updateState',
       payload: {
         searchParams: {
-          title: value
-        }
+          title: value,
+        },
+        showSearch: false
       }
     });
     dispatch(routerRedux.push({

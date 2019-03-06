@@ -16,7 +16,7 @@ const Activity = ({historyActivity}) => {
         return (
           <Link key={index} to={`/activity/${item.id}`}>
             <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime} countDesc='阅读量'
-                            title={item.title} count={item.count} desc={item.content} status={item.status}/>
+                            title={item.title} count={item.count} desc={item.intro} status={item.status}/>
           </Link>
         )
       }) : <Empty/>}

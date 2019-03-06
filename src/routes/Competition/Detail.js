@@ -12,6 +12,7 @@ const Detail = ({data, location, match}) => {
   const params = getParams(location.search);
   let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
   let btnName = '报名';
+  let allowReport;
   if(params.from === 'home'){
     btnName = '查看比赛进度';
     if(params.isTutor === '1'){
@@ -19,6 +20,8 @@ const Detail = ({data, location, match}) => {
     }else{
       link = `${match.url}/progress?status=${params.status}`;
     }
+  }else{
+    allowReport = data.status === '2';
   }
 
   return (
@@ -28,11 +31,12 @@ const Detail = ({data, location, match}) => {
           time={data.createTime}
           read={data.pageViews}
           title={data.name}
-          content={data.content}
+          content={data.intro}
           mId={data.id}
           reportLink={link}
           btnName={btnName}
           img={data.pic}
+          allowReport={allowReport}
         />
         <div className='competition-detail' dangerouslySetInnerHTML={{__html: data.content}} />
         <div className='height6line  mb40'/>

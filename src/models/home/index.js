@@ -68,7 +68,7 @@ export default {
           })
         }else if(pathMatchRegexp('/home/match', location.pathname)){
           dispatch({type: 'userFindMatch'});
-          dispatch({type: 'home/updateState',
+          dispatch({type: 'updateState',
             payload: {
               selectedKeys: ['2']
             }
@@ -115,7 +115,7 @@ export default {
             }
           })
         }else if(pathMatchRegexp('/home/leave', location.pathname)){
-          dispatch({type: 'home/updateState',
+          dispatch({type: 'updateState',
             payload: {
               selectedKeys: ['7']
             }

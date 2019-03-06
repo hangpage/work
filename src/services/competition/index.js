@@ -29,10 +29,12 @@ export function getTeamDetail(params={}){
 * @date: 2019/2/11 19:58
 */
 
-export function insertTeam(formData){
-  return request('/api/team/insertTeam',{
-    method: 'post',
-    body: formData
+export function insertTeam(params){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/team/insertTeam?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
   });
 }
 

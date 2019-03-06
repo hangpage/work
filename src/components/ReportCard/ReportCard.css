@@ -74,12 +74,12 @@
   margin-bottom: 15px;
   padding-top: 5px;
   line-height: 28px;
+  max-height: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
+  display: -webkit-box;
   -webkit-line-clamp: 2;
-  word-break: break-all;
-  max-height: 66px;
+  -webkit-box-orient: vertical;
 }
 .card .title {
   line-height: 28px;
@@ -106,7 +106,6 @@
   height: 40px;
   line-height: 39px;
   text-align: center;
-  border-left: none;
 }
 .card .daoshi span {
   background: linear-gradient(to right, #00acaf, #0771bb);

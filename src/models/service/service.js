@@ -52,7 +52,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            serviceTypeList: data.data,
+            serviceTypeList: data.data.list,
             serviceTypeCount: data.data.count,
           }
         });
@@ -64,7 +64,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            list: data.data,
+            list: data.data.list,
             count: data.data.count,
           }
         });

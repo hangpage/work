@@ -161,6 +161,9 @@
 :global .ant-calendar-range-picker-separator {
   vertical-align: initial !important;
 }
+:global .ant-select {
+  height: 50px;
+}
 :global .ant-pagination-item-active {
   background: linear-gradient(to right, #00acaf, #0771bb);
   border: none !important;

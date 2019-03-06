@@ -15,10 +15,10 @@ import {connect} from "dva";
 
 const list1 = [{
   label: '姓名',
-  field: 'principalStr'
+  field: 'name'
 }, {
   label: '工卡号',
-  field: 'studySchool'
+  field: 'workNum'
 }, {
   label: '性别',
   field: 'gendar',
@@ -26,58 +26,60 @@ const list1 = [{
   options: Const.GENDAR_OPTIONS
 }, {
   label: '职务',
-  field: 'education'
+  field: 'position'
 }, {
   label: '籍贯',
-  field: 'graduationTime',
-  type: 'datepicker'
+  field: 'birthplace',
 }, {
   label: '电话',
-  field: 'householdRegistration',
-}, {
-  label: '政治面貌',
-  field: 'QQ',
-},{
-  label: 'QQ/微信',
-  field: 'QQ',
-}, {
-  label: '身份证号',
   field: 'phone',
 }, {
-  label: '邮箱',
+  label: '政治面貌',
+  field: 'politicalStatus',
+},{
+  label: 'QQ',
   field: 'QQ',
+},{
+  label: '微信',
+  field: 'weixin',
+}, {
+  label: '身份证号',
+  field: 'idCard',
+}, {
+  label: '邮箱',
+  field: 'email',
 }];
 
 const list2 = [{
   label: '姓名',
-  field: 'QQ',
+  field: 'emergencyName',
 }, {
   label: '关系',
-  field: 'QQ',
+  field: 'emergencyRi',
 }, {
   label: '电话',
-  field: 'QQ',
+  field: 'emergencyPhone',
 }];
 
 const list3 = [{
   label: '学校',
-  field: 'QQ',
+  field: 'studySchool',
 }, {
   label: '专业',
-  field: 'QQ',
+  field: 'studyProfession',
 }, {
   label: '毕业时间',
-  field: 'QQ',
+  field: 'studyDate',
   type: 'datepicker'
 }, {
   label: '学历',
-  field: 'QQ',
+  field: 'studyEdu',
 }, {
   label: '户籍地址',
-  field: 'QQ',
+  field: 'householdAddress',
 }, {
   label: '常用地址',
-  field: 'QQ',
+  field: 'address',
 }];
 
 class ParkStep3 extends React.Component {
@@ -201,7 +203,7 @@ class ParkStep3 extends React.Component {
               <Row gutter={138}>
                 <Col span={12}>
                   <Form.Item
-                    label='照片'
+                    label='pic'
                     labelCol={{span: 24}}
                     wrapperCol={{span: 6}}
                   >
@@ -212,12 +214,12 @@ class ParkStep3 extends React.Component {
                 </Col>
                 <Col span={12}>
                   <Form.Item
-                    label='文件上传'
+                    label='文件上传（学位/学历/学生证）（可上传3张）'
                     labelCol={{span: 24}}
                     wrapperCol={{span: 6}}
                   >
                     {getFieldDecorator('file', Const.RULE)(
-                      <ImageUpload />
+                      <ImageUpload max={3}/>
                     )}
                   </Form.Item>
                 </Col>

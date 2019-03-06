@@ -91,7 +91,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
           {INDEX_ENTRANCE_LIST.map((item, index) => <Link to={item.link} key={index}><IndexEntrance key={index} icon={item.icon} text={item.text} /></Link>)}
         </div>
        <div className="stage">
-         <IndexTitle title='最新活动' alias='activity'/>
+         <IndexTitle title='最新活动' alias='activity' moreLink='/activity'/>
          <div className='flex-width-space-between'>
            <Row type='flex' gutter={58}>
            {activityList.map((item, index) =>{
@@ -107,7 +107,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
            </Row>
          </div>
        </div>
-        <IndexTitle title='创业大赛' alias='competition'/>
+        <IndexTitle title='创业大赛' alias='competition' moreLink='/competition'/>
         <div className="stage">
             <Row type='flex' gutter={58}>
               {competitionList.map((item, index) => {
@@ -123,7 +123,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
               }
             </Row>
         </div>
-        <IndexTitle title='创业动态' alias='dynamic'/>
+        <IndexTitle title='创业动态' alias='dynamic' moreLink='/article'/>
         <div className="stage">
           <Row type='flex' gutter={60}>
             {articleList.map((item, index) => {

@@ -6,11 +6,17 @@
 import React from 'react';
 import icon from '../../assets/index/jiantou.png';
 import styles from './IndexTitle.less';
+import {Link} from "dva/router";
 
-const IndexTitle = ({title, alias}) => {
+const IndexTitle = ({title, alias, moreLink}) => {
   return (
     <div style={{textAlign: 'center', marginBottom: 50, marginTop: 79}}>
-      <h6 className={styles.title}>{title}</h6>
+      <div style={{position: 'relative'}}>
+        <h6 className={styles.title}>{title}</h6>
+        <Link className={styles.more} to={moreLink}>
+          <span>更多</span>
+        </Link>
+      </div>
       <p style={{textAlign: 'center', marginBottom: 6, marginTop: 3}}>
         <span className={styles.alias}>
           {alias}

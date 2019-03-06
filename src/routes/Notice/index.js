@@ -22,7 +22,7 @@ const Index = ({list}) => {
                       <p>{item.content}</p>
                       <div>
                         <span className='time'>{item.createTime}</span>
-                        <span className='ml30'>{item.pageViews}人阅读</span>
+                        <span className='ml30'>{item.pageViews || 0}人阅读</span>
                       </div>
                     </div>
                   </Link>

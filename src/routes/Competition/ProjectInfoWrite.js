@@ -7,8 +7,9 @@ import React from 'react';
 import {Form, Input, message, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import {equalResultStatus, getParams, reFormatParams} from "../../utils";
-import {insertProject} from "../../services/competition";
+import {insertProject, insertTeam} from "../../services/competition";
 import FileUpload from "../../components/FileUpload/FileUpload";
+import qs from "qs";
 
 const {TextArea} = Input;
 
@@ -25,6 +26,7 @@ const TeamInfoWrite = ({form, history, location}) => {
         Object.keys(params).forEach((item) => {
           formData.append(item, params[item]);
         });
+        insertTeam(qs.parse(location.search.split('?')[1]));
         insertProject(formData).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');

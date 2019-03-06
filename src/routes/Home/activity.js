@@ -16,9 +16,9 @@ const Match = ({activityData}) => {
         <div className='pl20 pr 20'>
           {activityData.length ? activityData.map((item, index) => {
             return (
-              <Link key={index} to={`/competition/${item.id}?park=${item.park}`}>
+              <Link key={index} to={`/activity/${item.id}`}>
                 <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime}
-                                title={item.title} count={item.count} desc={item.content} status={item.status}/>
+                                title={item.title} count={item.count} desc={item.intro} status={item.status}/>
               </Link>
             )
           }) : <Empty/>}

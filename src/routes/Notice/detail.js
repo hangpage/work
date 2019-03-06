@@ -168,7 +168,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
           <div className="info">
             <span>{data.createTime}</span>
             <span className='ml38 mr38'>|</span>
-            <span>{data.pageViews}人阅读</span>
+            <span>{data.pageViews || 0}人阅读</span>
           </div>
           <div className="dash-line-gray mt27" />
           <div className='content' dangerouslySetInnerHTML={{__html: data.content}} />

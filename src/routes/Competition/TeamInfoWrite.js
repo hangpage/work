@@ -6,9 +6,9 @@
 import React from 'react';
 import {message, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
-import {equalResultStatus, getParams} from "../../utils";
-import {insertTeam} from "../../services/competition";
+import {getParams} from "../../utils";
 import CompanyInfo from "../../components/CompanyInfo/CompanyInfo";
+import qs from 'qs';
 
 
 class TeamInfoWrite extends React.Component {
@@ -19,23 +19,12 @@ class TeamInfoWrite extends React.Component {
 
   submit = () => {
     const {history, location} = this.props;
-    let formData = new FormData();
     const params = this.ref.getTeamInfoData();
     if(!Object.keys(params).length){
       return message.error('请填写必填项！');
     }
-    params.token = sessionStorage.getItem('token');
     params.mId = getParams(location.search).mId;
-    Object.keys(params).forEach((item) => {
-      formData.append(item, params[item]);
-    });
-    insertTeam(formData).then(({data}) => {
-      if (equalResultStatus(data)) {
-        history.push(`/competition/${params.mId}/project_info_write?mId=${params.mId}`);
-      } else {
-        message.error(data.message);
-      }
-    })
+    history.push(`/competition/${params.mId}/project_info_write?${qs.stringify(params)}`);
   };
 
   render() {
