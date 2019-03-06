@@ -6,8 +6,9 @@
 import React from 'react';
 import styles from "../CompetitionCard/HorizontalCard.less";
 import Const from "../../utils/Const";
+import moment from "moment";
 
-const HorizontalCard = ({img, title, time, count, status, desc, style}) => {
+const HorizontalCard = ({img, title, time, count, status, desc, style, countDesc='已报名'}) => {
   return (
     <div style={style}>
       <div className={styles.card}>
@@ -16,8 +17,8 @@ const HorizontalCard = ({img, title, time, count, status, desc, style}) => {
         <div className={styles.content}>
           <p className={styles.title} style={{"WebkitBoxOrient": "vertical"}}>{title}</p>
           <p className={styles.info}>
-            <span style={{marginRight: 30}}>{time}</span>
-            <span>已报名：<span className="deep-gray">{count}</span></span>
+            <span style={{marginRight: 30}}>{moment(time).format('YYYY-MM-DD')}</span>
+            <span>{countDesc}：<span className="deep-gray">{count || '暂无数据'}</span></span>
           </p>
           <p className='desc' />
         </div>

@@ -1,5 +1,5 @@
 import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
-import {carLicenseGet, findType, serviceGet} from "../../services/service";
+import {carLicenseGet, findService, findType, serviceGet} from "../../services/service";
 import {message} from "antd";
 
 export default {
@@ -10,7 +10,10 @@ export default {
     list: [],
     detail: {},
     modalVisible: false,
-    parkRecordList: []
+    count: 0,
+    serviceTypeCount: 3,
+    parkRecordList: [],
+    serviceTypeList: []
   },
 
   subscriptions: {
@@ -18,12 +21,17 @@ export default {
       history.listen(location => {
         if(pathMatchRegexp('/service', location.pathname)){
           dispatch({
-            type: 'queryServiceList',
+            type: 'queryServiceTypeList',
             payload: {
               pageNo: 1,
               pageSize: 4
             }
           })
+        }else if(pathMatchRegexp('/service/:id', location.pathname)){
+          const match = pathMatchRegexp('/service/:id', location.pathname);
+          if (match) {
+            dispatch({ type: 'queryServiceList', payload: { type: match[1], pageNo: 1, pageSize: 12} })
+          }
         }else if (pathMatchRegexp('/service/:id/detail', location.pathname)) {
           const id = getParams(location.search).id;
           const match = pathMatchRegexp('/service/:id/detail', location.pathname);
@@ -38,9 +46,21 @@ export default {
   },
 
   effects: {
-    *queryServiceList({ payload }, { call, put }) {
+    *queryServiceTypeList({ payload }, { call, put }) {
       const {data} = yield call(findType, payload);
       if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            serviceTypeList: data.data,
+            serviceTypeCount: data.data.count,
+          }
+        });
+      }
+    },
+    *queryServiceList({ payload }, { call, put }) {
+      const {data} = yield call(findService, payload);
+      if(data){
         yield put({
           type: 'updateState',
           payload: {

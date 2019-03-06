@@ -38,4 +38,4 @@ const ServiceList = ({list, count, match}) => {
   );
 };
 
-export default connect(({serviceList}) => (serviceList))(ServiceList);
+export default connect(({service}) => (service))(ServiceList);

@@ -38,14 +38,11 @@ const LIST = [{
 }];
 
 
-const Index = ({list, count, dispatch}) => {
+const Index = ({serviceTypeList, serviceTypeCount, dispatch}) => {
   const onPageChange = (pageNo, pageSize) => {
     dispatch({
-      type: 'service/queryServiceList',
-      payload: {
-        pageNo,
-        pageSize
-      }
+      type: 'service/queryServiceTypeList',
+      payload: {pageNo, pageSize}
     })
   };
   return (
@@ -72,7 +69,7 @@ const Index = ({list, count, dispatch}) => {
           })}
         </Row>
         <Row gutter={60} className='mt10'>
-          {list.map((item, index) => {
+          {serviceTypeList.map((item, index) => {
             return (
               <Col span={12} key={index}>
                 <Link to={`/service/${item.id}`}>
@@ -88,7 +85,7 @@ const Index = ({list, count, dispatch}) => {
             )
           })}
         </Row>
-        <Pagination total={count} className='mt60' onChange={onPageChange} pageSize={4}/>
+        <Pagination total={serviceTypeCount} className='mt60' defaultCurrent={1} onChange={onPageChange} pageSize={4}/>
       </div>
     </div>
 

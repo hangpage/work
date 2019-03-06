@@ -153,9 +153,7 @@ const TeamInfoWrite = ({form, history, location}) => {
                 labelCol={{span: 24}}
                 wrapperCol={{span: 6}}
               >
-                {getFieldDecorator('file', {
-                  rules: [{required: true,message: '请上传附件'}],
-                })(
+                {getFieldDecorator('file')(
                   <FileUpload/>
                 )}
               </Form.Item>

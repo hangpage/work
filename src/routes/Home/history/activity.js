@@ -15,7 +15,7 @@ const Activity = ({historyActivity}) => {
       {historyActivity.length ? historyActivity.map((item, index) => {
         return (
           <Link key={index} to={`/activity/${item.id}`}>
-            <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime}
+            <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime} countDesc='阅读量'
                             title={item.title} count={item.count} desc={item.content} status={item.status}/>
           </Link>
         )

@@ -14,7 +14,7 @@ const Lockers = ({locker}) => {
       {locker.length ? locker.map((item, index) => {
         return (
           <div className="room-card" key={index}>
-            <div className="top colorblue">储物柜：{item.locker}</div>
+            <div className="top colorblue">储物柜：{item.lockerName}</div>
             <div className="bottom">
               <span className='status'>{Const.SERVICE_STATUS[item.status]}</span>
               <span className='time'>{item.createTime}</span>

@@ -115,7 +115,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
                   <Col key={index}>
                     <Link to={`/competition/${item.id}?park=${item.park}`}>
                     <CompetitionCard title={item.name} img={`${item.pic}`} read={item.pageViews}
-                                     time={item.createTime}/>
+                                     time={item.createTime} status={item.status}/>
                     </Link>
                   </Col>
                 )

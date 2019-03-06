@@ -6,11 +6,11 @@
 import React from 'react';
 import {connect} from "dva";
 import Modal from "./component/modal";
-import {equalResultStatus, pathMatchRegexp} from "../../utils";
+import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
 import {serviceDeclare} from "../../services/service";
 import {message} from "antd";
 
-const Detail = ({detail, modalVisible, dispatch, location,}) => {
+const Detail = ({detail, modalVisible, dispatch, location}) => {
   const onBtnClick = () => {
     dispatch({
       type: 'service/updateState',
@@ -29,9 +29,8 @@ const Detail = ({detail, modalVisible, dispatch, location,}) => {
     })
   };
   const onOk = (data) => {
-    const match = pathMatchRegexp('/service/:id/detail', location.pathname);
     const params = data;
-    params.serviceId = match[1];
+    params.serviceId = getParams(location.search);
     serviceDeclare(params).then(({data}) => {
       if(equalResultStatus(data)){
         message.success('申请成功');

@@ -12,7 +12,6 @@ const app = dva();
 // 3. Model
 app.model(require('./models/competition/competition').default);
 app.model(require('./models/service/service').default);
-app.model(require('./models/service/serviceList').default);
 app.model(require('./models/app').default);
 app.model(require('./models/index').default);
 app.model(require('./models/notice').default);
