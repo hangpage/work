@@ -12,8 +12,10 @@ export default modelExtend(model, {
     list: [],
     data: {},
     teamDetail: {},
-    count: 0
-  },
+    count: 0,
+    tutorReview: [], //当前比赛的可评分队伍列表
+  }
+  ,
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -33,6 +35,11 @@ export default modelExtend(model, {
           }
         }else if(pathMatchRegexp('/competition/:id/score', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/score', location.pathname);
+          if (match) {
+            dispatch({ type: 'queryDetail', payload: { id: match[1] } })
+          }
+        }else if(pathMatchRegexp('/competition/:id/progress', location.pathname)){
+          const match = pathMatchRegexp('/competition/:id/progress', location.pathname);
           if (match) {
             dispatch({ type: 'getTeamDetail', payload: { mId: match[1] } })
           }
@@ -56,12 +63,13 @@ export default modelExtend(model, {
       }
     },
     *queryDetail({ payload }, { call, put }){
-      const {data} = yield  call(matchGet, payload);
+      const {data} = yield call(matchGet, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'save',
           payload: {
-            data: data.data
+            data: data.data,
+            tutorReview: data.data.tutorReview
           }
         })
       }else{

@@ -79,7 +79,8 @@ class Score extends React.Component {
 
 
   render() {
-    const {form, teamDetail} = this.props;
+    const {form, tutorReview} = this.props;
+    const teamDetail = tutorReview[0].project;
     const {getFieldDecorator} = form;
     return (
       <div className="second-bg pt40">

@@ -4,7 +4,6 @@
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import Home from './index';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from "antd";
 import Const from "../../utils/Const";
 import {equalResultStatus, reFormatParams} from "../../utils";

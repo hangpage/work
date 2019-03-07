@@ -241,7 +241,24 @@ export function aboutUs(){
 export function historyActivity(params={}){
   params.type = 1;
   params.token = sessionStorage.getItem('token');
-  return request(`/api//user/findBrowsingHistory?${qs.stringify(params)}`,{
+  return request(`/api/user/findBrowsingHistory?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/**
+ * @Description: 获取历史浏览文章
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/28 22:50
+ */
+export function historyArticle(params={}){
+  params.type = 2;
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/user/findBrowsingHistory?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"

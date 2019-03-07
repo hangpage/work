@@ -3,7 +3,7 @@ import {message} from "antd";
 import {
   aboutUs,
   historyActivity,
-  historyMatch,
+  historyArticle,
   queryResidentTeamInfo,
   userFindAwesome,
   userFindComment,
@@ -40,7 +40,7 @@ export default {
     comment: [],
     aboutUs: {},
     leaderAndMemberInfo: {},
-    historyMatch: [],
+    historyArticle: [],
     historyActivity: []
   },
 
@@ -107,7 +107,7 @@ export default {
             }
           })
         }else if(pathMatchRegexp('/home/history', location.pathname)){
-          dispatch({type: 'historyMatch'});
+          dispatch({type: 'historyArticle'});
           dispatch({type: 'historyActivity'});
           dispatch({type: 'updateState',
             payload: {
@@ -195,20 +195,20 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            historyActivity: data.data
+            historyActivity: data.data.list
           }
         })
       }else{
         message.error(data.message);
       }
     },
-    *historyMatch({ payload }, { call, put }) {
-      const {data} = yield call(historyMatch, payload);
+    *historyArticle({ payload }, { call, put }) {
+      const {data} = yield call(historyArticle, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'updateState',
           payload: {
-            historyMatch: data.data
+            historyArticle: data.data.list
           }
         })
       }else {

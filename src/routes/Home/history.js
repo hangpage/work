@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import {Tabs} from "antd";
-import Match from "./history/match";
+import Match from "./history/article";
 import Activity from "./history/activity";
 
 const History = () => {
@@ -16,7 +16,7 @@ const History = () => {
           <Tabs.TabPane tab='活动' key='0'>
             <Activity/>
           </Tabs.TabPane>
-          <Tabs.TabPane tab='创业大赛' key='1'>
+          <Tabs.TabPane tab='文章' key='1'>
             <Match/>
           </Tabs.TabPane>
         </Tabs>

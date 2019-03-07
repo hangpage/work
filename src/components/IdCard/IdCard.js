@@ -5,7 +5,6 @@
  */
 import React from 'react';
 import config from '../../utils/config';
-import {userSign} from "../../services/user";
 
 const IdCard = ({photo='', name, autograph, onSignClick}) => {
   return (

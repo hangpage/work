@@ -6,6 +6,7 @@
 import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
+import {Avatar} from "antd";
 
 const Detail = ({data}) => {
   return (
@@ -28,7 +29,7 @@ const Detail = ({data}) => {
             {data.signMembers.map((item, index) => {
               return (
                 <li key={index}>
-                  <img src={item.img} alt=""/>
+                  <Avatar size={50} src={item.img}/>
                   <span>{item.name}</span>
                 </li>
               )

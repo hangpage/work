@@ -489,7 +489,7 @@
   background: rgba(153, 153, 153, 0.1);
   margin-bottom: 80px;
 }
-:global .sign-member p {
+:global .sign-member p:first-child {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
@@ -502,23 +502,46 @@
 }
 :global .sign-member .member-box {
   display: flex;
-}
-:global .sign-member .member-box img {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin-right: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 :global .sign-member .member-box li {
   display: inline-block;
   height: 113px;
   line-height: 113px;
-  text-align: center;
   width: 25%;
+  padding: 0 60px;
+  border-bottom: 1px solid rgba(153, 153, 153, 0.1);
 }
 :global .sign-member .member-box li span {
   font-size: 16px;
   color: #666666;
+  margin-left: 20px;
+}
+:global .sign-member .member-box.competition-sign-member li {
+  width: 50%;
+  text-align: center;
+  padding-top: 31px;
+  padding-bottom: 31px;
+  height: initial;
+  line-height: initial;
+  position: relative;
+}
+:global .sign-member .member-box.competition-sign-member li:after {
+  content: '';
+  display: inline-block;
+  height: 50px;
+  width: 1px;
+  border-right: 1px solid rgba(153, 153, 153, 0.2);
+  position: absolute;
+  right: 0;
+}
+:global .sign-member .member-box.competition-sign-member li .dianping {
+  cursor: pointer;
+  margin-left: 80px;
+  background: linear-gradient(to right, #0771bb, #00acaf);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 :global .park-card {
   width: 570px;
@@ -1371,5 +1394,18 @@
 }
 :global .ant-empty {
   margin-top: 45px !important;
+}
+:global .ant-timeline-item-content {
+  padding-top: 7px;
+}
+:global .ant-timeline-item-content p {
+  margin: 0;
+  line-height: 1;
+  font-size: 20px;
+  color: #666666;
+}
+:global .ant-timeline-item-content p span {
+  color: #999999;
+  float: right;
 }
 /*# sourceMappingURL=index.css.map */

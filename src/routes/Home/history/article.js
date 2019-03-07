@@ -9,14 +9,14 @@ import {Link} from "dva/router";
 import HorizontalCard from "../../../components/HorizontalCard/HorizontalCard";
 import Empty from "antd/es/empty";
 
-const Match = ({historyMatch}) => {
+const Article = ({historyArticle}) => {
   return (
     <div className='pl20 pr 20'>
-      {historyMatch.length ? historyMatch.map((item, index) => {
+      {historyArticle.length ? historyArticle.map((item, index) => {
         return (
-          <Link key={index} to={`/competition/${item.id}`}>
+          <Link key={index} to={`/article/${item.id}`}>
             <HorizontalCard style={{marginTop: 40}} img={item.pic} time={item.createTime}
-                            title={item.name} count={item.joinCount} desc={item.intro} status={item.status}/>
+                            title={item.title} count={item.pageViews} desc={item.intro} countDesc='阅读量' status={item.status}/>
           </Link>
         )
       }) : <Empty/>}
@@ -24,4 +24,4 @@ const Match = ({historyMatch}) => {
   );
 };
 
-export default connect(({home}) => (home))(Match);
+export default connect(({home}) => (home))(Article);

@@ -30,7 +30,7 @@ const Detail = ({detail, modalVisible, dispatch, location}) => {
   };
   const onOk = (data) => {
     const params = data;
-    params.serviceId = getParams(location.search);
+    params.serviceId = getParams(location.search).id;
     serviceDeclare(params).then(({data}) => {
       if(equalResultStatus(data)){
         message.success('申请成功');

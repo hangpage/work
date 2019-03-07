@@ -70,6 +70,15 @@ Const.MATCH_STATUS = {
   12: '比赛结束',
 };
 
+
+const COMPETITION_PROGRESS_MAP = {
+  schoolReview: '学校内部评审',
+  netReview: '网络评审',
+  firstReview: '现场答辩初试',
+  secondReview: '现场答辩复试',
+  endReview: '比赛结束',
+};
+
 Const.CHE_WEI_SHEN_QING_STATUS = {
   0: '审核中',
   1: '已通过',

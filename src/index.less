@@ -463,7 +463,7 @@
   .sign-member{
     background: rgba(153, 153, 153, 0.1);
     margin-bottom: 80px;
-    p{
+    p:first-child{
       .color-linear();
       text-align: center;
       font-weight: bold;
@@ -474,21 +474,44 @@
     }
     .member-box{
       display: flex;
-      img{
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        margin-right: 20px;
-      }
+      flex-wrap: wrap;
+      justify-content: space-between;
       li{
         display: inline-block;
         height: 113px;
         line-height: 113px;
-        text-align: center;
         width: 25%;
+        padding: 0 60px;
+        border-bottom: 1px solid @opacity999;
         span{
           font-size:16px;
           color: @deep-gray;
+          margin-left: 20px;
+        }
+      }
+      &.competition-sign-member{
+        li{
+          width: 50%;
+          text-align: center;
+          padding-top: 31px;
+          padding-bottom: 31px;
+          height: initial;
+          line-height: initial;
+          position: relative;
+          &:after{
+            content: '';
+            display: inline-block;
+            height: 50px;
+            width: 1px;
+            border-right: 1px solid rgba(153, 153, 153, 0.2);
+            position: absolute;
+            right: 0;
+          }
+          .dianping{
+            cursor: pointer;
+            margin-left: 80px;
+            .color-linear-to-right();
+          }
         }
       }
     }
@@ -1405,5 +1428,18 @@
   }
   .ant-empty{
     margin-top: 45px !important;
+  }
+  .ant-timeline-item-content{
+    padding-top: 7px;
+    p{
+      margin: 0;
+      line-height: 1;
+      font-size: 20px;
+      color: @deep-gray;
+      span{
+        color: @light-gray;
+        float: right;
+      }
+    }
   }
 }
