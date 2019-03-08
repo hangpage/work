@@ -129,7 +129,7 @@ class TeamInfo extends React.Component {
       label: '微信',
       field: 'weixin',
     }, {
-      label: 'QQ/微信',
+      label: 'QQ',
       field: 'QQ',
     }, {
       label: '邮箱',

@@ -45,10 +45,10 @@ const Team = ({teamInfo, location, data}) => {
             <Tabs.TabPane tab='团队信息' key='2'>
               <TeamInfo/>
             </Tabs.TabPane>
-            {data.principal === 1 && <Tabs.TabPane tab='个人详情（负责人）' key='3'>
+            {data.principal === '1' && <Tabs.TabPane tab='个人详情（负责人）' key='3'>
               <LeaderInfo/>
             </Tabs.TabPane>}
-            {data.principa2 === 2 && <Tabs.TabPane tab='个人详情（成员）' key='4'>
+            {data.principal === '2' && <Tabs.TabPane tab='个人详情（成员）' key='4'>
               <MemberInfo/>
             </Tabs.TabPane>}
           </Tabs>

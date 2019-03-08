@@ -76,7 +76,7 @@ const list1 = [{
   type: 'datepicker'
 },{
   label: 'QQ/微信',
-  field: 'QQ',
+  field: 'qq',
 },{
   label: '本人电话',
   field: 'phone',
@@ -85,7 +85,7 @@ const list1 = [{
   field: 'emergencyContact',
 },{
   label: '户籍地址',
-  field: 'household_address',
+  field: 'householdAddress',
 },{
   label: '在京地址',
   field: 'address',
@@ -211,8 +211,19 @@ class Team extends React.Component {
 
   componentDidMount() {
     const data = cloneDeep(this.props.leaderAndMemberInfo);
+    if(data.familySituation){
+      const stringArray = data.familySituation.split(';');
+      stringArray[0] && stringArray[0].split(',').forEach((item, index) => {
+        data['f' + (index + 1)] = item;
+      });
+      stringArray[1] && stringArray[0].split(',').forEach((item, index) => {
+        data['m' + (index + 1)] = item;
+      });
+    }
     data.birth = data.birth ? moment(data.birth) : '';
+    data.graduationTime = data.graduationTime ? moment(data.graduationTime) : '';
     data.date = data.date ? moment(data.date) : '';
+    data.projectName = this.props.teamInfo.projectName;
     this.props.form.setFieldsValue(data);
     this.setState({
       studyExperience: data.study || [],
@@ -272,7 +283,7 @@ class Team extends React.Component {
     study.id = this.props.leaderAndMemberInfo.id;
     saveStudyExperience(JSON.stringify(study)).then(({data}) => {
       if(equalResultStatus(data)){
-        message.success('学习经历保存成功')
+
       }else{
         message.error(data.message);
       }
@@ -286,7 +297,7 @@ class Team extends React.Component {
     work.id = this.props.leaderAndMemberInfo.id;
     saveWorkExperience(JSON.stringify(work)).then(({data}) => {
         if(equalResultStatus(data)){
-          message.success('工作经历保存成功')
+
         }else{
           message.error(data.message);
         }
@@ -307,8 +318,7 @@ class Team extends React.Component {
         const fArray = [params.f1, params.f2, params.f3, params.f4, params.f5, params.f6];
         const mArray = [params.m1, params.m2, params.m3, params.m4, params.m5, params.m6];
         params.familySituation = fArray.join(',') + ';' + mArray.join(',');
-        //TODO 暂时删除毕业时间字段
-        delete params.graduationTime;
+        params.graduationTime = params.graduationTime + ' 00:00:00';
         params.birth = params.birth + ' 00:00:00';
         let array = [];
         if(prize.length){

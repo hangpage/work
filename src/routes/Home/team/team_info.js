@@ -61,16 +61,21 @@ class Team extends React.Component {
   };
 
   onOk = (data) => {
-    let membersStr = cloneDeep(this.state.membersStr);
-    if (data.itemKey >= 0) {
-      membersStr[data.itemKey] = reFormatParams(data);
-    } else {
-      membersStr.push(reFormatParams(data));
-    }
-    this.setState({
-      membersStr,
-      modalVisible: false
-    })
+    const {dispatch} = this.props;
+    const {currentItem} = this.state;
+    let params = reFormatParams(data);
+    params.token = sessionStorage.getItem('token');
+    params.rtId = this.props.teamInfo.id;
+    params.id = currentItem.id;
+    parkSaveMembers(params).then(({data}) => {
+      if (equalResultStatus(data)) {
+        message.success('修改成功');
+        this.setState({modalVisible: false});
+        dispatch({type: 'home/queryTeamInfo'})
+      } else {
+        message.error(data.message);
+      }
+    });
   };
 
   submit = () => {
@@ -99,7 +104,7 @@ class Team extends React.Component {
   componentWillReceiveProps(nextProps, nextContext) {
     if(!isEqual(this.props.teamInfo.members, nextProps.teamInfo.members)){
       this.setState({
-        members: nextProps.teamInfo.members
+        membersStr: nextProps.teamInfo.members
       })
     }
   }

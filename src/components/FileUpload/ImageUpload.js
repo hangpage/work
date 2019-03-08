@@ -14,7 +14,7 @@ class ImageUpload extends React.Component {
     };
   }
 
-  handleCancel = () => this.setState({ previewVisible: false })
+  handleCancel = () => this.setState({ previewVisible: false });
 
   handlePreview = (file) => {
     this.setState({
@@ -24,8 +24,21 @@ class ImageUpload extends React.Component {
   };
 
 
-  componentDidMount(){
-
+  componentWillReceiveProps(nextProps, nextContext) {
+    const fileList = [];
+    if(nextProps.max){
+      const arr = nextProps.value.split('|');
+      arr.forEach((item, index) => {
+          fileList.push({url: item, status: 'done', uid: index})
+      });
+      console.log(fileList)
+      this.setState({fileList})
+    }else{
+      console.log(fileList)
+      this.setState({
+        fileList: [{url: nextProps.value, uid: 1, status: 'done',}]
+      })
+    }
   }
 
   handleChange = (info) => {

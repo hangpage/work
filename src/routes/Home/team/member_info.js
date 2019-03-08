@@ -87,7 +87,6 @@ class ParkStep3 extends React.Component {
     super(props);
   }
 
-
   submit = () => {
     const {form, history, location} = this.props;
     const {validateFields} = form;
