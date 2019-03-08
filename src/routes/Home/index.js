@@ -10,53 +10,48 @@ import {connect} from "dva";
 import {Link} from "dva/router";
 import Sign from "./sign";
 
-const HomeList = [{
-  title: '个人资料',
-  icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
-  url: '/profile'
-}, {
-  title: '团队档案',
-  icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
-  url: '/team'
-}, {
-  title: '我的比赛',
-  icon: require('../../assets/icon/home/icon-default-bisai.png'),
-  url: '/match'
-}, {
-  title: '我的活动',
-  icon: require('../../assets/icon/home/icon-default-bisai.png'),
-  url: '/activity'
-}, {
-  title: '我的服务',
-  icon: require('../../assets/icon/home/icon-default-fuwu.png'),
-  url: '/service'
-}, {
-  title: '我的消息',
-  icon: require('../../assets/icon/home/icon-default-xiaoxi.png'),
-  url: '/message'
-}, {
-  title: '浏览历史',
-  icon: require('../../assets/icon/home/icon-default-liulanlishi.png'),
-  url: '/history'
-}, {
-  title: '申请离园',
-  icon: require('../../assets/icon/home/icon-default-shenqingliyuan.png'),
-  url: '/leave'
-}, {
-  title: '入驻管理',
-  icon: require('../../assets/icon/home/icon-default-ruzhuguanli.png'),
-  url: '/enter'
-}, {
-  title: '意见反馈',
-  icon: require('../../assets/icon/home/icon-default-yijianfankui.png'),
-  url: '/advise'
-}, {
-  title: '关于我们',
-  icon: require('../../assets/icon/home/icon-default-guanyuwomen.png'),
-  url: '/about'
-}];
-
 const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) => {
+  const HomeList = [{
+    title: '个人资料',
+    icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
+    url: '/profile'
+  },  {
+    title: '我的比赛',
+    icon: require('../../assets/icon/home/icon-default-bisai.png'),
+    url: '/match'
+  }, {
+    title: '我的活动',
+    icon: require('../../assets/icon/home/icon-default-bisai.png'),
+    url: '/activity'
+  }, {
+    title: '我的服务',
+    icon: require('../../assets/icon/home/icon-default-fuwu.png'),
+    url: '/service'
+  }, {
+    title: '我的消息',
+    icon: require('../../assets/icon/home/icon-default-xiaoxi.png'),
+    url: '/message'
+  }, {
+    title: '浏览历史',
+    icon: require('../../assets/icon/home/icon-default-liulanlishi.png'),
+    url: '/history'
+  }, {
+    title: '申请离园',
+    icon: require('../../assets/icon/home/icon-default-shenqingliyuan.png'),
+    url: '/leave'
+  }, {
+    title: '入驻管理',
+    icon: require('../../assets/icon/home/icon-default-ruzhuguanli.png'),
+    url: '/enter'
+  }, {
+    title: '意见反馈',
+    icon: require('../../assets/icon/home/icon-default-yijianfankui.png'),
+    url: '/advise'
+  }, {
+    title: '关于我们',
+    icon: require('../../assets/icon/home/icon-default-guanyuwomen.png'),
+    url: '/about'
+  }];
   const onSignClick = () => {
     dispatch({
       type: 'home/updateState',
@@ -82,6 +77,14 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
       }
     })
   };
+
+  if(data.residentTeamStatus === 1){ //判断当前用户是否已经入驻
+    HomeList.splice(1, 0, {
+      title: '团队档案',
+      icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
+      url: '/team'
+    },)
+  }
 
   return (
     <div className="bg-white pt40 pb80">

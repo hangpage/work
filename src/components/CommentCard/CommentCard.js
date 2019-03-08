@@ -16,7 +16,7 @@ const CommentCard = ({userImg, nickName, osNickName, osImg, content, time, actio
           <div className={styles.time}>{time}</div>
           <div className={styles.action}>{action}</div>
           <div className={styles.child}>
-            <Avatar size={49}/>
+            <Avatar src={osImg} size={49}/>
             <div className={styles.childContent}>
               <div className={styles.osNickname}>{osNickName}</div>
               <div className={styles.osComment}>{content}</div>

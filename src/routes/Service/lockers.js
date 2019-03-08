@@ -9,6 +9,7 @@ import {equalResultStatus} from "../../utils";
 import {serviceLockerAppli, serviceQueryLockers} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 import Radio from "antd/es/radio";
+import {cloneDeep} from "lodash";
 
 
 class Lockers extends React.Component{
@@ -65,12 +66,12 @@ class Lockers extends React.Component{
             <Form.Item
               label="选择储物柜"
               labelCol={{span: 8}}
-              wrapperCol={{span: 8}}
+              wrapperCol={{span: 16}}
               colon={false}
             >
             {getFieldDecorator('locker')(
               <Radio.Group className='bl-label'>
-                {list.map((item, index) => <Radio key={index} value={item.id}>{item.name}</Radio>)}
+                {list.map((item, index) => <Radio key={index} value={item.id} disabled={String(item.available) !== '1'}>{item.name}</Radio>)}
               </Radio.Group>
             )}
             </Form.Item>

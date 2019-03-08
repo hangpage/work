@@ -12,7 +12,7 @@ const Awesome = ({awesome}) => {
   return (
     <div style={{padding: '0 20px'}}>
       {awesome.length ? awesome.map((item, key) =>
-        <CommentCard time={item.createTime} action='赞了这条动态' key={key} userImg={item.userImg} content={item.content} nickName={item.nickName} osImg={item.osImg} osNickName={item.osNickName}/>
+        <CommentCard time={item.createTime} action='赞了这条动态' key={key} userImg={item.img} content={item.content} nickName={item.nickName} osImg={item.osImg} osNickName={item.osNickName}/>
       ) : <Empty/>}
     </div>
   );

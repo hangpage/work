@@ -33,27 +33,27 @@ const Team = ({teamInfo, location, data}) => {
           团队档案
         </div>
       </div>
-        <div>
-          <div className="w">
-            <Tabs>
-              <Tabs.TabPane tab='公司与项目信息' key='0'>
-                <CompanyInfo/>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab='融资情况' key='1'>
-                <FinancingInfo/>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab='团队信息' key='2'>
-                <TeamInfo/>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab='个人详情（负责人）' key='3'>
-                <LeaderInfo/>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab='个人详情（成员）' key='4'>
-                <MemberInfo/>
-              </Tabs.TabPane>
-            </Tabs>
-          </div>
+      <div>
+        <div className="w">
+          <Tabs>
+            <Tabs.TabPane tab='公司与项目信息' key='0'>
+              <CompanyInfo/>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab='融资情况' key='1'>
+              <FinancingInfo/>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab='团队信息' key='2'>
+              <TeamInfo/>
+            </Tabs.TabPane>
+            {data.principal === 1 && <Tabs.TabPane tab='个人详情（负责人）' key='3'>
+              <LeaderInfo/>
+            </Tabs.TabPane>}
+            {data.principa2 === 2 && <Tabs.TabPane tab='个人详情（成员）' key='4'>
+              <MemberInfo/>
+            </Tabs.TabPane>}
+          </Tabs>
         </div>
+      </div>
     </div>
   );
 };

@@ -29,7 +29,7 @@ const TeamInfoWrite = ({form, history, location}) => {
         });
         tutorDeclare(formData).then(({data}) => {
           if (equalResultStatus(data)) {
-            message.success(data.message);
+            message.success('报名成功');
             history.push({
               pathname: '/index',
             });

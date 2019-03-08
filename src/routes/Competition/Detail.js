@@ -9,6 +9,7 @@ import {connect} from "dva";
 import {getParams} from "../../utils";
 import {Avatar, Empty} from "antd";
 import {Link} from "dva/router";
+import qs from "qs";
 
 const Detail = ({data, location, match}) => {
   const params = getParams(location.search);
@@ -27,6 +28,10 @@ const Detail = ({data, location, match}) => {
     }
   } else {
     allowReport = data.status === '2';
+  }
+
+  if(data.type === '3'){
+    noTeacher = true;
   }
 
   return (
@@ -50,16 +55,16 @@ const Detail = ({data, location, match}) => {
           <p>已报名</p>
           <div className="member-box competition-sign-member">
             {
-              data.joinTeams && data.joinTeams.length ? data.joinTeams.map((item, index) => {
+              data.tutorReview && data.tutorReview.length ? data.tutorReview.map((item, index) => {
                 return (
                   <li key={index}>
                     <Avatar size={50} src={item.pic}/>
                     <span>{item.name}</span>
-                    {params.isTutor === '1' &&
-                    <Link to={link}><span className='dianping'>点评</span></Link>}
+                    {params.isTutor === '1' && Number(data.status) >= 6 && data.type !== '3' &&
+                    <Link to={`${link}?${qs.stringify(item)}&matchName=${data.name}`}><span className='dianping'>点评</span></Link>}
                   </li>
                 )
-              }) : <Empty/>
+              }) : <div className='text-align' style={{width: '100%', paddingBottom: 20}}><Empty/></div>
             }
           </div>
         </div>

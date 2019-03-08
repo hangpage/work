@@ -20,11 +20,11 @@ const Match = ({matchData}) => {
             from: 'home',
             isTutor: item.isTutor,
             time1: item.signStartTime,
-            time2: item.signStartTime,
-            time3: item.signStartTime,
-            time4: item.signStartTime,
-            time5: item.signStartTime,
-            time6: item.signStartTime,
+            time2: item.internalReviewStartTime,
+            time3: item.networdReviewStartTime,
+            time4: item.replyFirstStartTime,
+            time5: item.replySecondStartTime,
+            time6: item.matchEndTime,
           };
           return (
             <Link key={index}

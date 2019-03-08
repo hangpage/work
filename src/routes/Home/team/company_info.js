@@ -67,22 +67,24 @@ class CompanyInfo extends React.Component {
     if (!isEqual(this.props.teamInfo, nextProps.teamInfo)) {
       const data = cloneDeep(nextProps.teamInfo);
       data.registeredTime = moment(data.registeredTime);
-      if(data.grandPrize){
+      if (data.grandPrize) {
         const array = data.grandPrize.split(';');
         const grandPrize = [];
         array.forEach((item) => {
-            const _array = item.split(',');
-          grandPrize.push({
+          const _array = item.split(',');
+          if(_array[0]){
+            grandPrize.push({
               match: _array[0],
               rate: _array[1]
             })
+          }
         });
-        data.isJudge = 1;
+        data.isJudge = '1';
         this.setState({
           grandPrize
         })
-      }else{
-        data.isJudge = 0;
+      } else {
+        data.isJudge = '0';
       }
       this.props.form.setFieldsValue(data)
     }
@@ -105,7 +107,7 @@ class CompanyInfo extends React.Component {
         params.token = sessionStorage.getItem('token');
         params.registeredTime = params.registeredTime + ' 00:00:00';
         const array = [];
-        if(grandPrize.length){
+        if (grandPrize.length) {
           grandPrize.forEach((item) => {
             array.push(item.match + ',' + item.rate);
           })
@@ -149,9 +151,9 @@ class CompanyInfo extends React.Component {
 
   onOk = (data) => {
     let grandPrize = cloneDeep(this.state.grandPrize);
-    if(data.itemKey >= 0){
+    if (data.itemKey >= 0) {
       grandPrize[data.itemKey] = data;
-    }else{
+    } else {
       grandPrize.push(data);
     }
     this.setState({
@@ -216,12 +218,16 @@ class CompanyInfo extends React.Component {
                         <div className='self-add' key={index}>
                           <span className="title">{item.match}</span>
                           <span className="reward">{item.rate}</span>
-                          <div className='fr' onClick={(e) => {this.onDel(e, index)}}>
+                          <div className='fr' onClick={(e) => {
+                            this.onDel(e, index)
+                          }}>
                             <i className="icon-del"/>
                             <span className="edit">删除</span>
                           </div>
                           <i className="split fr"/>
-                          <div className='fr' onClick={(e) => {this.onEdit(e, index)}}>
+                          <div className='fr' onClick={(e) => {
+                            this.onEdit(e, index)
+                          }}>
                             <i className="icon-edit"/>
                             <span className="edit">编辑</span>
                           </div>

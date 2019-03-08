@@ -6,13 +6,13 @@
 import React from 'react';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
-import {parkResidentTeam, parkSaveMembers} from "../../../services/park";
+import {parkSaveMembers} from "../../../services/park";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import {cloneDeep, isEqual} from "lodash";
 import Modal from './component/step3Modal';
-import moment from "moment";
 import {connect} from "dva";
+import moment from "moment";
 
 
 class Team extends React.Component {
@@ -50,9 +50,11 @@ class Team extends React.Component {
 
   onEdit = (e, index) => {
     let membersStr = cloneDeep(this.state.membersStr);
+    const item = cloneDeep(membersStr[index]);
+    item.studyDate = moment(item.studyDate);
     this.setState({
       membersStr,
-      modalItem: membersStr[index],
+      modalItem: item,
       modalVisible: true,
       itemKey: index
     })
@@ -152,7 +154,6 @@ class Team extends React.Component {
         <div className='w bg-white pb80'>
           <div className='bl-form'>
             <div className="form-content">
-              <div className='subheading'>团队成员</div>
               {modalVisible && <Modal {...modalProps}/>}
               <Form>
                 <Row gutter={138}>
@@ -181,11 +182,16 @@ class Team extends React.Component {
                       </Col>
                     )
                   })}
+                </Row>
+                <Row type='flex' justify='space-around' gutter={360}>
+                  <div className='main-button' onClick={this.submit} style={{width: 600}}>保存</div>
+                </Row>
+                <Row gutter={138}>
                   <Col span={24}>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
                       <label className='subheading'>团队成员</label>
                       {/*<span onClick={this.showModal} className='fr icon-add-box'><i*/}
-                        {/*className='icon-add'/><span>添加</span></span>*/}
+                      {/*className='icon-add'/><span>添加</span></span>*/}
                     </div>
                     {membersStr.map((item, index) => {
                       return (
@@ -218,9 +224,6 @@ class Team extends React.Component {
               </Form>
             </div>
           </div>
-          <Row type='flex' justify='space-around' gutter={360}>
-            <div className='main-button' onClick={this.submit} style={{width: 600}}>保存</div>
-          </Row>
         </div>
       </div>
     );

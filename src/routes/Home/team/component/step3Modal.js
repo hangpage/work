@@ -29,6 +29,19 @@ const list1 = [{
   field: 'phone',
 }];
 
+
+const formItemLayout = {
+  labelCol: {
+    xs: {span: 24},
+    sm: {span: 8},
+  },
+  wrapperCol: {
+    xs: {span: 24},
+    sm: {span: 16},
+  },
+  colon: false
+};
+
 @Form.create()
 class Step3Modal extends React.Component{
   handleOk = () => {
@@ -56,33 +69,40 @@ class Step3Modal extends React.Component{
         {...modalProps}
         onOk={this.handleOk}
       >
-        <Form>
+        <Form layout='horizontal' className='form-bl'>
           <Row>
-            {list1.map((item, index) => {
-              var comp = <Input placeholder={`请输入${item.label}`}/>;
-              if (item.type === 'select') {
-                comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
-              } else if (item.type === 'datepicker') {
-                comp = <DatePicker placeholder={`请选择${item.label}`}/>;
-              } else if (item.type === 'radio') {
-                comp =
-                  (<Radio.Group>
-                    {item.options.map((option, oindex) => <Radio key={oindex}
-                                                                 value={option.value}>{option.text}</Radio>)}
-                  </Radio.Group>)
-              }
-              return (
-                <Col span={24} key={index}>
+            <Col span={24}>
+              {list1.map((item, index) => {
+                var comp = <Input placeholder={`请输入${item.label}`}/>;
+                if (item.type === 'select') {
+                  comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
+                } else if (item.type === 'datepicker') {
+                  comp = <DatePicker placeholder={`请选择${item.label}`}/>;
+                } else if (item.type === 'radio') {
+                  comp =
+                    (<Radio.Group>
+                      {item.options.map((option, oindex) => <Radio key={oindex}
+                                                                   value={option.value}>{option.text}</Radio>)}
+                    </Radio.Group>)
+                }
+                return (
                   <Form.Item
                     label={item.label}
+                    key={index}
+                    {...formItemLayout}
                   >
-                    {getFieldDecorator(`${item.field}`, Const.RULE)(
+                    {getFieldDecorator(`${item.field}`, {
+                      initialValue: modalItem[item.field],
+                      rules: [{
+                        required: true, message: '此处为必填项'
+                      }]
+                    })(
                       comp
                     )}
                   </Form.Item>
-                </Col>
-              )
-            })}
+                )
+              })}
+            </Col>
           </Row>
         </Form>
       </Modal>

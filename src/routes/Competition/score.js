@@ -6,8 +6,9 @@
 import React from 'react';
 import {Form, Input, message} from "antd";
 import {connect} from "dva";
-import {equalResultStatus} from "../../utils";
+import {equalResultStatus, getParams} from "../../utils";
 import {saveScore} from "../../services/competition";
+import qs from "qs";
 
 
 const List = [{
@@ -48,13 +49,14 @@ class Score extends React.Component {
   }
 
   submit = () => {
-    const {form, teamDetail, history} = this.props;
+    const {form, history, location} = this.props;
     const {validateFields} = form;
     validateFields((err, values) => {
       if (!err) {
         let params = values;
+        const locationParams = qs.parse(location.search.split('?')[1]);
         params.token = sessionStorage.getItem('token');
-        params.teamId = teamDetail.teamId;
+        params.teamId = locationParams.teamId;
         saveScore(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('评分成功！');
@@ -67,40 +69,49 @@ class Score extends React.Component {
     });
   };
 
+  componentWillMount() {
+    const {location} = this.props;
+    const params = qs.parse(location.search.split('?')[1]);
+    this.setState({
+      total: params.total
+    })
+  }
+
   handleChange = () => {
     const {form} = this.props;
     const scores = form.getFieldsValue();
     let total = 0;
     Object.keys(scores).forEach((item) => {
-      total += Number(scores[item] || 0);
+      total += Number(scores[item] || 0) || 0;
     });
     this.setState({total});
   };
 
 
   render() {
-    const {form, tutorReview} = this.props;
-    const teamDetail = tutorReview[0].project;
+    const {form, location} = this.props;
+    const params = qs.parse(location.search.split('?')[1]);
     const {getFieldDecorator} = form;
     return (
       <div className="second-bg pt40">
         <div className='w'>
           <div className="pb60 score mb80 ">
             <div className="top">
-              <h1>北京理工大学国防科技园项目创新大赛</h1>
-              <h2>项目名称：大气环保监测</h2>
+              <h1>{params.matchName}</h1>
+              <h2>项目名称：{params.projectName}</h2>
             </div>
             {List.map((item, index) => {
               return (
                 <div className="score-card" key={index}>
                   <h4>{item.title}</h4>
                   <p className='content'>
-                    {teamDetail[item.field]}
+                    {params.project[item.field]}
                   </p>
                   <div className="bottom">
                     <span className='pingfen'>评分</span>
                     {getFieldDecorator(item.field, {
                       rules: [{required: true, message: '请评分!'}],
+                      initialValue: params[item.field],
                       getValueFromEvent: (event) => {
                         return event.target.value.replace(/\D/g, '')
                       },
@@ -117,11 +128,14 @@ class Score extends React.Component {
               <div className="score-form" style={{borderRadius: 4}}>
                 <div className="bottom" style={{height: 'auto'}}>
                   <div className="pingfen">总分</div>
-                  <Input value={this.state.total}/>
+                  <Input value={this.state.total} disabled={true}/>
                 </div>
                 <div className="bottom" style={{height: 'auto', marginTop: 40}}>
                   <div className="pingfen" style={{alignSelf: 'flex-start'}}>评价</div>
-                  {getFieldDecorator('evaluation')(
+                  {getFieldDecorator('evaluation', {
+                    rules: [{required: true, message: '请填写评价!'}],
+                    initialValue: params['evaluation'],
+                  })(
                     <Input.TextArea style={{height: 275}}/>
                   )}
                 </div>

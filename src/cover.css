@@ -174,4 +174,7 @@
 :global .ant-pagination-item-active a {
   color: #ffffff !important;
 }
+:global .bl-label .ant-radio-wrapper-disabled > span {
+  background: rgba(153, 153, 153, 0.2);
+}
 /*# sourceMappingURL=cover.css.map */

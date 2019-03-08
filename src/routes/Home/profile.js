@@ -118,7 +118,7 @@ const Profile = ({form, data, dispatch}) => {
               rules: [{
                 required: true, message: '前选择性别!',
               }],
-              initialValue: data.gendar
+              initialValue: String(data.gendar)
             })(
               <Radio.Group>
                 <Radio value={Const.Man}>男</Radio>

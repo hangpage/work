@@ -11,6 +11,7 @@ import ComboBox from "../../components/ComboBox";
 import Modal from './component/step3Modal';
 import {cloneDeep} from 'lodash';
 import ImageUpload from "../../components/FileUpload/ImageUpload";
+import moment from "moment";
 
 
 class TeamInfo extends React.Component {
@@ -70,9 +71,11 @@ class TeamInfo extends React.Component {
 
   onEdit = (e, index) => {
     let membersStr = cloneDeep(this.state.membersStr);
+    const item = cloneDeep(membersStr[index]);
+    item.studyDate = moment(item.studyDate);
     this.setState({
       membersStr,
-      modalItem: membersStr[index],
+      modalItem: item,
       modalVisible: true,
       itemKey: index
     })

@@ -1,7 +1,7 @@
 import {model} from "../../utils/model";
 import modelExtend from 'dva-model-extend'
-import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
-import {activityFindList, activityGet} from "../../services/activity";
+import {equalResultStatus, pathMatchRegexp} from "../../utils";
+import {activityFindList} from "../../services/activity";
 import {message} from "antd";
 import {articleFindList} from "../../services/article";
 
