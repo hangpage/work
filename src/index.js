@@ -4,7 +4,13 @@ import './common.css';
 import './cover.css';
 
 // 1. Initialize
-const app = dva();
+const app = dva({
+  onError(error, dispatch){
+    console.log(error);
+  }
+});
+
+window.g_app = app;
 
 // 2. Plugins
 // app.use(createLoading());

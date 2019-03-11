@@ -1,4 +1,6 @@
 import fetch from 'dva/fetch';
+import store from '../index';
+import {routerRedux} from "dva/router";
 
 function parseJSON(response) {
   return response.json();
@@ -15,6 +17,15 @@ function checkStatus(response) {
 }
 
 function handleData(data) {
+  const { code, message } = data;
+  if (code === 2 && message === '请登录') {
+    //全局登录拦截, 缓存登录之后的回调url
+    sessionStorage.setItem('cbUrl', window.location.href.split('#')[1]);
+    window.g_app._store.dispatch(routerRedux.push({
+      pathname: '/login'
+    }));
+    return {};
+  }
   return {data};
 }
 
@@ -33,5 +44,7 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON)
     .then(handleData)
-    .catch(err => ({ err }));
+    .catch(err => {
+      console.log(err)
+    });
 }

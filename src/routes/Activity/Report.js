@@ -4,12 +4,8 @@
  * @Date: 2019/2/3 12:53
  */
 import React from 'react';
-import {
-  Form, Input,
-   Row, Col, Radio, message
-} from 'antd';
+import {Col, Form, Input, message, Radio, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
-import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
 import {equalResultStatus, getParams, reFormatParams} from "../../utils";
 import {activitySign} from "../../services/activity";

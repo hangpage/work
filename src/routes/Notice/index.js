@@ -19,7 +19,7 @@ const Index = ({list}) => {
                 <Col span={12} key={index}>
                   <Link to={`/notice/${item.id}`}>
                     <div className="notice">
-                      <p>{item.content}</p>
+                      <p>{item.title}</p>
                       <div>
                         <span className='time'>{item.createTime}</span>
                         <span className='ml30'>{item.pageViews || 0}人阅读</span>

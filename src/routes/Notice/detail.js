@@ -14,8 +14,12 @@ import Modal from '../Article/component/Modal';
 import {cloneDeep} from "lodash";
 
 const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
-  const hideModal = () => {dispatch({ type: 'notice/updateState', payload: {modalVisible: false} })};
-  const getArticleDetail = () => {dispatch({ type: 'notice/get', payload: {id: pathMatchRegexp('/notice/:id', location.pathname)[1]}})};
+  const hideModal = () => {
+    dispatch({type: 'notice/updateState', payload: {modalVisible: false}})
+  };
+  const getArticleDetail = () => {
+    dispatch({type: 'notice/get', payload: {id: pathMatchRegexp('/notice/:id', location.pathname)[1]}})
+  };
 
   const onAwesomeClick = () => {
     const match = pathMatchRegexp('/notice/:id', location.pathname);
@@ -23,10 +27,10 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
       msgId: match[1],
       type: '5',
     }).then(({data}) => {
-      if(equalResultStatus(data)){
+      if (equalResultStatus(data)) {
         getArticleDetail();
         message.success('点赞成功');
-      }else{
+      } else {
         message.error(data.message);
       }
     })
@@ -37,33 +41,33 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
       msgId: id,
       type: '4',
     }).then(({data}) => {
-      if(equalResultStatus(data)){
+      if (equalResultStatus(data)) {
         getArticleDetail();
         message.success('点赞成功');
-      }else{
+      } else {
         message.error(data.message);
       }
     })
   };
 
   const onCommentDetailClick = (e, id) => {
-      const list = cloneDeep(commentShowChildrenList);
-      if(list.indexOf(id) !== -1){
-        list.splice(list.indexOf(id) , 1);
-      }else{
-        list.push(id);
+    const list = cloneDeep(commentShowChildrenList);
+    if (list.indexOf(id) !== -1) {
+      list.splice(list.indexOf(id), 1);
+    } else {
+      list.push(id);
+    }
+    dispatch({
+      type: 'notice/updateState',
+      payload: {
+        commentShowChildrenList: list
       }
-      dispatch({
-        type: 'notice/updateState',
-        payload: {
-          commentShowChildrenList: list
-        }
-      })
+    })
   };
 
   const onCommentClick = () => {
     const match = pathMatchRegexp('/notice/:id', location.pathname);
-    if(!comment){
+    if (!comment) {
       return message.error('请输入评论内容');
     }
     dynamicComment({
@@ -71,7 +75,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
       type: '5',
       content: comment
     }).then(({data}) => {
-      if(equalResultStatus(data)){
+      if (equalResultStatus(data)) {
         message.success('评论成功');
         dispatch({
           type: 'notice/updateState',
@@ -80,7 +84,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
           }
         });
         getArticleDetail();
-      }else{
+      } else {
         message.error(data.message);
       }
     })
@@ -108,7 +112,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
     })
   };
 
-  const onReplyClick = (e, id, replyWho) =>  {
+  const onReplyClick = (e, id, replyWho) => {
     dispatch({
       type: 'notice/updateState',
       payload: {
@@ -122,28 +126,28 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
   };
 
   const onOk = (params) => {
-    if(!params.content){
+    if (!params.content) {
       return message.error(`请输入${modalTitle}内容`);
     }
     params.msgId = currentMsgId;
     params.type = '4';
-    if(modalTitle === '回复'){
+    if (modalTitle === '回复') {
       dynamicComment(params).then(({data}) => {
-        if(equalResultStatus(data)){
+        if (equalResultStatus(data)) {
           message.success('评论成功');
           hideModal();
           getArticleDetail();
-        }else{
+        } else {
           message.error(data.message);
         }
       })
-    }else{
+    } else {
       dynamicReport(params).then(({data}) => {
-        if(equalResultStatus(data)){
+        if (equalResultStatus(data)) {
           message.success('举报成功');
           hideModal();
           getArticleDetail();
-        }else{
+        } else {
           message.error(data.message);
         }
       })
@@ -170,14 +174,15 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
             <span className='ml38 mr38'>|</span>
             <span>{data.pageViews || 0}人阅读</span>
           </div>
-          <div className="dash-line-gray mt27" />
-          <div className='content' dangerouslySetInnerHTML={{__html: data.content}} />
+          <div className="dash-line-gray mt27"/>
+          <div className='content' dangerouslySetInnerHTML={{__html: data.content}}/>
           <div style={{textAlign: 'center'}}>
             <FabulousButton onClick={onAwesomeClick}/>
           </div>
         </div>
-        <div className="solid-line6 mt40 mb40" />
-        <Input.TextArea onChange={onTextareaChange} style={{height: 180}} value={comment} className='bl-input' placeholder='请输入评论内容...'/>
+        <div className="solid-line6 mt40 mb40"/>
+        <Input.TextArea onChange={onTextareaChange} style={{height: 180}} value={comment} className='bl-input'
+                        placeholder='请输入评论内容...'/>
         <div className="main-button mt40 mb59" onClick={onCommentClick} style={{width: 146, borderRadius: 25}}>评论</div>
         <div className='comment-list'>
           {commentList.map((item, index) => {
@@ -189,11 +194,17 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
                            awesomeCount={item.awesomeCount}
                            onReplyClick={(e) => onReplyClick(e, item.id, item.nickName)}
                            commentCount={item.commontList.length}
-                           onReportClick={(e) => {onReportClick(e, item.id)}}
-                           onAwesomeClick={(e) => {onCommentAwesomeClick(e, item.id)}}
+                           onReportClick={(e) => {
+                             onReportClick(e, item.id)
+                           }}
+                           onAwesomeClick={(e) => {
+                             onCommentAwesomeClick(e, item.id)
+                           }}
                            userImg={item.userImg}
                            content={item.content}
-                           onCommentDetailClick={(e) => {onCommentDetailClick(e, item.id)}}
+                           onCommentDetailClick={(e) => {
+                             onCommentDetailClick(e, item.id)
+                           }}
                   />
                   {commentShowChildrenList.indexOf(item.id) !== -1 && item.commontList.length ?
                     <div className='ml84 mr20' style={{background: '#F3F3F3'}}>
@@ -204,8 +215,12 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
                                    createTime={c.createTime}
                                    awesomeCount={c.awesomeCount}
                                    onReplyClick={(e) => onReplyClick(e, c.id, c.nickName)}
-                                   onReportClick={(e) => {onReportClick(e, c.id)}}
-                                   onAwesomeClick={(e) => {onCommentAwesomeClick(e, c.id)}}
+                                   onReportClick={(e) => {
+                                     onReportClick(e, c.id)
+                                   }}
+                                   onAwesomeClick={(e) => {
+                                     onCommentAwesomeClick(e, c.id)
+                                   }}
                                    userImg={c.userImg}
                                    content={c.content}
                                    replyToWhom={item.nickName}
@@ -219,7 +234,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
             }
           )}
           {modalVisible && <Modal {...modalProps} replyWho={replyWho} placeHolder={placeHolder}/>}
-      </div>
+        </div>
       </div>
     </div>
   );
