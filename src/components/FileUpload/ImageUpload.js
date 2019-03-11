@@ -26,18 +26,18 @@ class ImageUpload extends React.Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     const fileList = [];
-    if(nextProps.max){
-      const arr = nextProps.value.split('|');
-      arr.forEach((item, index) => {
+    if(nextProps.value){
+      if(nextProps.max){
+        const arr = nextProps.value.split('|');
+        arr.forEach((item, index) => {
           fileList.push({url: item, status: 'done', uid: index})
-      });
-      console.log(fileList)
-      this.setState({fileList})
-    }else{
-      console.log(fileList)
-      this.setState({
-        fileList: [{url: nextProps.value, uid: 1, status: 'done',}]
-      })
+        });
+        this.setState({fileList})
+      }else{
+        this.setState({
+          fileList: [{url: nextProps.value, uid: 1, status: 'done',}]
+        })
+      }
     }
   }
 

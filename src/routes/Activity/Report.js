@@ -80,7 +80,7 @@ const TeamInfoWrite = ({form, history, location}) => {
                     label="来源高校"
                   >
                     {getFieldDecorator('school', Const.RULE)(
-                      <ComboBox placeholder='请选择学校' url='/dict/findType?type=school'/>
+                      <Input placeholder='请填写学校'/>
                     )}
                   </Form.Item>
                 </Col>

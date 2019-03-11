@@ -62,11 +62,11 @@ class Team extends React.Component {
 
   onOk = (data) => {
     const {dispatch} = this.props;
-    const {currentItem} = this.state;
+    const {modalItem} = this.state;
     let params = reFormatParams(data);
     params.token = sessionStorage.getItem('token');
     params.rtId = this.props.teamInfo.id;
-    params.id = currentItem.id;
+    params.id = modalItem.id;
     parkSaveMembers(params).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('修改成功');
