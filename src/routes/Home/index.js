@@ -9,8 +9,9 @@ import IdCard from "../../components/IdCard/IdCard";
 import {connect} from "dva";
 import {Link} from "dva/router";
 import Sign from "./sign";
+import {validateIsResident} from "../../utils";
 
-const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) => {
+const Index = ({data, match, children, modalVisible, dispatch, selectedKeys, history}) => {
   const HomeList = [{
     title: '个人资料',
     icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
@@ -38,7 +39,8 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
   }, {
     title: '申请离园',
     icon: require('../../assets/icon/home/icon-default-shenqingliyuan.png'),
-    url: '/leave'
+    url: '/leave',
+    auth: true
   }, {
     title: '入驻管理',
     icon: require('../../assets/icon/home/icon-default-ruzhuguanli.png'),
@@ -52,13 +54,34 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
     icon: require('../../assets/icon/home/icon-default-guanyuwomen.png'),
     url: '/about'
   }];
+
+  const doLink = (link) => {
+    if(validateIsResident()){
+      history.push(link)
+    }else{
+      Modal.warning({
+        title: '您还未入驻！',
+        content: '该功能只对已入驻成员开放，请您先入入驻或选择加入已入驻的团队！',
+        centered: true
+      });
+    }
+  };
+
   const onSignClick = () => {
-    dispatch({
-      type: 'home/updateState',
-      payload: {
-        modalVisible: true
-      }
-    })
+    if(validateIsResident()){
+      dispatch({
+        type: 'home/updateState',
+        payload: {
+          modalVisible: true
+        }
+      })
+    }else{
+      Modal.warning({
+        title: '您还未入驻！',
+        content: '该功能只对已入驻成员开放，请您先入入驻或选择加入已入驻的团队！',
+        centered: true
+      });
+    }
   };
   const onCancelClick = () => {
     dispatch({
@@ -78,7 +101,7 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
     })
   };
 
-  if(data.residentTeamStatus === 1){ //判断当前用户是否已经入驻
+  if(data.residentTeamStatus >= 2){ //判断当前用户是否已经入驻 小于2的是未入驻
     HomeList.splice(1, 0, {
       title: '团队档案',
       icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
@@ -109,10 +132,13 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
               {HomeList.map((item, index) => {
                 return (
                   <Menu.Item key={index} onClick={onMenuItemClick}>
-                    <Link to={`/home${item.url}`}>
+                    {item.auth ?  <div onClick={() => {doLink(`/home${item.url}`)}}>
                       <img src={item.icon} alt="" style={{marginRight: 10}}/>
                       <span>{item.title}</span>
-                    </Link>
+                    </div> : <Link to={`/home${item.url}`}>
+                      <img src={item.icon} alt="" style={{marginRight: 10}}/>
+                      <span>{item.title}</span>
+                    </Link>}
                   </Menu.Item>
                 )
               })}

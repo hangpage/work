@@ -5,10 +5,11 @@
  */
 import React from 'react';
 import banner from "../../assets/banner/banner-fuwu.png";
-import {Col, Pagination, Row} from "antd";
+import {Col, Pagination, Row, Modal} from "antd";
 import {connect} from "dva";
 import config from '../../utils/config';
 import {Link} from "dva/router";
+import {validateIsResident} from "../../utils";
 
 const LIST = [{
   img: require('../../assets/service/img-yuyuehuiyishi.png'),
@@ -38,13 +39,26 @@ const LIST = [{
 }];
 
 
-const Index = ({serviceTypeList, serviceTypeCount, dispatch}) => {
+const Index = ({serviceTypeList, serviceTypeCount, dispatch, history}) => {
   const onPageChange = (pageNo, pageSize) => {
     dispatch({
       type: 'service/queryServiceTypeList',
       payload: {pageNo, pageSize}
     })
   };
+
+  const doLink = (link) => {
+      if(validateIsResident()){
+        history.push(link)
+      }else{
+        Modal.warning({
+          title: '您还未入驻！',
+          content: '该功能只对已入驻成员开放，请您先入入驻或选择加入已入驻的团队！',
+          centered: true
+        });
+      }
+  };
+
   return (
     <div className='bg-white pb80'>
       <div style={{width: '100%'}}>
@@ -55,15 +69,13 @@ const Index = ({serviceTypeList, serviceTypeCount, dispatch}) => {
           {LIST.map((item, index) => {
             return (
               <Col key={index}>
-                <Link to={item.link}>
-                  <div className="service-card" style={{backgroundImage: `url(${item.img})`}}>
-                    <div className="mask">
-                      {/*<img className='img' src={item.img} alt=""/>*/}
-                      <img className='icon' src={item.icon} alt=""/>
-                      <p>{item.text}</p>
-                    </div>
+                <div className="service-card" style={{backgroundImage: `url(${item.img})`}} onClick={() => {doLink(item.link)}}>
+                  <div className="mask">
+                    {/*<img className='img' src={item.img} alt=""/>*/}
+                    <img className='icon' src={item.icon} alt=""/>
+                    <p>{item.text}</p>
                   </div>
-                </Link>
+                </div>
               </Col>
             )
           })}
@@ -72,15 +84,13 @@ const Index = ({serviceTypeList, serviceTypeCount, dispatch}) => {
           {serviceTypeList.map((item, index) => {
             return (
               <Col span={12} key={index}>
-                <Link to={`/service/${item.id}`}>
-                  <div className="service-type mt50"
-                       style={{background: `url(${config.URL}${item.pic})}`}}>
-                    <img src={`${config.URL}${item.pic}`} alt=""/>
-                    <div className="img-box">
-                      {item.name}
-                    </div>
+                <div className="service-type mt50" onClick={() => {doLink(`/service/${item.id}`)}}
+                     style={{background: `url(${config.URL}${item.pic})}`}}>
+                  <img src={`${config.URL}${item.pic}`} alt=""/>
+                  <div className="img-box">
+                    {item.name}
                   </div>
-                </Link>
+                </div>
               </Col>
             )
           })}

@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  overflow: hidden;
 }
 .card .info {
   font-size: 14px;
@@ -82,9 +83,12 @@
   -webkit-box-orient: vertical;
 }
 .card .title {
-  line-height: 28px;
+  line-height: 28px !important;
   font-size: 20px;
   color: #333333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .card .baoming {
   display: inline-block;

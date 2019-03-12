@@ -6,8 +6,25 @@
 import React from 'react';
 import styles from './ReportCard.less';
 import {Link} from "dva/router";
+import {validateIsResident} from "../../utils";
+import {Modal} from "antd";
 
-const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true}) => {
+const ReportCard = ({img, history, title, time, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false}) => {
+  const doLink = (link) => {
+    if(auth){
+      if(validateIsResident()){
+        history.push(link);
+      }else{
+        Modal.warning({
+          title: '您还未入驻！',
+          content: '该功能只对已入驻成员开放，请您先入入驻或选择加入已入驻的团队！',
+          centered: true
+        });
+      }
+    }else{
+      history.push(link);
+    }
+  };
   return (
     <div className={styles.card}>
       <img src={img} alt=""/>
@@ -19,7 +36,7 @@ const ReportCard = ({img, title, time, read, content, mId, noTeacher, reportLink
         </div>
         <p className={styles.content} style={{"WebkitBoxOrient": "vertical"}}>{content}</p>
         <div>
-          {allowReport && <div className={styles.baoming}><Link className={styles.link} to={reportLink}>{btnName}</Link></div>}
+          {allowReport && <div className={styles.baoming}><div className={styles.link} onClick={() => {doLink(reportLink)}}>{btnName}</div></div>}
           {!noTeacher ? <div className={styles.daoshi}><Link to={`/competition/${mId}/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}
         </div>
       </div>

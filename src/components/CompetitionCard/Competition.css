@@ -49,10 +49,8 @@
   border-bottom: 1px solid #999999;
   padding-bottom: 14px;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 }
 .card {
   border-radius: 4px;

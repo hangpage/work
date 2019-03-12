@@ -177,4 +177,7 @@
 :global .bl-label .ant-radio-wrapper-disabled > span {
   background: rgba(153, 153, 153, 0.2);
 }
+:global .ant-modal-confirm-body-wrapper .ant-modal-confirm-btns .ant-btn-primary {
+  background: linear-gradient(to right, #00acaf, #0771bb);
+}
 /*# sourceMappingURL=cover.css.map */

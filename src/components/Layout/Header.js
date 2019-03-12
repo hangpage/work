@@ -127,8 +127,8 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
         </Menu>}
         {!showSearch && <img className='search' src={searchIcon} onClick={onSearchClick} alt=""/>}
         {showSearch && <SearchButton onCloseClick={onCloseClick} onPressEnter={onSearch} onSearchClick={onSearch}/>}
-        <div onClick={goToPersonalCenter} style={{cursor: 'pointer'}}>
-          <Avatar size={60} icon="user" src={user.img} style={{marginLeft: 12, marginRight: 3}}/>
+        <div onClick={goToPersonalCenter} style={{cursor: 'pointer', display: 'flex', alignItems: 'center'}}>
+          <Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/>
           <span className='nickname'>{user.nickName}</span>
         </div>
         {sessionStorage.getItem('token') &&

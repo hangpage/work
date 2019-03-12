@@ -182,6 +182,11 @@
 :global .ant-layout-header .nickname {
   color: #1F81C2;
   font-size: 14px;
+  display: block;
+  width: 53px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 :global .ant-layout-header .search {
   margin-left: 100px;
@@ -751,6 +756,7 @@
   position: relative;
   background-size: 238px;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 :global .service-card .mask {
   position: absolute;
@@ -796,6 +802,7 @@
   background: rgba(0, 12, 23, 0.5);
   background-size: 100% 100%;
   position: relative;
+  cursor: pointer;
 }
 :global .service-type img {
   position: absolute;

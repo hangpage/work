@@ -4,13 +4,9 @@ import './common.css';
 import './cover.css';
 
 // 1. Initialize
-const app = dva({
-  onError(error, dispatch){
-    console.log(error);
-  }
-});
+const app = dva();
 
-window.g_app = app;
+window.g_app = app; //开放全局app变量
 
 // 2. Plugins
 // app.use(createLoading());

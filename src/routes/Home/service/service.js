@@ -12,7 +12,7 @@ const Service = ({service}) => {
   return (
     <div style={{padding: '40px 20px 60px'}}>
       {service.length ? service.map((item, index) =>
-        <HomeServiceCard key={index} status={item.status} name={item.name} time={item.createTime} phone={item.phone} content={item.content}/>
+        <HomeServiceCard key={index} status={item.status} name={item.name} time={item.createTime} phone={item.phone} content={item.note}/>
       ) : <Empty/>}
     </div>
   );

@@ -20,6 +20,7 @@ const Detail = ({data}) => {
           img={data.pic}
           reportLink={`/activity/${data.id}/report?id=${data.id}`}
           noTeacher={true}
+          auth={true}
         />
         <div className='competition-detail mb40' dangerouslySetInnerHTML={{__html: data.content}} />
         <div className='height6line  mb40'/>

@@ -70,7 +70,7 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            noticeContent: {content: data.data.list[0].content},
+            noticeContent: {content: data.data.list[0].title},
           }
         });
       }
