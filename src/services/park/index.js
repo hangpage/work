@@ -47,7 +47,7 @@ export function parkSavePrincipal(params){
   });
 }
 /**
- * @Description: 入驻园区
+ * @Description: 团队信息保存成员
  * @Param:
  * @return:
  * @Author: zzhihang@hotmail.com

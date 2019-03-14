@@ -1,4 +1,4 @@
-import {Carousel, Col, Layout, Row} from 'antd';
+import {Carousel, Col, message, Row} from 'antd';
 import pl from '../../assets/index/bg-zuo-gonhgao.png';
 import laba from '../../assets/icon/icon-gonggao.png';
 import jinru from '../../assets/icon/icon-jinru.png';
@@ -6,11 +6,9 @@ import {ActivityCard, IndexEntrance} from "../../components";
 import React from "react";
 import IndexTitle from "../../components/IndexTitle/IndexTitle";
 import CompetitionCard from "../../components/CompetitionCard/CompetitionCard";
-import {Link} from 'dva/router'
+import {Link, routerRedux} from 'dva/router'
 import config from '../../utils/config';
 import {connect} from "dva";
-
-const {Content} = Layout;
 
 
 const INDEX_ENTRANCE_LIST = [{
@@ -24,14 +22,27 @@ const INDEX_ENTRANCE_LIST = [{
 },{
   icon: require('../../assets/icon/icon-yuanquruzhu.png'),
   text: '园区入驻',
-  link: '/park'
+  link: '/park',
+  auth: true
 },{
   icon: require('../../assets/icon/icon-bisaibaoming.png'),
   text: '比赛报名',
   link: '/competition'
 }];
 
-const Index = ({competitionList, activityList, articleList, noticeContent, slideShowList}) => {
+const Index = ({competitionList, activityList, articleList, noticeContent, slideShowList, dispatch}) => {
+
+  const doLink = (link) => {
+    const status = JSON.parse(sessionStorage.getItem('user')).residentTeamStatus;
+    if(status === 1){
+      return message.warning('您已申请入驻！')
+    }else if(status > 1){
+      return message.warning('您已入驻！')
+    }else{
+      dispatch(routerRedux.push(link));
+    }
+  };
+
   return (
     <div className='bg-white pb78'>
       <div style={{width: '100%'}}>
@@ -88,7 +99,12 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
       </div>
       <div className='w'>
         <div className="flex-width-space-between" style={{marginTop: 75}}>
-          {INDEX_ENTRANCE_LIST.map((item, index) => <Link to={item.link} key={index}><IndexEntrance key={index} icon={item.icon} text={item.text} /></Link>)}
+          {INDEX_ENTRANCE_LIST.map((item, index) => {
+            if(item.auth){
+              return <div onClick={() => {doLink(item.link)}} key={index}><IndexEntrance icon={item.icon} text={item.text} /></div>
+            }
+            return <Link to={item.link} key={index}><IndexEntrance icon={item.icon} text={item.text} /></Link>
+          })}
         </div>
        <div className="stage">
          <IndexTitle title='最新活动' alias='activity' moreLink='/activity'/>

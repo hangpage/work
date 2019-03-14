@@ -4,7 +4,7 @@
   ],
   "proxy": {
       "/api": {
-        "target": "http://39.98.37.28/beili/",
+        "target": "http://39.104.109.31/beili/",
         "changeOrigin": true,
         "pathRewrite": { "^/api" : "" }
       }

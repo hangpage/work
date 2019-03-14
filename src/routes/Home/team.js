@@ -36,15 +36,15 @@ const Team = ({teamInfo, location, data}) => {
       <div>
         <div className="w">
           <Tabs>
-            <Tabs.TabPane tab='公司与项目信息' key='0'>
+            {data.principal === '1' && <Tabs.TabPane tab='公司与项目信息' key='0'>
               <CompanyInfo/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab='融资情况' key='1'>
+            </Tabs.TabPane>}
+            {data.principal === '1' && <Tabs.TabPane tab='融资情况' key='1'>
               <FinancingInfo/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab='团队信息' key='2'>
+            </Tabs.TabPane>}
+            {data.principal === '1' &&  <Tabs.TabPane tab='团队信息' key='2'>
               <TeamInfo/>
-            </Tabs.TabPane>
+            </Tabs.TabPane>}
             {data.principal === '1' && <Tabs.TabPane tab='个人详情（负责人）' key='3'>
               <LeaderInfo/>
             </Tabs.TabPane>}
