@@ -69,7 +69,7 @@ export function getBase64(img, callback) {
 
 
 export function validateIsResident() { //大于等于2表示入驻
-  if(JSON.parse(sessionStorage.getItem('user').residentTeamStatus >= 2)){
+  if(JSON.parse(sessionStorage.getItem('user')).residentTeamStatus >= 2){
     return true;
   }
   return false;

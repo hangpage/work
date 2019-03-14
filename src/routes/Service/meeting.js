@@ -130,7 +130,7 @@ class Lockers extends React.Component{
     return (
       <div className='second-bg'>
         <div className="w form-bl service-form-wrapper">
-          <Form layout='horizontal'>
+          <Form layout='horizontal' style={{paddingLeft: 100}}>
             {INPUT_LIST.map((item, index) => {
               const open = this.state[`${item.field}Open`]
               if(item.type === 'timepicker'){

@@ -7,11 +7,11 @@ import React from 'react';
 import {Layout, Menu, Modal} from 'antd';
 import IdCard from "../../components/IdCard/IdCard";
 import {connect} from "dva";
-import {Link} from "dva/router";
+import {Link, routerRedux} from "dva/router";
 import Sign from "./sign";
 import {validateIsResident} from "../../utils";
 
-const Index = ({data, match, children, modalVisible, dispatch, selectedKeys, history}) => {
+const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) => {
   const HomeList = [{
     title: '个人资料',
     icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
@@ -57,7 +57,7 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys, his
 
   const doLink = (link) => {
     if(validateIsResident()){
-      history.push(link)
+      dispatch(routerRedux.push(link));
     }else{
       Modal.warning({
         title: '您还未入驻！',

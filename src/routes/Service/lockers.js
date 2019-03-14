@@ -9,7 +9,6 @@ import {equalResultStatus} from "../../utils";
 import {serviceLockerAppli, serviceQueryLockers} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 import Radio from "antd/es/radio";
-import {cloneDeep} from "lodash";
 
 
 class Lockers extends React.Component{
@@ -62,11 +61,11 @@ class Lockers extends React.Component{
     return (
       <div className='second-bg'>
         <div className="w form-bl service-form-wrapper">
+          <div style={{color: '#333', fontSize: 20}}>选择储物柜</div>
+          <div className="height1line mt29 mb29" style={{background:'#999999'}}/>
           <Form>
             <Form.Item
-              label="选择储物柜"
-              labelCol={{span: 8}}
-              wrapperCol={{span: 16}}
+              wrapperCol={{span: 24}}
               colon={false}
             >
             {getFieldDecorator('locker')(
@@ -76,7 +75,7 @@ class Lockers extends React.Component{
             )}
             </Form.Item>
           </Form>
-          <Row type='flex' justify='space-around'>
+          <Row type='flex' justify='space-between'>
             <BackButton />
             <div className='main-button' onClick={submit}>提交</div>
           </Row>

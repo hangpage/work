@@ -8,7 +8,6 @@ import banner from "../../assets/banner/banner-fuwu.png";
 import {Col, Pagination, Row, Modal} from "antd";
 import {connect} from "dva";
 import config from '../../utils/config';
-import {Link} from "dva/router";
 import {validateIsResident} from "../../utils";
 
 const LIST = [{

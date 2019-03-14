@@ -8,7 +8,7 @@ import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
 import {Avatar} from "antd";
 
-const Detail = ({data}) => {
+const Detail = ({data, history}) => {
   return (
     <div className='second-bg'>
       <div className="w">
@@ -21,6 +21,7 @@ const Detail = ({data}) => {
           reportLink={`/activity/${data.id}/report?id=${data.id}`}
           noTeacher={true}
           auth={true}
+          history={history}
         />
         <div className='competition-detail mb40' dangerouslySetInnerHTML={{__html: data.content}} />
         <div className='height6line  mb40'/>

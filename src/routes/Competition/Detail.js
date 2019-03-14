@@ -11,7 +11,7 @@ import {Avatar, Empty} from "antd";
 import {Link} from "dva/router";
 import qs from "qs";
 
-const Detail = ({data, location, match}) => {
+const Detail = ({data, location, match, history}) => {
   const params = getParams(location.search);
   let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
   let btnName = '报名';
@@ -48,6 +48,7 @@ const Detail = ({data, location, match}) => {
           noTeacher={noTeacher}
           img={data.pic}
           allowReport={allowReport}
+          history={history}
         />
         <div className='competition-detail' dangerouslySetInnerHTML={{__html: data.content}}/>
         <div className='height6line  mb40'/>
