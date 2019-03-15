@@ -160,6 +160,7 @@
   text-align: center;
   line-height: 23px;
   vertical-align: bottom;
+  cursor: pointer;
 }
 :global .normal-upload .ant-upload {
   color: #ffffff !important;

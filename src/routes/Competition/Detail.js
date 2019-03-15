@@ -17,12 +17,14 @@ const Detail = ({data, location, match, history}) => {
   let btnName = '报名';
   let allowReport;
   let noTeacher;
+  let obKey = 'joinTeams';
   if (params.from === 'home') {
     btnName = '查看比赛进度';
     noTeacher = true;
     if (params.isTutor === '1') {
       allowReport = false;
       link = `${match.url}/score`;
+      obKey = `tutorReview`;
     } else {
       link = `${match.url}/progress${location.search}`;
     }
@@ -30,8 +32,13 @@ const Detail = ({data, location, match, history}) => {
     allowReport = data.status === '2';
   }
 
-  if(data.type === '3'){
+  if(data.type === '3'){ //其他比赛不允许申请导师 只能报名
     noTeacher = true;
+  }
+
+  if(data.status === '12'){ //比赛结束状态不允许报名和申请导师
+    noTeacher = true;
+    allowReport = false;
   }
 
   return (
@@ -56,7 +63,7 @@ const Detail = ({data, location, match, history}) => {
           <p>已报名</p>
           <div className="member-box competition-sign-member">
             {
-              data.tutorReview && data.tutorReview.length ? data.tutorReview.map((item, index) => {
+              data[obKey] && data[obKey].length ? data[obKey].map((item, index) => {
                 return (
                   <li key={index}>
                     <Avatar size={50} src={item.pic}/>

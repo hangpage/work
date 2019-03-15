@@ -6,7 +6,7 @@
 import React from 'react';
 import {Form, Input, message} from "antd";
 import {connect} from "dva";
-import {equalResultStatus, getParams} from "../../utils";
+import {equalResultStatus} from "../../utils";
 import {saveScore} from "../../services/competition";
 import qs from "qs";
 

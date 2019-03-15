@@ -26,17 +26,22 @@ const TeamInfoWrite = ({form, history, location}) => {
         Object.keys(params).forEach((item) => {
           formData.append(item, params[item]);
         });
-        insertTeam(qs.parse(location.search.split('?')[1]));
-        insertProject(formData).then(({data}) => {
-          if (equalResultStatus(data)) {
-            message.success('保存成功');
-            history.push({
-              pathname: '/index',
-            });
-          } else {
+        insertTeam(qs.parse(location.search.split('?')[1])).then(({data}) => {
+          if(equalResultStatus(data)){
+            insertProject(formData).then(({data}) => {
+              if (equalResultStatus(data)) {
+                message.success('保存成功');
+                history.push({
+                  pathname: '/index',
+                });
+              } else {
+                message.error(data.message);
+              }
+            })
+          }else{
             message.error(data.message);
           }
-        })
+        });
       }
     });
   };
@@ -60,6 +65,17 @@ const TeamInfoWrite = ({form, history, location}) => {
                   rules: [{required: true, message: '请输入项目名称'}],
                 })(
                   <Input placeholder='请输入项目名称'/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label="产品与服务"
+                labelCol={{span: 12}}
+                wrapperCol={{span: 24}}
+              >
+                {getFieldDecorator('service', {
+                  rules: [{required: true,message: '请输入产品与服务'}],
+                })(
+                  <TextArea placeholder='请输入产品与服务...' style={{height: 240}}/>
                 )}
               </Form.Item>
               <Form.Item

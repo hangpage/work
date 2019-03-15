@@ -8,8 +8,18 @@ import {connect} from "dva";
 import {Link} from "dva/router";
 import HorizontalCard from "../../../components/HorizontalCard/HorizontalCard";
 import Empty from "antd/es/empty";
+import {Pagination} from "antd";
 
-const Article = ({historyArticle}) => {
+const Article = ({historyArticle, historyArticleCount, dispatch}) => {
+  const onPageChange = (pageNo, pageSize) => {
+    dispatch({
+      type: 'home/historyArticle',
+      payload: {
+        pageNo,
+        pageSize
+      }
+    })
+  };
   return (
     <div className='pl20 pr 20'>
       {historyArticle.length ? historyArticle.map((item, index) => {
@@ -20,6 +30,7 @@ const Article = ({historyArticle}) => {
           </Link>
         )
       }) : <Empty/>}
+      <Pagination total={historyArticleCount} onChange={onPageChange} pageSize={4} className='mt30'/>
     </div>
   );
 };

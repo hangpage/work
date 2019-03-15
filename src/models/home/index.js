@@ -41,7 +41,9 @@ export default {
     aboutUs: {},
     leaderAndMemberInfo: {},
     historyArticle: [],
-    historyActivity: []
+    historyActivity: [],
+    historyActivityCount: 0,
+    historyArticleCount: 0
   },
 
   subscriptions: {
@@ -107,8 +109,8 @@ export default {
             }
           })
         }else if(pathMatchRegexp('/home/history', location.pathname)){
-          dispatch({type: 'historyArticle'});
-          dispatch({type: 'historyActivity'});
+          dispatch({type: 'historyArticle', payload: {pageNo: 1, pageSize: 4}});
+          dispatch({type: 'historyActivity', payload: {pageNo: 1, pageSize: 4}});
           dispatch({type: 'updateState',
             payload: {
               selectedKeys: ['6']
@@ -195,7 +197,8 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            historyActivity: data.data.list
+            historyActivity: data.data.list,
+            historyActivityCount: data.data.count
           }
         })
       }else{
@@ -208,7 +211,8 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            historyArticle: data.data.list
+            historyArticle: data.data.list,
+            historyArticleCount: data.data.count
           }
         })
       }else {

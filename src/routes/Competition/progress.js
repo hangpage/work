@@ -19,7 +19,8 @@ const Progress = ({location, teamDetail}) => {
       <div style={{background: '#f5f5f5'}}>
         <div style={{width: 470, paddingTop: 53, margin: '0 auto'}}>
           <Timeline pending={pen} pendingDot={<i/>}>
-            <Timeline.Item dot={<i className='icon-timeline-circle'/>}><p className='mb12'>报名开始<span>{params.time1}</span></p></Timeline.Item>
+            <Timeline.Item dot={<i className='icon-timeline-circle'/>}><p
+              className='mb12'>报名开始<span>{params.time1}</span></p></Timeline.Item>
             {teamDetail.schoolReview &&
             <Timeline.Item dot={<i className='icon-timeline-circle'/>}><p
               className='mb12'>学校内部评审<span>{params.time2}</span></p>{teamDetail.schoolReview.total}</Timeline.Item>}

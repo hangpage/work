@@ -16,7 +16,7 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
     title: '个人资料',
     icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
     url: '/profile'
-  },  {
+  }, {
     title: '我的比赛',
     icon: require('../../assets/icon/home/icon-default-bisai.png'),
     url: '/match'
