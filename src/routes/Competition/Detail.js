@@ -6,40 +6,38 @@
 import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
-import {getParams} from "../../utils";
 import {Avatar, Empty} from "antd";
 import {Link} from "dva/router";
 import qs from "qs";
 
 const Detail = ({data, location, match, history}) => {
-  const params = getParams(location.search);
   let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
   let btnName = '报名';
   let allowReport;
   let noTeacher;
   let obKey = 'joinTeams';
-  if (params.from === 'home') {
+
+  if(String(data.joinUser) === '1'){ //已报名当前比赛
     btnName = '查看比赛进度';
     noTeacher = true;
-    if (params.isTutor === '1') {
+    if(String(data.isTutor) === '1'){//当前用户是导师
       allowReport = false;
       link = `${match.url}/score`;
       obKey = `tutorReview`;
-    } else {
+    }else{//当前用户不是导师
       link = `${match.url}/progress${location.search}`;
     }
-  } else {
+  }else{//当前用户未报名当前比赛
     allowReport = data.status === '2';
+    if(Number(data.status) >= 7){ //网络评审结束状态不允许报名和申请导师
+      noTeacher = true;
+      allowReport = false;
+    }
   }
-
   if(data.type === '3'){ //其他比赛不允许申请导师 只能报名
     noTeacher = true;
   }
 
-  if(data.status === '12'){ //比赛结束状态不允许报名和申请导师
-    noTeacher = true;
-    allowReport = false;
-  }
 
   return (
     <div className='second-bg'>
@@ -68,7 +66,7 @@ const Detail = ({data, location, match, history}) => {
                   <li key={index}>
                     <Avatar size={50} src={item.pic}/>
                     <span>{item.name}</span>
-                    {params.isTutor === '1' && Number(data.status) >= 6 && data.type !== '3' &&
+                    {data.isTutor === '1' && Number(data.status) >= 6 && data.type !== '3' &&
                     <Link to={`${link}?${qs.stringify(item)}&matchName=${data.name}`}><span className='dianping'>点评</span></Link>}
                   </li>
                 )

@@ -526,9 +526,9 @@
 }
 :global .sign-member .member-box.competition-sign-member li {
   width: 50%;
-  text-align: center;
   padding-top: 31px;
   padding-bottom: 31px;
+  padding-left: 182px;
   height: initial;
   line-height: initial;
   position: relative;
