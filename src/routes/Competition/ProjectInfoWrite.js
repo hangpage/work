@@ -10,6 +10,7 @@ import {equalResultStatus, getParams, reFormatParams} from "../../utils";
 import {insertProject, insertTeam} from "../../services/competition";
 import FileUpload from "../../components/FileUpload/FileUpload";
 import qs from "qs";
+import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 const {TextArea} = Input;
 
@@ -65,6 +66,17 @@ const TeamInfoWrite = ({form, history, location}) => {
                   rules: [{required: true, message: '请输入项目名称'}],
                 })(
                   <Input placeholder='请输入项目名称'/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label="项目概况"
+                labelCol={{span: 12}}
+                wrapperCol={{span: 24}}
+              >
+                {getFieldDecorator('generalization', {
+                  rules: [{required: true,message: '请输入项目概况'}],
+                })(
+                  <TextArea placeholder='请输入项目概况...' style={{height: 240}}/>
                 )}
               </Form.Item>
               <Form.Item
@@ -156,6 +168,28 @@ const TeamInfoWrite = ({form, history, location}) => {
                 )}
               </Form.Item>
               <Form.Item
+                label="组织结构"
+                labelCol={{span: 12}}
+                wrapperCol={{span: 24}}
+              >
+                {getFieldDecorator('organizationStructure', {
+                  rules: [{required: true,message: '请填写'}],
+                })(
+                  <TextArea placeholder='请输入组织结构...' style={{height: 240}}/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label="核心团队介绍"
+                labelCol={{span: 12}}
+                wrapperCol={{span: 24}}
+              >
+                {getFieldDecorator('teamIntroduction', {
+                  rules: [{required: true,message: '请填写'}],
+                })(
+                  <TextArea placeholder='请输入核心团队介绍...' style={{height: 240}}/>
+                )}
+              </Form.Item>
+              <Form.Item
                 label="其他"
                 labelCol={{span: 12}}
                 wrapperCol={{span: 24}}
@@ -167,12 +201,34 @@ const TeamInfoWrite = ({form, history, location}) => {
                 )}
               </Form.Item>
               <Form.Item
-                label="附件"
+                label="附件一：填写《北京地区高校大学生优秀创业团队评选活动申请表》，打印好，到学校就业服务中心盖章，然后将扫描件上传"
                 labelCol={{span: 24}}
                 wrapperCol={{span: 6}}
               >
                 {getFieldDecorator('file')(
-                  <FileUpload/>
+                  <ImageUpload/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label="附件二：团队负责人（企业法人）身份证扫描件"
+                labelCol={{span: 24}}
+                wrapperCol={{span: 18}}
+                className='row-upload'
+              >
+                {getFieldDecorator('principalCardFront')(
+                  <ImageUpload uploadText='身份证正面'/>
+                )}
+                {getFieldDecorator('principalCardReverse')(
+                  <ImageUpload uploadText={'身份证反面'}/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label="附件三：已注册企业需准备《营业执照》扫描件"
+                labelCol={{span: 24}}
+                wrapperCol={{span: 6}}
+              >
+                {getFieldDecorator('businessLicense')(
+                  <ImageUpload/>
                 )}
               </Form.Item>
             </Form>

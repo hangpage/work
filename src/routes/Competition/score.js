@@ -14,6 +14,9 @@ import qs from "qs";
 const List = [{
   title: '产品与服务',
   field: 'service',
+},{
+  title: '项目概况',
+  field: 'generalization',
 }, {
   title: '市场分析',
   field: 'marketAnalysis',
@@ -35,6 +38,12 @@ const List = [{
 }, {
   title: '网站介绍',
   field: 'webIntro',
+}, {
+  title: '组织结构',
+  field: 'organizationStructure',
+}, {
+  title: '核心团队介绍',
+  field: 'teamIntroduction',
 }, {
   title: '其他',
   field: 'other',

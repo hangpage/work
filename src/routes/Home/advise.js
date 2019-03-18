@@ -76,7 +76,7 @@ const Leave = ({form}) => {
           </Form.Item>
         </Form>
         <div className='text-align'>
-          <div className="main-button" style={{width: 360}} onClick={handleSubmit}>提交</div>
+          <div className="main-button" style={{width: 330}} onClick={handleSubmit}>提交</div>
         </div>
       </div>
   );

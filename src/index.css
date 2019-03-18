@@ -509,7 +509,6 @@
 :global .sign-member .member-box {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 :global .sign-member .member-box li {
   display: inline-block;
@@ -731,7 +730,7 @@
   position: absolute;
   left: 0;
   top: 50%;
-  margin-top: -21px;
+  margin-top: -36px;
 }
 :global .footer .ant-layout-footer {
   height: 153px;
@@ -1416,5 +1415,8 @@
 :global .ant-timeline-item-content p span {
   color: #999999;
   float: right;
+}
+:global .row-upload .ant-form-item-children {
+  display: flex !important;
 }
 /*# sourceMappingURL=index.css.map */

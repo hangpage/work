@@ -30,9 +30,15 @@ const Profile = ({form, data, dispatch}) => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
+        if(!values.img){
+          return message.error('请上传一张图片作为您的头像');
+        }
         userUpdateInfo(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
+            dispatch({
+              type: 'home/query',
+            })
           } else {
             message.error(data.message);
           }
@@ -72,7 +78,7 @@ const Profile = ({form, data, dispatch}) => {
         <div className="text-align mt40 mb50">
           {getFieldDecorator('img', {
             rules: [{
-              required: true, message: '请输入姓名!',
+              required: true, message: '请上传头像!',
             }],
             initialValue: data.img
           })(
@@ -170,7 +176,7 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('intro', {
             initialValue: data.intro
           })(
-            <Input.TextArea placeholder='输入您的简介...'/>
+            <Input.TextArea placeholder='输入您的简介...' maxLength={10}/>
           )}
         </Form.Item>
       </Form>

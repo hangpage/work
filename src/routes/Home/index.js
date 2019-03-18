@@ -15,43 +15,53 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
   const HomeList = [{
     title: '个人资料',
     icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-gerenziliao.png'),
     url: '/profile'
   }, {
     title: '我的比赛',
     icon: require('../../assets/icon/home/icon-default-bisai.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-bisai.png'),
     url: '/match'
   }, {
     title: '我的活动',
-    icon: require('../../assets/icon/home/icon-default-bisai.png'),
+    icon: require('../../assets/icon/home/icon-default-wodehuodong.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-wodehuodong.png'),
     url: '/activity'
   }, {
     title: '我的服务',
     icon: require('../../assets/icon/home/icon-default-fuwu.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-fuwu.png'),
     url: '/service'
   }, {
     title: '我的消息',
     icon: require('../../assets/icon/home/icon-default-xiaoxi.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-xiaoxi.png'),
     url: '/message'
   }, {
     title: '浏览历史',
     icon: require('../../assets/icon/home/icon-default-liulanlishi.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-liulanlishi.png'),
     url: '/history'
   }, {
     title: '申请离园',
     icon: require('../../assets/icon/home/icon-default-shenqingliyuan.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-shenqingliyuan.png'),
     url: '/leave',
     auth: true
   }, {
     title: '入驻管理',
     icon: require('../../assets/icon/home/icon-default-ruzhuguanli.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-ruzhuguanli.png'),
     url: '/enter'
   }, {
     title: '意见反馈',
     icon: require('../../assets/icon/home/icon-default-yijianfankui.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-yijianfankui.png'),
     url: '/advise'
   }, {
     title: '关于我们',
     icon: require('../../assets/icon/home/icon-default-guanyuwomen.png'),
+    pressIcon:  require('../../assets/icon/home/icon-pressed-guanyuwomen.png'),
     url: '/about'
   }];
 
@@ -104,7 +114,8 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
   if(data.residentTeamStatus >= 2){ //判断当前用户是否已经入驻 小于2的是未入驻
     HomeList.splice(1, 0, {
       title: '团队档案',
-      icon: require('../../assets/icon/home/icon-default-gerenziliao.png'),
+      icon: require('../../assets/icon/home/icon-default-tuanduidangan.png'),
+      pressIcon:  require('../../assets/icon/home/icon-pressed-tuanduidangan.png'),
       url: '/team'
     },)
   }
@@ -133,10 +144,12 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
                 return (
                   <Menu.Item key={index} onClick={onMenuItemClick}>
                     {item.auth ?  <div onClick={() => {doLink(`/home${item.url}`)}}>
-                      <img src={item.icon} alt="" style={{marginRight: 10}}/>
+                      {selectedKeys[0] === String(index) ? <img src={item.pressIcon} alt="" style={{marginRight: 10}}/>
+                        : <img src={item.icon} alt="" style={{marginRight: 10}}/>}
                       <span>{item.title}</span>
                     </div> : <Link to={`/home${item.url}`}>
-                      <img src={item.icon} alt="" style={{marginRight: 10}}/>
+                      {selectedKeys[0] === String(index) ? <img src={item.pressIcon} alt="" style={{marginRight: 10}}/>
+                        : <img src={item.icon} alt="" style={{marginRight: 10}}/>}
                       <span>{item.title}</span>
                     </Link>}
                   </Menu.Item>

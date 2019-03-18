@@ -73,11 +73,11 @@ class ImageUpload extends React.Component {
 
   render() {
     const { previewVisible, previewImage, fileList } = this.state;
-    const {max=1} = this.props;
+    const {max=1, uploadText='点击上传图片'} = this.props;
     const uploadButton = (
       <div>
         <i className='icon-camera'/>
-        <div className="ant-upload-text">点击上传图片</div>
+        <div className="ant-upload-text">{uploadText}</div>
       </div>
     );
     return (

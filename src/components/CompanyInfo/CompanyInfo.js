@@ -9,6 +9,7 @@ import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
 import {reFormatParams} from "../../utils";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
+import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
 
 const {TextArea} = Input;
 
@@ -303,7 +304,7 @@ class CompanyInfo extends React.Component {
                         rules: [{required: true, message: '请选择'}],
                         initialValue: initialValueMap.profession
                       })(
-                        <ComboBox placeholder='请选择所学专业' url='/dict/findType?type=profession'/>
+                        <Input placeholder='请输入专业'/>
                       )}
                     </Form.Item>
                   </Col>
@@ -315,7 +316,7 @@ class CompanyInfo extends React.Component {
                         rules: [{required: true, message: '请选择'}],
                         initialValue: initialValueMap.matchSchoolId
                       })(
-                        <ComboBox nameProp='name' valueProp='id' placeholder='请选择所学专业' url={`/team/findMatchSchool?mId=${matchId}`}/>
+                        <ComboBox nameProp='name' valueProp='id' placeholder='请选择报名学校' url={`/team/findMatchSchool?mId=${matchId}`}/>
                       )}
                     </Form.Item>
                   </Col>
@@ -358,7 +359,7 @@ class CompanyInfo extends React.Component {
                       )}
                     </Form.Item>
                   </Col>
-                  <Col span={6}>
+                  <Col span={12}>
                     <Form.Item
                       label="学生证或身份证"
                     >
@@ -367,6 +368,28 @@ class CompanyInfo extends React.Component {
                         initialValue: initialValueMap.diploma
                       })(
                         <ImageUpload />
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="核心团队成员"
+                    >
+                      {getFieldDecorator('coreMembers', {
+                        rules: [{required: true, message: '请添加'}],
+                      })(
+                        <DynamicFieldSet maxNum={6} name='coreMembers' fieldText='核心团队成员' />
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="指导教师"
+                    >
+                      {getFieldDecorator('guidanceTeacher', {
+                        rules: [{required: true, message: '请添加'}],
+                      })(
+                        <DynamicFieldSet maxNum={3} name='guidanceTeacher' fieldText='指导教师' />
                       )}
                     </Form.Item>
                   </Col>
