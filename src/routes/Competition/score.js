@@ -42,9 +42,6 @@ const List = [{
   title: '组织结构',
   field: 'organizationStructure',
 }, {
-  title: '核心团队介绍',
-  field: 'teamIntroduction',
-}, {
   title: '其他',
   field: 'other',
 }];

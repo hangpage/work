@@ -43,7 +43,8 @@ export default {
     historyArticle: [],
     historyActivity: [],
     historyActivityCount: 0,
-    historyArticleCount: 0
+    historyArticleCount: 0,
+    systemNoticeCount: 0
   },
 
   subscriptions: {
@@ -93,7 +94,7 @@ export default {
             }
           })
         }else if(pathMatchRegexp('/home/message', location.pathname)){
-          dispatch({type: 'userFindSystem'});
+          dispatch({type: 'userFindSystem', payload: {pageNo: 1, pageSize: 4}});
           dispatch({type: 'userFindComment'});
           dispatch({type: 'userFindAwesome'});
           dispatch({type: 'updateState',
@@ -316,7 +317,8 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            system: data.data.list
+            system: data.data.list,
+            systemNoticeCount: data.data.count
           }
         })
       }else{

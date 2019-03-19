@@ -24,6 +24,7 @@ class TeamInfoWrite extends React.Component {
       return message.error('请填写必填项！');
     }
     params.mId = getParams(location.search).mId;
+    sessionStorage.setItem('cInfo', JSON.stringify(params));
     history.push(`/competition/${params.mId}/project_info_write?${qs.stringify(params)}`);
   };
 

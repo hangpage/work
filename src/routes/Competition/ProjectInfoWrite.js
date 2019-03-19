@@ -8,7 +8,6 @@ import {Form, Input, message, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import {equalResultStatus, getParams, reFormatParams} from "../../utils";
 import {insertProject, insertTeam} from "../../services/competition";
-import FileUpload from "../../components/FileUpload/FileUpload";
 import qs from "qs";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 
@@ -32,6 +31,7 @@ const TeamInfoWrite = ({form, history, location}) => {
             insertProject(formData).then(({data}) => {
               if (equalResultStatus(data)) {
                 message.success('保存成功');
+                sessionStorage.removeItem('cInfo');
                 history.push({
                   pathname: '/index',
                 });

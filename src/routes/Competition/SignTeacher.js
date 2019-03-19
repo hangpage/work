@@ -109,6 +109,17 @@ const TeamInfoWrite = ({form, history, location}) => {
                 </Col>
                 <Col span={12}>
                   <Form.Item
+                    label="学历"
+                  >
+                    {getFieldDecorator('educationalBackground', {
+                      rules: [{required: true, message: '必填项'}],
+                    })(
+                      <Input placeholder='请填写学历'/>
+                    )}
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
                     label="最高学历院校"
                   >
                     {getFieldDecorator('school', {
@@ -131,12 +142,12 @@ const TeamInfoWrite = ({form, history, location}) => {
                 </Col>
                 <Col span={12}>
                   <Form.Item
-                    label="职业资格"
+                    label="职业资格(用英文逗号分割)"
                   >
                     {getFieldDecorator('professional', {
                       rules: [{required: true, message: '必填项'}],
                     })(
-                      <Input placeholder='请输入职业资格'/>
+                      <Input placeholder='请输入职业资格(用英文逗号分割)'/>
                     )}
                   </Form.Item>
                 </Col>
@@ -153,12 +164,12 @@ const TeamInfoWrite = ({form, history, location}) => {
                 </Col>
                 <Col span={12}>
                   <Form.Item
-                    label="行业"
+                    label="擅长领域"
                   >
                     {getFieldDecorator('industry', {
                       rules: [{required: true, message: '必填项'}],
                     })(
-                      <ComboBox placeholder='请选择行业' url='/dict/findType?type=industry'/>
+                      <ComboBox placeholder='请选择擅长领域' url='/dict/findType?type=industry'/>
                     )}
                   </Form.Item>
                 </Col>

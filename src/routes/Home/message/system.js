@@ -6,14 +6,24 @@
 import React from 'react';
 import {connect} from "dva";
 import SystemMessage from "../../../components/SystemMessage/SystemMessage";
-import {Empty} from "antd";
+import {Empty, Pagination} from "antd";
 
-const System = ({system}) => {
+const System = ({system, systemNoticeCount, dispatch}) => {
+  const onPageChange = (pageNo, pageSize) => {
+    dispatch({
+      type: 'home/historyActivity',
+      payload: {
+        pageNo,
+        pageSize
+      }
+    })
+  };
   return (
     <div style={{padding: '59px 20px 68px'}}>
       {system.length ? system.map((item, key) =>
         <SystemMessage time={item.createTime} key={key} title={item.title}/>
       ) : <Empty/>}
+      <Pagination total={systemNoticeCount} onChange={onPageChange} pageSize={4} className='mt30'/>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import Const from "../../utils/Const";
 import {reFormatParams} from "../../utils";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
+import moment from "moment";
 
 const {TextArea} = Input;
 
@@ -17,6 +18,9 @@ const {TextArea} = Input;
 class CompanyInfo extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      isRegistRequired: false
+  }
   }
   getTeamInfoData = () =>{
     const {form} = this.props;
@@ -31,6 +35,22 @@ class CompanyInfo extends React.Component {
     });
     return params;
   };
+  componentDidMount() {
+    const cInfo = sessionStorage.getItem('cInfo');
+    if(cInfo){
+      const data = JSON.parse(cInfo);
+      data.birth = moment(data.birth);
+      data.admissionTime = moment(data.admissionTime);
+      this.props.form.setFieldsValue(data);
+    }
+  }
+
+  handleIsRegistChange = (e) => {
+    this.setState({
+      isRegistRequired: e.target.value === '1'
+    })
+  };
+
   render() {
     const {form, matchId='', initialValueMap={}} = this.props;
     const {getFieldDecorator} = form;
@@ -44,13 +64,13 @@ class CompanyInfo extends React.Component {
                 <Row gutter={138}>
                   <Col span={12}>
                     <Form.Item
-                      label="公司名称"
+                      label="公司/团队名称"
                     >
                       {getFieldDecorator('name', {
-                        rules: [{required: true, message: '请输入公司名称'}],
+                        rules: [{required: true, message: '请输入公司/团队名称'}],
                         initialValue: initialValueMap.name
                       })(
-                        <Input placeholder='请输入公司名称'/>
+                        <Input placeholder='请输入公司/团队名称'/>
                       )}
                     </Form.Item>
                   </Col>
@@ -116,13 +136,28 @@ class CompanyInfo extends React.Component {
                   </Col>
                   <Col span={12}>
                     <Form.Item
-                      label="地址"
+                      label="办公地址"
                     >
                       {getFieldDecorator('address', {
-                        rules: [{required: true, message: '请填写地址'}],
+                        rules: [{required: true, message: '请填写办公地址'}],
                         initialValue: initialValueMap.address
                       })(
-                        <Input placeholder='请填写地址' />
+                        <Input placeholder='请填写办公地址' />
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="是否注册"
+                    >
+                      {getFieldDecorator('isRegist', {
+                        rules: [{required: true, message: '请选择'}],
+                        initialValue: initialValueMap.isRegist
+                      })(
+                        <Radio.Group onChange={this.handleIsRegistChange}>
+                          <Radio value={Const.Yes}>是</Radio>
+                          <Radio value={Const.No}>否</Radio>
+                        </Radio.Group>
                       )}
                     </Form.Item>
                   </Col>
@@ -131,7 +166,7 @@ class CompanyInfo extends React.Component {
                       label="注册资金(w)"
                     >
                       {getFieldDecorator('registeredCapital', {
-                        rules: [{required: true, message: '请填写'}],
+                        rules: [{required: this.state.isRegistRequired, message: '请填写'}],
                         initialValue: initialValueMap.registeredCapital
                       })(
                         <Input placeholder='请输入注册资金'/>
@@ -143,7 +178,7 @@ class CompanyInfo extends React.Component {
                       label="申请人所占注册资金比例"
                     >
                       {getFieldDecorator('proportionOfFunds', {
-                        rules: [{required: true, message: '请填写'}],
+                        rules: [{required:  this.state.isRegistRequired, message: '请填写'}],
                         initialValue: initialValueMap.proportionOfFunds
                       })(
                         <Input placeholder='请输入所占注册资金比例'/>
@@ -197,7 +232,7 @@ class CompanyInfo extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('businessRegistration', {
-                    rules: [{required: true, message: '请填写'}],
+                    rules: [{required: this.state.isRegistRequired, message: '请填写'}],
                     initialValue: initialValueMap.businessRegistration
                   })(
                     <TextArea placeholder='请输入团队工商注册情况...' style={{height: 240}}/>
@@ -349,7 +384,7 @@ class CompanyInfo extends React.Component {
                   </Col>
                   <Col span={12}>
                     <Form.Item
-                      label="入学时间"
+                      label="毕业时间"
                     >
                       {getFieldDecorator('admissionTime', {
                         rules: [{required: true, message: '请选择'}],
@@ -373,10 +408,10 @@ class CompanyInfo extends React.Component {
                   </Col>
                   <Col span={12}>
                     <Form.Item
-                      label="核心团队成员"
+                      label="核心成员"
                     >
                       {getFieldDecorator('coreMembers', {
-                        rules: [{required: true, message: '请添加'}],
+                        rules: [{required : true, message: '请添加'}],
                       })(
                         <DynamicFieldSet maxNum={6} name='coreMembers' fieldText='核心团队成员' />
                       )}

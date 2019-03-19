@@ -7,67 +7,82 @@ import {
 let id = 0;
 
 class DynamicFieldSet extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      keys: [],
+      value: []
+    }
+  }
   remove = (k) => {
-    const { form } = this.props;
-    const keys = form.getFieldValue('keys');
+    const {keys, value} = this.state;
     if (keys.length === 1) {
       return;
     }
-    form.setFieldsValue({
+    value.splice(k, 1);
+    this.setState({
       keys: keys.filter(key => key !== k),
+      value: value
     });
-    this.handleInputChange();
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(value.join(','));
+    }
   };
 
   add = () => {
-    const { form, maxNum, fieldText } = this.props;
-    const keys = form.getFieldValue('keys');
+    const { maxNum, fieldText } = this.props;
+    const keys = this.state.keys;
     if(keys.length === maxNum){
       return message.error(`最多添加${maxNum}个${fieldText}`);
     }
     const nextKeys = keys.concat(id++);
-    form.setFieldsValue({
+    this.setState({
       keys: nextKeys,
     });
-    this.handleInputChange();
   };
 
-  handleInputChange = () => {
-    const { form, name, onChange } = this.props;
-    const values = form.getFieldValue(name) || [];
-    const newArr = [];
-    values.forEach((item) => {
-      if(item){
-        newArr.push(item);
-      }
-    });
-    Array.from(values); //防止有empty
-    if (onChange) {
-      console.log(newArr.join(','));
-      onChange(newArr.join(','));
+  handleInputChange = (e, index) => {
+    const { onChange } = this.props;
+    const value = this.state.value || [];
+    value[index] = e.currentTarget.value.replace(/[^\u4e00-\u9fa5\da-zA-Z]+/g, '');
+    if(value[index].length > 10){
+      return message.error('最多填写10个字')
     }
+    if (onChange) {
+      onChange(value.join(','));
+    }
+    this.setState({
+      value: value
+    });
   };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    const value = [];
+    const keys = [];
+    if(nextProps.value){
+      const arr = nextProps.value.split(',');
+      arr.forEach((item, index) => {
+        value.push(item);
+        keys.push(index);
+      });
+      this.setState({value, keys})
+    }
+  }
 
   render() {
-    const { getFieldDecorator, getFieldValue } = this.props.form;
-    const {fieldText, name} = this.props;
-    getFieldDecorator('keys', { initialValue: [] });
-    const keys = getFieldValue('keys');
+    const {fieldText} = this.props;
+    const {keys, value} = this.state;
     const formItems = keys.map((k, index) => (
       <Form.Item
         required={false}
         key={index}
       >
-        {getFieldDecorator(`${name}[${k}]`, {
-          trigger: 'onInput',
-          rules: [{
-            required: true,
-            whitespace: true,
-            message: `请输入${fieldText}`,
-          }],
-        })(
-          <Input onChange={this.handleInputChange} placeholder={`${fieldText}姓名`} style={{ width: '60%', marginRight: 8 }} />
-        )}
+        <Input
+          onChange={(e) => {this.handleInputChange(e, index)}}
+          value={value[index]}
+          placeholder={`${fieldText}姓名`}
+          style={{ width: '60%', marginRight: 8 }} />
         {keys.length > 1 ? (
           <Icon
             className="dynamic-delete-button"
@@ -91,4 +106,4 @@ class DynamicFieldSet extends React.Component {
   }
 }
 
-export default Form.create()(DynamicFieldSet);
+export default DynamicFieldSet;

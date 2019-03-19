@@ -12,7 +12,7 @@ import qs from "qs";
 
 const Detail = ({data, location, match, history}) => {
   let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
-  let btnName = '报名';
+  let btnName = '报名比赛';
   let allowReport;
   let noTeacher;
   let obKey = 'joinTeams';
@@ -24,10 +24,10 @@ const Detail = ({data, location, match, history}) => {
     btnName = '查看比赛进度';
     noTeacher = true;
   }else{//当前用户不是导师
-    link = `${match.url}/progress${location.search}`;
     if(String(data.joinUser) === '1'){
       btnName = '查看比赛进度';
       noTeacher = true;
+      link = `${match.url}/progress${location.search}`;
     }else{
       allowReport = data.status === '2';
       if(Number(data.status) >= 7){ //网络评审结束状态不允许报名和申请导师
