@@ -17,21 +17,23 @@ const Detail = ({data, location, match, history}) => {
   let noTeacher;
   let obKey = 'joinTeams';
 
-  if(String(data.joinUser) === '1'){ //已报名当前比赛
+  if(String(data.isTutor) === '1'){//当前用户是导师
+    allowReport = false;
+    link = `${match.url}/score`;
+    obKey = `tutorReview`;
     btnName = '查看比赛进度';
     noTeacher = true;
-    if(String(data.isTutor) === '1'){//当前用户是导师
-      allowReport = false;
-      link = `${match.url}/score`;
-      obKey = `tutorReview`;
-    }else{//当前用户不是导师
-      link = `${match.url}/progress${location.search}`;
-    }
-  }else{//当前用户未报名当前比赛
-    allowReport = data.status === '2';
-    if(Number(data.status) >= 7){ //网络评审结束状态不允许报名和申请导师
+  }else{//当前用户不是导师
+    link = `${match.url}/progress${location.search}`;
+    if(String(data.joinUser) === '1'){
+      btnName = '查看比赛进度';
       noTeacher = true;
-      allowReport = false;
+    }else{
+      allowReport = data.status === '2';
+      if(Number(data.status) >= 7){ //网络评审结束状态不允许报名和申请导师
+        noTeacher = true;
+        allowReport = false;
+      }
     }
   }
   if(data.type === '3'){ //其他比赛不允许申请导师 只能报名

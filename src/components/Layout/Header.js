@@ -15,7 +15,8 @@ const LIST = [{
   text: '首页',
   linkTo: '/index',
   icon: require('../../assets/icon/icon-default-shouye.png'),
-  selectIcon: require('../../assets/icon/icon-pressed-shouye.png')
+  selectIcon: require('../../assets/icon/icon-pressed-shouye.png'),
+  extraStyle: {marginBottom: 3}
 }, {
   text: '发现',
   linkTo: '/find',
@@ -108,20 +109,18 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
           style={{lineHeight: '90px', height: '90px', background: 'transparent'}}
         >
           {LIST.map((item, index) => {
+            const style = Object.assign({}, {
+              height: 18,
+              width: 18,
+              marginRight: 9
+            }, item.extraStyle);
             if (index === Number(headerMenuSelectedKeys[0])) {
               return <Menu.Item onClick={onMenuItemClick} key={index}><Link to={item.linkTo}><img src={item.selectIcon}
-                                                                                                  alt="" style={{
-                height: 18,
-                width: 18,
-                marginRight: 9
-              }}/>{item.text}</Link></Menu.Item>
+                                                                                                  alt="" style={style}/>{item.text}</Link></Menu.Item>
             }
             return <Menu.Item onClick={onMenuItemClick} key={index}><Link to={item.linkTo}><img src={item.icon} alt=""
-                                                                                                style={{
-                                                                                                  height: 18,
-                                                                                                  width: 18,
-                                                                                                  marginRight: 9
-                                                                                                }}/>{item.text}
+                                                                                                style={style}
+                                                                                                />{item.text}
             </Link></Menu.Item>
           })}
         </Menu>}

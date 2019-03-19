@@ -46,7 +46,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
   return (
     <div className='bg-white pb78'>
       <div style={{width: '100%'}}>
-        <Carousel autoplay={true}>
+        <Carousel autoplay={true} style={{minHeight: 729}}>
           {slideShowList.map((item, index) => {
             let url = '';
             switch (item.type) {

@@ -177,7 +177,7 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
           <div className="dash-line-gray mt27"/>
           <div className='content' dangerouslySetInnerHTML={{__html: data.content}}/>
           <div style={{textAlign: 'center'}}>
-            <FabulousButton onClick={onAwesomeClick}/>
+            <FabulousButton onClick={onAwesomeClick} isAwesome={data.isAwesome}/>
           </div>
         </div>
         <div className="solid-line6 mt40 mb40"/>
