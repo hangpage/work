@@ -29,7 +29,7 @@ class TeamInfoWrite extends React.Component {
     }
     params.mId = getParams(location.search).mId;
     sessionStorage.setItem('cInfo', JSON.stringify(params));
-    history.push(`/competition/${params.mId}/project_info_write?${qs.stringify(params)}`);
+    history.push(`/competition/${params.mId}/project_info_write?egistrationNotice=${getParams(location.search).egistrationNotice}&${qs.stringify(params)}`);
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -51,6 +51,10 @@ class TeamInfoWrite extends React.Component {
             <BackButton text='取消'/>
             <div className='main-button' onClick={this.submit}>下一步</div>
           </Row>
+          <div className='app_notes'>
+            <h6 className=''>报名须知：</h6>
+            <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
+          </div>
         </div>
       </div>
     );

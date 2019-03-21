@@ -623,6 +623,23 @@
   text-overflow: ellipsis;
   margin-bottom: 0;
 }
+:global .app_notes {
+  padding: 0 30px;
+  margin-top: 30px;
+  color: #c03e3e !important;
+}
+:global .app_notes .competition-detail {
+  margin-top: 12px;
+}
+:global .app_notes h6 {
+  font-size: 20px;
+  color: #c03e3e !important;
+  font-weight: bold;
+}
+:global .progress_qrcode {
+  height: 100px;
+  width: 100px;
+}
 :global .id-card {
   width: 240px;
   height: 286px;
@@ -1407,15 +1424,14 @@
   margin-top: 45px !important;
 }
 :global .ant-timeline-item-content {
-  padding-top: 7px;
+  width: 440px !important;
 }
-:global .ant-timeline-item-content p {
+:global .ant-timeline-item-content div {
   margin: 0;
-  line-height: 1;
   font-size: 20px;
   color: #666666;
 }
-:global .ant-timeline-item-content p span {
+:global .ant-timeline-item-content div div {
   color: #999999;
   float: right;
 }

@@ -26,7 +26,7 @@ class DynamicFieldSet extends React.Component {
     });
     const { onChange } = this.props;
     if (onChange) {
-      onChange(value.join(','));
+      onChange(value.join('、'));
     }
   };
 
@@ -47,7 +47,7 @@ class DynamicFieldSet extends React.Component {
     const value = this.state.value || [];
     value[index] = e.currentTarget.value.replace(/[^\u4e00-\u9fa5\da-zA-Z]+/g, '');
     if (onChange) {
-      onChange(value.join(','));
+      onChange(value.join('、'));
     }
     this.setState({
       value: value
@@ -58,7 +58,7 @@ class DynamicFieldSet extends React.Component {
     const value = [];
     const keys = [];
     if(nextProps.value){
-      const arr = nextProps.value.split(',');
+      const arr = nextProps.value.split('、');
       arr.forEach((item, index) => {
         value.push(item);
         keys.push(index);

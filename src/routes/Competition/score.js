@@ -93,6 +93,14 @@ class Score extends React.Component {
     this.setState({total});
   };
 
+  checkScore = (rule, value, callback) => {
+    if (value.number > 100 || value.number < 0 ) {
+      callback();
+      return;
+    }
+    callback('分数在0-100之间');
+  };
+
 
   render() {
     const {form, location} = this.props;
@@ -116,7 +124,7 @@ class Score extends React.Component {
                   <div className="bottom">
                     <span className='pingfen'>评分</span>
                     {getFieldDecorator(item.field, {
-                      rules: [{required: true, message: '请评分!'}],
+                      rules: [{required: true, validator: this.checkScore }],
                       initialValue: params[item.field],
                       getValueFromEvent: (event) => {
                         return event.target.value.replace(/\D/g, '')

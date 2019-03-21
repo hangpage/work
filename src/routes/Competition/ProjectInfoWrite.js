@@ -12,7 +12,6 @@ import qs from "qs";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import {connect} from "dva";
 import {isEqual} from "lodash";
-import moment from "moment";
 
 const {TextArea} = Input;
 
@@ -68,7 +67,7 @@ class TeamInfoWrite extends React.Component{
   }
 
   render(){
-      const {form} = this.props;
+      const {form, location} = this.props;
       const {getFieldDecorator} = form;
       return (
         <div style={{background: '#FAFAFA', paddingBottom: 60}}>
@@ -261,6 +260,10 @@ class TeamInfoWrite extends React.Component{
               <BackButton/>
               <div className='main-button' onClick={this.submit}>提交</div>
             </Row>
+            <div className='app_notes'>
+              <h6 className=''>报名须知：</h6>
+              <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
+            </div>
           </div>
         </div>
       );

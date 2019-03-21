@@ -9,13 +9,16 @@ import {connect} from "dva";
 import {Avatar, Button, Empty} from "antd";
 import {Link} from "dva/router";
 import qs from "qs";
+import logoAvatar from '../../assets/logo_avatar.png'
 
 const Detail = ({data, location, match, history, teamMatchDetail}) => {
-  let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
+  let link = `/competition/${data.id}/team_info_write?mId=${data.id}&egistrationNotice=${data.egistrationNotice}`;
   let btnName = '报名比赛';
   let allowReport;
   let noTeacher;
   let obKey = 'joinTeams';
+
+  let isTutor = String(data.isTutor) === '1';
 
   if(String(data.isTutor) === '1'){//当前用户是导师
     allowReport = false;
@@ -70,8 +73,8 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
               data[obKey] && data[obKey].length ? data[obKey].map((item, index) => {
                 return (
                   <li key={index}>
-                    <Avatar size={50} src={item.pic}/>
-                    <span>{item.name}</span>
+                    <Avatar size={50} src={isTutor ? logoAvatar : item.pic}/>
+                    <span>{isTutor? `项目${index + 1}` : item.name}</span>
                     {data.isTutor === '1' && Number(data.status) >= 6 && data.type !== '3' &&
                     <Link to={`${link}?${qs.stringify(item)}&matchName=${data.name}`}><span className='dianping'>点评</span></Link>}
                   </li>

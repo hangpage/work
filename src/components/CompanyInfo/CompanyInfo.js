@@ -52,9 +52,11 @@ class CompanyInfo extends React.Component {
     if(nextProps.teamMatchDetail && !sessionStorage.getItem('cInfo')){
       if(!isEqual(this.props.teamMatchDetail, nextProps.teamMatchDetail)){
         const data = nextProps.teamMatchDetail.team;
-        data.birth = moment(data.birth);
-        data.admissionTime = moment(data.admissionTime);
-        this.props.form.setFieldsValue(data);
+        if(data){
+          data.birth = moment(data.birth);
+          data.admissionTime = moment(data.admissionTime);
+          this.props.form.setFieldsValue(data);
+        }
       }
     }
   }

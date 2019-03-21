@@ -5,6 +5,7 @@
  */
 import React from 'react';
 import {connect} from "dva";
+import {Link} from 'dva/router';
 import SystemMessage from "../../../components/SystemMessage/SystemMessage";
 import {Empty, Pagination} from "antd";
 
@@ -21,7 +22,9 @@ const System = ({system, systemNoticeCount, dispatch}) => {
   return (
     <div style={{padding: '59px 20px 68px'}}>
       {system.length ? system.map((item, key) =>
-        <SystemMessage time={item.createTime} key={key} title={item.title}/>
+        <Link to={`/notice/${item.id}`} key={key}>
+          <SystemMessage time={item.createTime} title={item.title}/>
+        </Link>
       ) : <Empty/>}
       <Pagination total={systemNoticeCount} onChange={onPageChange} pageSize={4} className='mt30'/>
     </div>
