@@ -6,11 +6,11 @@
 import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
-import {Avatar, Empty} from "antd";
+import {Avatar, Button, Empty} from "antd";
 import {Link} from "dva/router";
 import qs from "qs";
 
-const Detail = ({data, location, match, history}) => {
+const Detail = ({data, location, match, history, teamMatchDetail}) => {
   let link = `/competition/${data.id}/team_info_write?mId=${data.id}`;
   let btnName = '报名比赛';
   let allowReport;
@@ -44,6 +44,10 @@ const Detail = ({data, location, match, history}) => {
   return (
     <div className='second-bg'>
       <div className="w">
+        {(teamMatchDetail.team && !teamMatchDetail.tutor && String(teamMatchDetail.team.schoolReviewStatus) === '0')
+        && <Button type="dashed" block><Link to={`/competition/${data.id}/team_info_write?mId=${data.id}`}>修改比赛报名信息</Link></Button>}
+        {(teamMatchDetail.tutor && String(teamMatchDetail.tutor.status) === '0')
+        && <Button type="dashed" block><Link to={`/competition/${data.id}/sign_teacher?mId=${data.id}`}>修改成为导师报名信息</Link></Button>}
         <ReportCard
           time={data.createTime}
           read={data.pageViews}

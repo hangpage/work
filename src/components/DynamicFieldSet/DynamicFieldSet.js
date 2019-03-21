@@ -46,9 +46,6 @@ class DynamicFieldSet extends React.Component {
     const { onChange } = this.props;
     const value = this.state.value || [];
     value[index] = e.currentTarget.value.replace(/[^\u4e00-\u9fa5\da-zA-Z]+/g, '');
-    if(value[index].length > 10){
-      return message.error('最多填写10个字')
-    }
     if (onChange) {
       onChange(value.join(','));
     }
@@ -82,6 +79,7 @@ class DynamicFieldSet extends React.Component {
           onChange={(e) => {this.handleInputChange(e, index)}}
           value={value[index]}
           placeholder={`${fieldText}姓名`}
+          maxLength={10}
           style={{ width: '60%', marginRight: 8 }} />
         {keys.length > 1 ? (
           <Icon
@@ -94,14 +92,12 @@ class DynamicFieldSet extends React.Component {
       </Form.Item>
     ));
     return (
-      <Form onSubmit={this.handleSubmit}>
-        {formItems}
-        <Form.Item>
+        <div>
+          {formItems}
           <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
             <Icon type="plus" /> 添加
           </Button>
-        </Form.Item>
-      </Form>
+        </div>
     );
   }
 }

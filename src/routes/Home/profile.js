@@ -176,7 +176,7 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('intro', {
             initialValue: data.intro
           })(
-            <Input.TextArea placeholder='输入您的简介...' maxLength={10}/>
+            <Input.TextArea placeholder='输入您的简介...' maxLength={50}/>
           )}
         </Form.Item>
       </Form>

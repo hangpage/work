@@ -7,16 +7,22 @@ import React from 'react';
 import {Form, Input, message, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import {equalResultStatus, getParams, reFormatParams} from "../../utils";
-import {insertProject, insertTeam} from "../../services/competition";
+import {insertProject, insertTeam, updateTeam} from "../../services/competition";
 import qs from "qs";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
+import {connect} from "dva";
+import {isEqual} from "lodash";
+import moment from "moment";
 
 const {TextArea} = Input;
 
-const TeamInfoWrite = ({form, history, location}) => {
-  const {getFieldDecorator, validateFields} = form;
-
-  const submit = () => {
+class TeamInfoWrite extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  submit = () => {
+    const {form, history, location} = this.props;
+    const {validateFields} = form;
     validateFields((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
@@ -26,7 +32,14 @@ const TeamInfoWrite = ({form, history, location}) => {
         Object.keys(params).forEach((item) => {
           formData.append(item, params[item]);
         });
-        insertTeam(qs.parse(location.search.split('?')[1])).then(({data}) => {
+        const subData = qs.parse(location.search.split('?')[1]);
+
+        if(this.props.teamMatchDetail.team){
+          subData.id = this.props.teamMatchDetail.team.id;
+        }
+
+        const fun = this.props.teamMatchDetail.team ? updateTeam : insertTeam;
+        fun(subData).then(({data}) => {
           if(equalResultStatus(data)){
             insertProject(formData).then(({data}) => {
               if (equalResultStatus(data)) {
@@ -47,200 +60,211 @@ const TeamInfoWrite = ({form, history, location}) => {
     });
   };
 
-  return (
-    <div style={{background: '#FAFAFA', paddingBottom: 60}}>
-      <div className='w mt39 bg-white pb80'>
-        <div className='bl-form'>
-          <div className='form-title'>报名</div>
-          <div className="form-content">
-            <div className="text-align">
-              <span className="form-name">项目信息</span>
+  componentWillReceiveProps(nextProps, nextContext) {
+    if(!isEqual(this.props.teamMatchDetail, nextProps.teamMatchDetail)){
+      const data = nextProps.teamMatchDetail.team;
+      this.props.form.setFieldsValue(data);
+    }
+  }
+
+  render(){
+      const {form} = this.props;
+      const {getFieldDecorator} = form;
+      return (
+        <div style={{background: '#FAFAFA', paddingBottom: 60}}>
+          <div className='w mt39 bg-white pb80'>
+            <div className='bl-form'>
+              <div className='form-title'>报名</div>
+              <div className="form-content">
+                <div className="text-align">
+                  <span className="form-name">项目信息</span>
+                </div>
+                <Form>
+                  <Form.Item
+                    label="项目名称"
+                    labelCol={{span: 24}}
+                    wrapperCol={{span: 12}}
+                  >
+                    {getFieldDecorator('projectName', {
+                      rules: [{required: true, message: '请输入项目名称'}],
+                    })(
+                      <Input placeholder='请输入项目名称'/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="项目概况"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('generalization', {
+                      rules: [{required: true,message: '请输入项目概况'}],
+                    })(
+                      <TextArea placeholder='请输入项目概况...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="产品与服务"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('service', {
+                      rules: [{required: true,message: '请输入产品与服务'}],
+                    })(
+                      <TextArea placeholder='请输入产品与服务...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="市场分析"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('marketAnalysis', {
+                      rules: [{required: true,message: '请输入项目市场分析'}],
+                    })(
+                      <TextArea placeholder='请输入项目市场分析...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="项目营销策略"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('marketingStrategy', {
+                      rules: [{required: true,message: '请输入项目营销策略..'}],
+                    })(
+                      <TextArea placeholder='请输入项目营销策略..' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="风险分析与控制"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('riskAnalysis', {
+                      rules: [{required: true,message: '请输入项目分析与控制...'}],
+                    })(
+                      <TextArea placeholder='请输入项目分析与控制...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="项目三年规划"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('plan', {
+                      rules: [{required: true,message: '请输入项目三年规划..'}],
+                    })(
+                      <TextArea placeholder='请输入项目三年规划..' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="项目资金筹措与使用"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('financing', {
+                      rules: [{required: true,message: '请输入项目资金筹措与使用..'}],
+                    })(
+                      <TextArea placeholder='请输入项目资金筹措与使用..' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="项目财务分析"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('financialAnalysis', {
+                      rules: [{required: true,message: '请输入项目财务分析...'}],
+                    })(
+                      <TextArea placeholder='请输入项目财务分析...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="网站介绍"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('webIntro', {
+                      rules: [{required: true,message: '请输入项目网站介绍...'}],
+                    })(
+                      <TextArea placeholder='请输入项目网站介绍...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="组织结构"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('organizationStructure', {
+                      rules: [{required: true,message: '请填写'}],
+                    })(
+                      <TextArea placeholder='请输入组织结构...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="核心团队介绍"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('teamIntroduction', {
+                      rules: [{required: true,message: '请填写'}],
+                    })(
+                      <TextArea placeholder='请输入核心团队介绍...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="其他"
+                    labelCol={{span: 12}}
+                    wrapperCol={{span: 24}}
+                  >
+                    {getFieldDecorator('other', {
+                      rules: [{required: true,message: '请填写'}],
+                    })(
+                      <TextArea placeholder='可输入项目其他相关内容...' style={{height: 240}}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="附件一：填写《北京地区高校大学生优秀创业团队评选活动申请表》，打印好，到学校就业服务中心盖章，然后将扫描件上传"
+                    labelCol={{span: 24}}
+                    wrapperCol={{span: 6}}
+                  >
+                    {getFieldDecorator('file')(
+                      <ImageUpload/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="附件二：团队负责人（企业法人）身份证扫描件"
+                    labelCol={{span: 24}}
+                    wrapperCol={{span: 18}}
+                    className='row-upload'
+                  >
+                    {getFieldDecorator('principalCardFront')(
+                      <ImageUpload uploadText='身份证正面'/>
+                    )}
+                    {getFieldDecorator('principalCardReverse')(
+                      <ImageUpload uploadText={'身份证反面'}/>
+                    )}
+                  </Form.Item>
+                  <Form.Item
+                    label="附件三：已注册企业需准备《营业执照》扫描件"
+                    labelCol={{span: 24}}
+                    wrapperCol={{span: 6}}
+                  >
+                    {getFieldDecorator('businessLicense')(
+                      <ImageUpload/>
+                    )}
+                  </Form.Item>
+                </Form>
+              </div>
             </div>
-            <Form>
-              <Form.Item
-                label="项目名称"
-                labelCol={{span: 24}}
-                wrapperCol={{span: 12}}
-              >
-                {getFieldDecorator('projectName', {
-                  rules: [{required: true, message: '请输入项目名称'}],
-                })(
-                  <Input placeholder='请输入项目名称'/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="项目概况"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('generalization', {
-                  rules: [{required: true,message: '请输入项目概况'}],
-                })(
-                  <TextArea placeholder='请输入项目概况...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="产品与服务"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('service', {
-                  rules: [{required: true,message: '请输入产品与服务'}],
-                })(
-                  <TextArea placeholder='请输入产品与服务...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="市场分析"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('marketAnalysis', {
-                  rules: [{required: true,message: '请输入项目市场分析'}],
-                })(
-                  <TextArea placeholder='请输入项目市场分析...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="项目营销策略"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('marketingStrategy', {
-                  rules: [{required: true,message: '请输入项目营销策略..'}],
-                })(
-                  <TextArea placeholder='请输入项目营销策略..' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="风险分析与控制"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('riskAnalysis', {
-                  rules: [{required: true,message: '请输入项目分析与控制...'}],
-                })(
-                  <TextArea placeholder='请输入项目分析与控制...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="项目三年规划"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('plan', {
-                  rules: [{required: true,message: '请输入项目三年规划..'}],
-                })(
-                  <TextArea placeholder='请输入项目三年规划..' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="项目资金筹措与使用"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('financing', {
-                  rules: [{required: true,message: '请输入项目资金筹措与使用..'}],
-                })(
-                  <TextArea placeholder='请输入项目资金筹措与使用..' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="项目财务分析"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('financialAnalysis', {
-                  rules: [{required: true,message: '请输入项目财务分析...'}],
-                })(
-                  <TextArea placeholder='请输入项目财务分析...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="网站介绍"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('webIntro', {
-                  rules: [{required: true,message: '请输入项目网站介绍...'}],
-                })(
-                  <TextArea placeholder='请输入项目网站介绍...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="组织结构"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('organizationStructure', {
-                  rules: [{required: true,message: '请填写'}],
-                })(
-                  <TextArea placeholder='请输入组织结构...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="核心团队介绍"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('teamIntroduction', {
-                  rules: [{required: true,message: '请填写'}],
-                })(
-                  <TextArea placeholder='请输入核心团队介绍...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="其他"
-                labelCol={{span: 12}}
-                wrapperCol={{span: 24}}
-              >
-                {getFieldDecorator('other', {
-                  rules: [{required: true,message: '请填写'}],
-                })(
-                  <TextArea placeholder='可输入项目其他相关内容...' style={{height: 240}}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="附件一：填写《北京地区高校大学生优秀创业团队评选活动申请表》，打印好，到学校就业服务中心盖章，然后将扫描件上传"
-                labelCol={{span: 24}}
-                wrapperCol={{span: 6}}
-              >
-                {getFieldDecorator('file')(
-                  <ImageUpload/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="附件二：团队负责人（企业法人）身份证扫描件"
-                labelCol={{span: 24}}
-                wrapperCol={{span: 18}}
-                className='row-upload'
-              >
-                {getFieldDecorator('principalCardFront')(
-                  <ImageUpload uploadText='身份证正面'/>
-                )}
-                {getFieldDecorator('principalCardReverse')(
-                  <ImageUpload uploadText={'身份证反面'}/>
-                )}
-              </Form.Item>
-              <Form.Item
-                label="附件三：已注册企业需准备《营业执照》扫描件"
-                labelCol={{span: 24}}
-                wrapperCol={{span: 6}}
-              >
-                {getFieldDecorator('businessLicense')(
-                  <ImageUpload/>
-                )}
-              </Form.Item>
-            </Form>
+            <Row type='flex' justify='space-around' gutter={360}>
+              <BackButton/>
+              <div className='main-button' onClick={this.submit}>提交</div>
+            </Row>
           </div>
         </div>
-        <Row type='flex' justify='space-around' gutter={360}>
-          <BackButton/>
-          <div className='main-button' onClick={submit}>提交</div>
-        </Row>
-      </div>
-    </div>
-  );
-};
+      );
+    }
+}
 
-export default Form.create()(TeamInfoWrite);
+export default connect(({competition}) => competition)(Form.create()(TeamInfoWrite));

@@ -646,6 +646,9 @@
 :global .id-card .autograph {
   color: #999999;
   font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 :global .id-card .sign {
   margin-top: 19px;

@@ -9,12 +9,16 @@ import BackButton from "../../components/BackButton/BackButton";
 import {getParams} from "../../utils";
 import CompanyInfo from "../../components/CompanyInfo/CompanyInfo";
 import qs from 'qs';
+import {connect} from "dva";
 
 
 class TeamInfoWrite extends React.Component {
   constructor(props) {
     super(props);
     this.ref = React.createRef();
+    this.state = {
+      teamMatchDetail: {},
+    }
   }
 
   submit = () => {
@@ -28,6 +32,12 @@ class TeamInfoWrite extends React.Component {
     history.push(`/competition/${params.mId}/project_info_write?${qs.stringify(params)}`);
   };
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.setState({
+      teamMatchDetail: nextProps.teamMatchDetail
+    })
+  }
+
   render() {
     const {location} = this.props;
     return (
@@ -35,7 +45,7 @@ class TeamInfoWrite extends React.Component {
         <div className='w mt39 bg-white pb80'>
           <div className='bl-form'>
             <div className='form-title'>报名</div>
-            <CompanyInfo matchId={getParams(location.search).mId} wrappedComponentRef={(form) => this.ref = form}/>
+            <CompanyInfo teamMatchDetail={this.state.teamMatchDetail} matchId={getParams(location.search).mId} wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
             <BackButton text='取消'/>
@@ -47,4 +57,4 @@ class TeamInfoWrite extends React.Component {
   }
 };
 
-export default TeamInfoWrite;
+export default connect(({competition}) => competition)(TeamInfoWrite);

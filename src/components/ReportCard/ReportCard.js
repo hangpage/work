@@ -9,7 +9,7 @@ import {Link} from "dva/router";
 import {validateIsResident} from "../../utils";
 import {Modal} from "antd";
 
-const ReportCard = ({img, history, title, time, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false}) => {
+const ReportCard = ({img, history, title, time, style, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false}) => {
   const doLink = (link) => {
     if(auth){
       if(validateIsResident()){
@@ -26,7 +26,7 @@ const ReportCard = ({img, history, title, time, read, content, mId, noTeacher, r
     }
   };
   return (
-    <div className={styles.card}>
+    <div className={styles.card} style={style}>
       <img src={img} alt=""/>
       <div className={styles.right}>
         <h1 className={styles.title}>{title}</h1>

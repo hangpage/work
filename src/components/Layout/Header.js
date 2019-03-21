@@ -100,7 +100,7 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
     <Layout.Header style={{height: 90, lineHeight: '90px', background: 'rgba(243,243,243,1)', padding: 0}}>
       <div className="w" style={{display: 'flex', alignItems: 'center'}}>
         <Link to='/index'>
-          <img className='logo' src={logo} alt="" style={{marginRight: 190, width: 88, marginLeft: 85}}/>
+          <img className='logo' src={logo} alt="" style={{marginRight: 176}}/>
         </Link>
         {!showSearch && <Menu
           theme="dark"

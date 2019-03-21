@@ -40,6 +40,23 @@ export function insertTeam(params){
 
 
 /**
+ * @Description: 更新比赛报名信息
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 19:58
+ */
+
+export function updateTeam(params){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/team/updateTeam?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/**
  * @Description: 比赛报名
  * @Param:
  * @return:
@@ -65,6 +82,22 @@ export function insertProject(formData){
 export function matchGet(params={}){
   params.token = sessionStorage.getItem('token');
   return request(`/api/match/get?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
+/**
+ * @Description: 获取比赛详情
+ * @Param: id：比赛id
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 19:58
+ */
+export function teamFindMatchDetail(params={}){
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/team/findMatchDetail?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),
     credentials: "include"
