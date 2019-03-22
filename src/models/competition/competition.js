@@ -32,7 +32,7 @@ export default modelExtend(model, {
         }else if(pathMatchRegexp('/competition/:id', location.pathname)){
           const match = pathMatchRegexp('/competition/:id', location.pathname);
           if (match) {
-            dispatch({ type: 'queryDetail', payload: { id: match[1], park: getParams(location.search).park } })
+            dispatch({ type: 'queryDetail', payload: { id: match[1], park: getParams(location.search).park } });
             dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
           }
         }else if(pathMatchRegexp('/competition/:id/team_info_write', location.pathname)){
@@ -80,7 +80,7 @@ export default modelExtend(model, {
       }
     },
     *queryDetail({ payload }, { call, put }){
-      const {data} = yield call(matchGet, payload);
+      const {data={}} = yield call(matchGet, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'save',
@@ -89,12 +89,10 @@ export default modelExtend(model, {
             tutorReview: data.data.tutorReview
           }
         })
-      }else{
-        message.error(data.message);
       }
     },
     *teamFindMatchDetail({ payload }, { call, put }){
-      const {data} = yield call(teamFindMatchDetail, payload);
+      const {data={}} = yield call(teamFindMatchDetail, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'save',
@@ -102,8 +100,6 @@ export default modelExtend(model, {
             teamMatchDetail: data || {},
           }
         })
-      }else{
-        message.error(data.message);
       }
     },
     *getTeamDetail({ payload }, { call, put }){
