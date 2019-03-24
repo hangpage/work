@@ -11,7 +11,8 @@ import ImageUpload from "../../../components/FileUpload/ImageUpload";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import {connect} from "dva";
-
+import {cloneDeep, isEqual} from "lodash";
+import moment from "moment";
 
 const list1 = [{
   label: '姓名',
@@ -88,9 +89,8 @@ class ParkStep3 extends React.Component {
   }
 
   submit = () => {
-    const {form, history, location} = this.props;
+    const {form, history} = this.props;
     const {validateFields} = form;
-    const {membersStr} = this.state;
     validateFields((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
@@ -109,6 +109,14 @@ class ParkStep3 extends React.Component {
       }
     });
   };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (!isEqual(this.props.leaderAndMemberInfo, nextProps.leaderAndMemberInfo)) {
+      const data = cloneDeep(nextProps.leaderAndMemberInfo);
+      data.studyDate = moment(data.studyDate);
+      this.props.form.setFieldsValue(data);
+    }
+  }
 
 
   render() {

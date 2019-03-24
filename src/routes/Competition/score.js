@@ -91,7 +91,7 @@ class Score extends React.Component {
       total += Number(scores[item] || 0) || 0;
     });
     total = total / 11;
-    total = Number(total).toFixed(2);
+    total = Number(total).toFixed(3);
     this.setState({total});
   };
 
