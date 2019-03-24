@@ -51,10 +51,10 @@ class TeamInfoWrite extends React.Component {
             <BackButton text='取消'/>
             <div className='main-button' onClick={this.submit}>下一步</div>
           </Row>
-          <div className='app_notes'>
-            <h6 className=''>报名须知：</h6>
-            <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
-          </div>
+        </div>
+        <div className='app_notes'>
+          <h6 className=''>报名须知：</h6>
+          <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
         </div>
       </div>
     );

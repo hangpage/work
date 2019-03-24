@@ -15,7 +15,7 @@ const Comment = ({nickName, awesomeCount, replyToWhom, type, content, createTime
   const cls = isAwesome === '1' ? 'icon-pressed-dianzan' : 'icon-default-dianzan';
   return (
     <div className={styles.card}>
-      <Avatar size={49} src={userImg}/>
+      <Avatar size={49} src={userImg} style={{flexShrink: 0}}/>
       <div className={styles.detail}>
         <div className={styles.action}>
           <span className={styles.name}>{nickName}</span>

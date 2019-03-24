@@ -3,15 +3,33 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-right {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-bottom {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .bg-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
@@ -41,11 +59,6 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.color-linear {
-  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
-  -webkit-background-clip: text;
-  color: transparent;
-}
 .title {
   font-size: 20px;
   color: #333333 !important;
@@ -59,6 +72,7 @@
   border-radius: 4px;
   width: 361px;
   height: 357px;
+  position: relative;
 }
 .card img {
   border-radius: 4px 4px 0 0;
@@ -68,9 +82,27 @@
 }
 .card:hover .title {
   background: linear-gradient(to right, #00acaf, #0771bb) !important;
-  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9)) !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .card:hover .title {
+    background: none !important;
+    color: #00acaf !important;
+  }
+}
+.status {
+  height: 30px;
+  min-width: 80px;
+  padding: 0 13px;
+  background: linear-gradient(90deg, rgba(0, 172, 175, 0.9), rgba(7, 113, 187, 0.9));
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  line-height: 30px;
+  border-bottom-right-radius: 4px;
 }
 .desc {
   padding: 20px;
@@ -103,15 +135,21 @@
   height: 400px;
   width: 550px;
   border-radius: 6px;
+  position: relative;
 }
 .bigcard:hover .desc {
   box-shadow: 0 2px 8px 0 rgba(31, 130, 194, 0.3);
 }
 .bigcard:hover .title {
   background: linear-gradient(to right, #00acaf, #0771bb) !important;
-  background: linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9)) !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .bigcard:hover .title {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .bigcard .title {
   overflow: hidden;

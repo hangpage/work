@@ -20,6 +20,12 @@
         .border-linear();
       }
     }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+      .title{
+        background: none;
+        color: #00acaf !important;
+      }
+    }
   }
 }
 
@@ -39,7 +45,6 @@
 .title{
   color: #333333;
   font-size: 20px;
-  .ellipsis1();
   max-width: 590px;
 }
 .content{
@@ -64,6 +69,5 @@
   margin-bottom: 15px;
   line-height: 28px;
   max-height: 86px;
-  .ellipsis2();
   padding-top: 15px;
 }

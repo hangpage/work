@@ -3,15 +3,33 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-right {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-bottom {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .bg-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
@@ -76,11 +94,6 @@
   padding-top: 5px;
   line-height: 28px;
   max-height: 66px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 }
 .card .title {
   line-height: 28px !important;
@@ -117,5 +130,11 @@
   -webkit-background-clip: text;
   color: transparent;
   border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .card .daoshi span {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 /*# sourceMappingURL=ReportCard.css.map */

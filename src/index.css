@@ -3,15 +3,33 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-right {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-bottom {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .bg-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
@@ -48,9 +66,6 @@
 :global html {
   background: #ffffff;
 }
-:global #root {
-  height: 100%;
-}
 :global .score {
   background: #f5f5f5;
 }
@@ -72,6 +87,12 @@
   font-size: 20px;
   margin-bottom: 28px;
   color: transparent !important;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .score .top h2 {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .score .score-card {
   background: #ffffff;
@@ -108,6 +129,12 @@
   margin-right: 20px;
   flex-shrink: 0;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .score .pingfen {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .score input {
   width: 120px;
   height: 44px;
@@ -130,6 +157,15 @@
   color: #666666 !important;
   line-height: 1 !important;
 }
+:global .header-content {
+  display: flex;
+  align-items: center;
+}
+:global .header-content-toolbar {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
 :global .ant-layout {
   background: #ffffff !important;
 }
@@ -149,6 +185,12 @@
   font-weight: bold !important;
   font-size: 24px !important;
   line-height: initial !important;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .ant-modal-title {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .normal-upload {
   width: 72px;
@@ -296,6 +338,12 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .notice-box .notice:hover p {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .article-box {
   padding: 30px 20px 40px;
   background: #ffffff;
@@ -307,6 +355,12 @@
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 0;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .article-box p {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .article-box .info {
   font-size: 16px;
@@ -387,6 +441,12 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .service-tab .ant-tabs-nav .ant-tabs-tab-active {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .ant-tabs-ink-bar {
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
@@ -422,13 +482,13 @@
 }
 :global .ant-carousel .slick-slide {
   text-align: center;
-  height: 729px !important;
+  height: 388px !important;
   overflow: hidden;
 }
 :global .ant-carousel .slick-slide img {
   width: 100%;
-  height: 729px !important;
-  min-height: 729px !important;
+  height: 388px !important;
+  min-height: 388px !important;
 }
 :global .result-search:focus {
   box-shadow: none !important;
@@ -441,6 +501,12 @@
   color: transparent;
   font-size: 20px;
   font-weight: bold;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .team-body .main-title {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .team-box {
   background: url("./assets/team-bg.png");
@@ -506,6 +572,12 @@
   border-bottom: 1px dashed #00acaf;
   margin-bottom: 0;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .sign-member p:first-child {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .sign-member .member-box {
   display: flex;
   flex-wrap: wrap;
@@ -548,6 +620,12 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .sign-member .member-box.competition-sign-member li .dianping {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .park-card {
   width: 570px;
   height: 456px;
@@ -563,6 +641,12 @@
   -webkit-background-clip: text;
   color: transparent;
   border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .park-card:hover .content p.title {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .park-card img {
   width: 570px;
@@ -624,9 +708,9 @@
   margin-bottom: 0;
 }
 :global .app_notes {
-  padding: 0 30px;
-  margin-top: 30px;
   color: #c03e3e !important;
+  width: 1200px;
+  margin: 30px auto 0;
 }
 :global .app_notes .competition-detail {
   margin-top: 12px;
@@ -692,6 +776,12 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-home .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected span {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .bl-home .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected:before {
   content: '';
   display: block;
@@ -712,6 +802,12 @@
   font-size: 24px;
   font-weight: bold;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-home subheading {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .bl-home .ant-layout-content .title-card {
   background: rgba(153, 153, 153, 0.1);
   height: 60px;
@@ -726,11 +822,24 @@
   color: transparent;
   font-weight: bold;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-home .ant-layout-content .title-card span {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .bl-home .ant-layout-content {
   width: 910px !important;
   justify-content: center;
   margin-left: 50px;
   border: 1px solid rgba(153, 153, 153, 0.2) !important;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-home .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected span,
+  :global .bl-home .ant-layout-content .title-card span {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .footer {
   position: relative;
@@ -868,6 +977,12 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .service-detail-card .right h1 span {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .service-detail-card .right .btn {
   width: 140px;
   height: 40px;
@@ -925,6 +1040,12 @@
   border-radius: 50%;
   background: #00ACAF;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .service-list-card .box .type {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .back-button {
   width: 240px;
   height: 50px;
@@ -947,6 +1068,12 @@
   color: transparent;
   font-weight: bold;
   font-size: 26px;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .sign-list .title {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .sign-list .item {
   height: 77px;
@@ -1001,6 +1128,12 @@
 :global .icon-add-box span {
   padding-bottom: 2px;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .icon-add-box {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .icon-box {
   display: flex;
   align-items: center;
@@ -1034,6 +1167,13 @@
   color: transparent;
   margin-left: 4px;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .self-add .edit,
+  :global .self-add .del {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .self-add .split {
   display: inline-block;
   width: 1px;
@@ -1053,7 +1193,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background: url("./assets/login/bg.png") repeat;
   background-size: 100%;
@@ -1168,6 +1308,12 @@
   color: transparent;
   font-size: 24px;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-confirm .title span {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .bl-confirm .border {
   height: 6px;
   background: linear-gradient(to bottom, #0771bb, #00acaf);
@@ -1249,6 +1395,12 @@
   font-weight: bold;
   margin-bottom: 30px;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-form .subheading {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .bl-form .form-name {
   position: relative;
   font-size: 24px;
@@ -1268,6 +1420,12 @@
   position: absolute;
   left: -16px;
   top: 8px;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .bl-form .form-name {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .bl-form .form-content {
   padding: 30px 30px 60px;
@@ -1295,6 +1453,12 @@
   vertical-align: middle;
   margin-bottom: 4px;
   margin-left: 16px;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .form-next {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .ant-modal-body .ant-form-item:last-child {
   margin-bottom: 0 !important;
@@ -1409,10 +1573,22 @@
   -webkit-background-clip: text !important;
   color: transparent !important;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .ant-tabs-nav .ant-tabs-tab:hover {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 :global .ant-tabs-nav .ant-tabs-tab-active {
   background: linear-gradient(to right, #0771bb, #00acaf) !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  :global .ant-tabs-nav .ant-tabs-tab-active {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 :global .ant-tabs-bar {
   margin-bottom: 40px !important;

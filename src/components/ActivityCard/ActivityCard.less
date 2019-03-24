@@ -1,9 +1,4 @@
 @import "../../variable.less";
-.color-linear{
-  background:linear-gradient(to right, rgba(0, 172, 175, 0.9), rgba(11, 158, 160, 0.9));
-  -webkit-background-clip: text;
-  color: transparent;
-}
 .title{
   font-size:20px;
   color: #333333 !important;
@@ -14,6 +9,7 @@
   border-radius: 4px;
   width: 361px;
   height: 357px;
+  position: relative;
   img{
     border-radius:4px 4px 0 0;
   }
@@ -24,7 +20,27 @@
     .title{
       .color-linear() !important;
     }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+      .title{
+        background: none !important;
+        color: #00acaf !important;
+      }
+    }
   }
+}
+
+.status{
+  height:30px;
+  min-width: 80px;
+  padding: 0 13px;
+  background: @linear-main;
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  line-height: 30px;
+  border-bottom-right-radius: 4px;
 }
 
 .desc{
@@ -67,12 +83,19 @@
   height: 400px;
   width: 550px;
   border-radius: 6px;
+  position: relative;
   &:hover{
     .desc{
       box-shadow:0 2px 8px 0 rgba(31,130,194,0.3);
     }
     .title{
       .color-linear() !important;
+    }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+      .title{
+        background: none;
+        color: #00acaf !important;
+      }
     }
   }
   .title{

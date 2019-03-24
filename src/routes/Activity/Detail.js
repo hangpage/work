@@ -7,6 +7,7 @@ import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
 import {Avatar} from "antd";
+import isEnd from "../../utils";
 
 const Detail = ({data, history}) => {
   return (
@@ -22,6 +23,7 @@ const Detail = ({data, history}) => {
           noTeacher={true}
           auth={true}
           history={history}
+          allowReport={!isEnd(data.endTime)}
         />
         <div className='competition-detail mb40' dangerouslySetInnerHTML={{__html: data.content}} />
         <div className='height6line  mb40'/>

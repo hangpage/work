@@ -21,6 +21,7 @@ const Index = ({list, count, match, dispatch}) => {
             title={item.title}
             time={item.createTime}
             read={item.pageViews}
+            endTime={item.endTime}
           />
         </Link>
       </Col>

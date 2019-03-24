@@ -6,7 +6,6 @@
   line-height: 36px;
   border-bottom: 1px solid rgba(153,153,153,1);
   padding-bottom: 14px;
-  .ellipsis1();
 }
 .card{
   border-radius: 4px;
@@ -18,6 +17,12 @@
     p{
       .color-linear();
       .border-linear();
+    }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+      p{
+        background: none;
+        color: #00acaf !important;
+      }
     }
   }
   img{

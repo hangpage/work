@@ -98,7 +98,7 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
 
   return (
     <Layout.Header style={{height: 90, lineHeight: '90px', background: 'rgba(243,243,243,1)', padding: 0}}>
-      <div className="w" style={{display: 'flex', alignItems: 'center'}}>
+      <div className="w header-content">
         <Link to='/index'>
           <img className='logo' src={logo} alt="" style={{marginRight: 176}}/>
         </Link>
@@ -126,7 +126,7 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
         </Menu>}
         {!showSearch && <img className='search' src={searchIcon} onClick={onSearchClick} alt=""/>}
         {showSearch && <SearchButton onCloseClick={onCloseClick} onPressEnter={onSearch} onSearchClick={onSearch}/>}
-        <div onClick={goToPersonalCenter} style={{cursor: 'pointer', display: 'flex', alignItems: 'center'}}>
+        <div onClick={goToPersonalCenter} className={'header-content-toolbar'}>
           <Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/>
           <span className='nickname'>{user.nickName}</span>
         </div>

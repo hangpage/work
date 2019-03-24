@@ -27,10 +27,20 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
     btnName = '查看比赛进度';
     noTeacher = true;
   }else{//当前用户不是导师
+    const params = {
+      from: 'home',
+      isTutor: data.isTutor,
+      time1: data.signStartTime,
+      time2: data.internalReviewStartTime,
+      time3: data.networdReviewStartTime,
+      time4: data.replyFirstStartTime,
+      time5: data.replySecondStartTime,
+      time6: data.matchEndTime,
+    };
     if(String(data.joinUser) === '1'){
       btnName = '查看比赛进度';
       noTeacher = true;
-      link = `${match.url}/progress${location.search}`;
+      link = `${match.url}/progress?${qs.stringify(params)}`;
     }else{
       allowReport = data.status === '2';
       if(Number(data.status) >= 7){ //网络评审结束状态不允许报名和申请导师

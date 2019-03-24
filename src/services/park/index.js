@@ -61,6 +61,21 @@ export function parkSaveMembers(params){
   });
 }
 
+/**
+ * @Description: 删除团队成员
+ * @Param:
+ * @return:
+ * @Author: zzhihang@hotmail.com
+ * @date: 2019/2/11 17:06
+ */
+export function parkDeleteMember(params){
+  return request(`/api/residentTeam/deleteMember?${qs.stringify(params)}`,{
+    method: 'POST',
+    headers: new Headers(),
+    credentials: "include"
+  });
+}
+
 
 /**
  * @Description: 保存负责人教育经历

@@ -103,7 +103,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
             if(item.auth){
               return <div onClick={() => {doLink(item.link)}} key={index}><IndexEntrance icon={item.icon} text={item.text} /></div>
             }
-            return <Link to={item.link} key={index}><IndexEntrance icon={item.icon} text={item.text} /></Link>
+            return <Link to={item.link} key={index} style={{display: 'block'}}><IndexEntrance icon={item.icon} text={item.text} /></Link>
           })}
         </div>
        <div className="stage">
@@ -114,7 +114,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
              return (
                <Col key={index}>
                  <Link to={`/activity/${item.id}`}>
-                   <ActivityCard title={item.title} img={`${config.URL}${item.pic}`} read={item.pageViews} time={item.createTime}/>
+                   <ActivityCard title={item.title} img={`${config.URL}${item.pic}`} read={item.pageViews} time={item.createTime} endTime={item.endTime}/>
                  </Link>
                </Col>
                )
@@ -130,7 +130,7 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
                 return (
                   <Col key={index}>
                     <Link to={`/competition/${item.id}?park=${item.park}`}>
-                    <CompetitionCard title={item.name} img={`${item.pic}`} read={item.pageViews}
+                    <CompetitionCard title={item.name} img={`${item.pic}`} read={item.joinCount}
                                      time={item.createTime} status={item.status}/>
                     </Link>
                   </Col>

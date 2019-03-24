@@ -74,3 +74,13 @@ export function validateIsResident() { //大于等于2表示入驻
   }
   return false;
 }
+
+export default function isEnd(date1){
+  const oDate1 = new Date(date1);
+  const oDate2 = new Date();
+  if(oDate1.getTime() > oDate2.getTime()){//转换成毫秒进行比较
+    return false;
+  }else{
+    return true;
+  }
+}

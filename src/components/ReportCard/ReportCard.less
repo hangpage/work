@@ -33,7 +33,6 @@
     padding-top: 5px;
     line-height:28px;
     max-height: 66px;
-    .ellipsis2();
   }
   .title{
     color: #333333;
@@ -67,6 +66,12 @@
     span{
       .color-linear();
       .border-linear();
+    }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+      span{
+        background: none;
+        color: #00acaf !important;
+      }
     }
   }
 

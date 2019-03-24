@@ -4,9 +4,9 @@
  * @Date: 2019/2/18 20:12
  */
 import React from 'react';
-import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
+import {Col, DatePicker, Form, Input, message, Popconfirm, Radio, Row} from 'antd';
 import {equalResultStatus, reFormatParams} from "../../../utils";
-import {parkSaveMembers} from "../../../services/park";
+import {parkDeleteMember, parkSaveMembers} from "../../../services/park";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import {cloneDeep, isEqual} from "lodash";
@@ -39,13 +39,17 @@ class Team extends React.Component {
     })
   };
 
-  onDel = (e, index) => {
+  onDelConfirm = (e, index) => {
+    const {dispatch} = this.props;
     let membersStr = cloneDeep(this.state.membersStr);
-    membersStr.splice(index, 1);
-    this.setState({
-      membersStr,
-      modalVisible: false
-    })
+    parkDeleteMember({id: membersStr[index].id}).then(({data}) => {
+      if (equalResultStatus(data)) {
+        message.success('删除成功');
+        dispatch({type: 'home/queryTeamInfo'})
+      } else {
+        message.error(data.message);
+      }
+    });
   };
 
   onEdit = (e, index) => {
@@ -208,11 +212,13 @@ class Team extends React.Component {
                           <span className="item">{`${item.studyDate}毕业`}</span>
                           <span className="item">{item.studyEdu}</span>
                           <span className="item">{item.phone}</span>
-                          <div className='fr' onClick={(e) => {
-                            this.onDel(e, index)
-                          }}>
+                          <div className='fr'>
                             <i className="icon-del"/>
-                            <span className="edit">删除</span>
+                            <Popconfirm title="确认删除该成员吗？" onConfirm={(e) => {
+                              this.onDelConfirm(e, index)
+                            }} okText="确认" cancelText="取消">
+                              <span className="edit">删除</span>
+                            </Popconfirm>,
                           </div>
                           <i className="split fr"/>
                           <div className='fr' onClick={(e) => {

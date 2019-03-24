@@ -3,15 +3,33 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-right {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-bottom {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .bg-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
@@ -168,11 +186,15 @@
   left: 6px !important;
 }
 :global .ant-pagination-item-active {
-  background: linear-gradient(to right, #00acaf, #0771bb);
+  background: linear-gradient(to right, #00acaf, #0771bb) !important;
   border: none !important;
 }
 :global .ant-pagination-item-active a {
   color: #ffffff !important;
+}
+:global div.ant-typography,
+:global .ant-typography p {
+  margin-bottom: 0 !important;
 }
 :global .bl-label .ant-radio-wrapper-disabled > span {
   background: rgba(153, 153, 153, 0.2);

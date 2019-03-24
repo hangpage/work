@@ -3,15 +3,33 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-right {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
   -webkit-background-clip: text;
   color: transparent;
 }
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear-to-bottom {
+    background: none;
+    color: #00acaf !important;
+  }
+}
 .color-linear {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .color-linear {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .bg-linear-to-bottom {
   background: linear-gradient(to bottom, #0771bb, #00acaf);
@@ -48,9 +66,6 @@
   line-height: 36px;
   border-bottom: 1px solid #999999;
   padding-bottom: 14px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 .card {
   border-radius: 4px;
@@ -64,6 +79,12 @@
   -webkit-background-clip: text;
   color: transparent;
   border-image: linear-gradient(to right, #00ACAF, #0771BB) 10;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .card:hover p {
+    background: none;
+    color: #00acaf !important;
+  }
 }
 .card img {
   width: 100%;

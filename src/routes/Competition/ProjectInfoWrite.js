@@ -200,17 +200,17 @@ class TeamInfoWrite extends React.Component{
                       <TextArea placeholder='请输入组织结构...' style={{height: 240}}/>
                     )}
                   </Form.Item>
-                  <Form.Item
-                    label="核心团队介绍"
-                    labelCol={{span: 12}}
-                    wrapperCol={{span: 24}}
-                  >
-                    {getFieldDecorator('teamIntroduction', {
-                      rules: [{required: true,message: '请填写'}],
-                    })(
-                      <TextArea placeholder='请输入核心团队介绍...' style={{height: 240}}/>
-                    )}
-                  </Form.Item>
+                  {/*<Form.Item*/}
+                    {/*label="核心团队介绍"*/}
+                    {/*labelCol={{span: 12}}*/}
+                    {/*wrapperCol={{span: 24}}*/}
+                  {/*>*/}
+                    {/*{getFieldDecorator('teamIntroduction', {*/}
+                      {/*rules: [{required: true,message: '请填写'}],*/}
+                    {/*})(*/}
+                      {/*<TextArea placeholder='请输入核心团队介绍...' style={{height: 240}}/>*/}
+                    {/*)}*/}
+                  {/*</Form.Item>*/}
                   <Form.Item
                     label="其他"
                     labelCol={{span: 12}}
@@ -222,17 +222,17 @@ class TeamInfoWrite extends React.Component{
                       <TextArea placeholder='可输入项目其他相关内容...' style={{height: 240}}/>
                     )}
                   </Form.Item>
+                  {/*<Form.Item*/}
+                    {/*label="附件一：填写《北京地区高校大学生优秀创业团队评选活动申请表》，打印好，到学校就业服务中心盖章，然后将扫描件上传"*/}
+                    {/*labelCol={{span: 24}}*/}
+                    {/*wrapperCol={{span: 6}}*/}
+                  {/*>*/}
+                    {/*{getFieldDecorator('file')(*/}
+                      {/*<ImageUpload/>*/}
+                    {/*)}*/}
+                  {/*</Form.Item>*/}
                   <Form.Item
-                    label="附件一：填写《北京地区高校大学生优秀创业团队评选活动申请表》，打印好，到学校就业服务中心盖章，然后将扫描件上传"
-                    labelCol={{span: 24}}
-                    wrapperCol={{span: 6}}
-                  >
-                    {getFieldDecorator('file')(
-                      <ImageUpload/>
-                    )}
-                  </Form.Item>
-                  <Form.Item
-                    label="附件二：团队负责人（企业法人）身份证扫描件"
+                    label="附件一：团队负责人（企业法人）身份证扫描件"
                     labelCol={{span: 24}}
                     wrapperCol={{span: 18}}
                     className='row-upload'
@@ -245,7 +245,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="附件三：已注册企业需准备《营业执照》扫描件"
+                    label="附件二：已注册企业需准备《营业执照》扫描件"
                     labelCol={{span: 24}}
                     wrapperCol={{span: 6}}
                   >
@@ -260,10 +260,10 @@ class TeamInfoWrite extends React.Component{
               <BackButton/>
               <div className='main-button' onClick={this.submit}>提交</div>
             </Row>
-            <div className='app_notes'>
-              <h6 className=''>报名须知：</h6>
-              <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
-            </div>
+          </div>
+          <div className='appi_notes'>
+            <h6 className=''>报名须知：</h6>
+            <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
           </div>
         </div>
       );

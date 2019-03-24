@@ -13,16 +13,37 @@
   color: transparent;
 }
 
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+  .color-linear-to-right{
+    background: none;
+    color: #00acaf !important;
+  }
+}
+
 .color-linear-to-bottom {
   background: linear-gradient(to bottom, rgba(7, 113, 187, 1), rgba(0, 172, 175, 1));
   -webkit-background-clip: text;
   color: transparent;
 }
 
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+  .color-linear-to-bottom{
+    background: none;
+    color: #00acaf !important;
+  }
+}
+
 .color-linear {
   background: linear-gradient(to right, rgba(0, 172, 175, 1), rgba(7, 113, 187, 1));
   -webkit-background-clip: text;
   color: transparent;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+  .color-linear{
+    background: none;
+    color: #00acaf !important;
+  }
 }
 
 .bg-linear-to-bottom {

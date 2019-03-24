@@ -81,6 +81,7 @@ class ActivityList extends Component {
               time={item.createTime}
               read={item.pageViews}
               style={{marginBottom: 50}}
+              endTime={item.endTime}
             />
           </Link>
         </Col>

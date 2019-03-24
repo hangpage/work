@@ -12,6 +12,8 @@ import FinancingInfo from "./team/financing_info";
 import TeamInfo from "./team/team_info";
 import MemberInfo from "./team/member_info";
 import LeaderInfo from "./team/leader_info";
+import {Typography} from "antd";
+import styles from "../../components/CompetitionCard/Competition.less";
 
 const Team = ({teamInfo, location, data}) => {
   return (
@@ -23,7 +25,7 @@ const Team = ({teamInfo, location, data}) => {
           </div>
         </div>
         <div className="nick-name">{data.nickName}</div>
-        <div className="desc">{data.intro}</div>
+        <Typography.Text className="desc" style={{width: 400, color: '#ffffff'}} ellipsis={{ rows: 1}}>{data.intro}</Typography.Text>
         <Link to='/home/profile'>
           <div className="edit">编辑个人资料</div>
         </Link>

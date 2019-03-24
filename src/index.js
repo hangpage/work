@@ -1,7 +1,10 @@
+import '@babel/polyfill';
 import dva from 'dva';
 import './index.css';
 import './common.css';
 import './cover.css';
+Object.setPrototypeOf = require('setprototypeof')
+
 
 // 1. Initialize
 const app = dva();

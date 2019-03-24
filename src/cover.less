@@ -158,11 +158,15 @@
   }
 
   .ant-pagination-item-active{
-    .bg-linear-to-right();
+    .bg-linear-to-right() !important;
     border:none !important;
     a{
       color: @white !important;
     }
+  }
+
+  div.ant-typography, .ant-typography p{
+    margin-bottom: 0 !important;
   }
 
   .bl-label .ant-radio-wrapper-disabled>span{

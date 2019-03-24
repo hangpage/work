@@ -8,6 +8,7 @@ import styles from './ReportCard.less';
 import {Link} from "dva/router";
 import {validateIsResident} from "../../utils";
 import {Modal} from "antd";
+import {Typography} from "antd";
 
 const ReportCard = ({img, history, title, time, style, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false}) => {
   const doLink = (link) => {
@@ -34,7 +35,7 @@ const ReportCard = ({img, history, title, time, style, read, content, mId, noTea
           <span>{time}</span>
           <span className='ml20'>{read || 0}人阅读</span>
         </div>
-        <p className={styles.content} style={{"WebkitBoxOrient": "vertical"}}>{content}</p>
+        <Typography.Paragraph className={styles.content} ellipsis={{ rows: 2}}>{content}</Typography.Paragraph>
         <div>
           {allowReport && <div className={styles.baoming}><div className={styles.link} onClick={() => {doLink(reportLink)}}>{btnName}</div></div>}
           {!noTeacher ? <div className={styles.daoshi}><Link to={`/competition/${mId}/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}

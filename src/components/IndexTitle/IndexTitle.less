@@ -18,8 +18,15 @@
     span{
       .color-linear-to-right();
     }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
+      span{
+        background: none;
+        color: #00acaf !important;
+      }
+    }
   }
 }
+
 
 .alias {
   color: rgba(153, 153, 144, 0.7);

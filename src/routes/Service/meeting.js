@@ -171,7 +171,7 @@ class Lockers extends React.Component{
             <Form.Item
               label="选择会议室"
               labelCol={{span: 8}}
-              wrapperCol={{span: 8}}
+              wrapperCol={{span: 16}}
               colon={false}
             >
               {getFieldDecorator('roomNum')(

@@ -29,10 +29,10 @@ const Profile = ({form, data, dispatch}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     form.validateFields((err, values) => {
+      if(!values.img){
+        return message.error('请上传一张图片作为您的头像');
+      }
       if (!err) {
-        if(!values.img){
-          return message.error('请上传一张图片作为您的头像');
-        }
         userUpdateInfo(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');

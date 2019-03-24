@@ -56,8 +56,8 @@ class Score extends React.Component {
 
   submit = () => {
     const {form, history, location} = this.props;
-    const {validateFields} = form;
-    validateFields((err, values) => {
+    const {validateFieldsAndScroll} = form;
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = values;
         const locationParams = qs.parse(location.search.split('?')[1]);
@@ -90,15 +90,17 @@ class Score extends React.Component {
     Object.keys(scores).forEach((item) => {
       total += Number(scores[item] || 0) || 0;
     });
+    total = total / 11;
+    total = Number(total).toFixed(2);
     this.setState({total});
   };
 
   checkScore = (rule, value, callback) => {
-    if (value.number > 100 || value.number < 0 ) {
-      callback();
+    if (Number(value) > 100 || Number(value) < 0 ) {
+      callback('分数在0-100之间');
       return;
     }
-    callback('分数在0-100之间');
+    callback();
   };
 
 
@@ -123,8 +125,11 @@ class Score extends React.Component {
                   </p>
                   <div className="bottom">
                     <span className='pingfen'>评分</span>
+                    <Form.Item style={{marginTop: 40}}>
                     {getFieldDecorator(item.field, {
-                      rules: [{required: true, validator: this.checkScore }],
+                      rules: [{required: true, message: '请填写必填项'}, {
+                        validator: this.checkScore,
+                      }],
                       initialValue: params[item.field],
                       getValueFromEvent: (event) => {
                         return event.target.value.replace(/\D/g, '')
@@ -133,6 +138,7 @@ class Score extends React.Component {
                     })(
                       <Input onChange={this.handleChange}/>
                     )}
+                    </Form.Item>
                   </div>
                 </div>
               )
@@ -146,12 +152,14 @@ class Score extends React.Component {
                 </div>
                 <div className="bottom" style={{height: 'auto', marginTop: 40}}>
                   <div className="pingfen" style={{alignSelf: 'flex-start'}}>评价</div>
+                  <Form.Item style={{width: "100%"}}>
                   {getFieldDecorator('evaluation', {
                     rules: [{required: true, message: '请填写评价!'}],
                     initialValue: params['evaluation'],
                   })(
                     <Input.TextArea style={{height: 275}}/>
                   )}
+                  </Form.Item>
                 </div>
               </div>
             </div>
