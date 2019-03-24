@@ -11,19 +11,22 @@ import ComboBox from "../../components/ComboBox";
 import Modal from './component/modal';
 import {cloneDeep} from 'lodash';
 import {parkResidentTeam} from "../../services/park";
+import {NUMBER_VALIDATE} from "../../utils/validate";
 
 const {TextArea} = Input;
 
 
 const list1 = [{
   label: '项目名称',
-  field: 'projectName'
+  field: 'projectName',
+  validate: {min: 2, max: 50, message: '2-50个汉字'}
 }, {
   label: '门牌名称',
   field: 'houseNumber'
 }, {
   label: '公司名称',
-  field: 'companyName'
+  field: 'companyName',
+  validate: {min: 2, max: 50, message: '2-50个汉字'}
 }, {
   label: '注册时间',
   field: 'registeredTime',
@@ -33,7 +36,8 @@ const list1 = [{
   field: 'registeredAddress'
 }, {
   label: '注册资金（w）',
-  field: 'registeredFunds'
+  field: 'registeredFunds',
+  validate: NUMBER_VALIDATE
 }, {
   label: '项目所属行业',
   type: 'select',
@@ -173,7 +177,9 @@ class ParkStep1 extends React.Component {
                         <Form.Item
                           label={item.label}
                         >
-                          {getFieldDecorator(`${item.field}`, Const.RULE)(
+                          {getFieldDecorator(`${item.field}`, {
+                            rules: [{required: true, message: '必填项'}, item.validate || {}],
+                          })(
                             comp
                           )}
                         </Form.Item>
@@ -214,7 +220,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='申请专利'
                     >
-                      {getFieldDecorator('patentNumber', Const.RULE)(
+                      {getFieldDecorator('patentNumber', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入申请专利数量'/>
                       )}
                     </Form.Item>
@@ -252,7 +260,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='在校生'
                     >
-                      {getFieldDecorator('student', Const.RULE)(
+                      {getFieldDecorator('student', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入在校生数量'/>
                       )}
                     </Form.Item>
@@ -261,7 +271,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='毕业生'
                     >
-                      {getFieldDecorator('graduate', Const.RULE)(
+                      {getFieldDecorator('graduate', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入毕业生数量'/>
                       )}
                     </Form.Item>
@@ -270,7 +282,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='全职'
                     >
-                      {getFieldDecorator('fullTime', Const.RULE)(
+                      {getFieldDecorator('fullTime', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入全职数量'/>
                       )}
                     </Form.Item>
@@ -279,7 +293,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='兼职'
                     >
-                      {getFieldDecorator('partTime', Const.RULE)(
+                      {getFieldDecorator('partTime', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入兼职数量'/>
                       )}
                     </Form.Item>
@@ -288,7 +304,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='总人数'
                     >
-                      {getFieldDecorator('peopleCount', Const.RULE)(
+                      {getFieldDecorator('peopleCount', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入总人数'/>
                       )}
                     </Form.Item>
@@ -302,7 +320,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='博士生'
                     >
-                      {getFieldDecorator('doctor', Const.RULE)(
+                      {getFieldDecorator('doctor', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入博士生数量'/>
                       )}
                     </Form.Item>
@@ -311,7 +331,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='硕士生'
                     >
-                      {getFieldDecorator('master', Const.RULE)(
+                      {getFieldDecorator('master', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入硕士生数量'/>
                       )}
                     </Form.Item>
@@ -320,7 +342,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='本科生'
                     >
-                      {getFieldDecorator('bachelor', Const.RULE)(
+                      {getFieldDecorator('bachelor', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入本科生数量'/>
                       )}
                     </Form.Item>
@@ -329,7 +353,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='专科生'
                     >
-                      {getFieldDecorator('specialist', Const.RULE)(
+                      {getFieldDecorator('specialist', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入专科生数量'/>
                       )}
                     </Form.Item>
@@ -338,7 +364,9 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='总人数'
                     >
-                      {getFieldDecorator('count', Const.RULE)(
+                      {getFieldDecorator('count', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
                         <Input placeholder='请输入总人数'/>
                       )}
                     </Form.Item>

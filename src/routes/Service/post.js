@@ -8,6 +8,7 @@ import {Form, Input, message, Row} from "antd";
 import {equalResultStatus} from "../../utils";
 import {serviceDeclare} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
+import {MOBILE_VALIDATE} from "../../utils/validate";
 
 
 const Post = ({form, history}) => {
@@ -48,10 +49,12 @@ const Post = ({form, history}) => {
 
   const INPUT_LIST = [{
     label: '联系人',
-    field: 'name'
+    field: 'name',
+    validate: {}
   }, {
     label: '联系电话',
-    field: 'phone'
+    field: 'phone',
+    validate: MOBILE_VALIDATE
   }];
 
   return (
@@ -65,7 +68,9 @@ const Post = ({form, history}) => {
                 label={item.label}
                 key={index}
               >
-                {getFieldDecorator(`${item.field}`, RULE)(
+                {getFieldDecorator(`${item.field}`, {
+                  rules: [{required: true, message: '必填项'}, item.validate || {}],
+                })(
                   <Input placeholder={`请输入${item.label}`}/>
                 )}
               </Form.Item>

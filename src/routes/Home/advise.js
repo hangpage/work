@@ -7,6 +7,7 @@ import React from 'react';
 import {Form, Input, message} from "antd";
 import {equalResultStatus} from "../../utils";
 import {userFeedBack} from "../../services/user";
+import {MOBILE_VALIDATE, TWO_20, TWO_50} from "../../utils/validate";
 
 
 const Leave = ({form}) => {
@@ -52,7 +53,12 @@ const Leave = ({form}) => {
             {...formItemLayout}
             label="联系人"
           >
-            {getFieldDecorator('name', RULE)(
+            {getFieldDecorator('name', {
+              rules: [{
+                required: true, message: '必填!',
+                TWO_20
+              }],
+            })(
               <Input placeholder='请输入联系人姓名'/>
             )}
           </Form.Item>
@@ -60,7 +66,12 @@ const Leave = ({form}) => {
             {...formItemLayout}
             label="联系方式"
           >
-            {getFieldDecorator('phone', RULE)(
+            {getFieldDecorator('phone', {
+              rules: [{
+                required: true, message: '必填!',
+                MOBILE_VALIDATE
+              }],
+            })(
               <Input placeholder='请输入联系方式'/>
             )}
           </Form.Item>

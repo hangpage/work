@@ -8,6 +8,7 @@ import {Col, DatePicker, Form, Input, Radio, Row} from 'antd';
 import {reFormatParams} from "../../utils";
 import Const from "../../utils/Const";
 import ComboBox from "../../components/ComboBox";
+import {NUMBER_VALIDATE} from "../../utils/validate";
 
 
 const list1 = [{
@@ -17,37 +18,48 @@ const list1 = [{
   options: Const.YesOrNoOptions
 }, {
   label: '融资金额（w）',
-  field: 'financingFunds'
+  field: 'financingFunds',
+  validate: NUMBER_VALIDATE
 }, {
   label: '自有资金（w）',
-  field: 'privateCapital'
+  field: 'privateCapital',
+  validate: NUMBER_VALIDATE
 }, {
   label: '民间借贷（w）',
-  field: 'privateLending'
+  field: 'privateLending',
+  validate: NUMBER_VALIDATE
 }, {
   label: '风险投资（w）',
-  field: 'ventureCapital'
+  field: 'ventureCapital',
+  validate: NUMBER_VALIDATE
 }, {
   label: '银行借贷（w）',
-  field: 'bankLending'
+  field: 'bankLending',
+  validate: NUMBER_VALIDATE
 },{
   label: '种子资金（w）',
-  field: 'seedFunding'
+  field: 'seedFunding',
+  validate: NUMBER_VALIDATE
 }, {
   label: '天使投资金额（w）',
-  field: 'angelInvestment'
+  field: 'angelInvestment',
+  validate: NUMBER_VALIDATE
 }, {
   label: 'A轮融资金额（w）',
-  field: 'a'
+  field: 'a',
+  validate: NUMBER_VALIDATE
 }, {
   label: 'B轮融资金额（w）',
-  field: 'b'
+  field: 'b',
+  validate: NUMBER_VALIDATE
 }, {
   label: 'C轮融资金额（w）',
-  field: 'c'
+  field: 'c',
+  validate: NUMBER_VALIDATE
 }, {
   label: '其他融资金额（w）',
-  field: 'other'
+  field: 'other',
+  validate: NUMBER_VALIDATE
 },{
   label: '出让股权',
   field: 'equity'
@@ -94,7 +106,9 @@ class FinancingInfo extends React.Component {
                   <Form.Item
                     label={item.label}
                   >
-                    {getFieldDecorator(`${item.field}`, Const.RULE)(
+                    {getFieldDecorator(`${item.field}`, {
+                      rules: [{required: true, message: '必填项'}, item.validate || {}],
+                    })(
                       comp
                     )}
                   </Form.Item>

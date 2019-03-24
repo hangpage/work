@@ -13,6 +13,7 @@ import {tutorDeclare} from "../../services/tutor";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import {isEqual} from "lodash";
 import {connect} from "dva";
+import {MOBILE_VALIDATE} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -84,7 +85,7 @@ class SignTeacher extends React.Component{
                       label="姓名"
                     >
                       {getFieldDecorator('name', {
-                        rules: [{required: true, message: '必填项'}],
+                        rules: [{required: true, message: '必填项'}, {min: 2, max: 20, message: '2-20个汉字'}],
                       })(
                         <Input placeholder='请输入姓名'/>
                       )}
@@ -109,7 +110,7 @@ class SignTeacher extends React.Component{
                       label="手机"
                     >
                       {getFieldDecorator('phone', {
-                        rules: [{required: true, message: '必填项'}],
+                        rules: [{required: true, message: '必填项'}, MOBILE_VALIDATE],
                       })(
                         <Input placeholder='请输入手机号码'/>
                       )}
@@ -122,7 +123,7 @@ class SignTeacher extends React.Component{
                       {getFieldDecorator('profession', {
                         rules: [{required: true, message: '必填项'}],
                       })(
-                        <ComboBox placeholder='请选择教育背景' url='/dict/findType?type=profession'/>
+                        <Input placeholder='请选择教育背景'/>
                       )}
                     </Form.Item>
                   </Col>
@@ -131,7 +132,7 @@ class SignTeacher extends React.Component{
                       label="学历"
                     >
                       {getFieldDecorator('educationalBackground', {
-                        rules: [{required: true, message: '必填项'}],
+                        rules: [{required: true, message: '必填项'}, {min: 2, max: 20, message: '2-20个汉字'}],
                       })(
                         <Input placeholder='请填写学历'/>
                       )}
@@ -175,7 +176,7 @@ class SignTeacher extends React.Component{
                       label="现在任职单位"
                     >
                       {getFieldDecorator('unit', {
-                        rules: [{required: true, message: '必填项'}],
+                        rules: [{required: true, message: '必填项'}, {min: 2, max: 50, message: '2-50个汉字'}],
                       })(
                         <Input placeholder='请输入现在任职单位'/>
                       )}

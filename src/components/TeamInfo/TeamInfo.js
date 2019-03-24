@@ -12,6 +12,7 @@ import Modal from './component/step3Modal';
 import {cloneDeep} from 'lodash';
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import moment from "moment";
+import {EMAIL_VALIDATE, MOBILE_VALIDATE} from "../../utils/validate";
 
 
 class TeamInfo extends React.Component {
@@ -98,6 +99,7 @@ class TeamInfo extends React.Component {
     const list1 = [{
       label: '姓名',
       field: 'name',
+      validate: {min: 2, max: 20, message: '2-20个汉字'}
     }, {
       label: '性别',
       field: 'gendar',
@@ -106,12 +108,15 @@ class TeamInfo extends React.Component {
     }, {
       label: '学校',
       field: 'studySchool',
+      validate: {min: 2, max: 50, message: '2-50个汉字'}
     }, {
       label: '专业',
       field: 'studyProfession',
+      validate: {min: 2, max: 20, message: '2-20个汉字'}
     }, {
       label: '学历',
       field: 'education',
+      validate: {min: 2, max: 30, message: '2-30个汉字'}
     }, {
       label: '毕业时间',
       field: 'graduationTime',
@@ -122,9 +127,11 @@ class TeamInfo extends React.Component {
     }, {
       label: '政治面貌',
       field: 'politicalStatus',
+      validate: {min: 2, max: 20, message: '2-20个汉字'}
     }, {
       label: '联系电话',
       field: 'phone',
+      validate: MOBILE_VALIDATE
     }, {
       label: '微信',
       field: 'weixin',
@@ -134,6 +141,7 @@ class TeamInfo extends React.Component {
     }, {
       label: '邮箱',
       field: 'email',
+      validate: EMAIL_VALIDATE
     },];
     const modalProps = {
       visible: this.state.modalVisible,
@@ -168,7 +176,9 @@ class TeamInfo extends React.Component {
                   <Form.Item
                     label={item.label}
                   >
-                    {getFieldDecorator(`${item.field}`, Const.RULE)(
+                    {getFieldDecorator(`${item.field}`, {
+                      rules: [{required: true, message: '必填项'}, item.validate || {}],
+                    })(
                       comp
                     )}
                   </Form.Item>

@@ -12,6 +12,7 @@ import ImageUpload from "../../components/FileUpload/ImageUpload";
 import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
 import moment from "moment";
 import {isEqual} from "lodash";
+import {NUMBER_VALIDATE} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -83,7 +84,7 @@ class CompanyInfo extends React.Component {
                   label="公司/团队名称"
                 >
                   {getFieldDecorator('name', {
-                    rules: [{required: true, message: '请输入公司/团队名称'}],
+                    rules: [{required: true, message: '请输入公司/团队名称'}, {min: 2, max: 50, message: '2-50个汉字'}],
                     initialValue: initialValueMap.name
                   })(
                     <Input placeholder='请输入公司/团队名称'/>
@@ -95,7 +96,7 @@ class CompanyInfo extends React.Component {
                   label="职工人数"
                 >
                   {getFieldDecorator('employees', {
-                    rules: [{required: true, message: '请输入职工人数'}],
+                    rules: [{required: true, message: '请输入职工人数'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.employees
                   })(
                     <Input placeholder='请输入职工人数'/>
@@ -107,7 +108,7 @@ class CompanyInfo extends React.Component {
                   label="办公面积(㎡)"
                 >
                   {getFieldDecorator('area', {
-                    rules: [{required: true, message: '请输入办公面积'}],
+                    rules: [{required: true, message: '请输入办公面积'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.area
                   })(
                     <Input placeholder='请输入办公面积'/>
@@ -119,7 +120,7 @@ class CompanyInfo extends React.Component {
                   label="年收入(w)"
                 >
                   {getFieldDecorator('income', {
-                    rules: [{required: true, message: '请输入年收入'}],
+                    rules: [{required: true, message: '请输入年收入'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.income
                   })(
                     <Input placeholder='请输入年收入'/>
@@ -131,7 +132,7 @@ class CompanyInfo extends React.Component {
                   label="税收(w)"
                 >
                   {getFieldDecorator('tax', {
-                    rules: [{required: true, message: '请输入税收金额'}],
+                    rules: [{required: true, message: '请输入税收金额'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.tax
                   })(
                     <Input placeholder='请输入税收金额'/>
@@ -182,7 +183,7 @@ class CompanyInfo extends React.Component {
                   label="注册资金(w)"
                 >
                   {getFieldDecorator('registeredCapital', {
-                    rules: [{required: this.state.isRegistRequired, message: '请填写'}],
+                    rules: [{required: this.state.isRegistRequired, message: '请填写'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.registeredCapital
                   })(
                     <Input placeholder='请输入注册资金'/>
@@ -194,7 +195,7 @@ class CompanyInfo extends React.Component {
                   label="申请人所占注册资金比例"
                 >
                   {getFieldDecorator('proportionOfFunds', {
-                    rules: [{required: this.state.isRegistRequired, message: '请填写'}],
+                    rules: [{required: this.state.isRegistRequired, message: '请填写'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.proportionOfFunds
                   })(
                     <Input placeholder='请输入所占注册资金比例'/>
@@ -277,7 +278,7 @@ class CompanyInfo extends React.Component {
                   label="姓名"
                 >
                   {getFieldDecorator('principal', {
-                    rules: [{required: true, message: '请输入姓名'}],
+                    rules: [{required: true, message: '请输入姓名'}, {min: 2, max: 20, message: '2-20个汉字'}],
                     initialValue: initialValueMap.principal
                   })(
                     <Input placeholder='请输入姓名'/>
@@ -340,7 +341,7 @@ class CompanyInfo extends React.Component {
                   label="学历"
                 >
                   {getFieldDecorator('educations', {
-                    rules: [{required: true, message: '请输入'}],
+                    rules: [{required: true, message: '请输入'}, {min: 2, max: 20, message: '2-20个汉字'}],
                     initialValue: initialValueMap.educations
                   })(
                     <Input placeholder='请输入学历'/>
@@ -352,7 +353,7 @@ class CompanyInfo extends React.Component {
                   label="专业"
                 >
                   {getFieldDecorator('profession', {
-                    rules: [{required: true, message: '请选择'}],
+                    rules: [{required: true, message: '请选择'}, {min: 2, max: 20, message: '2-20个汉字'}],
                     initialValue: initialValueMap.profession
                   })(
                     <Input placeholder='请输入专业'/>
@@ -377,7 +378,7 @@ class CompanyInfo extends React.Component {
                   label="最高学历院校"
                 >
                   {getFieldDecorator('education', {
-                    rules: [{required: true, message: '请选择'}],
+                    rules: [{required: true, message: '请选择'}, {min: 2, max: 20, message: '2-20个汉字'}],
                     initialValue: initialValueMap.education
                   })(
                     <Input placeholder='请输入最高学历院校'/>
@@ -413,7 +414,7 @@ class CompanyInfo extends React.Component {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="学生证或身份证"
+                  label="学生证"
                 >
                   {getFieldDecorator('diploma', {
                     rules: [{required: true, message: '请上传'}],
