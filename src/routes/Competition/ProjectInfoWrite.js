@@ -21,8 +21,8 @@ class TeamInfoWrite extends React.Component{
   }
   submit = () => {
     const {form, history, location} = this.props;
-    const {validateFields} = form;
-    validateFields((err, values) => {
+    const {validateFieldsAndScroll} = form;
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');

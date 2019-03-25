@@ -7,7 +7,7 @@ import React from 'react';
 import ReportCard from "../../components/ReportCard/ReportCard";
 import {connect} from "dva";
 import {Avatar} from "antd";
-import isEnd from "../../utils";
+import {isEnd} from "../../utils";
 
 const Detail = ({data, history}) => {
   return (

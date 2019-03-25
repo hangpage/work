@@ -7,7 +7,7 @@ import React from 'react';
 import {Col, DatePicker, Form, Input, Radio, Row} from 'antd';
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
-import {reFormatParams} from "../../utils";
+import {reFormatParams, testId} from "../../utils";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
 import moment from "moment";
@@ -27,9 +27,9 @@ class CompanyInfo extends React.Component {
 
   getTeamInfoData = () => {
     const {form} = this.props;
-    const {validateFields} = form;
+    const {validateFieldsAndScroll} = form;
     let params = {};
-    validateFields((err, values) => {
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         params = reFormatParams(values);
         params.birth = params.birth + ' 00:00:00';
@@ -66,6 +66,15 @@ class CompanyInfo extends React.Component {
     this.setState({
       isRegistRequired: e.target.value === '1'
     })
+  };
+
+  checkId = (rule, value, callback) => {
+    const result = testId(value);
+    if (result.status === 0) {
+      callback(result.msg);
+      return;
+    }
+    callback();
   };
 
   render() {
@@ -183,10 +192,13 @@ class CompanyInfo extends React.Component {
                   label="注册资金(w)"
                 >
                   {getFieldDecorator('registeredCapital', {
-                    rules: [{required: this.state.isRegistRequired, message: '请填写'}, NUMBER_VALIDATE],
-                    initialValue: initialValueMap.registeredCapital
+                    rules: [{required: this.state.isRegistRequired, message: '请填写'}],
+                    initialValue: initialValueMap.registeredCapital,
+                    getValueFromEvent: (event) => {
+                        return event.target.value.replace(/\D/g, '')
+                    },
                   })(
-                    <Input placeholder='请输入注册资金'/>
+                    <Input placeholder='请输入注册资金' />
                   )}
                 </Form.Item>
               </Col>
@@ -195,8 +207,11 @@ class CompanyInfo extends React.Component {
                   label="申请人所占注册资金比例"
                 >
                   {getFieldDecorator('proportionOfFunds', {
-                    rules: [{required: this.state.isRegistRequired, message: '请填写'}, NUMBER_VALIDATE],
-                    initialValue: initialValueMap.proportionOfFunds
+                    rules: [{required: this.state.isRegistRequired, message: '请填写'}],
+                    initialValue: initialValueMap.proportionOfFunds,
+                    getValueFromEvent: (event) => {
+                      return event.target.value.replace(/\D/g, '')
+                    },
                   })(
                     <Input placeholder='请输入所占注册资金比例'/>
                   )}
@@ -317,7 +332,7 @@ class CompanyInfo extends React.Component {
                   label="身份证号"
                 >
                   {getFieldDecorator('idCard', {
-                    rules: [{required: true, message: '请输入'}],
+                    rules: [{required: true, message: '请输入'}, {validator: this.checkId}],
                     initialValue: initialValueMap.idCard
                   })(
                     <Input placeholder='请输入身份证号'/>

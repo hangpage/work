@@ -98,9 +98,9 @@ class CompanyInfo extends React.Component {
   };
   submit = () => {
     const {form} = this.props;
-    const {validateFields} = form;
+    const {validateFieldsAndScroll} = form;
     const {grandPrize} = this.state;
-    validateFields((err, values) => {
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.id = this.props.teamInfo.id;

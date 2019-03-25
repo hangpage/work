@@ -37,7 +37,7 @@ class Lockers extends React.Component{
 
     const submit = (e) => {
       e.preventDefault();
-      form.validateFields((err, values) => {
+      form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           values.token = sessionStorage.getItem('token');
           if(!values.locker){

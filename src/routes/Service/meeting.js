@@ -87,7 +87,7 @@ class Lockers extends React.Component{
   submit = (e) => {
     const {form, history} = this.props;
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         values.token = sessionStorage.getItem('token');
         values.busiDate = moment(values.busiDate).format('YYYY-MM-DD');

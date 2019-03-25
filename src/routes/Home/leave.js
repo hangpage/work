@@ -33,7 +33,7 @@ const Leave = ({form}) => {
   const {getFieldDecorator} = form;
   const handleSubmit = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         const params = reFormatParams(values);
         params.inTime = params.inTime + ' 00:00:00';

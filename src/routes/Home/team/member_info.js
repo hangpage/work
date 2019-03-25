@@ -90,8 +90,8 @@ class ParkStep3 extends React.Component {
 
   submit = () => {
     const {form, history} = this.props;
-    const {validateFields} = form;
-    validateFields((err, values) => {
+    const {validateFieldsAndScroll} = form;
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');

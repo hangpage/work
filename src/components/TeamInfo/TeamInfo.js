@@ -35,10 +35,10 @@ class TeamInfo extends React.Component {
 
   getTeamInfoData = () => {
     const {form} = this.props;
-    const {validateFields} = form;
+    const {validateFieldsAndScroll} = form;
     let params = {};
     const {membersStr} = this.state;
-    validateFields((err, values) => {
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         params = reFormatParams(values);
         let array = [];

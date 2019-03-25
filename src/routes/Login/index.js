@@ -22,7 +22,7 @@ class NormalLoginForm extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         login(values).then(({data}) => {
           if(equalResultStatus(data)){
@@ -86,6 +86,7 @@ class NormalLoginForm extends React.Component {
                 )}
                 <CountDown onClick={() => {this.startTimer()}} count={60} ref={(span) => {this.ref = span}}/>
               </Form.Item>
+              <div style={{color: 'rgb(122, 122, 122)', textAlign: 'left', marginTop: 5}}>提示：可通过验证码直接注册</div>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 登录
               </Button>

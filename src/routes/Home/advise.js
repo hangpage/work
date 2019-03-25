@@ -32,7 +32,7 @@ const Leave = ({form}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         userFeedBack(values).then(({data}) => {
           if(equalResultStatus(data)){

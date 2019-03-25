@@ -5,8 +5,8 @@ import React from "react";
 class AddModal extends React.Component{
   handleOk = () => {
     const { onOk, form, itemKey } = this.props;
-    const { validateFields, getFieldsValue } = form;
-    validateFields(errors => {
+    const { validateFieldsAndScroll, getFieldsValue } = form;
+    validateFieldsAndScroll(errors => {
       if (errors) {
         return
       }

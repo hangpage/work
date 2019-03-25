@@ -72,9 +72,9 @@ class FinancingInfo extends React.Component {
 
   getTeamInfoData = () => {
     const {form} = this.props;
-    const {validateFields} = form;
+    const {validateFieldsAndScroll} = form;
     let params = {};
-    validateFields((err, values) => {
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         params = reFormatParams(values);
       }

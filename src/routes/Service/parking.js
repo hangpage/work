@@ -33,7 +33,7 @@ const Parking = ({form, history}) => {
 
   const submit = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         parkingApply(values).then(({data}) => {
           if (equalResultStatus(data)) {

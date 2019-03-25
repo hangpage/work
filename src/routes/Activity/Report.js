@@ -12,9 +12,12 @@ import {activitySign} from "../../services/activity";
 
 
 const TeamInfoWrite = ({form, history, location}) => {
-  const {getFieldDecorator, validateFields} = form;
+  const {getFieldDecorator, validateFieldsAndScroll} = form;
   const submit = () => {
-    validateFields((err, values) => {
+    if(!JSON.parse(sessionStorage.getItem('user')).name){
+      return message.error('请先去个人中心完善您的信息！')
+    }
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = values;
         params.token = sessionStorage.getItem('token');

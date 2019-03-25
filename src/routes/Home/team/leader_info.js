@@ -306,11 +306,11 @@ class Team extends React.Component {
 
   submit = () => {
     const {form} = this.props;
-    const {validateFields} = form;
+    const {validateFieldsAndScroll} = form;
     const {prize} = this.state;
     this.saveStudyExperience();
     this.saveWorkExperience();
-    validateFields((err, values) => {
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');

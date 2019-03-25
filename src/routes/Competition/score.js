@@ -14,27 +14,35 @@ import qs from "qs";
 const List = [{
   title: '产品与服务',
   field: 'service',
+  total: 35
 },{
   title: '项目概况',
   field: 'generalization',
+  total: 35
 }, {
   title: '市场分析',
   field: 'marketAnalysis',
+  total: 20
 }, {
   title: '营销策略',
   field: 'marketingStrategy',
+  total: 5
 }, {
   title: '风险分析与控制',
   field: 'riskAnalysis',
+  total: 10
 }, {
   title: '项目三年规划',
   field: 'plan',
+  total: 5
 }, {
   title: '项目筹措与使用',
   field: 'financing',
+  total: 5
 }, {
   title: '项目财务分析',
   field: 'financialAnalysis',
+  total: 5
 }, {
   title: '网站介绍',
   field: 'webIntro',
@@ -63,6 +71,10 @@ class Score extends React.Component {
         const locationParams = qs.parse(location.search.split('?')[1]);
         params.token = sessionStorage.getItem('token');
         params.teamId = locationParams.teamId;
+        params.service = this.state.total;
+        if(Number(params.service) > 100 || Number(params.service) <= 0){
+          return message.error('评分在0-100之间！')
+        }
         saveScore(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('评分成功！');
@@ -95,6 +107,12 @@ class Score extends React.Component {
     this.setState({total});
   };
 
+  handleTotalChange = (e) => {
+    this.setState({
+      total: e.currentTarget.value
+    })
+  };
+
   checkScore = (rule, value, callback) => {
     if (Number(value) > 100 || Number(value) < 0 ) {
       callback('分数在0-100之间');
@@ -124,21 +142,21 @@ class Score extends React.Component {
                     {params.project[item.field]}
                   </p>
                   <div className="bottom">
-                    <span className='pingfen'>评分</span>
-                    <Form.Item style={{marginTop: 40}}>
-                    {getFieldDecorator(item.field, {
-                      rules: [{required: true, message: '请填写必填项'}, {
-                        validator: this.checkScore,
-                      }],
-                      initialValue: params[item.field],
-                      getValueFromEvent: (event) => {
-                        return event.target.value.replace(/\D/g, '')
-                      },
-                      trigger: 'onInput'
-                    })(
-                      <Input onChange={this.handleChange}/>
-                    )}
-                    </Form.Item>
+                    {item.total ? <span className='pingfen'>此项得分满分为{item.total}分</span> : <span className='pingfen'>此项不参与评分</span>}
+                    {/*<Form.Item style={{marginTop: 40}}>*/}
+                    {/*{getFieldDecorator(item.field, {*/}
+                      {/*rules: [{required: true, message: '请填写必填项'}, {*/}
+                        {/*validator: this.checkScore,*/}
+                      {/*}],*/}
+                      {/*initialValue: params[item.field],*/}
+                      {/*getValueFromEvent: (event) => {*/}
+                        {/*return event.target.value.replace(/\D/g, '')*/}
+                      {/*},*/}
+                      {/*trigger: 'onInput'*/}
+                    {/*})(*/}
+                      {/*<Input onChange={this.handleChange}/>*/}
+                    {/*)}*/}
+                    {/*</Form.Item>*/}
                   </div>
                 </div>
               )
@@ -148,7 +166,7 @@ class Score extends React.Component {
               <div className="score-form" style={{borderRadius: 4}}>
                 <div className="bottom" style={{height: 'auto'}}>
                   <div className="pingfen">总分</div>
-                  <Input value={this.state.total} disabled={true}/>
+                  <Input value={this.state.total} onChange={this.handleTotalChange}/>
                 </div>
                 <div className="bottom" style={{height: 'auto', marginTop: 40}}>
                   <div className="pingfen" style={{alignSelf: 'flex-start'}}>评价</div>

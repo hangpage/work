@@ -43,7 +43,7 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
       link = `${match.url}/progress?${qs.stringify(params)}`;
     }else{
       allowReport = data.status === '2';
-      if(Number(data.status) >= 7){ //网络评审结束状态不允许报名和申请导师
+      if(Number(data.status) >= 6){ //网络评审结束状态不允许报名和申请导师
         noTeacher = true;
         allowReport = false;
       }

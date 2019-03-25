@@ -16,9 +16,9 @@ const rule = {
 };
 
 const TeamInfoWrite = ({form, history, location}) => {
-  const {getFieldDecorator, validateFields} = form;
+  const {getFieldDecorator, validateFieldsAndScroll} = form;
   const submit = () => {
-    validateFields((err, values) => {
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = values;
         params.token = sessionStorage.getItem('token');

@@ -35,8 +35,8 @@ const formItemLayout = {
 class WorkExperience extends React.Component{
   handleOk = () => {
     const { onOk, form, itemKey } = this.props;
-    const { validateFields, getFieldsValue } = form;
-    validateFields(errors => {
+    const { validateFieldsAndScroll, getFieldsValue } = form;
+    validateFieldsAndScroll(errors => {
       if (errors) {
         return
       }

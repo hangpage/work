@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ActivityCard.less';
 import {Typography} from 'antd';
-import isEnd from "../../utils";
+import {isEnd} from "../../utils";
 
 
 const ActivityCard = ({img, title, time, read, size='', style, endTime}) => {

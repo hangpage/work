@@ -84,8 +84,8 @@ class Team extends React.Component {
 
   submit = () => {
     const {form, dispatch} = this.props;
-    const {validateFields, resetFields} = form;
-    validateFields((err, values) => {
+    const {validateFieldsAndScroll, resetFields} = form;
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');

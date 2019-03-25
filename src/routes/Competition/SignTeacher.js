@@ -24,8 +24,8 @@ class SignTeacher extends React.Component{
   submit = () => {
     console.log(this.props)
     const {form, location, history} = this.props;
-    const {validateFields} = form;
-    validateFields((err, values) => {
+    const {validateFieldsAndScroll} = form;
+    validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');

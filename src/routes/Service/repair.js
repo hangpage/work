@@ -33,7 +33,7 @@ const Repair = ({form, history}) => {
 
   const submit = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         values.token = sessionStorage.getItem('token');
         let formData = new FormData();

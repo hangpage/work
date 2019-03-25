@@ -33,7 +33,7 @@ const Post = ({form, history}) => {
 
   const submit = (e) => {
     e.preventDefault();
-    form.validateFields((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         serviceDeclare(values).then(({data}) => {
           if (equalResultStatus(data)) {

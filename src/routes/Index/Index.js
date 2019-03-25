@@ -10,7 +10,6 @@ import {Link, routerRedux} from 'dva/router'
 import config from '../../utils/config';
 import {connect} from "dva";
 
-
 const INDEX_ENTRANCE_LIST = [{
   icon: require('../../assets/icon/icon-yuyuecanguan.png'),
   text: '预约参观',
