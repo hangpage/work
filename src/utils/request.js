@@ -1,5 +1,4 @@
 import fetch from 'dva/fetch';
-import store from '../index';
 import {routerRedux} from "dva/router";
 
 function parseJSON(response) {

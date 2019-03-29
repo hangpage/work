@@ -21,7 +21,8 @@ class CompanyInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isRegistRequired: false
+      isRegistRequired: false,
+      isOnSchoolRequired: false
     }
   }
 
@@ -67,6 +68,13 @@ class CompanyInfo extends React.Component {
       isRegistRequired: e.target.value === '1'
     })
   };
+
+  handleIsOnSchoolChange = (e) => {
+    this.setState({
+      isRegistRequired: e.target.value === '0'
+    })
+  };
+
 
   checkId = (rule, value, callback) => {
     const result = testId(value);
@@ -408,7 +416,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.isOnSchool
                   })(
-                    <Radio.Group>
+                    <Radio.Group onChange={this.handleIsOnSchoolChange}>
                       <Radio value={Const.Yes}>是</Radio>
                       <Radio value={Const.No}>否</Radio>
                     </Radio.Group>
@@ -420,7 +428,7 @@ class CompanyInfo extends React.Component {
                   label="毕业时间"
                 >
                   {getFieldDecorator('admissionTime', {
-                    rules: [{required: true, message: '请选择'}],
+                    rules: [{required: this.state.isOnSchoolRequired, message: '请选择'}],
                     initialValue: initialValueMap.admissionTime
                   })(
                     <DatePicker/>

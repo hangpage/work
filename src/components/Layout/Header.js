@@ -24,7 +24,7 @@ const LIST = [{
   selectIcon: require('../../assets/icon/icon-pressed-faxian.png')
 }, {
   text: '服务',
-  linkTo: '/service',
+  linkTo: '/sign_teacher',
   icon: require('../../assets/icon/icon-default-fuwu.png'),
   selectIcon: require('../../assets/icon/icon-pressed-fuwu.png')
 }];
@@ -87,7 +87,8 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
   };
 
   const logOut = () => {
-    sessionStorage.setItem('token', '');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('cInfo');
     dispatch({
       type: 'app/updateState',
       payload: {

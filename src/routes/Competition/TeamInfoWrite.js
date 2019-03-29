@@ -27,6 +27,9 @@ class TeamInfoWrite extends React.Component {
     if(!Object.keys(params).length){
       return message.error('请填写必填项！');
     }
+    if(params.birth.split(' ')[0].replace(/-/g,'') !== String(params.idCard).substring(6, 14)){
+      return message.error('身份证和出生日期不匹配！');
+    }
     params.mId = getParams(location.search).mId;
     sessionStorage.setItem('cInfo', JSON.stringify(params));
     history.push(`/competition/${params.mId}/project_info_write?egistrationNotice=${getParams(location.search).egistrationNotice}&${qs.stringify(params)}`);

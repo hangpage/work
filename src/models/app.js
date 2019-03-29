@@ -3,6 +3,7 @@ import {userGetInfo} from "../services/user";
 import {message} from 'antd';
 import {articleFindList} from "../services/article";
 import {activityFindList} from "../services/activity";
+import {routerRedux} from "dva/router";
 
 export default {
 
@@ -53,6 +54,12 @@ export default {
             user: data.data,
           }
         });
+        if(!data.data.age){
+          yield put(routerRedux.push({
+            pathname: '/home/profile'
+          }));
+          return message.warning('请先完善个人信息');
+        }
       }else{
         message.error(data.message);
       }

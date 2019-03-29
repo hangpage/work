@@ -146,7 +146,7 @@ const routes = [{
 }];
 
 
-const URL_BLACK_LIST = ['/index', '/find', '/home', '/service', '/home/team', '/home/:type', '/search']; //不显示面包屑的页面url
+const URL_BLACK_LIST = ['/index', '/find', '/home', '/service', '/home/team', '/home/:type', '/search', '/sign_teacher']; //不显示面包屑的页面url
 
 const App = ({children, location}) => {
   const pathSnippets = location.pathname.split('/').filter(i => i);

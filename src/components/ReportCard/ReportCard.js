@@ -11,6 +11,7 @@ import {Modal} from "antd";
 import {Typography} from "antd";
 
 const ReportCard = ({img, history, title, time, style, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false}) => {
+  noTeacher = true;
   const doLink = (link) => {
     if(auth){
       if(validateIsResident()){

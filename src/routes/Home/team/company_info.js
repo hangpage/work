@@ -66,7 +66,7 @@ class CompanyInfo extends React.Component {
   componentWillReceiveProps(nextProps, nextContext) {
     if (!isEqual(this.props.teamInfo, nextProps.teamInfo)) {
       const data = cloneDeep(nextProps.teamInfo);
-      data.registeredTime = moment(data.registeredTime);
+      data.registeredTime = moment(moment(data.registeredTime).format('YYYY-MM-DD'));
       if (data.grandPrize) {
         const array = data.grandPrize.split(';');
         const grandPrize = [];

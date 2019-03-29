@@ -53,16 +53,16 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
                 url = item.src;
                 break;
               case '2':
-                url = '/article/' + item.src;
+                url = '/article/' + item.id;
                 break;
               case '3':
-                url = '/activity/' + item.src;
+                url = '/activity/' + item.id;
                 break;
               case '4':
-                url = '/competition/' + item.src;
+                url = '/competition/' + item.id;
                 break;
               case '5':
-                url = '/park/' + item.src;
+                url = '/park/' + item.id;
                 break;
               default:
                 url = '';

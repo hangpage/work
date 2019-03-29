@@ -3,6 +3,7 @@ import {model} from "../../utils/model";
 import modelExtend from 'dva-model-extend'
 import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
+import {tutorGetInfo} from "../../services/tutor";
 
 export default modelExtend(model, {
 
@@ -14,7 +15,8 @@ export default modelExtend(model, {
     teamDetail: {},
     teamMatchDetail: {},
     count: 0,
-    tutorReview: [], //当前比赛的可评分队伍列表
+    tutorReview: [], //当前比赛的可评分队伍列表,
+    tutorData: {}
   }
   ,
 
@@ -45,11 +47,8 @@ export default modelExtend(model, {
           if (match) {
             dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
           }
-        }else if(pathMatchRegexp('/competition/:id/sign_teacher', location.pathname)){
-          const match = pathMatchRegexp('/competition/:id/sign_teacher', location.pathname);
-          if (match) {
-            dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
-          }
+        }else if(pathMatchRegexp('/sign_teacher', location.pathname)){
+            dispatch({ type: 'tutorGetInfo'})
         }else if(pathMatchRegexp('/competition/:id/score', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/score', location.pathname);
           if (match) {
@@ -113,6 +112,24 @@ export default modelExtend(model, {
         })
       }else{
         message.error(data.message);
+      }
+    },
+    *tutorGetInfo({ payload }, { call, put }){
+      const {data} = yield  call(tutorGetInfo, payload);
+      if(data.code === 1){
+        if(String(data.status) === '0'){
+          message.success('导师信息审核中');
+        }else if(String(data.status) === '1'){
+          message.success('导师信息审核通过中');
+        }else if(String(data.status) === '2'){
+          message.error('导师申请已被拒绝');
+        }
+        yield put({
+          type: 'save',
+          payload: {
+            tutorData: data.data || {}
+          }
+        })
       }
     },
   },

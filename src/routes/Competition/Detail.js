@@ -57,10 +57,10 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
   return (
     <div className='second-bg'>
       <div className="w">
-        {(teamMatchDetail.team && !teamMatchDetail.tutor && String(teamMatchDetail.team.schoolReviewStatus) === '0')
-        && <Button type="dashed" block><Link to={`/competition/${data.id}/team_info_write?mId=${data.id}`}>修改比赛报名信息</Link></Button>}
-        {(teamMatchDetail.tutor && String(teamMatchDetail.tutor.status) === '0')
-        && <Button type="dashed" block><Link to={`/competition/${data.id}/sign_teacher?mId=${data.id}`}>修改成为导师报名信息</Link></Button>}
+        {(Number(data.status) <= 2 && teamMatchDetail.team && !teamMatchDetail.tutor && String(teamMatchDetail.team.schoolReviewStatus) === '0')
+        && <Link to={`/competition/${data.id}/team_info_write?mId=${data.id}`}><Button type="dashed" block htmlType='button'>修改比赛报名信息</Button></Link>}
+        {(Number(data.status) < 6 && teamMatchDetail.tutor && String(teamMatchDetail.tutor.status) === '0')
+        && <Link to={`/competition/${data.id}/sign_teacher?mId=${data.id}`}><Button type="dashed" block htmlType='button'>修改成为导师报名信息</Button></Link>}
         <ReportCard
           time={data.createTime}
           read={data.pageViews}

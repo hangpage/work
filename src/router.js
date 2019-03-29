@@ -213,7 +213,12 @@ const routes = [{
   component: Team,
   exact: 'exact',
   breadcrumbName: ''
-},];
+}, {
+  path: '/sign_teacher',
+  component: SignTeacher,
+  exact: 'exact',
+  breadcrumbName: '成为导师'
+}];
 
 const homeRoutes = [{
   path: '/home',

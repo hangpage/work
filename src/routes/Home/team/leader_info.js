@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
-import {equalResultStatus, reFormatParams} from "../../../utils";
+import {equalResultStatus, reFormatParams, testId} from "../../../utils";
 import {parkSavePrincipal, saveStudyExperience, saveWorkExperience} from "../../../services/park";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
@@ -318,8 +318,15 @@ class Team extends React.Component {
         const fArray = [params.f1, params.f2, params.f3, params.f4, params.f5, params.f6];
         const mArray = [params.m1, params.m2, params.m3, params.m4, params.m5, params.m6];
         params.familySituation = fArray.join(',') + ';' + mArray.join(',');
+        const birthValidateResult = testId(params.birth);
+        if(birthValidateResult.status !== '1'){
+            return message.error(birthValidateResult.msg);
+        }
         params.graduationTime = params.graduationTime + ' 00:00:00';
         params.birth = params.birth + ' 00:00:00';
+        if(params.birth.split(' ')[0].replace(/-/g,'') !== String(params.idCard).substring(6, 14)){
+          return message.error('身份证和出生日期不匹配！');
+        }
         let array = [];
         if(prize.length){
           prize.forEach((item) => {

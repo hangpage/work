@@ -18,7 +18,7 @@ const List = [{
 },{
   title: '项目概况',
   field: 'generalization',
-  total: 35
+  total: 15
 }, {
   title: '市场分析',
   field: 'marketAnalysis',
@@ -91,7 +91,7 @@ class Score extends React.Component {
     const {location} = this.props;
     const params = qs.parse(location.search.split('?')[1]);
     this.setState({
-      total: params.total
+      total: params.service
     })
   }
 

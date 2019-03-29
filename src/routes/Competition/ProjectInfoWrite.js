@@ -18,6 +18,9 @@ const {TextArea} = Input;
 class TeamInfoWrite extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      isRegistRequired: false
+    }
   }
   submit = () => {
     const {form, history, location} = this.props;
@@ -58,6 +61,14 @@ class TeamInfoWrite extends React.Component{
       }
     });
   };
+
+  componentWillMount() {
+    const {location} = this.props;
+    const isRegist = getParams(location.search).isRegist;
+    this.setState({
+      isRegistRequired: isRegist === '1'
+    })
+  }
 
   componentWillReceiveProps(nextProps, nextContext) {
     if(!isEqual(this.props.teamMatchDetail, nextProps.teamMatchDetail)){
@@ -183,9 +194,7 @@ class TeamInfoWrite extends React.Component{
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
-                    {getFieldDecorator('webIntro', {
-                      rules: [{required: true,message: '请输入项目网站介绍...'}],
-                    })(
+                    {getFieldDecorator('webIntro')(
                       <TextArea placeholder='请输入项目网站介绍...' style={{height: 240}}/>
                     )}
                   </Form.Item>
@@ -194,9 +203,7 @@ class TeamInfoWrite extends React.Component{
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
-                    {getFieldDecorator('organizationStructure', {
-                      rules: [{required: true,message: '请填写'}],
-                    })(
+                    {getFieldDecorator('organizationStructure')(
                       <TextArea placeholder='请输入组织结构...' style={{height: 240}}/>
                     )}
                   </Form.Item>
@@ -216,9 +223,7 @@ class TeamInfoWrite extends React.Component{
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
-                    {getFieldDecorator('other', {
-                      rules: [{required: true,message: '请填写'}],
-                    })(
+                    {getFieldDecorator('other')(
                       <TextArea placeholder='可输入项目其他相关内容...' style={{height: 240}}/>
                     )}
                   </Form.Item>
@@ -237,10 +242,14 @@ class TeamInfoWrite extends React.Component{
                     wrapperCol={{span: 18}}
                     className='row-upload'
                   >
-                    {getFieldDecorator('principalCardFront')(
+                    {getFieldDecorator('principalCardFront', {
+                      rules: [{required: this.state.isRegistRequired, message: '请上传'}],
+                    })(
                       <ImageUpload uploadText='身份证正面'/>
                     )}
-                    {getFieldDecorator('principalCardReverse')(
+                    {getFieldDecorator('principalCardReverse', {
+                      rules: [{required: this.state.isRegistRequired, message: '请上传'}],
+                    })(
                       <ImageUpload uploadText={'身份证反面'}/>
                     )}
                   </Form.Item>
@@ -249,7 +258,9 @@ class TeamInfoWrite extends React.Component{
                     labelCol={{span: 24}}
                     wrapperCol={{span: 6}}
                   >
-                    {getFieldDecorator('businessLicense')(
+                    {getFieldDecorator('businessLicense', {
+                      rules: [{required: this.state.isRegistRequired, message: '请上传'}],
+                    })(
                       <ImageUpload/>
                     )}
                   </Form.Item>
@@ -261,7 +272,7 @@ class TeamInfoWrite extends React.Component{
               <div className='main-button' onClick={this.submit}>提交</div>
             </Row>
           </div>
-          <div className='appi_notes'>
+          <div className='app_notes'>
             <h6 className=''>报名须知：</h6>
             <div className='competition-detail' dangerouslySetInnerHTML={{__html: decodeURIComponent(getParams(location.search).egistrationNotice)}}/>
           </div>

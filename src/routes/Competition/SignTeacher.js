@@ -22,14 +22,12 @@ class SignTeacher extends React.Component{
     super(props);
   }
   submit = () => {
-    console.log(this.props)
-    const {form, location, history} = this.props;
+    const {form, history} = this.props;
     const {validateFieldsAndScroll} = form;
     validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
-        params.mId = getParams(location.search).mId;
         if(this.props.teamMatchDetail.tutor){
           params.id = this.props.teamMatchDetail.tutor.id;
         }
@@ -52,8 +50,8 @@ class SignTeacher extends React.Component{
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if(!isEqual(this.props.teamMatchDetail, nextProps.teamMatchDetail)){
-      const data = nextProps.teamMatchDetail.tutor;
+    if(!isEqual(this.props.tutorData, nextProps.tutorData)){
+      const data = nextProps.tutorData;
       this.props.form.setFieldsValue(data);
     }
   }
