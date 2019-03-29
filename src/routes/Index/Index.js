@@ -16,8 +16,8 @@ const INDEX_ENTRANCE_LIST = [{
   link: '/appoint'
 },{
   icon: require('../../assets/icon/icon-yuanqufuwu.png'),
-  text: '园区服务',
-  link: '/service'
+  text: '成为导师',
+  link: '/sign_teacher'
 },{
   icon: require('../../assets/icon/icon-yuanquruzhu.png'),
   text: '园区入驻',

@@ -24,7 +24,7 @@ const LIST = [{
   selectIcon: require('../../assets/icon/icon-pressed-faxian.png')
 }, {
   text: '服务',
-  linkTo: '/sign_teacher',
+  linkTo: '/service',
   icon: require('../../assets/icon/icon-default-fuwu.png'),
   selectIcon: require('../../assets/icon/icon-pressed-fuwu.png')
 }];

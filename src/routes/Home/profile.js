@@ -29,7 +29,7 @@ const Profile = ({form, data, dispatch}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
+    form.validateFields((err, values) => {
       if(!values.img){
         return message.error('请上传一张图片作为您的头像');
       }

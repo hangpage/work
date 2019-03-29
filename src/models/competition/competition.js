@@ -4,6 +4,7 @@ import modelExtend from 'dva-model-extend'
 import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
 import {message} from "antd";
 import {tutorGetInfo} from "../../services/tutor";
+import {routerRedux} from "dva/router";
 
 export default modelExtend(model, {
 
@@ -48,7 +49,13 @@ export default modelExtend(model, {
             dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
           }
         }else if(pathMatchRegexp('/sign_teacher', location.pathname)){
+          if(!sessionStorage.getItem('token')){
+              dispatch(routerRedux.push({
+                pathname: '/login'
+              }))
+          }else{
             dispatch({ type: 'tutorGetInfo'})
+          }
         }else if(pathMatchRegexp('/competition/:id/score', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/score', location.pathname);
           if (match) {
@@ -115,13 +122,13 @@ export default modelExtend(model, {
       }
     },
     *tutorGetInfo({ payload }, { call, put }){
-      const {data} = yield  call(tutorGetInfo, payload);
+      const {data} = yield call(tutorGetInfo, payload);
       if(data.code === 1){
-        if(String(data.status) === '0'){
+        if(String(data.data.status) === '0'){
           message.success('导师信息审核中');
-        }else if(String(data.status) === '1'){
-          message.success('导师信息审核通过中');
-        }else if(String(data.status) === '2'){
+        }else if(String(data.data.status) === '1'){
+          message.success('导师信息审核通过');
+        }else if(String(data.data.status) === '2'){
           message.error('导师申请已被拒绝');
         }
         yield put({

@@ -28,8 +28,8 @@ class SignTeacher extends React.Component{
       if (!err) {
         let params = reFormatParams(values);
         params.token = sessionStorage.getItem('token');
-        if(this.props.teamMatchDetail.tutor){
-          params.id = this.props.teamMatchDetail.tutor.id;
+        if(this.props.tutorData.id){
+          params.id = this.props.tutorData.id;
         }
         let formData = new FormData();
         Object.keys(params).forEach((item) => {
@@ -37,7 +37,7 @@ class SignTeacher extends React.Component{
         });
         tutorDeclare(formData).then(({data}) => {
           if (equalResultStatus(data)) {
-            message.success('报名成功');
+            message.success('申请成功');
             history.push({
               pathname: '/index',
             });
@@ -54,6 +54,15 @@ class SignTeacher extends React.Component{
       const data = nextProps.tutorData;
       this.props.form.setFieldsValue(data);
     }
+  }
+
+  componentWillUnmount() {
+      this.props.dispatch({
+        type: 'competition/save',
+        payload: {
+          tutorData: {}
+        }
+      })
   }
 
   render() {
