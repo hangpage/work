@@ -2,12 +2,12 @@ import {Col, DatePicker, Form, Input, Modal, Radio, Row} from "antd";
 import React from "react";
 import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
-import {MOBILE_VALIDATE, TWO_20, TWO_30} from "../../../utils/validate";
+import {MOBILE_VALIDATE, validateNoChinese} from "../../../utils/validate";
 
 const list1 = [{
   label: '姓名',
   field: 'name',
-  validate: TWO_20
+  validator: validateNoChinese
 }, {
   label: '性别',
   field: 'gendar',
@@ -16,11 +16,11 @@ const list1 = [{
 }, {
   label: '所在院校',
   field: 'studySchool',
-  validate: TWO_30
+  validator: validateNoChinese
 }, {
   label: '所学专业',
   field: 'studyProfession',
-  validate: TWO_20
+  validator: validateNoChinese
 },{
   label: '毕业时间',
   field: 'studyDate',
@@ -28,7 +28,7 @@ const list1 = [{
 }, {
   label: '学历',
   field: 'studyEdu',
-  validate: TWO_20
+  validator: validateNoChinese
 }, {
   label: '联系电话',
   field: 'phone',

@@ -10,7 +10,7 @@ import {connect} from "dva";
 import {equalResultStatus} from "../../utils";
 import {userGetInfo, userUpdateInfo} from "../../services/user";
 import NormalUpload from "../../components/FileUpload/NormalUpload";
-import {NUMBER_VALIDATE, TWO_20, TWO_50} from "../../utils/validate";
+import {NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 
 const Profile = ({form, data, dispatch}) => {
@@ -96,7 +96,8 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('name', {
             rules: [{
               required: true, message: '请输入姓名!',
-              TWO_20
+            },{
+              validator: validateNoChinese
             }],
             initialValue: data.name
           })(
@@ -110,7 +111,8 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('nickName', {
             rules: [{
               required: true, message: '请输入昵称!',
-              TWO_20
+            },{
+              validator: validateNoChinese
             }],
             initialValue: data.nickName
           })(
@@ -123,8 +125,7 @@ const Profile = ({form, data, dispatch}) => {
         >
           {getFieldDecorator('age', {
             rules: [{
-              required: true, message: '请输入年龄!',
-              NUMBER_VALIDATE
+              required: true, message: '请输入正确的年龄!', ...NUMBER_VALIDATE, min: 1
             }],
             initialValue: data.age
           })(
@@ -154,7 +155,8 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('company', {
             rules: [{
               required: true, message: '请输入公司!',
-              TWO_50
+            },{
+              validator: validateNoChinese
             }],
             initialValue: data.company
           })(
@@ -168,7 +170,8 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('position', {
             rules: [{
               required: true, message: '请输入职位!',
-              TWO_20
+            },{
+              validator: validateNoChinese
             }],
             initialValue: data.position
           })(

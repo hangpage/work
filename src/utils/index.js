@@ -86,6 +86,9 @@ export function isEnd(date1) {
 
 export function testId(id) {
   // 1 "验证通过!", 0 //校验不通过
+  if(!id){
+    return {};
+  }
   id = String(id);
   const format = /^(([1][1-5])|([2][1-3])|([3][1-7])|([4][1-6])|([5][0-4])|([6][1-5])|([7][1])|([8][1-2]))\d{4}(([1][9]\d{2})|([2]\d{3}))(([0][1-9])|([1][0-2]))(([0][1-9])|([1-2][0-9])|([3][0-1]))\d{3}[0-9xX]$/;
   //号码规则校验
@@ -117,3 +120,12 @@ export function testId(id) {
   return {'status': 1, 'msg': '校验通过'}
 }
 
+
+export const checkId = (rule, value, callback) => {
+  const result = testId(value);
+  if (result.status === 0) {
+    callback(result.msg);
+    return;
+  }
+  callback();
+};

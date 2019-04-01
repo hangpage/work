@@ -8,7 +8,7 @@ import {Col, DatePicker, Form, Input, message, Radio, Row} from "antd";
 import Const from "../../utils/Const";
 import {equalResultStatus, reFormatParams} from "../../utils";
 import {userLeavePark} from "../../services/user";
-import {TWO_20, TWO_50} from "../../utils/validate";
+import {validateNoChinese} from "../../utils/validate";
 
 const formItemLayout = {
   labelCol: {
@@ -62,7 +62,8 @@ const Leave = ({form}) => {
                 {getFieldDecorator('companyName',{
                   rules: [{
                     required: true, message: '必填!',
-                    TWO_50
+                  },{
+                    validator: validateNoChinese
                   }],
                 })(
                   <Input placeholder='请输入公司名称'/>
@@ -94,7 +95,8 @@ const Leave = ({form}) => {
                 {getFieldDecorator('go', {
                   rules: [{
                     required: true, message: '必填!',
-                    TWO_20
+                  },{
+                    validator: validateNoChinese
                   }],
                 })(
                   <Input placeholder='请输入出孵去向'/>

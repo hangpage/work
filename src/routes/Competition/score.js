@@ -36,7 +36,7 @@ const List = [{
   field: 'plan',
   total: 5
 }, {
-  title: '项目筹措与使用',
+  title: '项目资金筹措与使用',
   field: 'financing',
   total: 5
 }, {

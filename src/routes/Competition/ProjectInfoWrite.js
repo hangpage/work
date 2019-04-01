@@ -102,7 +102,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="项目概况"
+                    label="项目概况(评分满分为15分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -124,7 +124,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="市场分析"
+                    label="市场分析(评分满分为20分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -135,7 +135,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="项目营销策略"
+                    label="项目营销策略(评分满分为5分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -146,7 +146,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="风险分析与控制"
+                    label="风险分析与控制(评分满分为10分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -157,7 +157,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="项目三年规划"
+                    label="项目三年规划(评分满分为5分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -168,7 +168,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="项目资金筹措与使用"
+                    label="项目资金筹措与使用(评分满分为5分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -179,7 +179,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="项目财务分析"
+                    label="项目财务分析(评分满分为5分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -239,7 +239,7 @@ class TeamInfoWrite extends React.Component{
                   <Form.Item
                     label="附件一：团队负责人（企业法人）身份证扫描件"
                     labelCol={{span: 24}}
-                    wrapperCol={{span: 18}}
+                    wrapperCol={{span: 12}}
                     className='row-upload'
                   >
                     {getFieldDecorator('principalCardFront', {
@@ -247,11 +247,16 @@ class TeamInfoWrite extends React.Component{
                     })(
                       <ImageUpload uploadText='身份证正面'/>
                     )}
-                    {getFieldDecorator('principalCardReverse', {
-                      rules: [{required: this.state.isRegistRequired, message: '请上传'}],
-                    })(
-                      <ImageUpload uploadText={'身份证反面'}/>
-                    )}
+                    <Form.Item
+                      wrapperCol={{span: 9}}
+                      className='row-upload'
+                    >
+                      {getFieldDecorator('principalCardReverse', {
+                        rules: [{required: this.state.isRegistRequired, message: '请上传'}],
+                      })(
+                        <ImageUpload uploadText={'身份证反面'}/>
+                      )}
+                    </Form.Item>
                   </Form.Item>
                   <Form.Item
                     label="附件二：已注册企业需准备《营业执照》扫描件"

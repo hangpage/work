@@ -9,6 +9,7 @@ import BackButton from "../../components/BackButton/BackButton";
 import Const from "../../utils/Const";
 import {equalResultStatus, getParams, reFormatParams} from "../../utils";
 import {activitySign} from "../../services/activity";
+import {MOBILE_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 
 const TeamInfoWrite = ({form, history, location}) => {
@@ -48,7 +49,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="姓名"
                   >
-                    {getFieldDecorator('name', Const.RULE)(
+                    {getFieldDecorator('name', {
+                      rules: [{required: true, message: '必填项'},{validator: validateNoChinese}],
+                    })(
                       <Input placeholder='请输入姓名'/>
                     )}
                   </Form.Item>
@@ -69,7 +72,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="手机"
                   >
-                    {getFieldDecorator('phone', Const.RULE)(
+                    {getFieldDecorator('phone', {
+                      rules: [{required: true, message: '必填项'}, MOBILE_VALIDATE],
+                    })(
                       <Input placeholder='请输入手机号码'/>
                     )}
                   </Form.Item>
@@ -78,7 +83,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="来源高校"
                   >
-                    {getFieldDecorator('school', Const.RULE)(
+                    {getFieldDecorator('school', {
+                      rules: [{required: true, message: '必填项'},{validator: validateNoChinese}],
+                    })(
                       <Input placeholder='请填写学校'/>
                     )}
                   </Form.Item>
@@ -87,7 +94,9 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="团队名称"
                   >
-                    {getFieldDecorator('companyName', Const.RULE)(
+                    {getFieldDecorator('companyName', {
+                      rules: [{required: true, message: '必填项'},{validator: validateNoChinese}],
+                    })(
                       <Input placeholder='请输入团队名称'/>
                     )}
                   </Form.Item>

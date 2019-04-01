@@ -8,6 +8,7 @@ import {Col, DatePicker, Form, Input, message, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import {equalResultStatus, getParams} from "../../utils";
 import {reservationPark} from "../../services/service";
+import {MOBILE_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -48,7 +49,7 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="姓名"
                   >
-                    {getFieldDecorator('name', rule)(
+                    {getFieldDecorator('name', {rules: [{ required: true, message: '此处为必填项!'}, {validator: validateNoChinese}]})(
                       <Input placeholder='请输入姓名'/>
                     )}
                   </Form.Item>
@@ -57,7 +58,7 @@ const TeamInfoWrite = ({form, history, location}) => {
                   <Form.Item
                     label="联系方式"
                   >
-                    {getFieldDecorator('phone', rule)(
+                    {getFieldDecorator('phone', {rules: [{ required: true, message: '此处为必填项!'}, MOBILE_VALIDATE]})(
                       <Input placeholder='请输入联系方式'/>
                     )}
                   </Form.Item>

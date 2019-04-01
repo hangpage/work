@@ -1,5 +1,6 @@
 import fetch from 'dva/fetch';
 import {routerRedux} from "dva/router";
+import {message} from 'antd';
 
 function parseJSON(response) {
   return response.json();
@@ -9,7 +10,9 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-
+  if(response.status === 500){
+    message.error('服务端出错了，请稍后重试！');
+  }
   const error = new Error(response.statusText);
   error.response = response;
   throw error;

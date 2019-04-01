@@ -8,7 +8,7 @@ Const.Man = '1';
 Const.Woman = '2';
 Const.ZHENG_CHANG_CHU_FU = '1';
 Const.TI_QIAN_CHU_FU = '2';
-Const.RULE = {rules: [{ required: true, message: '此处为必填项!' }]};
+Const.RULE = {rules: [{required: true, message: '此处为必填项!'}]};
 //1父子2父女3母子4母女
 Const.FU_ZI = '1';
 Const.FU_NV = '2';
@@ -18,7 +18,7 @@ Const.MU_NV = '4';
 Const.YesOrNoOptions = [{
   text: '是',
   value: Const.Yes
-},{
+}, {
   text: '否',
   value: Const.No
 }];
@@ -26,7 +26,7 @@ Const.YesOrNoOptions = [{
 Const.FATHER_RELATION = [{
   text: '父子',
   value: Const.FU_ZI
-},{
+}, {
   text: '父女',
   value: Const.FU_NV
 }];
@@ -34,7 +34,7 @@ Const.FATHER_RELATION = [{
 Const.MOTHER_RELATION = [{
   text: '母子',
   value: Const.MU_ZI
-},{
+}, {
   text: '母女',
   value: Const.MU_NV
 }];
@@ -42,7 +42,7 @@ Const.MOTHER_RELATION = [{
 Const.HaveOrNot = [{
   text: '有',
   value: Const.Yes
-},{
+}, {
   text: '无',
   value: Const.No
 }];
@@ -50,7 +50,7 @@ Const.HaveOrNot = [{
 Const.GENDAR_OPTIONS = [{
   text: '男',
   value: Const.Man
-},{
+}, {
   text: '女',
   value: Const.Woman
 }];
@@ -95,5 +95,10 @@ Const.SERVICE_STATUS = {
   1: '已通过',
   2: '已拒绝',
 };
+
+Const.EDUCATION_LIST = [{value: '小学', label: '小学'}, {value: '中学', label: '中学'}, {
+  value: '高中',
+  label: '高中'
+}, {value: '中专', label: '中专'}, {value: '大专', label: '大专'}, {value: '本科', label: '本科'}, {value: '硕士研究生', label: '硕士研究生'}, {value: '博士研究生', label: '博士研究生'}];
 
 export default Const;

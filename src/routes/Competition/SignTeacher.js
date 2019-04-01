@@ -8,12 +8,12 @@ import {Col, Form, Input, message, Radio, Row} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
-import {equalResultStatus, getParams, reFormatParams} from "../../utils";
+import {checkId, equalResultStatus, getParams, reFormatParams} from "../../utils";
 import {tutorDeclare} from "../../services/tutor";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import {isEqual} from "lodash";
 import {connect} from "dva";
-import {MOBILE_VALIDATE} from "../../utils/validate";
+import {MOBILE_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -92,7 +92,7 @@ class SignTeacher extends React.Component{
                       label="姓名"
                     >
                       {getFieldDecorator('name', {
-                        rules: [{required: true, message: '必填项'}, {min: 2, max: 20, message: '2-20个汉字'}],
+                        rules: [{required: true, message: '必填项'},{validator: validateNoChinese}],
                       })(
                         <Input placeholder='请输入姓名'/>
                       )}
@@ -125,6 +125,61 @@ class SignTeacher extends React.Component{
                   </Col>
                   <Col span={12}>
                     <Form.Item
+                      label="身份证号"
+                    >
+                      {getFieldDecorator('idCard', {
+                        rules: [{required: true, message: '请输入'}, {validator: checkId}],
+                      })(
+                        <Input placeholder='请输入身份证号'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="北京银行卡(注：发放劳务费使用)"
+                    >
+                      {getFieldDecorator('beijingBankCard', {
+                        rules: [{required: true, message: '请输入'}],
+                      })(
+                        <Input placeholder='请输入北京银行卡'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="开户行"
+                    >
+                      {getFieldDecorator('bankIntro', {
+                        rules: [{required: true, message: '请输入'}],
+                      })(
+                        <Input placeholder='请输入开户行'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="其他银行卡(注：发放劳务费使用)"
+                    >
+                      {getFieldDecorator('otherBankCard', {
+                        rules: [{required: true, message: '请输入'}],
+                      })(
+                        <Input placeholder='请输入其他银行卡'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      label="其他银行卡开户行"
+                    >
+                      {getFieldDecorator('otherIntro', {
+                        rules: [{required: true, message: '请输入'}],
+                      })(
+                        <Input placeholder='请输入其他银行卡开户行'/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
                       label="教育背景(专业)"
                     >
                       {getFieldDecorator('profession', {
@@ -139,7 +194,7 @@ class SignTeacher extends React.Component{
                       label="学历"
                     >
                       {getFieldDecorator('educationalBackground', {
-                        rules: [{required: true, message: '必填项'}, {min: 2, max: 20, message: '2-20个汉字'}],
+                        rules: [{required: true, message: '必填项'}, {validator: validateNoChinese,}],
                       })(
                         <Input placeholder='请填写学历'/>
                       )}

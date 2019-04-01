@@ -53,18 +53,20 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
     noTeacher = true;
   }
 
+  let editReportInfo = false;
+
+  if(Number(data.status) <= 2 && teamMatchDetail.team && !teamMatchDetail.tutor && String(teamMatchDetail.team.schoolReviewStatus) === '0'){
+    editReportInfo = true;
+  }
 
   return (
     <div className='second-bg'>
       <div className="w">
-        {(Number(data.status) <= 2 && teamMatchDetail.team && !teamMatchDetail.tutor && String(teamMatchDetail.team.schoolReviewStatus) === '0')
-        && <Link to={`/competition/${data.id}/team_info_write?mId=${data.id}`}><Button type="dashed" block htmlType='button'>修改比赛报名信息</Button></Link>}
-        {(Number(data.status) < 6 && teamMatchDetail.tutor && String(teamMatchDetail.tutor.status) === '0')
-        && <Link to={`/competition/${data.id}/sign_teacher?mId=${data.id}`}><Button type="dashed" block htmlType='button'>修改成为导师报名信息</Button></Link>}
         <ReportCard
           time={data.createTime}
           read={data.pageViews}
           title={data.name}
+          editReportInfo={editReportInfo}
           content={data.intro}
           mId={data.id}
           reportLink={link}
@@ -85,7 +87,7 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
                   <li key={index}>
                     <Avatar size={50} src={isTutor ? logoAvatar : item.pic}/>
                     <span>{isTutor? `项目${index + 1}` : item.name}</span>
-                    {data.isTutor === '1' && Number(data.status) >= 6 && data.type !== '3' &&
+                    {data.isTutor === '1' && (Number(data.status) === 6 || Number(data.status) === 7) && data.type !== '3' &&
                     <Link to={`${link}?${qs.stringify(item)}&matchName=${data.name}`}><span className='dianping'>点评</span></Link>}
                   </li>
                 )

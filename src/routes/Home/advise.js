@@ -7,7 +7,7 @@ import React from 'react';
 import {Form, Input, message} from "antd";
 import {equalResultStatus} from "../../utils";
 import {userFeedBack} from "../../services/user";
-import {MOBILE_VALIDATE, TWO_20, TWO_50} from "../../utils/validate";
+import {MOBILE_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 
 const Leave = ({form}) => {
@@ -56,7 +56,8 @@ const Leave = ({form}) => {
             {getFieldDecorator('name', {
               rules: [{
                 required: true, message: '必填!',
-                TWO_20
+              },{
+                validator: validateNoChinese
               }],
             })(
               <Input placeholder='请输入联系人姓名'/>

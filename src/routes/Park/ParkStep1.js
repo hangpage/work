@@ -11,7 +11,7 @@ import ComboBox from "../../components/ComboBox";
 import Modal from './component/modal';
 import {cloneDeep} from 'lodash';
 import {parkResidentTeam} from "../../services/park";
-import {NUMBER_VALIDATE} from "../../utils/validate";
+import {NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -19,14 +19,14 @@ const {TextArea} = Input;
 const list1 = [{
   label: '项目名称',
   field: 'projectName',
-  validate: {min: 2, max: 50, message: '2-50个汉字'}
+  validate: validateNoChinese,
 }, {
   label: '门牌名称',
   field: 'houseNumber'
 }, {
   label: '公司名称',
   field: 'companyName',
-  validate: {min: 2, max: 50, message: '2-50个汉字'}
+  validate: validateNoChinese,
 }, {
   label: '注册时间',
   field: 'registeredTime',
@@ -178,7 +178,8 @@ class ParkStep1 extends React.Component {
                           label={item.label}
                         >
                           {getFieldDecorator(`${item.field}`, {
-                            rules: [{required: true, message: '必填项'}, item.validate || {}],
+                            rules: item.validate ? [{required: true, message: '必填项'}, item.validate] :
+                              [{required: true, message: '必填项'}]
                           })(
                             comp
                           )}

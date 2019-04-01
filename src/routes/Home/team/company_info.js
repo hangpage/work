@@ -178,7 +178,7 @@ class CompanyInfo extends React.Component {
           <div className='bl-form'>
             <div className="form-content">
               <div className="text-align mb58">
-                <span className="form-name">公司信息</span>
+                <span className="form-name">企业信息</span>
               </div>
               <Form>
                 <Row gutter={138}>

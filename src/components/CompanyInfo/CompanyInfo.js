@@ -4,15 +4,15 @@
  * @Date: 2019/2/3 12:53
  */
 import React from 'react';
-import {Col, DatePicker, Form, Input, Radio, Row} from 'antd';
+import {Col, DatePicker, Form, Input, Radio, Row, Select} from 'antd';
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
-import {reFormatParams, testId} from "../../utils";
+import {checkId, isEnd, reFormatParams, testId} from "../../utils";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
 import moment from "moment";
 import {isEqual} from "lodash";
-import {NUMBER_VALIDATE} from "../../utils/validate";
+import {NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -33,7 +33,6 @@ class CompanyInfo extends React.Component {
     validateFieldsAndScroll((err, values) => {
       if (!err) {
         params = reFormatParams(values);
-        params.birth = params.birth + ' 00:00:00';
         params.admissionTime = params.admissionTime + ' 00:00:00';
       }
     });
@@ -70,19 +69,12 @@ class CompanyInfo extends React.Component {
   };
 
   handleIsOnSchoolChange = (e) => {
-    this.setState({
-      isRegistRequired: e.target.value === '0'
-    })
-  };
-
-
-  checkId = (rule, value, callback) => {
-    const result = testId(value);
-    if (result.status === 0) {
-      callback(result.msg);
-      return;
+    console.log(moment().format('YYYY-MM-DD'));
+    if(e){
+      this.setState({
+        isOnSchoolRequired: isEnd(e.format('YYYY-MM-DD'))
+      })
     }
-    callback();
   };
 
   render() {
@@ -92,7 +84,7 @@ class CompanyInfo extends React.Component {
       <div>
         <div className="form-content">
           <div className="text-align">
-            <span className="form-name">公司信息</span>
+            <span className="form-name">企业信息</span>
           </div>
           <Form>
             <Row gutter={138}>
@@ -110,13 +102,13 @@ class CompanyInfo extends React.Component {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="职工人数"
+                  label="团队人数"
                 >
                   {getFieldDecorator('employees', {
-                    rules: [{required: true, message: '请输入职工人数'}, NUMBER_VALIDATE],
+                    rules: [{required: true, message: '请输入团队人数'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.employees
                   })(
-                    <Input placeholder='请输入职工人数'/>
+                    <Input placeholder='请输入团队人数'/>
                   )}
                 </Form.Item>
               </Col>
@@ -301,7 +293,7 @@ class CompanyInfo extends React.Component {
                   label="姓名"
                 >
                   {getFieldDecorator('principal', {
-                    rules: [{required: true, message: '请输入姓名'}, {min: 2, max: 20, message: '2-20个汉字'}],
+                    rules: [{required: true, message: '请输入姓名'}, {validator: validateNoChinese,}],
                     initialValue: initialValueMap.principal
                   })(
                     <Input placeholder='请输入姓名'/>
@@ -310,37 +302,10 @@ class CompanyInfo extends React.Component {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="性别"
-                >
-                  {getFieldDecorator('gendar', {
-                    rules: [{required: true, message: '请选择'}],
-                    initialValue: initialValueMap.gendar
-                  })(
-                    <Radio.Group>
-                      <Radio value={Const.Man}>男</Radio>
-                      <Radio value={Const.Woman}>女</Radio>
-                    </Radio.Group>
-                  )}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label="出生年月"
-                >
-                  {getFieldDecorator('birth', {
-                    rules: [{required: true, message: '请选择'}],
-                    initialValue: initialValueMap.birth
-                  })(
-                    <DatePicker/>
-                  )}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
                   label="身份证号"
                 >
                   {getFieldDecorator('idCard', {
-                    rules: [{required: true, message: '请输入'}, {validator: this.checkId}],
+                    rules: [{required: true, message: '请输入'}, {validator: checkId}],
                     initialValue: initialValueMap.idCard
                   })(
                     <Input placeholder='请输入身份证号'/>
@@ -364,10 +329,12 @@ class CompanyInfo extends React.Component {
                   label="学历"
                 >
                   {getFieldDecorator('educations', {
-                    rules: [{required: true, message: '请输入'}, {min: 2, max: 20, message: '2-20个汉字'}],
+                    rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.educations
                   })(
-                    <Input placeholder='请输入学历'/>
+                    <Select placeholder={'请选择学历'}>
+                      {Const.EDUCATION_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
+                    </Select>
                   )}
                 </Form.Item>
               </Col>
@@ -376,7 +343,7 @@ class CompanyInfo extends React.Component {
                   label="专业"
                 >
                   {getFieldDecorator('profession', {
-                    rules: [{required: true, message: '请选择'}, {min: 2, max: 20, message: '2-20个汉字'}],
+                    rules: [{required: true, message: '请选择'}, {validator: validateNoChinese,}],
                     initialValue: initialValueMap.profession
                   })(
                     <Input placeholder='请输入专业'/>
@@ -401,7 +368,7 @@ class CompanyInfo extends React.Component {
                   label="最高学历院校"
                 >
                   {getFieldDecorator('education', {
-                    rules: [{required: true, message: '请选择'}, {min: 2, max: 20, message: '2-20个汉字'}],
+                    rules: [{required: true, message: '请选择'}, {validator: validateNoChinese,}],
                     initialValue: initialValueMap.education
                   })(
                     <Input placeholder='请输入最高学历院校'/>
@@ -410,13 +377,13 @@ class CompanyInfo extends React.Component {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="是否在校生"
+                  label="请选择最高学历是否为全日制"
                 >
                   {getFieldDecorator('isOnSchool', {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.isOnSchool
                   })(
-                    <Radio.Group onChange={this.handleIsOnSchoolChange}>
+                    <Radio.Group>
                       <Radio value={Const.Yes}>是</Radio>
                       <Radio value={Const.No}>否</Radio>
                     </Radio.Group>
@@ -428,10 +395,10 @@ class CompanyInfo extends React.Component {
                   label="毕业时间"
                 >
                   {getFieldDecorator('admissionTime', {
-                    rules: [{required: this.state.isOnSchoolRequired, message: '请选择'}],
+                    rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.admissionTime
                   })(
-                    <DatePicker/>
+                    <DatePicker onChange={this.handleIsOnSchoolChange}/>
                   )}
                 </Form.Item>
               </Col>
@@ -440,7 +407,7 @@ class CompanyInfo extends React.Component {
                   label="学生证"
                 >
                   {getFieldDecorator('diploma', {
-                    rules: [{required: true, message: '请上传'}],
+                    rules: [{required: this.state.isOnSchoolRequired, message: '请上传'}],
                     initialValue: initialValueMap.diploma
                   })(
                     <ImageUpload/>
