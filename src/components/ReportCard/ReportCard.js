@@ -10,7 +10,7 @@ import {validateIsResident} from "../../utils";
 import {Modal} from "antd";
 import {Typography} from "antd";
 
-const ReportCard = ({img, history, title, time, style, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false, editReportInfo=false}) => {
+const ReportCard = ({img, history, title, time, style, read, content, mId, noTeacher, reportLink, btnName='报名', allowReport=true, auth=false, editReportInfo=false, editUrl}) => {
   noTeacher = true;
   const doLink = (link) => {
     if(auth){
@@ -39,7 +39,7 @@ const ReportCard = ({img, history, title, time, style, read, content, mId, noTea
         <Typography.Paragraph className={styles.content} ellipsis={{ rows: 2}}>{content}</Typography.Paragraph>
         <div>
           {allowReport && <div className={styles.baoming}><div className={styles.link} onClick={() => {doLink(reportLink)}}>{btnName}</div></div>}
-          {editReportInfo && <div className={styles.daoshi}><Link to={`/competition/${mId}/team_info_write?mId=${mId}`}>修改比赛报名信息</Link></div>}
+          {editReportInfo && <div className={styles.daoshi}><Link to={editUrl}>修改比赛报名信息</Link></div>}
           {!noTeacher ? <div className={styles.daoshi}><Link to={`/competition/${mId}/sign_teacher?mId=${mId}`}><span>成为导师</span></Link></div> : ''}
         </div>
       </div>

@@ -70,6 +70,7 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
           content={data.intro}
           mId={data.id}
           reportLink={link}
+          editUrl={`/competition/${data.id}/team_info_write?mId=${data.id}&egistrationNotice=${data.egistrationNotice}`}
           btnName={btnName}
           noTeacher={noTeacher}
           img={data.pic}

@@ -6,7 +6,7 @@
 import React from 'react';
 import {Link, routerRedux, withRouter} from 'dva/router'
 import {Avatar, Layout, Menu} from "antd";
-import logo from "./imgs/logo.png";
+import logo from "./imgs/r-logo.png";
 import searchIcon from '../../assets/icon/icon-search.png';
 import {connect} from "dva";
 import SearchButton from "../SearchButton/SearchButton";
@@ -95,6 +95,7 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
         user: {}
       }
     })
+    dispatch(routerRedux.push({pathname: '/index'}))
   };
 
   return (

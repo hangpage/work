@@ -69,10 +69,9 @@ class CompanyInfo extends React.Component {
   };
 
   handleIsOnSchoolChange = (e) => {
-    console.log(moment().format('YYYY-MM-DD'));
     if(e){
       this.setState({
-        isOnSchoolRequired: isEnd(e.format('YYYY-MM-DD'))
+        isOnSchoolRequired: !isEnd(e.format('YYYY-MM-DD'))
       })
     }
   };
@@ -93,7 +92,7 @@ class CompanyInfo extends React.Component {
                   label="公司/团队名称"
                 >
                   {getFieldDecorator('name', {
-                    rules: [{required: true, message: '请输入公司/团队名称'}, {min: 2, max: 50, message: '2-50个汉字'}],
+                    rules: [{required: true, message: '请输入公司/团队名称'}],
                     initialValue: initialValueMap.name
                   })(
                     <Input placeholder='请输入公司/团队名称'/>
@@ -126,13 +125,13 @@ class CompanyInfo extends React.Component {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="年收入(w)"
+                  label="近一年流水(w)"
                 >
                   {getFieldDecorator('income', {
-                    rules: [{required: true, message: '请输入年收入'}, NUMBER_VALIDATE],
+                    rules: [{required: true, message: '请输入近一年流水'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.income
                   })(
-                    <Input placeholder='请输入年收入'/>
+                    <Input placeholder='请输入近一年流水'/>
                   )}
                 </Form.Item>
               </Col>
@@ -213,7 +212,7 @@ class CompanyInfo extends React.Component {
                       return event.target.value.replace(/\D/g, '')
                     },
                   })(
-                    <Input placeholder='请输入所占注册资金比例'/>
+                    <Input placeholder='请输入所占注册资金比例' addonAfter={'%'}/>
                   )}
                 </Form.Item>
               </Col>

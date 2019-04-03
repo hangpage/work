@@ -64,6 +64,7 @@ class TeamInfoWrite extends React.Component{
 
   componentWillMount() {
     const {location} = this.props;
+    debugger
     const isRegist = getParams(location.search).isRegist;
     this.setState({
       isRegistRequired: isRegist === '1'
@@ -113,7 +114,7 @@ class TeamInfoWrite extends React.Component{
                     )}
                   </Form.Item>
                   <Form.Item
-                    label="产品与服务"
+                    label="产品与服务(评分满分为35分)"
                     labelCol={{span: 12}}
                     wrapperCol={{span: 24}}
                   >
@@ -243,7 +244,7 @@ class TeamInfoWrite extends React.Component{
                     className='row-upload'
                   >
                     {getFieldDecorator('principalCardFront', {
-                      rules: [{required: this.state.isRegistRequired, message: '请上传'}],
+                      rules: [{required: true, message: '请上传'}],
                     })(
                       <ImageUpload uploadText='身份证正面'/>
                     )}
@@ -252,7 +253,7 @@ class TeamInfoWrite extends React.Component{
                       className='row-upload'
                     >
                       {getFieldDecorator('principalCardReverse', {
-                        rules: [{required: this.state.isRegistRequired, message: '请上传'}],
+                        rules: [{required: true, message: '请上传'}],
                       })(
                         <ImageUpload uploadText={'身份证反面'}/>
                       )}

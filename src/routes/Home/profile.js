@@ -111,8 +111,6 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('nickName', {
             rules: [{
               required: true, message: '请输入昵称!',
-            },{
-              validator: validateNoChinese
             }],
             initialValue: data.nickName
           })(
@@ -155,8 +153,6 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('company', {
             rules: [{
               required: true, message: '请输入公司!',
-            },{
-              validator: validateNoChinese
             }],
             initialValue: data.company
           })(
@@ -170,8 +166,6 @@ const Profile = ({form, data, dispatch}) => {
           {getFieldDecorator('position', {
             rules: [{
               required: true, message: '请输入职位!',
-            },{
-              validator: validateNoChinese
             }],
             initialValue: data.position
           })(

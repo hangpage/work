@@ -4,7 +4,7 @@
  * @Date: 2019/2/3 12:53
  */
 import React from 'react';
-import {Col, Form, Input, message, Radio, Row} from 'antd';
+import {Col, Form, Input, message, Radio, Row, Select} from 'antd';
 import BackButton from "../../components/BackButton/BackButton";
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
@@ -13,7 +13,7 @@ import {tutorDeclare} from "../../services/tutor";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import {isEqual} from "lodash";
 import {connect} from "dva";
-import {MOBILE_VALIDATE, validateNoChinese} from "../../utils/validate";
+import {MOBILE_VALIDATE, NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
 
 const {TextArea} = Input;
 
@@ -136,10 +136,10 @@ class SignTeacher extends React.Component{
                   </Col>
                   <Col span={12}>
                     <Form.Item
-                      label="北京银行卡(注：发放劳务费使用)"
+                      label="北京银行卡号(注：发放劳务费使用)"
                     >
                       {getFieldDecorator('beijingBankCard', {
-                        rules: [{required: true, message: '请输入'}],
+                        rules: [{required: true, message: '请输入'}, NUMBER_VALIDATE],
                       })(
                         <Input placeholder='请输入北京银行卡'/>
                       )}
@@ -158,10 +158,10 @@ class SignTeacher extends React.Component{
                   </Col>
                   <Col span={12}>
                     <Form.Item
-                      label="其他银行卡(注：发放劳务费使用)"
+                      label="其他银行卡号（注：无北京银行卡者填写）"
                     >
                       {getFieldDecorator('otherBankCard', {
-                        rules: [{required: true, message: '请输入'}],
+                        rules: [NUMBER_VALIDATE],
                       })(
                         <Input placeholder='请输入其他银行卡'/>
                       )}
@@ -171,9 +171,7 @@ class SignTeacher extends React.Component{
                     <Form.Item
                       label="其他银行卡开户行"
                     >
-                      {getFieldDecorator('otherIntro', {
-                        rules: [{required: true, message: '请输入'}],
-                      })(
+                      {getFieldDecorator('otherIntro')(
                         <Input placeholder='请输入其他银行卡开户行'/>
                       )}
                     </Form.Item>
@@ -185,7 +183,7 @@ class SignTeacher extends React.Component{
                       {getFieldDecorator('profession', {
                         rules: [{required: true, message: '必填项'}],
                       })(
-                        <Input placeholder='请选择教育背景'/>
+                        <Input placeholder='请输入教育背景'/>
                       )}
                     </Form.Item>
                   </Col>
@@ -196,7 +194,9 @@ class SignTeacher extends React.Component{
                       {getFieldDecorator('educationalBackground', {
                         rules: [{required: true, message: '必填项'}, {validator: validateNoChinese,}],
                       })(
-                        <Input placeholder='请填写学历'/>
+                        <Select placeholder={'请选择学历'}>
+                          {Const.EDUCATION_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
+                        </Select>
                       )}
                     </Form.Item>
                   </Col>
@@ -216,7 +216,7 @@ class SignTeacher extends React.Component{
                       label="职称"
                     >
                       {getFieldDecorator('jobTitle', {
-                        rules: [{required: true, message: '必填项'}],
+                        rules: [{required: true, message: '必填项'}, {validator: validateNoChinese}],
                       })(
                         <Input placeholder='请输入职称'/>
                       )}
@@ -238,7 +238,7 @@ class SignTeacher extends React.Component{
                       label="现在任职单位"
                     >
                       {getFieldDecorator('unit', {
-                        rules: [{required: true, message: '必填项'}, {min: 2, max: 50, message: '2-50个汉字'}],
+                        rules: [{required: true, message: '必填项'}, {validator: validateNoChinese}],
                       })(
                         <Input placeholder='请输入现在任职单位'/>
                       )}

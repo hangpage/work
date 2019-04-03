@@ -20,7 +20,7 @@ class ActivityList extends Component {
 
   fetchData = (url, params) => {
     const extraParams = this.props.params;
-    params = Object.assign({}, extraParams, params,{pageNo: this.state.pageNo, pageSize: this.state.pageSize});
+    params = Object.assign({}, extraParams, {pageNo: this.state.pageNo, pageSize: this.state.pageSize}, params);
     return request(`${url}?${qs.stringify(params)}`);
   };
 

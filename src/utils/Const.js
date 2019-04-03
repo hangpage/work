@@ -1,7 +1,7 @@
 const Const = {};
 
-Const.COMPANY_ADDRESS = '北京市海淀区中关村';
-Const.COMPANY_CONTACT = '020-2395495';
+Const.COMPANY_ADDRESS = '北京市海淀区西三环北路甲2号院中关村国防科技园1号楼';
+Const.COMPANY_CONTACT = '010-60910291';
 Const.Yes = '1';
 Const.No = '0';
 Const.Man = '1';
@@ -96,9 +96,6 @@ Const.SERVICE_STATUS = {
   2: '已拒绝',
 };
 
-Const.EDUCATION_LIST = [{value: '小学', label: '小学'}, {value: '中学', label: '中学'}, {
-  value: '高中',
-  label: '高中'
-}, {value: '中专', label: '中专'}, {value: '大专', label: '大专'}, {value: '本科', label: '本科'}, {value: '硕士研究生', label: '硕士研究生'}, {value: '博士研究生', label: '博士研究生'}];
+Const.EDUCATION_LIST = [{value: '大专', label: '大专'}, {value: '本科', label: '本科'}, {value: '硕士研究生', label: '硕士研究生'}, {value: '博士研究生', label: '博士研究生'}];
 
 export default Const;
