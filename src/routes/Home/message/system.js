@@ -12,7 +12,7 @@ import {Empty, Pagination} from "antd";
 const System = ({system, systemNoticeCount, dispatch}) => {
   const onPageChange = (pageNo, pageSize) => {
     dispatch({
-      type: 'home/historyActivity',
+      type: 'notice/findMessageList',
       payload: {
         pageNo,
         pageSize
@@ -23,7 +23,7 @@ const System = ({system, systemNoticeCount, dispatch}) => {
     <div style={{padding: '59px 20px 68px'}}>
       {system.length ? system.map((item, key) =>
         <Link to={`/notice/${item.id}`} key={key}>
-          <SystemMessage time={item.createTime} title={item.title}/>
+          <SystemMessage time={item.createTime} title={item.content}/>
         </Link>
       ) : <Empty/>}
       <Pagination total={systemNoticeCount} onChange={onPageChange} pageSize={4} className='mt30'/>

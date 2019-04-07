@@ -65,6 +65,7 @@ class ComboBox extends React.Component {
                   value={this.state.value}
                   style={{width: '100%'}}
                   placeholder={this.props.placeholder || '请选择'}
+                  disabled={this.props.disabled}
                   dropdownMatchSelectWidth={true}>
             {this.getOptions(this.state.dataSource)}
           </Select>

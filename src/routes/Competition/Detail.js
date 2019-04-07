@@ -54,9 +54,20 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
   }
 
   let editReportInfo = false;
+  let editBtnText = '修改比赛报名信息';
 
   if(Number(data.status) <= 2 && teamMatchDetail.team && !teamMatchDetail.tutor && String(teamMatchDetail.team.schoolReviewStatus) === '0'){
     editReportInfo = true;
+  }
+
+  if(Number(data.status) >= 4 &&  Number(data.status) <= 12){
+    editReportInfo = true;
+    editBtnText = '查看比赛报名信息';
+  }
+
+  //申请了导师不让参加比赛
+  if(sessionStorage.getItem('apply_tutor') === '1'){
+    allowReport = false;
   }
 
   return (
@@ -67,10 +78,11 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
           read={data.pageViews}
           title={data.name}
           editReportInfo={editReportInfo}
+          editBtnText={editBtnText}
           content={data.intro}
           mId={data.id}
           reportLink={link}
-          editUrl={`/competition/${data.id}/team_info_write?mId=${data.id}&egistrationNotice=${data.egistrationNotice}`}
+          editUrl={`/competition/${data.id}/team_info_write?mId=${data.id}&egistrationNotice=${data.egistrationNotice}&editBtnText=${editBtnText}`}
           btnName={btnName}
           noTeacher={noTeacher}
           img={data.pic}

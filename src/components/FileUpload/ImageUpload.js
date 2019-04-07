@@ -42,9 +42,7 @@ class ImageUpload extends React.Component {
   }
 
   handleChange = (info) => {
-    this.setState({
-      fileList: info.fileList
-    });
+
     if(info.file.response){
       const value = info.file.response.file;
       const onChange = this.props.onChange;
@@ -68,6 +66,10 @@ class ImageUpload extends React.Component {
       this.setState({
         fileList: info.fileList
       });
+    }else{
+      this.setState({
+        fileList: info.fileList
+      });
     }
   };
 
@@ -88,6 +90,7 @@ class ImageUpload extends React.Component {
           fileList={fileList}
           onPreview={this.handlePreview}
           onChange={this.handleChange}
+          disabled={this.props.disabled}
         >
           {fileList.length >= max ? null : uploadButton}
         </Upload>

@@ -12,6 +12,7 @@ import qs from "qs";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import {connect} from "dva";
 import {isEqual} from "lodash";
+import {Link} from "dva/router";
 
 const {TextArea} = Input;
 
@@ -19,7 +20,8 @@ class TeamInfoWrite extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      isRegistRequired: false
+      isRegistRequired: false,
+      formDisabledStatus: false
     }
   }
   submit = () => {
@@ -64,7 +66,6 @@ class TeamInfoWrite extends React.Component{
 
   componentWillMount() {
     const {location} = this.props;
-    debugger
     const isRegist = getParams(location.search).isRegist;
     this.setState({
       isRegistRequired: isRegist === '1'
@@ -76,11 +77,15 @@ class TeamInfoWrite extends React.Component{
       const data = nextProps.teamMatchDetail.team;
       this.props.form.setFieldsValue(data);
     }
+    this.setState({
+      formDisabledStatus: !!getParams(this.props.location.search).editBtnText
+    })
   }
 
   render(){
       const {form, location} = this.props;
       const {getFieldDecorator} = form;
+      const {formDisabledStatus} = this.state;
       return (
         <div style={{background: '#FAFAFA', paddingBottom: 60}}>
           <div className='w mt39 bg-white pb80'>
@@ -99,7 +104,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('projectName', {
                       rules: [{required: true, message: '请输入项目名称'}],
                     })(
-                      <Input placeholder='请输入项目名称'/>
+                      <Input placeholder='请输入项目名称' disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -110,7 +115,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('generalization', {
                       rules: [{required: true,message: '请输入项目概况'}],
                     })(
-                      <TextArea placeholder='请输入项目概况...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目概况...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -121,7 +126,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('service', {
                       rules: [{required: true,message: '请输入产品与服务'}],
                     })(
-                      <TextArea placeholder='请输入产品与服务...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入产品与服务...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -132,7 +137,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('marketAnalysis', {
                       rules: [{required: true,message: '请输入项目市场分析'}],
                     })(
-                      <TextArea placeholder='请输入项目市场分析...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目市场分析...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -143,7 +148,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('marketingStrategy', {
                       rules: [{required: true,message: '请输入项目营销策略..'}],
                     })(
-                      <TextArea placeholder='请输入项目营销策略..' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目营销策略..' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -154,7 +159,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('riskAnalysis', {
                       rules: [{required: true,message: '请输入项目分析与控制...'}],
                     })(
-                      <TextArea placeholder='请输入项目分析与控制...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目分析与控制...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -165,7 +170,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('plan', {
                       rules: [{required: true,message: '请输入项目三年规划..'}],
                     })(
-                      <TextArea placeholder='请输入项目三年规划..' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目三年规划..' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -176,7 +181,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('financing', {
                       rules: [{required: true,message: '请输入项目资金筹措与使用..'}],
                     })(
-                      <TextArea placeholder='请输入项目资金筹措与使用..' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目资金筹措与使用..' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -187,7 +192,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('financialAnalysis', {
                       rules: [{required: true,message: '请输入项目财务分析...'}],
                     })(
-                      <TextArea placeholder='请输入项目财务分析...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目财务分析...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -196,7 +201,7 @@ class TeamInfoWrite extends React.Component{
                     wrapperCol={{span: 24}}
                   >
                     {getFieldDecorator('webIntro')(
-                      <TextArea placeholder='请输入项目网站介绍...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入项目网站介绍...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   <Form.Item
@@ -205,7 +210,7 @@ class TeamInfoWrite extends React.Component{
                     wrapperCol={{span: 24}}
                   >
                     {getFieldDecorator('organizationStructure')(
-                      <TextArea placeholder='请输入组织结构...' style={{height: 240}}/>
+                      <TextArea placeholder='请输入组织结构...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   {/*<Form.Item*/}
@@ -225,7 +230,7 @@ class TeamInfoWrite extends React.Component{
                     wrapperCol={{span: 24}}
                   >
                     {getFieldDecorator('other')(
-                      <TextArea placeholder='可输入项目其他相关内容...' style={{height: 240}}/>
+                      <TextArea placeholder='可输入项目其他相关内容...' style={{height: 240}} disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                   {/*<Form.Item*/}
@@ -246,7 +251,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('principalCardFront', {
                       rules: [{required: true, message: '请上传'}],
                     })(
-                      <ImageUpload uploadText='身份证正面'/>
+                      <ImageUpload uploadText='身份证正面' disabled={formDisabledStatus}/>
                     )}
                     <Form.Item
                       wrapperCol={{span: 9}}
@@ -255,7 +260,7 @@ class TeamInfoWrite extends React.Component{
                       {getFieldDecorator('principalCardReverse', {
                         rules: [{required: true, message: '请上传'}],
                       })(
-                        <ImageUpload uploadText={'身份证反面'}/>
+                        <ImageUpload uploadText={'身份证反面'} disabled={formDisabledStatus}/>
                       )}
                     </Form.Item>
                   </Form.Item>
@@ -267,7 +272,7 @@ class TeamInfoWrite extends React.Component{
                     {getFieldDecorator('businessLicense', {
                       rules: [{required: this.state.isRegistRequired, message: '请上传'}],
                     })(
-                      <ImageUpload/>
+                      <ImageUpload disabled={formDisabledStatus}/>
                     )}
                   </Form.Item>
                 </Form>
@@ -275,7 +280,8 @@ class TeamInfoWrite extends React.Component{
             </div>
             <Row type='flex' justify='space-around' gutter={360}>
               <BackButton/>
-              <div className='main-button' onClick={this.submit}>提交</div>
+              {formDisabledStatus && <Link to={'/index'}><div className='main-button'>返回主页</div></Link>}
+              {!formDisabledStatus && <div className='main-button' onClick={this.submit}>提交</div>}
             </Row>
           </div>
           <div className='app_notes'>

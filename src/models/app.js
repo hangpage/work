@@ -4,6 +4,7 @@ import {message} from 'antd';
 import {articleFindList} from "../services/article";
 import {activityFindList} from "../services/activity";
 import {routerRedux} from "dva/router";
+import {tutorGetInfo} from "../services/tutor";
 
 export default {
 
@@ -13,7 +14,8 @@ export default {
     headerMenuSelectedKeys: ['1'],
     user: {},
     searchParams: {},
-    showSearch: false
+    showSearch: false,
+    isTutor: false
   },
 
   subscriptions: {
@@ -22,6 +24,7 @@ export default {
         switch (location.pathname) {
           case '/index':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['0']} });
+            dispatch({ type: 'tutorGetInfo' });
             break;
           case '/find':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['1']} });
@@ -95,7 +98,22 @@ export default {
       }else{
         message.error(article.message)
       }
-    }
+    },
+    *tutorGetInfo({ payload }, { call, put }){
+      sessionStorage.setItem('apply_tutor', '1')
+      const {data} = yield call(tutorGetInfo, payload);
+      if(data.code === 1){
+        if(String(data.data.status) === '1'){
+          message.success('您是导师身份');
+          yield put({
+            type: 'updateState',
+            payload: {
+              isTutor: true
+            }
+          })
+        }
+      }
+    },
   },
 
   reducers: {

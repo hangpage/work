@@ -80,6 +80,7 @@ class DynamicFieldSet extends React.Component {
           value={value[index]}
           placeholder={`${fieldText}姓名`}
           maxLength={10}
+          disabled={this.props.disabled}
           style={{ width: '60%', marginRight: 8 }} />
         {keys.length > 1 ? (
           <Icon
@@ -94,9 +95,9 @@ class DynamicFieldSet extends React.Component {
     return (
         <div>
           {formItems}
-          <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
+          {!this.props.disabled && <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
             <Icon type="plus" /> 添加
-          </Button>
+          </Button>}
         </div>
     );
   }

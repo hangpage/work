@@ -1,7 +1,4 @@
-import {Carousel, Col, message, Row} from 'antd';
-import pl from '../../assets/index/bg-zuo-gonhgao.png';
-import laba from '../../assets/icon/icon-gonggao.png';
-import jinru from '../../assets/icon/icon-jinru.png';
+import {Carousel, Col, message, Row, Typography} from 'antd';
 import {ActivityCard, IndexEntrance} from "../../components";
 import React from "react";
 import IndexTitle from "../../components/IndexTitle/IndexTitle";
@@ -29,7 +26,7 @@ const INDEX_ENTRANCE_LIST = [{
   link: '/competition'
 }];
 
-const Index = ({competitionList, activityList, articleList, noticeContent, slideShowList, dispatch}) => {
+const Index = ({competitionList, activityList, articleList, noticeList, slideShowList, dispatch}) => {
 
   const doLink = (link) => {
     const status = JSON.parse(sessionStorage.getItem('user')).residentTeamStatus;
@@ -43,58 +40,71 @@ const Index = ({competitionList, activityList, articleList, noticeContent, slide
   };
 
   return (
-    <div className='bg-white pb78'>
-      <div style={{width: '100%'}}>
-        <Carousel autoplay={true} style={{minHeight: 729}}>
-          {slideShowList.map((item, index) => {
-            let url = '';
-            switch (item.type) {
-              case '1':
-                url = item.src;
-                break;
-              case '2':
-                url = '/article/' + item.src;
-                break;
-              case '3':
-                url = '/activity/' + item.src;
-                break;
-              case '4':
-                url = '/competition/' + item.src;
-                break;
-              case '5':
-                url = '/park/' + item.src;
-                break;
-              default:
-                url = '';
-            }
-            if(item.type === '1'){
-              return (
-                <div key={index}>
+    <div className='bg-white pb78 pt24'>
+      <div className='w index-banner'>
+        <div className="" style={{width: 803,minHeight: 450}}>
+          <Carousel autoplay={true} dots={true} style={{minHeight: 450}}>
+            {slideShowList.map((item, index) => {
+              let url = '';
+              switch (item.type) {
+                case '1':
+                  url = item.src;
+                  break;
+                case '2':
+                  url = '/article/' + item.src;
+                  break;
+                case '3':
+                  url = '/activity/' + item.src;
+                  break;
+                case '4':
+                  url = '/competition/' + item.src;
+                  break;
+                case '5':
+                  url = '/park/' + item.src;
+                  break;
+                default:
+                  url = '';
+              }
+              if(item.type === '1'){
+                return (
+                  <div key={index}>
                     <a href={item.src}>
                       <img src={config.URL + item.img} alt=""/>
                     </a>
+                  </div>
+                )
+              }
+              return (
+                <div key={index}>
+                  <Link to={url}>
+                    <img src={config.URL + item.img} alt=""/>
+                  </Link>
                 </div>
               )
-            }
-            return (
-              <div key={index}>
-                <Link to={url}>
-                  <img src={config.URL + item.img} alt=""/>
-                </Link>
+            })}
+          </Carousel>
+        </div>
+        <div className="notice">
+            <div className='info-public-box'>
+              <div className='title'>
+                <span className='pull-left' style={{fontSize: 18, fontWeight: 'bold'}}>
+                  公告
+                </span>
+                <span className='pull-right' style={{color:'#0772B7 !important'}}>
+                 <Link to='/notice' style={{color:'#0772B7 !important'}}> 更多> </Link>
+                </span>
               </div>
-            )
-          })}
-        </Carousel>
-        <Link to='/notice'>
-          <div className='info-public-box'>
-           <div className="info-public">
-             <img src={pl} alt="" className='mr28'/>
-             <img src={laba} alt="" className='mr21'/>
-             <p>{noticeContent.content}</p>
-             <img src={jinru} alt=""/>
-           </div>
-          </div>
-        </Link>
+              <div className="info-public">
+                {noticeList.map((item, index) => {
+                  return (
+                    <Link to={`/notice/${item.id}`} key={index}>
+                      <Typography.Text className='notice-item' ellipsis={{ rows: 2}}>{item.title}</Typography.Text>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+        </div>
       </div>
       <div className='w'>
         <div className="flex-width-space-between" style={{marginTop: 75}}>

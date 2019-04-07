@@ -310,6 +310,14 @@
   display: flex;
   flex-wrap: wrap;
 }
+:global .index-banner {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+:global .index-banner .notice {
+  width: 338px;
+}
 :global .notice-box {
   padding: 0 20px 38px;
   margin-bottom: 79px;
@@ -482,13 +490,13 @@
 }
 :global .ant-carousel .slick-slide {
   text-align: center;
-  height: 388px !important;
+  height: 450px !important;
   overflow: hidden;
 }
 :global .ant-carousel .slick-slide img {
   width: 100%;
-  height: 388px !important;
-  min-height: 388px !important;
+  height: 450px !important;
+  min-height: 450px !important;
 }
 :global .result-search:focus {
   box-shadow: none !important;
@@ -679,33 +687,64 @@
   margin-top: 14px;
   padding-right: 17px;
 }
+:global .pull-left {
+  float: left;
+}
+:global .pull-right {
+  float: right;
+}
 :global .info-public-box {
-  height: 60px;
-  width: 1200px;
-  margin: 0 auto;
-  border-radius: 12px;
-  overflow: hidden;
-  transform: translateY(-34px);
+  height: 450px;
+  padding: 22px 22px 0 0;
+  background: #f9f9f9;
+  box-shadow: -1px 0 11px 1px rgba(85, 85, 85, 0.24);
+}
+:global .info-public-box .title {
+  height: 42px;
+  border-left: 9px solid #0772B7;
+  line-height: 42px;
+  padding: 0 0 0 22px;
+  color: #0772B7;
+}
+:global .daoshi-identity {
+  width: 36px;
+  height: 20px;
+  line-height: 20px;
+  color: #BE1E23;
+  border: 1px solid #BE1E23;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 12px;
 }
 :global .info-public {
-  height: 60px;
-  width: 1200px;
   margin: 0 auto;
+  padding-left: 22px;
+  height: 450px;
   color: #666666;
-  font-size: 18px;
-  background: #FBFBFB;
-  display: flex;
-  align-items: center;
+  font-size: 16px;
   padding-right: 20px;
-  border: 1px solid;
-  border-image: linear-gradient(0deg, rgba(0, 166, 189, 0.14), rgba(7, 111, 183, 0.14)) 1 1;
 }
-:global .info-public p {
-  flex: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 0;
+:global .info-public .notice-item {
+  display: block;
+  position: relative;
+  height: 40px;
+  color: #666666;
+  margin-top: 42px;
+  padding-left: 20px;
+}
+:global .info-public .notice-item:before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  background: #0772B7;
+  border-radius: 50%;
+  top: 7px;
+}
+:global .info-public .notice-item:hover {
+  color: #3089C2;
 }
 :global .app_notes {
   color: #c03e3e !important;

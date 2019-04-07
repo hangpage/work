@@ -7,7 +7,7 @@ import React from 'react';
 import {Col, DatePicker, Form, Input, Radio, Row, Select} from 'antd';
 import ComboBox from "../../components/ComboBox";
 import Const from "../../utils/Const";
-import {checkId, isEnd, reFormatParams, testId} from "../../utils";
+import {checkId, getParams, isEnd, reFormatParams, testId} from "../../utils";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
 import moment from "moment";
@@ -22,7 +22,8 @@ class CompanyInfo extends React.Component {
     super(props);
     this.state = {
       isRegistRequired: false,
-      isOnSchoolRequired: false
+      isOnSchoolRequired: false,
+      formDisabledStatus: false
     }
   }
 
@@ -60,6 +61,9 @@ class CompanyInfo extends React.Component {
         }
       }
     }
+    this.setState({
+      formDisabledStatus: !!nextProps.editBtnText
+    })
   }
 
   handleIsRegistChange = (e) => {
@@ -79,6 +83,7 @@ class CompanyInfo extends React.Component {
   render() {
     const {form, matchId = '', initialValueMap = {}} = this.props;
     const {getFieldDecorator} = form;
+    const {formDisabledStatus} = this.state;
     return (
       <div>
         <div className="form-content">
@@ -95,7 +100,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入公司/团队名称'}],
                     initialValue: initialValueMap.name
                   })(
-                    <Input placeholder='请输入公司/团队名称'/>
+                    <Input placeholder='请输入公司/团队名称' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -107,7 +112,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入团队人数'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.employees
                   })(
-                    <Input placeholder='请输入团队人数'/>
+                    <Input placeholder='请输入团队人数' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -119,7 +124,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入办公面积'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.area
                   })(
-                    <Input placeholder='请输入办公面积'/>
+                    <Input placeholder='请输入办公面积' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -131,7 +136,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入近一年流水'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.income
                   })(
-                    <Input placeholder='请输入近一年流水'/>
+                    <Input placeholder='请输入近一年流水' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -143,7 +148,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入税收金额'}, NUMBER_VALIDATE],
                     initialValue: initialValueMap.tax
                   })(
-                    <Input placeholder='请输入税收金额'/>
+                    <Input placeholder='请输入税收金额' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -155,7 +160,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择所属行业'}],
                     initialValue: initialValueMap.industry
                   })(
-                    <ComboBox placeholder='请选择所属行业' url='/dict/findType?type=industry'/>
+                    <ComboBox placeholder='请选择所属行业' url='/dict/findType?type=industry' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -167,7 +172,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请填写办公地址'}],
                     initialValue: initialValueMap.address
                   })(
-                    <Input placeholder='请填写办公地址'/>
+                    <Input placeholder='请填写办公地址' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -179,7 +184,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.isRegist
                   })(
-                    <Radio.Group onChange={this.handleIsRegistChange}>
+                    <Radio.Group onChange={this.handleIsRegistChange} disabled={formDisabledStatus}>
                       <Radio value={Const.Yes}>是</Radio>
                       <Radio value={Const.No}>否</Radio>
                     </Radio.Group>
@@ -197,7 +202,7 @@ class CompanyInfo extends React.Component {
                         return event.target.value.replace(/\D/g, '')
                     },
                   })(
-                    <Input placeholder='请输入注册资金' />
+                    <Input placeholder='请输入注册资金' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -212,7 +217,7 @@ class CompanyInfo extends React.Component {
                       return event.target.value.replace(/\D/g, '')
                     },
                   })(
-                    <Input placeholder='请输入所占注册资金比例' addonAfter={'%'}/>
+                    <Input placeholder='请输入所占注册资金比例' addonAfter={'%'} disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -224,7 +229,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.isOnPark
                   })(
-                    <Radio.Group>
+                    <Radio.Group disabled={formDisabledStatus}>
                       <Radio value={Const.Yes}>是</Radio>
                       <Radio value={Const.No}>否</Radio>
                     </Radio.Group>
@@ -242,7 +247,7 @@ class CompanyInfo extends React.Component {
                 rules: [{required: true, message: '请填写'}],
                 initialValue: initialValueMap.intro
               })(
-                <TextArea placeholder='请输入团队简要介绍...' style={{height: 240}}/>
+                <TextArea placeholder='请输入团队简要介绍...' style={{height: 240}} disabled={formDisabledStatus}/>
               )}
             </Form.Item>
             <Form.Item
@@ -254,7 +259,7 @@ class CompanyInfo extends React.Component {
                 rules: [{required: true, message: '请填写'}],
                 initialValue: initialValueMap.business
               })(
-                <TextArea placeholder='请输入团队主营业务...' style={{height: 240}}/>
+                <TextArea placeholder='请输入团队主营业务...' style={{height: 240}} disabled={formDisabledStatus}/>
               )}
             </Form.Item>
             <Form.Item
@@ -266,7 +271,7 @@ class CompanyInfo extends React.Component {
                 rules: [{required: this.state.isRegistRequired, message: '请填写'}],
                 initialValue: initialValueMap.businessRegistration
               })(
-                <TextArea placeholder='请输入团队工商注册情况...' style={{height: 240}}/>
+                <TextArea placeholder='请输入团队工商注册情况...' style={{height: 240}} disabled={formDisabledStatus}/>
               )}
             </Form.Item>
             <div className="text-align">
@@ -283,7 +288,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请上传照片'}],
                     initialValue: initialValueMap.pic
                   })(
-                    <ImageUpload/>
+                    <ImageUpload disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -295,7 +300,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入姓名'}, {validator: validateNoChinese,}],
                     initialValue: initialValueMap.principal
                   })(
-                    <Input placeholder='请输入姓名'/>
+                    <Input placeholder='请输入姓名' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -307,7 +312,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入'}, {validator: checkId}],
                     initialValue: initialValueMap.idCard
                   })(
-                    <Input placeholder='请输入身份证号'/>
+                    <Input placeholder='请输入身份证号' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -319,7 +324,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请输入'}],
                     initialValue: initialValueMap.householdRegistration
                   })(
-                    <Input placeholder='请输入户籍所在地'/>
+                    <Input placeholder='请输入户籍所在地' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -331,7 +336,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.educations
                   })(
-                    <Select placeholder={'请选择学历'}>
+                    <Select placeholder={'请选择学历'} disabled={formDisabledStatus}>
                       {Const.EDUCATION_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
                     </Select>
                   )}
@@ -345,7 +350,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}, {validator: validateNoChinese,}],
                     initialValue: initialValueMap.profession
                   })(
-                    <Input placeholder='请输入专业'/>
+                    <Input placeholder='请输入专业' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -358,7 +363,7 @@ class CompanyInfo extends React.Component {
                     initialValue: initialValueMap.matchSchoolId
                   })(
                     <ComboBox nameProp='name' valueProp='id' placeholder='请选择报名学校'
-                              url={`/team/findMatchSchool?mId=${matchId}`}/>
+                              url={`/team/findMatchSchool?mId=${matchId}`} disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -370,7 +375,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}, {validator: validateNoChinese,}],
                     initialValue: initialValueMap.education
                   })(
-                    <Input placeholder='请输入最高学历院校'/>
+                    <Input placeholder='请输入最高学历院校' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -382,7 +387,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.isOnSchool
                   })(
-                    <Radio.Group>
+                    <Radio.Group disabled={formDisabledStatus}>
                       <Radio value={Const.Yes}>是</Radio>
                       <Radio value={Const.No}>否</Radio>
                     </Radio.Group>
@@ -397,7 +402,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: true, message: '请选择'}],
                     initialValue: initialValueMap.admissionTime
                   })(
-                    <DatePicker onChange={this.handleIsOnSchoolChange}/>
+                    <DatePicker onChange={this.handleIsOnSchoolChange} disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -409,7 +414,7 @@ class CompanyInfo extends React.Component {
                     rules: [{required: this.state.isOnSchoolRequired, message: '请上传'}],
                     initialValue: initialValueMap.diploma
                   })(
-                    <ImageUpload/>
+                    <ImageUpload disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -420,7 +425,7 @@ class CompanyInfo extends React.Component {
                   {getFieldDecorator('coreMembers', {
                     rules: [{required: true, message: '请添加'}],
                   })(
-                    <DynamicFieldSet maxNum={6} name='coreMembers' fieldText='核心团队成员'/>
+                    <DynamicFieldSet maxNum={6} name='coreMembers' fieldText='核心团队成员' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>
@@ -431,7 +436,7 @@ class CompanyInfo extends React.Component {
                   {getFieldDecorator('guidanceTeacher', {
                     rules: [{required: true, message: '请添加'}],
                   })(
-                    <DynamicFieldSet maxNum={3} name='guidanceTeacher' fieldText='指导教师'/>
+                    <DynamicFieldSet maxNum={3} name='guidanceTeacher' fieldText='指导教师' disabled={formDisabledStatus}/>
                   )}
                 </Form.Item>
               </Col>

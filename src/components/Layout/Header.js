@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import {Link, routerRedux, withRouter} from 'dva/router'
-import {Avatar, Layout, Menu} from "antd";
+import {Avatar, Badge, Layout, Menu} from "antd";
 import logo from "./imgs/r-logo.png";
 import searchIcon from '../../assets/icon/icon-search.png';
 import {connect} from "dva";
@@ -29,7 +29,7 @@ const LIST = [{
   selectIcon: require('../../assets/icon/icon-pressed-fuwu.png')
 }];
 
-const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) => {
+const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch}) => {
 
   const onMenuItemClick = (e) => {
     dispatch({
@@ -94,7 +94,7 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
       payload: {
         user: {}
       }
-    })
+    });
     dispatch(routerRedux.push({pathname: '/index'}))
   };
 
@@ -129,7 +129,8 @@ const Header = ({headerMenuSelectedKeys, user, dispatch, showSearch, location}) 
         {!showSearch && <img className='search' src={searchIcon} onClick={onSearchClick} alt=""/>}
         {showSearch && <SearchButton onCloseClick={onCloseClick} onPressEnter={onSearch} onSearchClick={onSearch}/>}
         <div onClick={goToPersonalCenter} className={'header-content-toolbar'}>
-          <Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/>
+          <Badge dot offset={[-8, 7]}><Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/></Badge>
+          {isTutor && <span className='daoshi-identity'>导师</span>}
           <span className='nickname'>{user.nickName}</span>
         </div>
         {sessionStorage.getItem('token') &&

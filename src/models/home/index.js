@@ -16,7 +16,7 @@ import {
   userLockers,
   userRepair
 } from "../../services/user";
-import {noticeFindList} from "../../services/notice";
+import {messageFindList} from "../../services/notice";
 import {queryLeaderAndMemberInfo} from "../../services/park";
 
 export default {
@@ -312,7 +312,7 @@ export default {
       }
     },
     *userFindSystem({ payload }, { call, put }) {
-      const {data} = yield call(noticeFindList, payload);
+      const {data} = yield call(messageFindList, payload);
       if(equalResultStatus(data)){
         yield put({
           type: 'updateState',

@@ -29,7 +29,7 @@ class TeamInfoWrite extends React.Component {
     }
     params.mId = getParams(location.search).mId;
     sessionStorage.setItem('cInfo', JSON.stringify(params));
-    history.push(`/competition/${params.mId}/project_info_write?egistrationNotice=${getParams(location.search).egistrationNotice}&${qs.stringify(params)}`);
+    history.push(`/competition/${params.mId}/project_info_write?egistrationNotice=${getParams(location.search).egistrationNotice}&editBtnText=${getParams(location.search).editBtnText}&${qs.stringify(params)}`);
   };
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -45,7 +45,7 @@ class TeamInfoWrite extends React.Component {
         <div className='w mt39 bg-white pb80'>
           <div className='bl-form'>
             <div className='form-title'>报名</div>
-            <CompanyInfo teamMatchDetail={this.state.teamMatchDetail} matchId={getParams(location.search).mId} wrappedComponentRef={(form) => this.ref = form}/>
+            <CompanyInfo teamMatchDetail={this.state.teamMatchDetail} matchId={getParams(location.search).mId} editBtnText={getParams(location.search).editBtnText} wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
             <BackButton text='取消'/>

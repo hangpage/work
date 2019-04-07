@@ -12,6 +12,11 @@ export function noticeFindList(params) {
   return request(`/api/notice/findList?${qs.stringify(params)}`);
 }
 
+export function messageFindList(params={}) {
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/notice/findMessageList?${qs.stringify(params)}`);
+}
+
 
 export function slideShow(params) {
   return request(`/api/slideShow/findSlideShow?${qs.stringify(params)}`);

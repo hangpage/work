@@ -3,6 +3,8 @@ import {activityFindList} from "../../services/activity";
 import {findList} from "../../services/competition";
 import {articleFindList} from "../../services/article";
 import {noticeFindList, slideShow} from "../../services/notice";
+import {tutorGetInfo} from "../../services/tutor";
+import {message} from "antd";
 
 export default {
 
@@ -13,7 +15,7 @@ export default {
     activityList: [],
     articleList: [],
     slideShowList: [],
-    noticeContent: {}
+    noticeList: [],
   },
 
   subscriptions: {
@@ -65,12 +67,12 @@ export default {
       }
     },
     *noticeFindList({payload}, { call, put }){
-      const {data} = yield call(noticeFindList, {pageSize: 1});
+      const {data} = yield call(noticeFindList, {pageSize: 4});
       if(data){
         yield put({
           type: 'updateState',
           payload: {
-            noticeContent: {content: data.data.list[0].title},
+            noticeList: data.data.list,
           }
         });
       }
@@ -85,7 +87,7 @@ export default {
           }
         });
       }
-    }
+    },
   },
 
   reducers: {
