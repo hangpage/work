@@ -62,7 +62,7 @@ class CompanyInfo extends React.Component {
       }
     }
     this.setState({
-      formDisabledStatus: !!nextProps.editBtnText
+      formDisabledStatus: decodeURIComponent(nextProps.editBtnText) === '查看比赛报名信息'
     })
   }
 

@@ -5,6 +5,7 @@ import {articleFindList} from "../services/article";
 import {activityFindList} from "../services/activity";
 import {routerRedux} from "dva/router";
 import {tutorGetInfo} from "../services/tutor";
+import {findNewMessage} from "../services/notice";
 
 export default {
 
@@ -15,7 +16,8 @@ export default {
     user: {},
     searchParams: {},
     showSearch: false,
-    isTutor: false
+    isTutor: false,
+    newMessage: false,
   },
 
   subscriptions: {
@@ -25,6 +27,7 @@ export default {
           case '/index':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['0']} });
             dispatch({ type: 'tutorGetInfo' });
+            dispatch({ type: 'findNewMessage' });
             break;
           case '/find':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['1']} });
@@ -100,9 +103,9 @@ export default {
       }
     },
     *tutorGetInfo({ payload }, { call, put }){
-      sessionStorage.setItem('apply_tutor', '1')
       const {data} = yield call(tutorGetInfo, payload);
       if(data.code === 1){
+        sessionStorage.setItem('apply_tutor', '1');
         if(String(data.data.status) === '1'){
           message.success('您是导师身份');
           yield put({
@@ -112,6 +115,19 @@ export default {
             }
           })
         }
+      }else{
+        sessionStorage.setItem('apply_tutor', '2'); //设置成不是导师状态
+      }
+    },
+    *findNewMessage({ payload }, { call, put }){
+      const {data} = yield call(findNewMessage, payload);
+      if(data.code === 1){
+        yield put({
+          type: 'updateState',
+          payload: {
+            newMessage: true
+          }
+        })
       }
     },
   },

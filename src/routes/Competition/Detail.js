@@ -68,6 +68,8 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
   //申请了导师不让参加比赛
   if(sessionStorage.getItem('apply_tutor') === '1'){
     allowReport = false;
+    editReportInfo = false;
+    editBtnText='no';
   }
 
   return (
@@ -82,7 +84,7 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
           content={data.intro}
           mId={data.id}
           reportLink={link}
-          editUrl={`/competition/${data.id}/team_info_write?mId=${data.id}&egistrationNotice=${data.egistrationNotice}&editBtnText=${editBtnText}`}
+          editUrl={`/competition/${data.id}/team_info_write?mId=${data.id}&egistrationNotice=${data.egistrationNotice}&editBtnText=${editBtnText || ''}`}
           btnName={btnName}
           noTeacher={noTeacher}
           img={data.pic}

@@ -73,12 +73,12 @@ class TeamInfoWrite extends React.Component{
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if(!isEqual(this.props.teamMatchDetail, nextProps.teamMatchDetail)){
+    if(!isEqual(this.props.teamMatchDetail.team, nextProps.teamMatchDetail.team) || !this.props.form.getFieldValue('projectName')){
       const data = nextProps.teamMatchDetail.team;
       this.props.form.setFieldsValue(data);
     }
     this.setState({
-      formDisabledStatus: !!getParams(this.props.location.search).editBtnText
+      formDisabledStatus: decodeURIComponent(getParams(this.props.location.search).editBtnText) === '查看比赛报名信息'
     })
   }
 

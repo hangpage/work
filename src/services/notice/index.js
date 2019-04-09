@@ -17,6 +17,11 @@ export function messageFindList(params={}) {
   return request(`/api/notice/findMessageList?${qs.stringify(params)}`);
 }
 
+export function findNewMessage(params={}) {
+  params.token = sessionStorage.getItem('token');
+  return request(`/api/notice/selectNewMessage?${qs.stringify(params)}`);
+}
+
 
 export function slideShow(params) {
   return request(`/api/slideShow/findSlideShow?${qs.stringify(params)}`);

@@ -29,7 +29,7 @@ const LIST = [{
   selectIcon: require('../../assets/icon/icon-pressed-fuwu.png')
 }];
 
-const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch}) => {
+const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch, newMessage}) => {
 
   const onMenuItemClick = (e) => {
     dispatch({
@@ -76,9 +76,15 @@ const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch}) =
 
   const goToPersonalCenter = () => {
     if (sessionStorage.getItem('token')) {
-      dispatch(routerRedux.push({
-        pathname: '/home/profile'
-      }))
+      if(newMessage){
+        dispatch(routerRedux.push({
+          pathname: '/home/message'
+        }))
+      }else{
+        dispatch(routerRedux.push({
+          pathname: '/home/profile'
+        }))
+      }
     } else {
       dispatch(routerRedux.push({
         pathname: '/login'
@@ -89,6 +95,7 @@ const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch}) =
   const logOut = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('cInfo');
+    sessionStorage.removeItem('apply_tutor');
     dispatch({
       type: 'app/updateState',
       payload: {
@@ -129,7 +136,8 @@ const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch}) =
         {!showSearch && <img className='search' src={searchIcon} onClick={onSearchClick} alt=""/>}
         {showSearch && <SearchButton onCloseClick={onCloseClick} onPressEnter={onSearch} onSearchClick={onSearch}/>}
         <div onClick={goToPersonalCenter} className={'header-content-toolbar'}>
-          <Badge dot offset={[-8, 7]}><Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/></Badge>
+          {newMessage ? <Badge dot offset={[-8, 7]}><Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/></Badge>
+              : <Avatar size={60} icon="user" src={user.img} style={{marginLeft: 6, marginRight: 9}}/>}
           {isTutor && <span className='daoshi-identity'>导师</span>}
           <span className='nickname'>{user.nickName}</span>
         </div>

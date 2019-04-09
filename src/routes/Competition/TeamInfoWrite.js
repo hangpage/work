@@ -45,7 +45,7 @@ class TeamInfoWrite extends React.Component {
         <div className='w mt39 bg-white pb80'>
           <div className='bl-form'>
             <div className='form-title'>报名</div>
-            <CompanyInfo teamMatchDetail={this.state.teamMatchDetail} matchId={getParams(location.search).mId} editBtnText={getParams(location.search).editBtnText} wrappedComponentRef={(form) => this.ref = form}/>
+            <CompanyInfo teamMatchDetail={this.state.teamMatchDetail} matchId={getParams(location.search).mId} editBtnText={getParams(location.search).editBtnText || ''} wrappedComponentRef={(form) => this.ref = form}/>
           </div>
           <Row type='flex' justify='space-around' gutter={360}>
             <BackButton text='取消'/>

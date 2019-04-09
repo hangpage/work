@@ -22,9 +22,7 @@ const System = ({system, systemNoticeCount, dispatch}) => {
   return (
     <div style={{padding: '59px 20px 68px'}}>
       {system.length ? system.map((item, key) =>
-        <Link to={`/notice/${item.id}`} key={key}>
-          <SystemMessage time={item.createTime} title={item.content}/>
-        </Link>
+        <SystemMessage time={item.createTime} title={item.content} key={key}/>
       ) : <Empty/>}
       <Pagination total={systemNoticeCount} onChange={onPageChange} pageSize={4} className='mt30'/>
     </div>
