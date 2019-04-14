@@ -6,7 +6,7 @@
 import React from 'react';
 import styles from './ReportCard.less';
 import {Link} from "dva/router";
-import {validateIsResident} from "../../utils";
+import {isLogin, validateIsResident} from "../../utils";
 import {Modal} from "antd";
 import {Typography} from "antd";
 
@@ -23,6 +23,12 @@ const ReportCard = ({img, history, title, time, style, read, content, mId, noTea
           centered: true
         });
       }
+    }else if(!isLogin()){
+      Modal.warning({
+        title: '您还未登录！',
+        content: '该功能登陆后才可进行相关操作！',
+        centered: true
+      });
     }else{
       history.push(link);
     }

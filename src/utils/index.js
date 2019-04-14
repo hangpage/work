@@ -129,3 +129,17 @@ export const checkId = (rule, value, callback) => {
   }
   callback();
 };
+
+/**
+* @Description: 判断用户是否登录
+* @Param:
+* @return:
+* @Author: zzhihang@hotmail.com
+* @date: 2019/4/12 12:32
+*/
+export const isLogin = () => {
+  if(sessionStorage.getItem('token')){
+    return true
+  }
+  return false;
+};

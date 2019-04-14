@@ -35,8 +35,12 @@ export default modelExtend(model, {
         }else if(pathMatchRegexp('/competition/:id', location.pathname)){
           const match = pathMatchRegexp('/competition/:id', location.pathname);
           if (match) {
-            dispatch({ type: 'queryDetail', payload: { id: match[1], park: getParams(location.search).park } });
-            dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
+            if(sessionStorage.getItem('token')){
+              dispatch({ type: 'queryDetail', payload: { id: match[1], token: sessionStorage.getItem('token') }});
+              dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
+            }else{
+              dispatch({ type: 'queryDetail', payload: { id: match[1] }});
+            }
           }
         }else if(pathMatchRegexp('/competition/:id/team_info_write', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/team_info_write', location.pathname);
@@ -59,7 +63,7 @@ export default modelExtend(model, {
         }else if(pathMatchRegexp('/competition/:id/score', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/score', location.pathname);
           if (match) {
-            dispatch({ type: 'queryDetail', payload: { id: match[1] } })
+            dispatch({ type: 'queryDetail', payload: { id: match[1], token: sessionStorage.getItem('token')} })
           }
         }else if(pathMatchRegexp('/competition/:id/progress', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/progress', location.pathname);

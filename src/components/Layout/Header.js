@@ -17,6 +17,12 @@ const LIST = [{
   icon: require('../../assets/icon/icon-default-shouye.png'),
   selectIcon: require('../../assets/icon/icon-pressed-shouye.png'),
   extraStyle: {marginBottom: 3}
+},{
+  text: '创业动态',
+  linkTo: '/competition',
+  icon: require('../../assets/icon/icon-pingxuan-normal.png'),
+  selectIcon: require('../../assets/icon/icon-pingxuan-pressed.png'),
+  extraStyle: {marginBottom: 3}
 }, {
   text: '发现',
   linkTo: '/find',

@@ -1653,4 +1653,33 @@
 :global .row-upload .ant-form-item-children {
   display: flex !important;
 }
+:global .ant-carousel .slick-dots li button {
+  height: 0 !important;
+}
+:global .ant-carousel .slick-dots {
+  bottom: 17px !important;
+}
+:global .ant-carousel .slick-prev,
+:global .ant-carousel .slick-next {
+  z-index: 999;
+}
+:global .ant-carousel .slick-prev:hover,
+:global .ant-carousel .slick-next:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+:global .ant-carousel .slick-prev {
+  left: 10px !important;
+}
+:global .ant-carousel .slick-next {
+  right: 10px !important;
+}
+:global .media,
+:global .media-player {
+  height: 100% !important;
+  width: 100% !important;
+}
+:global .media-player video {
+  width: 803px !important;
+  height: 450px !important;
+}
 /*# sourceMappingURL=index.css.map */

@@ -8,10 +8,11 @@ import {connect} from "dva";
 import {Input, message} from 'antd';
 import FabulousButton from "../../components/Button/FabulousButton";
 import {dynamicAwesome, dynamicComment, dynamicReport} from "../../services/dynamic";
-import {equalResultStatus, pathMatchRegexp} from "../../utils";
+import {equalResultStatus, isLogin, pathMatchRegexp} from "../../utils";
 import Comment from "../../components/Commet/Comment";
 import Modal from './component/Modal';
 import {cloneDeep} from "lodash";
+import * as routerRedux from "react-router-redux";
 
 const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
   const hideModal = () => {dispatch({ type: 'article/updateState', payload: {modalVisible: false} })};
@@ -19,6 +20,12 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
 
   const onAwesomeClick = () => {
     const match = pathMatchRegexp('/article/:id', location.pathname);
+    if(!isLogin()){
+      window.g_app._store.dispatch(routerRedux.push({
+        pathname: '/login'
+      }));
+      return;
+    }
     dynamicAwesome({
       msgId: match[1],
       type: '1',
@@ -81,7 +88,7 @@ const Detail = ({data, location, placeHolder, comment, commentShowChildrenList, 
         });
         getArticleDetail();
       }else{
-        message.error(data.message);
+        message.error('评论失败了');
       }
     })
   };

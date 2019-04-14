@@ -60,7 +60,7 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
     editReportInfo = true;
   }
 
-  if(Number(data.status) >= 4 &&  Number(data.status) <= 12){
+  if(Number(data.status) >= 4 &&  Number(data.status) <= 12 && teamMatchDetail.team && !teamMatchDetail.tutor ){
     editReportInfo = true;
     editBtnText = '查看比赛报名信息';
   }

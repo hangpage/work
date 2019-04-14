@@ -8,10 +8,11 @@ import {connect} from "dva";
 import {Input, message} from 'antd';
 import FabulousButton from "../../components/Button/FabulousButton";
 import {dynamicAwesome, dynamicComment, dynamicReport} from "../../services/dynamic";
-import {equalResultStatus, pathMatchRegexp} from "../../utils";
+import {equalResultStatus, isLogin, pathMatchRegexp} from "../../utils";
 import Comment from "../../components/Commet/Comment";
 import Modal from '../Article/component/Modal';
 import {cloneDeep} from "lodash";
+import * as routerRedux from "react-router-redux";
 
 const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, commentList, dispatch, modalVisible, modalTitle, currentMsgId, replyWho}) => {
   const hideModal = () => {
@@ -23,6 +24,12 @@ const Detail = ({data, location, placeHolder, commentShowChildrenList, comment, 
 
   const onAwesomeClick = () => {
     const match = pathMatchRegexp('/notice/:id', location.pathname);
+    if(!isLogin()){
+      window.g_app._store.dispatch(routerRedux.push({
+        pathname: '/login'
+      }));
+      return;
+    }
     dynamicAwesome({
       msgId: match[1],
       type: '5',

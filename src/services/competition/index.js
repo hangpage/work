@@ -5,13 +5,13 @@ export function findList(params) {
   return request(`/api/match/findList?${qs.stringify(params)}`);
 }
 
-/** 
+/**
 * @Description: 获取比赛详情
 * @Param:  mId 比赛ID
-* @return:  
-* @Author: zzhihang@hotmail.com 
+* @return:
+* @Author: zzhihang@hotmail.com
 * @date: 2019/2/11 17:06
-*/ 
+*/
 export function getTeamDetail(params={}){
   params.token = sessionStorage.getItem('token');
   return request(`/api/team/getTeamDetail?${qs.stringify(params)}`,{
@@ -21,11 +21,11 @@ export function getTeamDetail(params={}){
   });
 }
 
-/** 
-* @Description: 比赛报名 
-* @Param:  
-* @return:  
-* @Author: zzhihang@hotmail.com 
+/**
+* @Description: 比赛报名
+* @Param:
+* @return:
+* @Author: zzhihang@hotmail.com
 * @date: 2019/2/11 19:58
 */
 
@@ -80,7 +80,6 @@ export function insertProject(formData){
  * @date: 2019/2/11 19:58
  */
 export function matchGet(params={}){
-  params.token = sessionStorage.getItem('token');
   return request(`/api/match/get?${qs.stringify(params)}`,{
     method: 'POST',
     headers: new Headers(),

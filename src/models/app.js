@@ -1,4 +1,4 @@
-import {equalResultStatus, pathMatchRegexp} from "../utils";
+import {equalResultStatus, isLogin, pathMatchRegexp} from "../utils";
 import {userGetInfo} from "../services/user";
 import {message} from 'antd';
 import {articleFindList} from "../services/article";
@@ -26,8 +26,10 @@ export default {
         switch (location.pathname) {
           case '/index':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['0']} });
-            dispatch({ type: 'tutorGetInfo' });
-            dispatch({ type: 'findNewMessage' });
+            if(isLogin()){
+              dispatch({ type: 'tutorGetInfo' });
+              dispatch({ type: 'findNewMessage' });
+            }
             break;
           case '/find':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['1']} });

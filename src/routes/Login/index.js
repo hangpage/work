@@ -86,7 +86,7 @@ class NormalLoginForm extends React.Component {
                 )}
                 <CountDown onClick={() => {this.startTimer()}} count={60} ref={(span) => {this.ref = span}}/>
               </Form.Item>
-              <div style={{color: 'rgb(122, 122, 122)', textAlign: 'left', marginTop: 5}}>提示：可通过验证码直接注册</div>
+              <div style={{color: 'red', textAlign: 'left', marginTop: 5}}>提示：可通过验证码直接注册</div>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 登录
               </Button>

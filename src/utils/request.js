@@ -20,8 +20,9 @@ function checkStatus(response) {
 
 function handleData(data) {
   const { code, message } = data;
-  if (code === 2 && message === '请登录') {
+  if ((Number(code) === 2 && String(message).trim() === '请登录')) {
     //全局登录拦截, 缓存登录之后的回调url
+    message.warning('需要登录后才能操作，请登录');
     if(window.location.href.split('#')[1] !== '/login'){
       sessionStorage.setItem('cbUrl', window.location.href.split('#')[1]);
     }
@@ -29,8 +30,9 @@ function handleData(data) {
       pathname: '/login'
     }));
     return {};
+  }else{
+    return {data};
   }
-  return {data};
 }
 
 /**
