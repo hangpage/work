@@ -7,6 +7,7 @@ import {Link, routerRedux} from 'dva/router'
 import config from '../../utils/config';
 import {connect} from "dva";
 import { Media, Player, controls } from 'react-media-player'
+import ReactPlayer from 'react-player'
 
 const INDEX_ENTRANCE_LIST = [{
   icon: require('../../assets/icon/icon-yuyuecanguan.png'),
@@ -31,7 +32,6 @@ const {
   PlayPause,
   CurrentTime,
   Progress,
-  SeekBar,
   Duration,
   MuteUnmute,
   Volume,
@@ -65,14 +65,14 @@ class Index extends React.Component{
   };
 
   handleStateChange = (e) => {
-    if(e.isPlaying){
+    if(!e){
       this.slider.slick.slickPause();
     }else{
       this.slider.slick.slickPlay();
     }
     this.setState({
-      autoPlay: !e.isPlaying
-    })
+      autoPlay: !e
+    });
   };
 
 
@@ -83,7 +83,7 @@ class Index extends React.Component{
       <div className='bg-white pb78 pt24'>
         <div className='w index-banner'>
           <div className="" style={{width: 803,minHeight: 450}}>
-            <Carousel ref={slider => this.slider = slider} autoplay={this.state.autoPlay} dots={true} style={{minHeight: 450}} arrows={true} autoplaySpeed={1000}>
+            <Carousel ref={slider => this.slider = slider} autoplay={this.state.autoPlay} dots={true} style={{minHeight: 450}} arrows={true} autoplaySpeed={3500}>
               {slideShowList.map((item, index) => {
                 let url = '';
                 switch (item.type) {
@@ -119,24 +119,22 @@ class Index extends React.Component{
                 }else if(item.type === '7'){
                   return (
                     <div key={index} style={{width: '100%', height: '100%'}}>
-                      <Media style={{width: '100%', height: '100%'}}>
-                        <div className="media">
-                          <div className="media-player">
-                            <Player src={url} light={item.img} controls={true} onPause={this.handleStateChange} onPlay={this.handleStateChange}/>
-                          </div>
-                          <div className="media-controls">
-                            <PlayPause />
-                            <CurrentTime />
-                            <MuteUnmute />
-                            <Progress />
-                            <SeekBar />
-                            <Duration />
-                            <MuteUnmute />
-                            <Volume />
-                            <Fullscreen />
-                          </div>
-                        </div>
-                      </Media>
+                      {/*<Media style={{width: '100%', height: '100%'}}>*/}
+                        {/*<div className="media">*/}
+                          {/*<div className="media-player">*/}
+                            {/*<Player src={url} light={item.img} controls={true} onPause={this.handleStateChange} onPlay={this.handleStateChange}/>*/}
+                          {/*</div>*/}
+                          {/*<div className="media-controls">*/}
+                            {/*<PlayPause />*/}
+                            {/*<CurrentTime />*/}
+                            {/*<Progress />*/}
+                            {/*<Duration />*/}
+                            {/*<Volume />*/}
+                            {/*<Fullscreen />*/}
+                          {/*</div>*/}
+                        {/*</div>*/}
+                      {/*</Media>*/}
+                      <ReactPlayer playing={true} url={url} controls={true} light={item.img} onPlay={this.handleStateChange} onPause={this.handleStateChange}/>
                     </div>
                   )
                 }

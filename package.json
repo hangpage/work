@@ -24,7 +24,8 @@
     "react-amap": "^1.2.8",
     "react-amap-plugin-geolocation": "0.0.2",
     "react-dom": "^16.2.0",
-    "react-media-player": "^0.7.7"
+    "react-media-player": "^0.7.7",
+    "react-player": "latest"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",
