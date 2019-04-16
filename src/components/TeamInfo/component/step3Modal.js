@@ -1,8 +1,8 @@
 import {Col, DatePicker, Form, Input, Modal, Radio, Row} from "antd";
 import React from "react";
-import ComboBox from "../../../components/ComboBox";
 import Const from "../../../utils/Const";
 import {MOBILE_VALIDATE, validateNoChinese} from "../../../utils/validate";
+import {Select} from "antd";
 
 const list1 = [{
   label: '姓名',
@@ -28,7 +28,7 @@ const list1 = [{
 }, {
   label: '学历',
   field: 'studyEdu',
-  validator: validateNoChinese
+  type: 'select'
 }, {
   label: '联系电话',
   field: 'phone',
@@ -81,8 +81,10 @@ class Step3Modal extends React.Component{
             {list1.map((item, index) => {
               var comp = <Input placeholder={`请输入${item.label}`}/>;
               if (item.type === 'select') {
-                comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
-              } else if (item.type === 'datepicker') {
+                comp =  <Select placeholder={'请选择学历'}>
+                  {Const.EDUCATION_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
+                </Select>
+              }else if (item.type === 'datepicker') {
                 comp = <DatePicker placeholder={`请选择${item.label}`}/>;
               } else if (item.type === 'radio') {
                 comp =
@@ -90,6 +92,22 @@ class Step3Modal extends React.Component{
                     {item.options.map((option, oindex) => <Radio key={oindex}
                                                                  value={option.value}>{option.text}</Radio>)}
                   </Radio.Group>)
+              }
+              if(item.validate){
+                return (
+                  <Form.Item
+                    label={item.label}
+                    key={index}
+                    {...formItemLayout}
+                  >
+                    {getFieldDecorator(`${item.field}`, {
+                      initialValue: modalItem[item.field],
+                      rules: [{required: true, message: '此处为必填项'}, item.validate || {}]
+                    })(
+                      comp
+                    )}
+                  </Form.Item>
+                )
               }
               return (
                   <Form.Item
@@ -99,7 +117,7 @@ class Step3Modal extends React.Component{
                   >
                     {getFieldDecorator(`${item.field}`, {
                       initialValue: modalItem[item.field],
-                      rules: [{required: true, message: '此处为必填项'}, item.validate || {}]
+                      rules: [{required: true, message: '此处为必填项'}]
                     })(
                       comp
                     )}

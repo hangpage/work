@@ -18,7 +18,7 @@ const LIST = [{
   selectIcon: require('../../assets/icon/icon-pressed-shouye.png'),
   extraStyle: {marginBottom: 3}
 },{
-  text: '创业动态',
+  text: '创业评选',
   linkTo: '/competition',
   icon: require('../../assets/icon/icon-pingxuan-normal.png'),
   selectIcon: require('../../assets/icon/icon-pingxuan-pressed.png'),
@@ -105,7 +105,9 @@ const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch, ne
     dispatch({
       type: 'app/updateState',
       payload: {
-        user: {}
+        user: {},
+        isTutor: false,
+        newMessage: false
       }
     });
     dispatch(routerRedux.push({pathname: '/index'}))
@@ -115,7 +117,7 @@ const Header = ({headerMenuSelectedKeys, isTutor, user, dispatch, showSearch, ne
     <Layout.Header style={{height: 90, lineHeight: '90px', background: 'rgba(243,243,243,1)', padding: 0}}>
       <div className="w header-content">
         <Link to='/index'>
-          <img className='logo' src={logo} alt="" style={{marginRight: 176}}/>
+          <img className='logo' src={logo} alt="" style={{marginRight: 100}}/>
         </Link>
         {!showSearch && <Menu
           theme="dark"

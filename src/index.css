@@ -283,7 +283,6 @@
 :global .w .ant-menu.ant-menu-dark .ant-menu-item-selected,
 :global .w .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
   background: linear-gradient(to right, #00acaf, #0771bb);
-  width: 120px;
   text-align: center;
 }
 :global .w .ant-menu-dark .ant-menu-item,
@@ -293,8 +292,7 @@
   font-size: 16px;
 }
 :global .w .ant-menu-dark.ant-menu-horizontal > .ant-menu-item {
-  width: 120px;
-  margin-right: 42px;
+  margin-right: 10px;
 }
 :global .w .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:last-child {
   margin-right: 0;
@@ -356,7 +354,7 @@
   padding: 30px 20px 40px;
   background: #ffffff;
 }
-:global .article-box p {
+:global .article-box > p {
   background: linear-gradient(to right, #00acaf, #0771bb);
   -webkit-background-clip: text;
   color: transparent;
@@ -725,9 +723,8 @@
   padding-right: 20px;
 }
 :global .info-public .notice-item {
-  display: block;
   position: relative;
-  height: 40px;
+  min-height: 40px;
   color: #666666;
   margin-top: 42px;
   padding-left: 20px;

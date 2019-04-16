@@ -6,17 +6,19 @@ import CompetitionCard from "../../components/CompetitionCard/CompetitionCard";
 import {Link, routerRedux} from 'dva/router'
 import config from '../../utils/config';
 import {connect} from "dva";
-import { Media, Player, controls } from 'react-media-player'
 import ReactPlayer from 'react-player'
+import {isLogin} from "../../utils";
 
 const INDEX_ENTRANCE_LIST = [{
   icon: require('../../assets/icon/icon-yuyuecanguan.png'),
   text: '预约参观',
-  link: '/appoint'
+  link: '/appoint',
+  auth: true
 },{
   icon: require('../../assets/icon/icon-yuanqufuwu.png'),
   text: '成为导师',
-  link: '/sign_teacher'
+  link: '/sign_teacher',
+  auth: true
 },{
   icon: require('../../assets/icon/icon-yuanquruzhu.png'),
   text: '园区入驻',
@@ -28,16 +30,6 @@ const INDEX_ENTRANCE_LIST = [{
   link: '/competition'
 }];
 
-const {
-  PlayPause,
-  CurrentTime,
-  Progress,
-  Duration,
-  MuteUnmute,
-  Volume,
-  Fullscreen,
-} = controls;
-
 class Index extends React.Component{
   constructor(props){
     super(props);
@@ -48,20 +40,29 @@ class Index extends React.Component{
     this.slider = null;
   }
 
-  doLink = (link) => {
+  doLink = (link, index) => {
+    if(!isLogin()){
+      message.warning('请先登录');
+      this.props.dispatch(routerRedux.push({
+        pathname: '/login'
+      }));
+      return;
+    }
     const {dispatch} = this.props;
     const user = JSON.parse(sessionStorage.getItem('user'));
     const status = user.residentTeamStatus;
-    if(Number(user.isInMatch) > 0){
-      return message.warning('报名比赛后不允许成为导师！')
-    }
-    if(status === 1){
-      return message.warning('您已申请入驻！')
-    }else if(status > 1){
-      return message.warning('您已入驻！')
+    if(index === 1){
+      if(Number(user.isInMatch) > 0){
+        return message.warning('报名比赛后不允许成为导师！')
+      }
     }else{
-      dispatch(routerRedux.push(link));
+      if(status === 1){
+        return message.warning('您已申请入驻！')
+      }else if(status > 1){
+        return message.warning('您已入驻！')
+      }
     }
+    dispatch(routerRedux.push(link));
   };
 
   handleStateChange = (e) => {
@@ -162,7 +163,7 @@ class Index extends React.Component{
                 {noticeList.map((item, index) => {
                   return (
                     <Link to={`/notice/${item.id}`} key={index}>
-                      <Typography.Text className='notice-item' ellipsis={{ rows: 2}}>{item.title}</Typography.Text>
+                      <Typography.Paragraph className='notice-item' ellipsis={{ rows: 2}}>{item.title}</Typography.Paragraph>
                     </Link>
                   )
                 })}
@@ -174,7 +175,7 @@ class Index extends React.Component{
           <div className="flex-width-space-between" style={{marginTop: 75}}>
             {INDEX_ENTRANCE_LIST.map((item, index) => {
               if(item.auth){
-                return <div onClick={() => {this.doLink(item.link)}} key={index}><IndexEntrance icon={item.icon} text={item.text} /></div>
+                return <div onClick={() => {this.doLink(item.link, index)}} key={index}><IndexEntrance icon={item.icon} text={item.text} /></div>
               }
               return <Link to={item.link} key={index} style={{display: 'block'}}><IndexEntrance icon={item.icon} text={item.text} /></Link>
             })}

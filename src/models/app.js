@@ -31,11 +31,14 @@ export default {
               dispatch({ type: 'findNewMessage' });
             }
             break;
-          case '/find':
+          case '/competition':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['1']} });
             break;
-          case '/service':
+          case '/find':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['2']} });
+            break;
+          case '/service':
+            dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['3']} });
             break;
         }
         if(sessionStorage.getItem('token')){

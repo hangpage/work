@@ -5,7 +5,6 @@
  */
 import React from 'react';
 import {Avatar, Form, Input, message, Radio} from "antd";
-import Const from "../../utils/Const";
 import {connect} from "dva";
 import {equalResultStatus} from "../../utils";
 import {userGetInfo, userUpdateInfo} from "../../services/user";
@@ -34,6 +33,7 @@ const Profile = ({form, data, dispatch}) => {
         return message.error('请上传一张图片作为您的头像');
       }
       if (!err) {
+        delete values.img;
         userUpdateInfo(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('保存成功');
@@ -136,13 +136,13 @@ const Profile = ({form, data, dispatch}) => {
         >
           {getFieldDecorator('gendar', {
             rules: [{
-              required: true, message: '前选择性别!',
+              required: true, message: '请选择性别!',
             }],
-            initialValue: String(data.gendar)
+            initialValue: data.gendar
           })(
             <Radio.Group>
-              <Radio value={Const.Man}>男</Radio>
-              <Radio value={Const.Woman}>女</Radio>
+              <Radio value={1}>男</Radio>
+              <Radio value={2}>女</Radio>
             </Radio.Group>
           )}
         </Form.Item>

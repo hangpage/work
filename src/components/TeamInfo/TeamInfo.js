@@ -7,12 +7,12 @@ import React from 'react';
 import {Col, DatePicker, Form, Input, Radio, Row} from 'antd';
 import {reFormatParams} from "../../utils";
 import Const from "../../utils/Const";
-import ComboBox from "../../components/ComboBox";
 import Modal from './component/step3Modal';
 import {cloneDeep} from 'lodash';
 import ImageUpload from "../../components/FileUpload/ImageUpload";
 import moment from "moment";
 import {EMAIL_VALIDATE, MOBILE_VALIDATE, validateNoChinese} from "../../utils/validate";
+import {Select} from "antd";
 
 
 class TeamInfo extends React.Component {
@@ -116,7 +116,7 @@ class TeamInfo extends React.Component {
     }, {
       label: '学历',
       field: 'education',
-      validate: validateNoChinese,
+      type: 'select',
     }, {
       label: '毕业时间',
       field: 'graduationTime',
@@ -127,7 +127,6 @@ class TeamInfo extends React.Component {
     }, {
       label: '政治面貌',
       field: 'politicalStatus',
-      validate: validateNoChinese,
     }, {
       label: '联系电话',
       field: 'phone',
@@ -161,7 +160,9 @@ class TeamInfo extends React.Component {
             {list1.map((item, index) => {
               var comp = <Input placeholder={`请输入${item.label}`}/>;
               if (item.type === 'select') {
-                comp = <ComboBox placeholder={`请选择${item.label}`} url={item.url || ''}/>;
+                comp =  <Select placeholder={'请选择学历'}>
+                  {Const.EDUCATION_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
+                </Select>
               } else if (item.type === 'datepicker') {
                 comp = <DatePicker placeholder={`请选择${item.label}`}/>;
               } else if (item.type === 'radio') {
@@ -171,13 +172,28 @@ class TeamInfo extends React.Component {
                                                                  value={option.value}>{option.text}</Radio>)}
                   </Radio.Group>)
               }
+              if(item.validate){
+                return (
+                  <Col span={12} key={index}>
+                    <Form.Item
+                      label={item.label}
+                    >
+                      {getFieldDecorator(`${item.field}`, {
+                        rules: [{required: true, message: '必填项'}, item.validate || {}],
+                      })(
+                        comp
+                      )}
+                    </Form.Item>
+                  </Col>
+                )
+              }
               return (
                 <Col span={12} key={index}>
                   <Form.Item
                     label={item.label}
                   >
                     {getFieldDecorator(`${item.field}`, {
-                      rules: [{required: true, message: '必填项'}, item.validate || {}],
+                      rules: [{required: true, message: '必填项'}],
                     })(
                       comp
                     )}

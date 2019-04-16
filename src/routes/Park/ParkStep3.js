@@ -26,7 +26,7 @@ class ParkStep3 extends React.Component {
     const principalStr = [];
     const array = Object.keys(params);
     array.forEach((item) => {
-      if(item !== 'memberStr'){
+      if(item !== 'membersStr'){
         principalStr.push(params[item]);
       }
     });
@@ -34,10 +34,10 @@ class ParkStep3 extends React.Component {
     subData.token = sessionStorage.getItem('token');
     subData.id = getParams(location.search).rtId;
     subData.principalStr = principalStr.join(',');
-    subData.memberStr = params.membersStr;
+    subData.membersStr = params.membersStr;
     parkResidentTeam(subData).then(({data}) => {
       if (equalResultStatus(data)) {
-        message.success('入驻成功');
+        message.success('入驻申请提交成功，请等待后台审核');
         history.push('/index');
       } else {
         message.error(data.message);

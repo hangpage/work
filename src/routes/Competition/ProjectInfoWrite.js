@@ -73,7 +73,7 @@ class TeamInfoWrite extends React.Component{
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if(!isEqual(this.props.teamMatchDetail.team, nextProps.teamMatchDetail.team) || !this.props.form.getFieldValue('projectName')){
+    if(!isEqual(this.props.teamMatchDetail.team, nextProps.teamMatchDetail.team) || (!this.props.form.getFieldValue('projectName') && nextProps.teamMatchDetail.team)){
       const data = nextProps.teamMatchDetail.team;
       this.props.form.setFieldsValue(data);
     }

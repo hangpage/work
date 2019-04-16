@@ -19,7 +19,6 @@ const {TextArea} = Input;
 const list1 = [{
   label: '项目名称',
   field: 'projectName',
-  validate: validateNoChinese,
 }, {
   label: '门牌名称',
   field: 'houseNumber'
