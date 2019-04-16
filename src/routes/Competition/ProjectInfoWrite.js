@@ -37,7 +37,8 @@ class TeamInfoWrite extends React.Component{
           formData.append(item, params[item]);
         });
         const subData = qs.parse(location.search.split('?')[1]);
-
+        delete subData.egistrationNotice;
+        delete subData.editBtnText;
         if(this.props.teamMatchDetail.team){
           subData.id = this.props.teamMatchDetail.team.id;
         }
