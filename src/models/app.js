@@ -12,7 +12,7 @@ export default {
   namespace: 'app',
 
   state: {
-    headerMenuSelectedKeys: ['1'],
+    headerMenuSelectedKeys: ['0'],
     user: {},
     searchParams: {},
     showSearch: false,

@@ -15,6 +15,10 @@ Const.FU_NV = '2';
 Const.MU_ZI = '3';
 Const.MU_NV = '4';
 
+Const.DEV_URL = 'http://39.104.109.31';
+
+Const.PRO_URL = 'http://58.129.246.43';
+
 Const.YesOrNoOptions = [{
   text: '是',
   value: Const.Yes
@@ -97,5 +101,9 @@ Const.SERVICE_STATUS = {
 };
 
 Const.EDUCATION_LIST = [{value: '大专', label: '大专'}, {value: '本科', label: '本科'}, {value: '硕士研究生', label: '硕士研究生'}, {value: '博士研究生', label: '博士研究生'}];
+
+Const.RATE_LIST = [{value: '国家级', label: '国家级'}, {value: '省级', label: '省级'}, {value: '市级', label: '市级'}, {value: '区级', label: '区级'}, {value: '校级', label: '校级'}];
+
+Const.QUALIFICATION_LIST = [{value: '国家高新技术企业', label: '国家高新技术企业'}, {value: '中关村高新技术企业', label: '中关村高新技术企业'}, {value: '中关村金种子', label: '中关村金种子'}, {value: '其他', label: '其他'}];
 
 export default Const;

@@ -18,7 +18,7 @@ const CompetitionCard = ({img, title, time, read, status}) => {
           <Typography.Paragraph className={styles.title} ellipsis={{ rows: 1}}>{title}</Typography.Paragraph>
           <p style={{marginTop: 14}}>
             <span className={styles.time}>{time}</span>
-            <span className={styles.read}>已报名：<span className="deep-gray">{read || 0}</span></span>
+            {/*<span className={styles.read}>已报名：<span className="deep-gray">{read || 0}</span></span>*/}
           </p>
         </div>
       </div>

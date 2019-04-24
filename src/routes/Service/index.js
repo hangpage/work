@@ -28,7 +28,7 @@ const LIST = [{
 }, {
   img: require('../../assets/service/img4.png'),
   icon: require('../../assets/service/icon-tijiaofuwu.png'),
-  text: '提交服务',
+  text: '服务需求',
   link: '/service/type/post'
 }, {
   img: require('../../assets/service/img4.png'),

@@ -4,7 +4,7 @@
  * @Date: 2019/2/17 13:40
  */
 import React from 'react';
-import {Button, DatePicker, Form, message, Radio, Row, TimePicker} from "antd";
+import {Button, DatePicker, Form, Input, message, Radio, Row, TimePicker} from "antd";
 import {equalResultStatus} from "../../utils";
 import {serviceMeetingAppli, serviceQueryMeeting} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
@@ -25,7 +25,7 @@ const formItemLayout = {
 
 const RULE = {
   rules: [{
-    required: true, message: '请选择!',
+    required: true, message: '必填项!',
   }],
 };
 const INPUT_LIST = [{
@@ -43,8 +43,8 @@ const INPUT_LIST = [{
   type: 'timepicker'
 }];
 
-class Lockers extends React.Component{
-  constructor(props){
+class Lockers extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       list: [],
@@ -55,17 +55,18 @@ class Lockers extends React.Component{
       endTimeOpen: false,
     }
   }
+
   queryMeetingRoom = () => {
     let params = {};
     params.busiDate = this.state.busiDate;
     params.startTime = this.state.startTime;
     params.endTime = this.state.endTime;
     serviceQueryMeeting(params).then(({data}) => {
-      if(equalResultStatus(data)){
+      if (equalResultStatus(data)) {
         this.setState({
           list: data.data
         })
-      }else{
+      } else {
         message.error(data.message);
       }
     });
@@ -73,12 +74,12 @@ class Lockers extends React.Component{
 
   setChooseTime = (e, field) => {
     let format = 'YYYY-MM-DD';
-    if(field.indexOf('Time') !== -1){
+    if (field.indexOf('Time') !== -1) {
       format = 'HH:mm';
     }
     this.setState({
       [field]: moment(e).format(format)
-    },(() => {
+    }, (() => {
       this.queryMeetingRoom();
     }))
   };
@@ -93,10 +94,10 @@ class Lockers extends React.Component{
         values.busiDate = moment(values.busiDate).format('YYYY-MM-DD');
         values.startTime = moment(values.startTime).format('HH:mm:ss');
         values.endTime = moment(values.endTime).format('HH:mm:ss');
-        if(Number(values.endTime.split(':')[0]) < Number(values.startTime.split(':')[0]) ||
+        if (Number(values.endTime.split(':')[0]) < Number(values.startTime.split(':')[0]) ||
           (Number(values.endTime.split(':')[0]) === Number(values.startTime.split(':')[0])
             && Number(values.endTime.split(':')[1]) < Number(values.startTime.split(':')[1]))
-        ){
+        ) {
           return message.error('结束时间应选择开始时间之后！');
         }
         values.roomNum = values.roomNum[0];
@@ -114,15 +115,15 @@ class Lockers extends React.Component{
     });
   };
 
-  handleClose = (field) => this.setState({ [field + 'Open']: false });
+  handleClose = (field) => this.setState({[field + 'Open']: false});
 
   handleOpenChange = (open, field) => {
     this.setState({
-      [field+'Open']: open
+      [field + 'Open']: open
     });
   };
 
-  render(){
+  render() {
     const {list} = this.state;
     const {form} = this.props;
     const {getFieldDecorator} = form;
@@ -131,9 +132,19 @@ class Lockers extends React.Component{
       <div className='second-bg'>
         <div className="w form-bl service-form-wrapper">
           <Form layout='horizontal' style={{paddingLeft: 100}}>
+            <Form.Item
+              label="会议主题"
+              labelCol={{span: 8}}
+              wrapperCol={{span: 16}}
+              colon={false}
+            >
+              {getFieldDecorator('title', RULE)(
+                <Input placeholder={'请输入会议主题'}/>
+              )}
+            </Form.Item>
             {INPUT_LIST.map((item, index) => {
               const open = this.state[`${item.field}Open`]
-              if(item.type === 'timepicker'){
+              if (item.type === 'timepicker') {
                 return (
                   <Form.Item
                     {...formItemLayout}
@@ -144,10 +155,16 @@ class Lockers extends React.Component{
                       <TimePicker placeholder={`请选择${item.label}`}
                                   format={item.format}
                                   open={open}
-                                  onOpenChange={(open) => {this.handleOpenChange(open, item.field)}}
-                                  onChange={(e) => {this.setChooseTime(e, item.field)}}
+                                  onOpenChange={(open) => {
+                                    this.handleOpenChange(open, item.field)
+                                  }}
+                                  onChange={(e) => {
+                                    this.setChooseTime(e, item.field)
+                                  }}
                                   addon={() => (
-                                    <Button className='time-picker-button' size="small" type="primary" onClick={() => {this.handleClose(item.field)}}>
+                                    <Button className='time-picker-button' size="small" type="primary" onClick={() => {
+                                      this.handleClose(item.field)
+                                    }}>
                                       完成
                                     </Button>
                                   )}
@@ -163,7 +180,9 @@ class Lockers extends React.Component{
                   key={index}
                 >
                   {getFieldDecorator(`${item.field}`, RULE)(
-                    <DatePicker placeholder={`请选择${item.label}`} onChange={(e) => {this.setChooseTime(e, item.field)}}/>
+                    <DatePicker placeholder={`请选择${item.label}`} onChange={(e) => {
+                      this.setChooseTime(e, item.field)
+                    }}/>
                   )}
                 </Form.Item>
               )
@@ -176,13 +195,14 @@ class Lockers extends React.Component{
             >
               {getFieldDecorator('roomNum')(
                 <Radio.Group className='bl-label'>
-                  {list.map((item, index) => <Radio key={index} value={item.id}>{item.name}</Radio>)}
+                  {list.map((item, index) => <Radio key={index} value={item.id}
+                                                    disabled={item.available !== '1'}>{item.name}</Radio>)}
                 </Radio.Group>
               )}
             </Form.Item>
           </Form>
           <Row type='flex' justify='space-around'>
-            <BackButton />
+            <BackButton/>
             <div className='main-button' onClick={this.submit}>提交</div>
           </Row>
         </div>

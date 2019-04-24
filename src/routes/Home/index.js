@@ -58,11 +58,6 @@ const Index = ({data, match, children, modalVisible, dispatch, selectedKeys}) =>
     icon: require('../../assets/icon/home/icon-default-yijianfankui.png'),
     pressIcon:  require('../../assets/icon/home/icon-pressed-yijianfankui.png'),
     url: '/advise'
-  }, {
-    title: '关于我们',
-    icon: require('../../assets/icon/home/icon-default-guanyuwomen.png'),
-    pressIcon:  require('../../assets/icon/home/icon-pressed-guanyuwomen.png'),
-    url: '/about'
   }];
 
   const doLink = (link) => {

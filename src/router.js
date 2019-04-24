@@ -53,6 +53,11 @@ const routes = [{
   component: Login,
   exact: 'exact',
   breadcrumbName: '登录'
+},{
+  path: '/about',
+  component: About,
+  exact: 'exact',
+  breadcrumbName: '关于我们'
 }, {
   path: '/index',
   component: Index,

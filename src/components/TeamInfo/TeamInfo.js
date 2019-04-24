@@ -46,7 +46,7 @@ class TeamInfo extends React.Component {
           membersStr.forEach((item) => {
             array.push(item.name + ',' + item.gendar + ','
               + item.studySchool + ',' + item.studyProfession
-              + ',' + item.studyDate+ ',' + item.studyEdu+ ',' + item.phone);
+              + ',' + item.studyDate+ ',' + item.studyEdu+ ',' + item.phone + ',' + item.faith + ',' + item.politicalStatus);
           })
         }
         params.membersStr = array.join(';');
@@ -125,9 +125,6 @@ class TeamInfo extends React.Component {
       label: '生源地',
       field: 'householdRegistration',
     }, {
-      label: '政治面貌',
-      field: 'politicalStatus',
-    }, {
       label: '联系电话',
       field: 'phone',
       validate: MOBILE_VALIDATE
@@ -141,6 +138,12 @@ class TeamInfo extends React.Component {
       label: '邮箱',
       field: 'email',
       validate: EMAIL_VALIDATE
+    },{
+      label: '宗教信仰',
+      field: 'faith',
+    }, {
+      label: '政治面貌',
+      field: 'politicalStatus',
     },];
     const modalProps = {
       visible: this.state.modalVisible,
@@ -228,6 +231,8 @@ class TeamInfo extends React.Component {
                     <span className="item">{`${item.studyDate}毕业`}</span>
                     <span className="item">{item.studyEdu}</span>
                     <span className="item">{item.phone}</span>
+                    <span className="item">宗教信仰：{item.faith}</span>
+                    <span className="item">政治面貌：{item.politicalStatus}</span>
                     <div className='fr' onClick={(e) => {
                       this.onDel(e, index)
                     }}>

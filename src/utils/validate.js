@@ -1,5 +1,8 @@
 export const NUMBER_VALIDATE = {
   type: 'number', message: '请输入数字', transform(value) {
+    if(value === undefined || value === null){
+      return 0;
+    }
     return Number(value);
   }
 };

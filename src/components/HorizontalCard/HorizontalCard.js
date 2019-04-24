@@ -1,5 +1,5 @@
 /**
- * @Description: 
+ * @Description:
  * @Author: zzhihang@hotmail.com
  * @Date: 2019/2/20 0:32
  */
@@ -19,7 +19,7 @@ const HorizontalCard = ({img, title, time, count, status, desc, style, countDesc
           <Typography.Paragraph className={styles.title} ellipsis={{ rows: 1}}>{title}</Typography.Paragraph>
           <p className={styles.info}>
             <span style={{marginRight: 30}}>{moment(time).format('YYYY-MM-DD')}</span>
-            <span>{countDesc}：<span className="deep-gray">{count || 0}</span></span>
+            {/*<span>{countDesc}：<span className="deep-gray">{count || 0}</span></span>*/}
           </p>
           <Typography.Paragraph className={styles.desc} ellipsis={{ rows: 2}}>{desc}</Typography.Paragraph>
         </div>

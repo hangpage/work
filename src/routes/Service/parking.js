@@ -9,6 +9,7 @@ import {equalResultStatus} from "../../utils";
 import {parkingApply} from "../../services/service";
 import BackButton from "../../components/BackButton/BackButton";
 import {Link} from "dva/router";
+import ImageUpload from "../../components/FileUpload/ImageUpload";
 
 
 const Parking = ({form, history}) => {
@@ -80,6 +81,24 @@ const Parking = ({form, history}) => {
               </Form.Item>
             )
           })}
+          {/*<Form.Item*/}
+          {/*label="行驶证"*/}
+          {/*labelCol={{span: 24}}*/}
+          {/*wrapperCol={{span: 6}}*/}
+          {/*>*/}
+          {/*{getFieldDecorator('file')(*/}
+          {/*<ImageUpload/>*/}
+          {/*)}*/}
+          {/*</Form.Item>*/}
+          {/*<Form.Item*/}
+            {/*label="驾驶证"*/}
+            {/*labelCol={{span: 24}}*/}
+            {/*wrapperCol={{span: 6}}*/}
+          {/*>*/}
+            {/*{getFieldDecorator('file')(*/}
+              {/*<ImageUpload/>*/}
+            {/*)}*/}
+          {/*</Form.Item>*/}
         </Form>
         <Row type='flex' justify='space-around'>
           <BackButton text='取消'/>

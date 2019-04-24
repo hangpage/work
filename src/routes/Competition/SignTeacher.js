@@ -31,6 +31,9 @@ class SignTeacher extends React.Component{
         if(this.props.tutorData.id){
           params.id = this.props.tutorData.id;
         }
+        if((!params.beijingBankCard && !params.bankIntro) || (!params.otherBankCard && !params.otherIntro)){
+            return message.error('北京银行卡信息和其他银行卡信息必须填写一个！');
+        }
         let formData = new FormData();
         Object.keys(params).forEach((item) => {
           formData.append(item, params[item]);
@@ -138,9 +141,7 @@ class SignTeacher extends React.Component{
                     <Form.Item
                       label="北京银行卡号(注：发放劳务费使用)"
                     >
-                      {getFieldDecorator('beijingBankCard', {
-                        rules: [{required: true, message: '请输入'}, NUMBER_VALIDATE],
-                      })(
+                      {getFieldDecorator('beijingBankCard')(
                         <Input placeholder='请输入北京银行卡'/>
                       )}
                     </Form.Item>
@@ -149,9 +150,7 @@ class SignTeacher extends React.Component{
                     <Form.Item
                       label="开户行"
                     >
-                      {getFieldDecorator('bankIntro', {
-                        rules: [{required: true, message: '请输入'}],
-                      })(
+                      {getFieldDecorator('bankIntro')(
                         <Input placeholder='请输入开户行'/>
                       )}
                     </Form.Item>

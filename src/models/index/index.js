@@ -1,10 +1,10 @@
-import {pathMatchRegexp} from "../../utils";
+import {equalResultStatus, pathMatchRegexp} from "../../utils";
 import {activityFindList} from "../../services/activity";
 import {findList} from "../../services/competition";
 import {articleFindList} from "../../services/article";
 import {noticeFindList, slideShow} from "../../services/notice";
-import {tutorGetInfo} from "../../services/tutor";
 import {message} from "antd";
+import {aboutUs} from "../../services/user";
 
 export default {
 
@@ -16,6 +16,7 @@ export default {
     articleList: [],
     slideShowList: [],
     noticeList: [],
+    aboutUs: {},
   },
 
   subscriptions: {
@@ -27,6 +28,13 @@ export default {
           dispatch({type: 'articleFindList'});
           dispatch({type: 'noticeFindList'});
           dispatch({type: 'slideShow'});
+        }else if(pathMatchRegexp('/about', location.pathname)){
+          dispatch({type: 'aboutUs'});
+          dispatch({type: 'updateState',
+            payload: {
+              selectedKeys: ['10']
+            }
+          })
         }
       })
     },
@@ -53,6 +61,19 @@ export default {
             activityList: data.data.list,
           }
         });
+      }
+    },
+    *aboutUs({ payload }, { call, put }) {
+      const {data} = yield call(aboutUs, payload);
+      if(equalResultStatus(data)){
+        yield put({
+          type: 'updateState',
+          payload: {
+            aboutUs: data.data
+          }
+        })
+      }else{
+        message.error(data.message);
       }
     },
     *articleFindList({payload}, { call, put }){

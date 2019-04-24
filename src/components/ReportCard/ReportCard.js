@@ -40,7 +40,7 @@ const ReportCard = ({img, history, title, time, style, read, content, mId, noTea
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.info}>
           <span>{time}</span>
-          <span className='ml20'>{read || 0}人阅读</span>
+          {/*<span className='ml20'>{read || 0}人阅读</span>*/}
         </div>
         <Typography.Paragraph className={styles.content} ellipsis={{ rows: 2}}>{content}</Typography.Paragraph>
         <div>

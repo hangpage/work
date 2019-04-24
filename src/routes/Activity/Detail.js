@@ -21,7 +21,7 @@ const Detail = ({data, history}) => {
           img={data.pic}
           reportLink={`/activity/${data.id}/report?id=${data.id}`}
           noTeacher={true}
-          auth={true}
+          auth={false}
           history={history}
           allowReport={!isEnd(data.endTime)}
         />

@@ -15,7 +15,8 @@ const list1 = [{
   label: '是否获得融资',
   field: 'isFinancing',
   type: 'radio',
-  options: Const.YesOrNoOptions
+  options: Const.YesOrNoOptions,
+  forceRequired: true,
 }, {
   label: '融资金额（w）',
   field: 'financingFunds',
@@ -68,6 +69,9 @@ const list1 = [{
 class FinancingInfo extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isFinancingRequired: false,
+    }
   }
 
   getTeamInfoData = () => {
@@ -80,6 +84,12 @@ class FinancingInfo extends React.Component {
       }
     });
     return params;
+  };
+
+  handleIsFinancingChange = (e) => {
+    this.setState({
+      isFinancingRequired: e.target.value === '1'
+    })
   };
 
   render() {
@@ -96,7 +106,7 @@ class FinancingInfo extends React.Component {
                 comp = <DatePicker placeholder={`请选择${item.label}`}/>;
               } else if (item.type === 'radio') {
                 comp =
-                  (<Radio.Group>
+                  (<Radio.Group onChange={this.handleIsFinancingChange}>
                     {item.options.map((option, oindex) => <Radio key={oindex}
                                                                  value={option.value}>{option.text}</Radio>)}
                   </Radio.Group>)
@@ -107,7 +117,7 @@ class FinancingInfo extends React.Component {
                     label={item.label}
                   >
                     {getFieldDecorator(`${item.field}`, {
-                      rules: [{required: true, message: '必填项'}, item.validate || {}],
+                      rules: [{required: item.forceRequired || this.state.isFinancingRequired, message: '必填项'}, this.isFinancingRequired ? item.validate : {} || {}],
                     })(
                       comp
                     )}

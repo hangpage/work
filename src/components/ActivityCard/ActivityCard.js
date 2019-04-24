@@ -13,7 +13,7 @@ const ActivityCard = ({img, title, time, read, size='', style, endTime}) => {
         <Typography.Text className={styles.title} ellipsis={{ rows: 2}}>{title}</Typography.Text>
         <p style={{marginTop: 7}}>
           <span className={styles.time}>{time}</span>
-          <span className={styles.read}>阅读量：<span className={'deep-gray'}>{read || 0}</span></span>
+          {/*<span className={styles.read}>阅读量：<span className={'deep-gray'}>{read || 0}</span></span>*/}
         </p>
       </div>
     </div>

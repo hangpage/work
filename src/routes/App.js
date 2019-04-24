@@ -17,6 +17,9 @@ const routes = [{
 }, {
   path: '/index',
   breadcrumbName: '首页'
+},{
+  path: '/about',
+  breadcrumbName: '关于我们'
 }, {
   path: '/service',
   breadcrumbName: '服务'
@@ -130,9 +133,6 @@ const routes = [{
   breadcrumbName: '我的活动'
 }, {
   path: '/home/team',
-  breadcrumbName: ''
-}, {
-  path: '/home/about',
   breadcrumbName: ''
 }, {
   path: '/home/message',

@@ -22,6 +22,12 @@ const list1 = [{
   field: 'studyProfession',
   validator: validateNoChinese
 },{
+  label: '宗教信仰',
+  field: 'faith',
+}, {
+  label: '政治面貌',
+  field: 'politicalStatus',
+},{
   label: '毕业时间',
   field: 'studyDate',
   type: 'datepicker'

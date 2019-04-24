@@ -8,13 +8,12 @@ import {connect} from "dva";
 
 const About = ({aboutUs}) => {
   return (
-    <div >
-        <div >
-          <div className="title-card"><span>关于我们</span></div>
+      <div className='bg-white'>
+        <div className='w'>
           <div style={{padding: '40px 20px'}} dangerouslySetInnerHTML={{__html: aboutUs.content}}/>
         </div>
-    </div>
+      </div>
   );
 };
 
-export default connect(({home}) => home)(About);
+export default connect(({index}) => index)(About);

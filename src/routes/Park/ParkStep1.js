@@ -12,6 +12,10 @@ import Modal from './component/modal';
 import {cloneDeep} from 'lodash';
 import {parkResidentTeam} from "../../services/park";
 import {NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
+import ImageUpload from "../../components/FileUpload/ImageUpload";
+import {Select} from 'antd';
+import ExhibitionModal from "./component/ExhibitionModal";
+import moment from "moment";
 
 const {TextArea} = Input;
 
@@ -34,10 +38,26 @@ const list1 = [{
   label: '注册地址',
   field: 'registeredAddress'
 }, {
+  label: '流水（w）',
+  field: 'flow',
+  validate: NUMBER_VALIDATE,
+  required: false
+},{
+  label: '净利润（w）',
+  field: 'profit',
+  validate: NUMBER_VALIDATE,
+  required: false
+}, {
+  label: '缴税额度（w）',
+  field: 'tax',
+  validate: NUMBER_VALIDATE,
+  required: false
+}, {
   label: '注册资金（w）',
   field: 'registeredFunds',
-  validate: NUMBER_VALIDATE
-}, {
+  validate: NUMBER_VALIDATE,
+  required: false
+},{
   label: '项目所属行业',
   type: 'select',
   field: 'industry',
@@ -59,8 +79,12 @@ class ParkStep1 extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
+      modalVisible2: false,
       grandPrize: [],
-      modalItem: {}
+      exhibition: [],
+      modalItem: {},
+      modalItem2: {},
+      otherQualificationShow: false
     }
   }
 
@@ -68,6 +92,13 @@ class ParkStep1 extends React.Component {
     this.setState({
       modalVisible: true,
       modalItem: []
+    })
+  };
+
+  showModal2 = () => {
+    this.setState({
+      modalVisible2: true,
+      modalItem2: []
     })
   };
 
@@ -82,10 +113,17 @@ class ParkStep1 extends React.Component {
         params.token = sessionStorage.getItem('token');
         params.park = getParams(location.search).id;
         params.inType = '1';//直接入驻
+        params.qualification.splice(params.qualification.indexOf('其他'), 1);
+        if(this.state.otherQualificationShow){
+          params.qualification = params.qualification.join('、') + '、' + params.otherQualification;
+          delete params.otherQualification;
+        }else{
+          params.qualification = params.qualification.join('、');
+        }
         let array = [];
         if(grandPrize.length){
           grandPrize.forEach((item) => {
-            array.push(item.match + ',' + item.rate);
+            array.push(item.match + ',' + item.rate + ',' + item.level + ',' + item.date + ',' + item.price);
           })
         }
         params.grandPrize = array.join(';');
@@ -108,6 +146,12 @@ class ParkStep1 extends React.Component {
     })
   };
 
+  onCancel2 = () => {
+    this.setState({
+      modalVisible2: false
+    })
+  };
+
   onDel = (e, index) => {
     let grandPrize = cloneDeep(this.state.grandPrize);
     grandPrize.splice(index, 1);
@@ -117,18 +161,48 @@ class ParkStep1 extends React.Component {
     })
   };
 
+  onDel2 = (e, index) => {
+    let exhibition = cloneDeep(this.state.exhibition);
+    exhibition.splice(index, 1);
+    this.setState({
+      exhibition,
+      modalVisible2: false
+    })
+  };
+
+  onQualificationChange = (e) => {
+    this.setState({
+      otherQualificationShow: e.indexOf('其他') !== -1
+    })
+  };
+
   onEdit = (e, index) => {
     let grandPrize = cloneDeep(this.state.grandPrize);
+    let item = cloneDeep(grandPrize[index]);
+    item.date = moment(item.date);
     this.setState({
       grandPrize,
-      modalItem: grandPrize[index],
+      modalItem: item,
       modalVisible: true,
       itemKey: index
     })
   };
 
+  onEdit2 = (e, index) => {
+    let exhibition = cloneDeep(this.state.exhibition);
+    let item = cloneDeep(exhibition[index]);
+    item.date = moment(item.date);
+    this.setState({
+      exhibition,
+      modalItem2: item,
+      modalVisible2: true,
+      itemKey2: index
+    })
+  };
+
   onOk = (data) => {
     let grandPrize = cloneDeep(this.state.grandPrize);
+    data.date = data.date.format('YYYY-MM-DD');
     if(data.itemKey >= 0){
       grandPrize[data.itemKey] = data;
     }else{
@@ -140,6 +214,20 @@ class ParkStep1 extends React.Component {
     })
   };
 
+  onOk2 = (data) => {
+    let exhibition = cloneDeep(this.state.exhibition);
+    data.date = data.date.format('YYYY-MM-DD');
+    if(data.itemKey2 >= 0){
+      exhibition[data.itemKey2] = data;
+    }else{
+      exhibition.push(data);
+    }
+    this.setState({
+      exhibition,
+      modalVisible2: false
+    })
+  };
+
   render() {
     const modalProps = {
       visible: this.state.modalVisible,
@@ -148,7 +236,14 @@ class ParkStep1 extends React.Component {
       onCancel: this.onCancel,
       onOk: this.onOk
     };
-    const {modalVisible, grandPrize} = this.state;
+    const modalProps2 = {
+      visible: this.state.modalVisible2,
+      modalItem: this.state.modalItem2,
+      itemKey: this.state.itemKey2,
+      onCancel: this.onCancel2,
+      onOk: this.onOk2
+    };
+    const {modalVisible, modalVisible2, grandPrize, exhibition} = this.state;
     const {getFieldDecorator} = this.props.form;
     return (
       <div style={{background: '#FAFAFA', paddingBottom: 60}}>
@@ -177,8 +272,8 @@ class ParkStep1 extends React.Component {
                           label={item.label}
                         >
                           {getFieldDecorator(`${item.field}`, {
-                            rules: item.validate ? [{required: true, message: '必填项'}, item.validate] :
-                              [{required: true, message: '必填项'}]
+                            rules: item.validate ? [{required: item.required !== false, message: '必填项'}, item.validate] :
+                              [{required: item.required !== false, message: '必填项'}]
                           })(
                             comp
                           )}
@@ -186,6 +281,29 @@ class ParkStep1 extends React.Component {
                       </Col>
                     )
                   })}
+
+                  <Col span={12}>
+                    <Form.Item
+                      label='产品介绍图片'
+                      labelCol={{span: 24}}
+                      wrapperCol={{span: 24}}
+                    >
+                      {getFieldDecorator('productIntro', Const.RULE)(
+                        <ImageUpload max={5}/>
+                      )}
+                    </Form.Item>
+                  </Col>
+                  <Col span={24}>
+                    <Form.Item
+                      label="产品介绍文字描述"
+                      labelCol={{span: 24}}
+                      wrapperCol={{span: 24}}
+                    >
+                      {getFieldDecorator('productText', Const.RULE)(
+                        <TextArea placeholder='请输入产品介绍..' style={{height: 240}}/>
+                      )}
+                    </Form.Item>
+                  </Col>
                   <Col span={24}>
                     <div className="ant-form-item-label" style={{width: '100%'}}>
                       <label htmlFor="" style={{float: 'left'}}>大赛名称及获奖等级情况</label>
@@ -197,6 +315,9 @@ class ParkStep1 extends React.Component {
                         <div className='self-add' key={index}>
                           <span className="title">{item.match}</span>
                           <span className="reward">{item.rate}</span>
+                          <span className="reward">{item.level}</span>
+                          <span className="reward">{item.date}</span>
+                          <span className="reward">{item.price}</span>
                           <div className='fr' onClick={(e) => {this.onDel(e, index)}}>
                             <i className="icon-del"/>
                             <span className="edit">删除</span>
@@ -209,7 +330,30 @@ class ParkStep1 extends React.Component {
                         </div>
                       )
                     })}
-
+                  </Col>
+                  <Col span={24}>
+                    <div className="ant-form-item-label" style={{width: '100%'}}>
+                      <label htmlFor="" style={{float: 'left'}}>参加展会名称及时间</label>
+                      <span onClick={this.showModal2} className='fr icon-add-box'><i
+                        className='icon-add'/><span>添加</span></span>
+                    </div>
+                    {exhibition.map((item, index) => {
+                      return (
+                        <div className='self-add' key={index}>
+                          <span className="title">{item.name}</span>
+                          <span className="reward">{item.date}</span>
+                          <div className='fr' onClick={(e) => {this.onDel2(e, index)}}>
+                            <i className="icon-del"/>
+                            <span className="edit">删除</span>
+                          </div>
+                          <i className="split fr"/>
+                          <div className='fr' onClick={(e) => {this.onEdit2(e, index)}}>
+                            <i className="icon-edit"/>
+                            <span className="edit">编辑</span>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </Col>
                 </Row>
                 <div className="text-align mt80 mb58">
@@ -378,7 +522,12 @@ class ParkStep1 extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('qualification',  Const.RULE)(
-                    <TextArea placeholder='请输入企业资质...' style={{height: 240}}/>
+                    <Select placeholder={'请填写企业资质'} onChange={this.onQualificationChange} mode="multiple">
+                      {Const.QUALIFICATION_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
+                    </Select>
+                  )}
+                  {getFieldDecorator('otherQualification')(
+                    <Input placeholder={'按顿号分割填写其他企业资质'} className={'mt10'} style={{display: this.state.otherQualificationShow ? 'block' : 'none'}}/>
                   )}
                 </Form.Item>
                 <Form.Item
@@ -426,6 +575,7 @@ class ParkStep1 extends React.Component {
             <div className='main-button' onClick={this.submit} style={{width: 600}}>下一步</div>
           </Row>
           {modalVisible && <Modal {...modalProps}/>}
+          {modalVisible2 && <ExhibitionModal {...modalProps2}/>}
         </div>
       </div>
     );

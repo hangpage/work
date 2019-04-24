@@ -212,6 +212,8 @@ class Team extends React.Component {
                           <span className="item">{`${item.studyDate}毕业`}</span>
                           <span className="item">{item.studyEdu}</span>
                           <span className="item">{item.phone}</span>
+                          <span className="item">宗教信仰：{item.faith}</span>
+                          <span className="item">政治面貌：{item.politicalStatus}</span>
                           <div className='fr'>
                             <i className="icon-del"/>
                             <Popconfirm title="确认删除该成员吗？" onConfirm={(e) => {
