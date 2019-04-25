@@ -1,6 +1,7 @@
 import pathToRegexp from 'path-to-regexp';
 import {cloneDeep} from 'lodash';
 import moment from "moment";
+import * as _ from "lodash";
 
 export function pathMatchRegexp(regexp, pathname) {
   return pathToRegexp(regexp).exec(pathname)
@@ -142,4 +143,10 @@ export const isLogin = () => {
     return true
   }
   return false;
+};
+
+export const deleteQualificationOption = (data) => {
+  data.indexOf('国家高新技术企业') !== -1 && data.splice(data.indexOf('国家高新技术企业'), 1);
+  data.indexOf('中关村高新技术企业') !== -1 && data.splice(data.indexOf('中关村高新技术企业'), 1);
+  data.indexOf('中关村金种子') !== -1 && data.splice(data.indexOf('中关村金种子'), 1);
 };

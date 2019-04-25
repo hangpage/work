@@ -19,6 +19,11 @@ Const.DEV_URL = 'http://39.104.109.31';
 
 Const.PRO_URL = 'http://58.129.246.43';
 
+
+Const.TEST_COUNT = '13240134970';
+
+Const.TEST_COUNT_PW = '179324865';
+
 Const.YesOrNoOptions = [{
   text: '是',
   value: Const.Yes

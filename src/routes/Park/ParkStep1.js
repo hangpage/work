@@ -106,7 +106,7 @@ class ParkStep1 extends React.Component {
   submit = () => {
     const {form, history, location} = this.props;
     const {validateFieldsAndScroll} = form;
-    const {grandPrize} = this.state;
+    const {grandPrize, exhibition} = this.state;
     validateFieldsAndScroll((err, values) => {
       if (!err) {
         let params = reFormatParams(values);
@@ -121,12 +121,19 @@ class ParkStep1 extends React.Component {
           params.qualification = params.qualification.join('、');
         }
         let array = [];
+        let array2 = [];
         if(grandPrize.length){
           grandPrize.forEach((item) => {
             array.push(item.match + ',' + item.rate + ',' + item.level + ',' + item.date + ',' + item.price);
           })
         }
+        if(exhibition.length){
+          exhibition.forEach((item) => {
+            array2.push(item.name + ',' + item.date);
+          })
+        }
         params.grandPrize = array.join(';');
+        params.exhibition = array2.join(';');
         params.registeredTime = params.registeredTime + ' 00:00:00';
         parkResidentTeam(params).then(({data}) => {
           if (equalResultStatus(data)) {

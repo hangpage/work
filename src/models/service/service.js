@@ -1,6 +1,7 @@
 import {equalResultStatus, getParams, pathMatchRegexp} from "../../utils";
 import {carLicenseGet, findService, findType, serviceGet} from "../../services/service";
 import {message} from "antd";
+import {queryResidentTeamInfo} from "../../services/user";
 
 export default {
 
@@ -40,6 +41,8 @@ export default {
           }
         }else if (pathMatchRegexp('/service/type/parking/record', location.pathname)) {
           dispatch({type: 'queryParkingRecord'})
+        }else if (pathMatchRegexp('/service/type/meeting', location.pathname)) {
+          dispatch({type: 'queryResidentTeamInfo'})
         }
       })
     },
@@ -66,6 +69,18 @@ export default {
           payload: {
             list: data.data.list,
             count: data.data.count,
+          }
+        });
+      }
+    },
+    *queryResidentTeamInfo({ payload }, { call, put }) {
+      const {data} = yield call(queryResidentTeamInfo, payload);
+      if(data){
+        yield put({
+          type: 'updateState',
+          payload: {
+            meetingStartTime: data.data.meetingStartTime,
+            meetingEndTime: data.data.meetingStartTime,
           }
         });
       }

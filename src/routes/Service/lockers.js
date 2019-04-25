@@ -43,7 +43,6 @@ class Lockers extends React.Component{
           if(!values.locker){
             return message.error('请选择储物柜');
           }
-          values.locker = values.locker[0];
           serviceLockerAppli(values).then(({data}) => {
             if (equalResultStatus(data)) {
               message.success('申请成功');

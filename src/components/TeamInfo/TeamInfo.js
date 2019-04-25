@@ -45,8 +45,8 @@ class TeamInfo extends React.Component {
         if (membersStr.length) {
           membersStr.forEach((item) => {
             array.push(item.name + ',' + item.gendar + ','
-              + item.studySchool + ',' + item.studyProfession
-              + ',' + item.studyDate+ ',' + item.studyEdu+ ',' + item.phone + ',' + item.faith + ',' + item.politicalStatus);
+              + item.studySchool + ',' + item.studyDate
+              + ',' + item.studyProfession+ ',' + item.studyEdu+ ',' + item.phone + ',' + item.faith + ',' + item.politicalStatus);
           })
         }
         params.membersStr = array.join(';');
@@ -114,36 +114,40 @@ class TeamInfo extends React.Component {
       field: 'studyProfession',
       validate: validateNoChinese,
     }, {
-      label: '学历',
+      label: '最高学历',
       field: 'education',
       type: 'select',
     }, {
       label: '毕业时间',
       field: 'graduationTime',
       type: 'datepicker',
-    }, {
+    },{
       label: '生源地',
       field: 'householdRegistration',
     }, {
+      label: '政治面貌',
+      field: 'politicalStatus',
+    },  {
       label: '联系电话',
       field: 'phone',
       validate: MOBILE_VALIDATE
-    }, {
-      label: '微信',
-      field: 'weixin',
-    }, {
+    },  {
       label: 'QQ',
       field: 'QQ',
+    },{
+      label: '微信',
+      field: 'weixin',
     }, {
       label: '邮箱',
       field: 'email',
       validate: EMAIL_VALIDATE
     },{
+      label: '照片',
+      field: 'file',
+      type: 'file'
+    },{
       label: '宗教信仰',
       field: 'faith',
-    }, {
-      label: '政治面貌',
-      field: 'politicalStatus',
     },];
     const modalProps = {
       visible: this.state.modalVisible,
@@ -175,6 +179,23 @@ class TeamInfo extends React.Component {
                                                                  value={option.value}>{option.text}</Radio>)}
                   </Radio.Group>)
               }
+              if(item.type === 'file'){
+                return (
+                  <Col span={24}>
+                    <Form.Item
+                      label={item.label}
+                      labelCol={{span: 24}}
+                      wrapperCol={{span: 24}}
+                    >
+                      {getFieldDecorator(`${item.field}`, {
+                        rules: [{required: true, message: '必填项'}],
+                      })(
+                        <ImageUpload />
+                      )}
+                    </Form.Item>
+                  </Col>
+                )
+              }
               if(item.validate){
                 return (
                   <Col span={12} key={index}>
@@ -204,17 +225,6 @@ class TeamInfo extends React.Component {
                 </Col>
               )
             })}
-            <Col span={12}>
-              <Form.Item
-                label='照片'
-                labelCol={{span: 24}}
-                wrapperCol={{span: 6}}
-              >
-                {getFieldDecorator('file', Const.RULE)(
-                  <ImageUpload />
-                )}
-              </Form.Item>
-            </Col>
             <Col span={24}>
               <div className="ant-form-item-label" style={{width: '100%'}}>
                 <label className='subheading'>团队成员</label>

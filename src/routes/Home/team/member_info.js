@@ -35,6 +35,9 @@ const list1 = [{
   label: '电话',
   field: 'phone',
 }, {
+  label: '宗教信仰',
+  field: 'faith',
+},{
   label: '政治面貌',
   field: 'politicalStatus',
 },{

@@ -45,11 +45,13 @@ export default modelExtend(model, {
         }else if(pathMatchRegexp('/competition/:id/team_info_write', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/team_info_write', location.pathname);
           if (match) {
+            dispatch({ type: 'save', payload: {teamMatchDetail: {}}})
             dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
           }
         }else if(pathMatchRegexp('/competition/:id/project_info_write', location.pathname)){
           const match = pathMatchRegexp('/competition/:id/project_info_write', location.pathname);
           if (match) {
+            dispatch({ type: 'save', payload: {teamMatchDetail: {}}})
             dispatch({ type: 'teamFindMatchDetail', payload: { mId: match[1] } })
           }
         }else if(pathMatchRegexp('/sign_teacher', location.pathname)){

@@ -42,6 +42,9 @@ const list1 = [{
   type: 'radio',
   options: Const.HaveOrNot,
 },{
+  label: '宗教信仰',
+  field: 'faith',
+},{
   label: '政治面貌',
   field: 'politicalStatus',
 },{
@@ -318,7 +321,7 @@ class Team extends React.Component {
         const fArray = [params.f1, params.f2, params.f3, params.f4, params.f5, params.f6];
         const mArray = [params.m1, params.m2, params.m3, params.m4, params.m5, params.m6];
         params.familySituation = fArray.join(',') + ';' + mArray.join(',');
-        const birthValidateResult = testId(params.birth);
+        const birthValidateResult = testId(params.idCard);
         if(birthValidateResult.status !== '1'){
             return message.error(birthValidateResult.msg);
         }

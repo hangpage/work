@@ -1,5 +1,7 @@
-import {Col, Form, Input, Modal, Row} from "antd";
+import {Col, DatePicker, Form, Input, Modal, Row} from "antd";
 import React from "react";
+import {Select} from "antd";
+import Const from "../../../../utils/Const";
 
 
 const formItemLayout = {
@@ -68,6 +70,47 @@ class AddModal extends React.Component{
                   }]
                 })(
                   <Input placeholder='请输入获奖等级'/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label='大赛级别'
+                {...formItemLayout}
+              >
+                {getFieldDecorator('level', {
+                  initialValue: modalItem.rate,
+                  rules: [{
+                    required: true
+                  }]
+                })(
+                  <Select placeholder={'请选择大赛级别'}>
+                    {Const.RATE_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item
+                label='获奖日期'
+                {...formItemLayout}
+              >
+                {getFieldDecorator('date', {
+                  initialValue: modalItem.date,
+                  rules: [{
+                    required: true
+                  }]
+                })(
+                  <DatePicker placeholder={'请选择获奖日期'}/>
+                )}
+              </Form.Item>
+              <Form.Item
+                label='获奖金额'
+                {...formItemLayout}
+              >
+                {getFieldDecorator('price', {
+                  initialValue: modalItem.price,
+                  rules: [{
+                    required: true
+                  }]
+                })(
+                  <Input placeholder={'请输入获奖金额'}/>
                 )}
               </Form.Item>
             </Col>
