@@ -33,18 +33,24 @@ class TeamInfoWrite extends React.Component{
         params.token = sessionStorage.getItem('token');
         params.mId = getParams(location.search).mId;
         let formData = new FormData();
+        let teamInfoFormData = new FormData();
         Object.keys(params).forEach((item) => {
           formData.append(item, params[item]);
         });
         const subData = qs.parse(location.search.split('?')[1]);
+        subData.token = sessionStorage.getItem('token');
         delete subData.egistrationNotice;
         delete subData.editBtnText;
         if(this.props.teamMatchDetail.team){
           subData.id = this.props.teamMatchDetail.team.id;
         }
 
+        Object.keys(subData).forEach((item) => {
+          teamInfoFormData.append(item, subData[item]);
+        });
+
         const fun = this.props.teamMatchDetail.team ? updateTeam : insertTeam;
-        fun(subData).then(({data}) => {
+        fun(teamInfoFormData).then(({data}) => {
           if(equalResultStatus(data)){
             insertProject(formData).then(({data}) => {
               if (equalResultStatus(data)) {

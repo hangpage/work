@@ -43,6 +43,7 @@ const list1 = [{
 }, {
   label: '缴税额度（w）',
   field: 'tax',
+  required: false
 }, {
   label: '注册资金（w）',
   field: 'registeredFunds'

@@ -29,12 +29,10 @@ export function getTeamDetail(params={}){
 * @date: 2019/2/11 19:58
 */
 
-export function insertTeam(params){
-  params.token = sessionStorage.getItem('token');
-  return request(`/api/team/insertTeam?${qs.stringify(params)}`,{
-    method: 'POST',
-    headers: new Headers(),
-    credentials: "include"
+export function insertTeam(formData){
+  return request(`/api/team/insertTeam`,{
+    method: 'post',
+    body: formData
   });
 }
 
@@ -47,12 +45,10 @@ export function insertTeam(params){
  * @date: 2019/2/11 19:58
  */
 
-export function updateTeam(params){
-  params.token = sessionStorage.getItem('token');
-  return request(`/api/team/updateTeam?${qs.stringify(params)}`,{
-    method: 'POST',
-    headers: new Headers(),
-    credentials: "include"
+export function updateTeam(formData){
+  return request(`/api/team/updateTeam`,{
+    method: 'post',
+    body: formData
   });
 }
 

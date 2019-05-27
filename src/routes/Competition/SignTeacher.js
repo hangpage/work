@@ -31,7 +31,7 @@ class SignTeacher extends React.Component{
         if(this.props.tutorData.id){
           params.id = this.props.tutorData.id;
         }
-        if((!params.beijingBankCard && !params.bankIntro) || (!params.otherBankCard && !params.otherIntro)){
+        if((!params.beijingBankCard && !params.bankIntro) && (!params.otherBankCard && !params.otherIntro)){
             return message.error('北京银行卡信息和其他银行卡信息必须填写一个！');
         }
         let formData = new FormData();

@@ -41,12 +41,10 @@ const list1 = [{
   label: '流水（w）',
   field: 'flow',
   validate: NUMBER_VALIDATE,
-  required: false
 },{
   label: '净利润（w）',
   field: 'profit',
   validate: NUMBER_VALIDATE,
-  required: false
 }, {
   label: '缴税额度（w）',
   field: 'tax',
@@ -56,7 +54,6 @@ const list1 = [{
   label: '注册资金（w）',
   field: 'registeredFunds',
   validate: NUMBER_VALIDATE,
-  required: false
 },{
   label: '项目所属行业',
   type: 'select',

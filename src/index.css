@@ -1683,4 +1683,7 @@
   width: 803px !important;
   height: 450px !important;
 }
+:global .flex-sb {
+  justify-content: space-between;
+}
 /*# sourceMappingURL=index.css.map */

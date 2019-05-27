@@ -24,6 +24,9 @@ export default {
     setup({ dispatch, history }) {
       history.listen((location) => {
         switch (location.pathname) {
+          case '/':
+            dispatch(routerRedux.push({pathname: '/index'}));
+            break;
           case '/index':
             dispatch({ type: 'updateState', payload: { headerMenuSelectedKeys: ['0']} });
             if(isLogin()){

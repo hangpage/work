@@ -30,12 +30,19 @@ const LIST = [{
   icon: require('../../assets/service/icon-tijiaofuwu.png'),
   text: '服务需求',
   link: '/service/type/post'
-}, {
+}];
+
+/*
+*
+* , {
   img: require('../../assets/service/img4.png'),
   icon: require('../../assets/service/icon-cheweishenqing.png'),
   text: '车位申请',
   link: '/service/type/parking'
-}];
+}
+*
+*
+* */
 
 
 const Index = ({serviceTypeList, serviceTypeCount, dispatch, history}) => {
@@ -64,7 +71,7 @@ const Index = ({serviceTypeList, serviceTypeCount, dispatch, history}) => {
         <img style={{width: '100%'}} src={banner} alt=""/>
       </div>
       <div className='w mt60'>
-        <Row type='flex'>
+        <Row type='flex' className={'flex-sb'}>
           {LIST.map((item, index) => {
             return (
               <Col key={index}>
