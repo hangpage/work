@@ -31,9 +31,7 @@ class ExhibitionModal extends React.Component{
         return
       }
       const data = getFieldsValue();
-      if(itemKey){
-        data.itemKey = itemKey;
-      }
+      data.itemKey = itemKey;
       onOk(data)
     })
   };
@@ -57,9 +55,7 @@ class ExhibitionModal extends React.Component{
               >
                 {getFieldDecorator('name', {
                   initialValue: modalItem.name,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
                   <Input placeholder='请输入展会名称'/>
                 )}
@@ -70,9 +66,7 @@ class ExhibitionModal extends React.Component{
               >
                 {getFieldDecorator('date', {
                   initialValue: modalItem.date,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
                   <DatePicker placeholder={'请选择参加时间'}/>
                 )}

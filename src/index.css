@@ -1183,11 +1183,15 @@
   border-radius: 4px;
   line-height: 61px;
   padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
 }
 :global .self-add .item {
-  margin-right: 30px;
   color: #666666;
   font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 :global .self-add .title {
   color: #666666;
@@ -1196,7 +1200,6 @@
 :global .self-add .reward {
   color: #999999;
   font-size: 16px;
-  margin-left: 119px;
 }
 :global .self-add .edit,
 :global .self-add .del {

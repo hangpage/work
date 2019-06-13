@@ -8,6 +8,7 @@ import {Form, message, Row} from 'antd';
 import {equalResultStatus, getParams} from "../../utils";
 import {parkResidentTeam} from "../../services/park";
 import TeamInfo from "../../components/TeamInfo/TeamInfo";
+import qs from "qs";
 
 
 class ParkStep3 extends React.Component {
@@ -30,12 +31,15 @@ class ParkStep3 extends React.Component {
         principalStr.push(params[item]);
       }
     });
-    const subData = {};
+    let formData = new FormData();
+    const subData = qs.parse(location.search.split('?')[1]);
     subData.token = sessionStorage.getItem('token');
-    subData.id = getParams(location.search).rtId;
     subData.principalStr = principalStr.join(',');
     subData.membersStr = params.membersStr;
-    parkResidentTeam(subData).then(({data}) => {
+    Object.keys(subData).forEach((item) => {
+      formData.append(item, subData[item]);
+    });
+    parkResidentTeam(formData).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('入驻申请提交成功，请等待后台审核');
         history.push('/index');

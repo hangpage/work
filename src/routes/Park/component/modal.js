@@ -25,9 +25,7 @@ class AddModal extends React.Component{
         return
       }
       const data = getFieldsValue();
-      if(itemKey){
-        data.itemKey = itemKey;
-      }
+      data.itemKey = itemKey;
       onOk(data)
     })
   };
@@ -51,9 +49,7 @@ class AddModal extends React.Component{
               >
                 {getFieldDecorator('match', {
                   initialValue: modalItem.match,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
                   <Input placeholder='请输入大赛名称'/>
                 )}
@@ -64,9 +60,7 @@ class AddModal extends React.Component{
               >
                 {getFieldDecorator('rate', {
                   initialValue: modalItem.rate,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
                   <Input placeholder='请输入获奖等级'/>
                 )}
@@ -77,9 +71,7 @@ class AddModal extends React.Component{
               >
                 {getFieldDecorator('level', {
                   initialValue: modalItem.rate,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
                   <Select placeholder={'请选择大赛级别'}>
                 {Const.RATE_LIST.map((item, index) => <Select.Option key={index} value={item.value}>{item.value}</Select.Option>)}
@@ -92,9 +84,7 @@ class AddModal extends React.Component{
               >
                 {getFieldDecorator('date', {
                   initialValue: modalItem.date,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
                   <DatePicker placeholder={'请选择获奖日期'}/>
                 )}
@@ -105,11 +95,9 @@ class AddModal extends React.Component{
               >
                 {getFieldDecorator('price', {
                   initialValue: modalItem.price,
-                  rules: [{
-                    required: true
-                  }]
+                  rules: [{ required: true, message: '此处为必填项!'}]
                 })(
-                  <Input placeholder={'请输入获奖金额'}/>
+                  <Input placeholder={'请输入获奖金额'} addonAfter={'元'}/>
                 )}
               </Form.Item>
             </Col>

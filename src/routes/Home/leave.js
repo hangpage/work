@@ -62,8 +62,6 @@ const Leave = ({form}) => {
                 {getFieldDecorator('companyName',{
                   rules: [{
                     required: true, message: '必填!',
-                  },{
-                    validator: validateNoChinese
                   }],
                 })(
                   <Input placeholder='请输入公司名称'/>

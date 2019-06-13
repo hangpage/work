@@ -5,9 +5,8 @@
  */
 import React from 'react';
 import {Form, message, Row} from 'antd';
-import {equalResultStatus, getParams, reFormatParams} from "../../utils";
-import {parkResidentTeam} from "../../services/park";
 import FinancingInfo from "../../components/FinancingInfo/FinancingInfo";
+import * as qs from "qs";
 
 class ParkStep2 extends React.Component {
   constructor(props) {
@@ -22,16 +21,16 @@ class ParkStep2 extends React.Component {
     if(!Object.keys(params).length){
       return message.error('请填写必填项！');
     }
-    params.token = sessionStorage.getItem('token');
-    params.id = getParams(location.search).rtId;
-    parkResidentTeam(reFormatParams(params)).then(({data}) => {
-      if (equalResultStatus(data)) {
-        message.success('保存成功');
-        history.push('/park/parkStep3?rtId=' + params.id);
-      } else {
-        message.error(data.message);
-      }
-    })
+    const url = location.search.split('?')[1] + '&' + qs.stringify(params);
+    history.push('/park/parkStep3?' + url);
+    // parkResidentTeam(reFormatParams(params)).then(({data}) => {
+    //   if (equalResultStatus(data)) {
+    //     message.success('保存成功');
+    //     history.push('/park/parkStep3?rtId=' + params.id);
+    //   } else {
+    //     message.error(data.message);
+    //   }
+    // })
   };
 
   render() {

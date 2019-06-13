@@ -103,7 +103,7 @@ const Detail = ({data, location, match, history, teamMatchDetail}) => {
                     <Avatar size={50} src={isTutor ? logoAvatar : item.pic}/>
                     <span>{isTutor? `项目${index + 1}` : item.name}</span>
                     {data.isTutor === '1' && (Number(data.status) === 6 || Number(data.status) === 7) && data.type !== '3' &&
-                    <Link to={`${link}?${qs.stringify(item)}&matchName=${data.name}`}><span className='dianping'>点评</span></Link>}
+                    <Link to={`${link}?${qs.stringify(item)}&matchName=${data.name}`}><span className='dianping'>{item.evaluation ? '已点评' : '点评'}</span></Link>}
                   </li>
                 )
               }) : <div className='text-align' style={{width: '100%', paddingBottom: 20}}><Empty/></div>

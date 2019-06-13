@@ -220,21 +220,23 @@ class Team extends React.Component {
                           <span className="item">{item.phone}</span>
                           <span className="item">宗教信仰：{item.faith}</span>
                           <span className="item">政治面貌：{item.politicalStatus}</span>
-                          <div className='fr'>
-                            <i className="icon-del"/>
-                            <Popconfirm title="确认删除该成员吗？" onConfirm={(e) => {
-                              this.onDelConfirm(e, index)
-                            }} okText="确认" cancelText="取消">
-                              <span className="edit">删除</span>
-                            </Popconfirm>,
-                          </div>
-                          <i className="split fr"/>
-                          <div className='fr' onClick={(e) => {
-                            this.onEdit(e, index)
-                          }}>
-                            <i className="icon-edit"/>
-                            <span className="edit">编辑</span>
-                          </div>
+                         <div>
+                           <div className='fr'>
+                             <i className="icon-del"/>
+                             <Popconfirm title="确认删除该成员吗？" onConfirm={(e) => {
+                               this.onDelConfirm(e, index)
+                             }} okText="确认" cancelText="取消">
+                               <span className="edit">删除</span>
+                             </Popconfirm>,
+                           </div>
+                           <i className="split fr"/>
+                           <div className='fr' onClick={(e) => {
+                             this.onEdit(e, index)
+                           }}>
+                             <i className="icon-edit"/>
+                             <span className="edit">编辑</span>
+                           </div>
+                         </div>
                         </div>
                       )
                     })}

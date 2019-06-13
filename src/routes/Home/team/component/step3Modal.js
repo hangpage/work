@@ -58,9 +58,7 @@ class Step3Modal extends React.Component{
         return
       }
       const data = getFieldsValue();
-      if(itemKey){
-        data.itemKey = itemKey;
-      }
+      data.itemKey = itemKey;
       onOk(data)
     })
   };

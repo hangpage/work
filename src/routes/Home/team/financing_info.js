@@ -23,7 +23,11 @@ class ParkStep2 extends React.Component {
     }
     params.token = sessionStorage.getItem('token');
     params.id = this.props.teamInfo.id;
-    parkResidentTeam(reFormatParams(params)).then(({data}) => {
+    let formData = new FormData();
+    Object.keys(reFormatParams(params)).forEach((item) => {
+      formData.append(item, params[item]);
+    });
+    parkResidentTeam(formData).then(({data}) => {
       if (equalResultStatus(data)) {
         message.success('保存成功');
       } else {

@@ -55,7 +55,7 @@ const Progress = ({location, teamDetail}) => {
             {teamDetail.endReview &&
             <Timeline.Item dot={<i className='icon-timeline-circle'/>}><div
               className='mb12'>比赛结束<div>{params.time6}</div>
-            </div>{String(teamDetail.endReview.status) === '1' ? '晋级下一轮' : '未晋级下一轮'}</Timeline.Item>}
+            </div></Timeline.Item>}
           </Timeline>
         </div>
       </div>

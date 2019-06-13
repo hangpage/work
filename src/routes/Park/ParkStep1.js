@@ -4,18 +4,17 @@
  * @Date: 2019/2/18 20:12
  */
 import React from 'react';
-import {Col, DatePicker, Form, Input, message, Radio, Row} from 'antd';
-import {equalResultStatus, getParams, reFormatParams} from "../../utils";
+import {Col, DatePicker, Form, Input, Radio, Row, Select, Typography} from 'antd';
+import {getParams, reFormatParams} from "../../utils";
 import Const from "../../utils/Const";
 import ComboBox from "../../components/ComboBox";
 import Modal from './component/modal';
 import {cloneDeep} from 'lodash';
-import {parkResidentTeam} from "../../services/park";
-import {NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
+import {NUMBER_VALIDATE} from "../../utils/validate";
 import ImageUpload from "../../components/FileUpload/ImageUpload";
-import {Select} from 'antd';
 import ExhibitionModal from "./component/ExhibitionModal";
 import moment from "moment";
+import * as qs from "qs";
 
 const {TextArea} = Input;
 
@@ -29,7 +28,6 @@ const list1 = [{
 }, {
   label: '公司名称',
   field: 'companyName',
-  validate: validateNoChinese,
 }, {
   label: '注册时间',
   field: 'registeredTime',
@@ -132,14 +130,15 @@ class ParkStep1 extends React.Component {
         params.grandPrize = array.join(';');
         params.exhibition = array2.join(';');
         params.registeredTime = params.registeredTime + ' 00:00:00';
-        parkResidentTeam(params).then(({data}) => {
-          if (equalResultStatus(data)) {
-            message.success('保存成功');
-            history.push('/park/parkStep2?rtId=' + data.data);
-          } else {
-            message.error(data.message);
-          }
-        })
+        history.push(`/park/parkStep2?${qs.stringify(params)}`);
+        // parkResidentTeam(params).then(({data}) => {
+        //   if (equalResultStatus(data)) {
+        //     message.success('保存成功');
+        //     history.push('/park/parkStep2?rtId=' + data.data);
+        //   } else {
+        //     message.error(data.message);
+        //   }
+        // })
       }
     });
   };
@@ -317,19 +316,23 @@ class ParkStep1 extends React.Component {
                     {grandPrize.map((item, index) => {
                       return (
                         <div className='self-add' key={index}>
-                          <span className="title">{item.match}</span>
+                          <Typography.Paragraph className="Text" ellipsis={ {rows: 1} } style={{width: 250, display: 'inline-block', float: 'left'}}>
+                            <span className="title">{item.match}</span>
+                          </Typography.Paragraph>
                           <span className="reward">{item.rate}</span>
                           <span className="reward">{item.level}</span>
                           <span className="reward">{item.date}</span>
                           <span className="reward">{item.price}</span>
-                          <div className='fr' onClick={(e) => {this.onDel(e, index)}}>
-                            <i className="icon-del"/>
-                            <span className="edit">删除</span>
-                          </div>
-                          <i className="split fr"/>
-                          <div className='fr' onClick={(e) => {this.onEdit(e, index)}}>
-                            <i className="icon-edit"/>
-                            <span className="edit">编辑</span>
+                          <div>
+                            <div className='fr' onClick={(e) => {this.onDel(e, index)}}>
+                              <i className="icon-del"/>
+                              <span className="edit">删除</span>
+                            </div>
+                            <i className="split fr"/>
+                            <div className='fr' onClick={(e) => {this.onEdit(e, index)}}>
+                              <i className="icon-edit"/>
+                              <span className="edit">编辑</span>
+                            </div>
                           </div>
                         </div>
                       )
@@ -346,14 +349,16 @@ class ParkStep1 extends React.Component {
                         <div className='self-add' key={index}>
                           <span className="title">{item.name}</span>
                           <span className="reward">{item.date}</span>
-                          <div className='fr' onClick={(e) => {this.onDel2(e, index)}}>
-                            <i className="icon-del"/>
-                            <span className="edit">删除</span>
-                          </div>
-                          <i className="split fr"/>
-                          <div className='fr' onClick={(e) => {this.onEdit2(e, index)}}>
-                            <i className="icon-edit"/>
-                            <span className="edit">编辑</span>
+                          <div>
+                            <div className='fr' onClick={(e) => {this.onDel2(e, index)}}>
+                              <i className="icon-del"/>
+                              <span className="edit">删除</span>
+                            </div>
+                            <i className="split fr"/>
+                            <div className='fr' onClick={(e) => {this.onEdit2(e, index)}}>
+                              <i className="icon-edit"/>
+                              <span className="edit">编辑</span>
+                            </div>
                           </div>
                         </div>
                       )
@@ -361,7 +366,7 @@ class ParkStep1 extends React.Component {
                   </Col>
                 </Row>
                 <div className="text-align mt80 mb58">
-                  <span className="form-name">专利获取情况</span>
+                  <span className="form-name">知识产权获取情况</span>
                 </div>
                 <Row gutter={138}>
                   <Col span={12}>
@@ -379,11 +384,10 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='申请著作权'
                     >
-                      {getFieldDecorator('patentCopyright', Const.RULE)(
-                        <Radio.Group>
-                          {Const.YesOrNoOptions.map((option, oindex) => <Radio key={oindex}
-                                                                               value={option.value}>{option.text}</Radio>)}
-                        </Radio.Group>
+                      {getFieldDecorator('patentCopyright', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
+                        <Input placeholder='请输入申请著作权数量'/>
                       )}
                     </Form.Item>
                   </Col>
@@ -391,11 +395,10 @@ class ParkStep1 extends React.Component {
                     <Form.Item
                       label='申请商标'
                     >
-                      {getFieldDecorator('patentTrademark', Const.RULE)(
-                        <Radio.Group>
-                          {Const.YesOrNoOptions.map((option, oindex) => <Radio key={oindex}
-                                                                               value={option.value}>{option.text}</Radio>)}
-                        </Radio.Group>
+                      {getFieldDecorator('patentTrademark', {
+                        rules: [{required: true, message: '必填项'}, NUMBER_VALIDATE],
+                      })(
+                        <Input placeholder='请输入申请商标数量'/>
                       )}
                     </Form.Item>
                   </Col>
@@ -549,8 +552,7 @@ class ParkStep1 extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('projectIntro',  Const.RULE)(
-                    <TextArea placeholder='成立时间、主营业务、主要产品和服务用途、特点及研发进度；项目运营情况，营业额及盈利情况，限200字' style={{height: 240}}
-                              maxLength={200}/>
+                    <TextArea placeholder='成立时间、主营业务、主要产品和服务用途、特点及研发进度；项目运营情况，营业额及盈利情况' style={{height: 240}}/>
                   )}
                 </Form.Item>
                 <Form.Item
@@ -559,8 +561,7 @@ class ParkStep1 extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('businessModel',  Const.RULE)(
-                    <TextArea placeholder='包括产品定位、目标群体、盈利模式、商业壁垒、内容资源、渠道资源、技术资源和客户资源等，限200字' style={{height: 240}}
-                              maxLength={200}/>
+                    <TextArea placeholder='包括产品定位、目标群体、盈利模式、商业壁垒、内容资源、渠道资源、技术资源和客户资源等' style={{height: 240}}/>
                   )}
                 </Form.Item>
                 <Form.Item
@@ -569,7 +570,7 @@ class ParkStep1 extends React.Component {
                   wrapperCol={{span: 24}}
                 >
                   {getFieldDecorator('wants',  Const.RULE)(
-                    <TextArea placeholder='申请工位数量、融资、培训等特殊需求说明，限100字' style={{height: 240}} maxLength={100}/>
+                    <TextArea placeholder='申请工位数量、融资、培训等特殊需求说明' style={{height: 240}}/>
                   )}
                 </Form.Item>
               </Form>

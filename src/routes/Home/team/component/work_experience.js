@@ -41,9 +41,7 @@ class WorkExperience extends React.Component{
         return
       }
       const data = getFieldsValue();
-      if(itemKey){
-        data.itemKey = itemKey;
-      }
+      data.itemKey = itemKey;
       onOk(data)
     })
   };
@@ -96,7 +94,7 @@ class WorkExperience extends React.Component{
                 rules: [{message: '请输入主要工作'}],
               })(
                 <Input.TextArea placeholder='请输入主要工作' style={{height: 240}}
-                          maxLength={200}/>
+                         />
               )}
             </Form.Item>
             </Col>

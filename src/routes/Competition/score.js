@@ -8,6 +8,7 @@ import {Form, Input, message} from "antd";
 import {connect} from "dva";
 import {equalResultStatus} from "../../utils";
 import {saveScore} from "../../services/competition";
+import {routerRedux} from 'dva/router';
 import qs from "qs";
 
 
@@ -63,7 +64,7 @@ class Score extends React.Component {
   }
 
   submit = () => {
-    const {form, history, location} = this.props;
+    const {form, history, location, dispatch} = this.props;
     const {validateFieldsAndScroll} = form;
     validateFieldsAndScroll((err, values) => {
       if (!err) {
@@ -78,7 +79,10 @@ class Score extends React.Component {
         saveScore(values).then(({data}) => {
           if (equalResultStatus(data)) {
             message.success('评分成功！');
-            history.push('/home/match');
+            dispatch(routerRedux.push({
+                pathname: '/home/match'
+            }))
+
           } else {
             message.error(data.message);
           }
@@ -173,7 +177,7 @@ class Score extends React.Component {
                   <Form.Item style={{width: "100%"}}>
                   {getFieldDecorator('evaluation', {
                     rules: [{required: true, message: '请填写评价!'}],
-                    initialValue: params['evaluation'],
+                    initialValue: params['evaluation'] || '',
                   })(
                     <Input.TextArea style={{height: 275}}/>
                   )}

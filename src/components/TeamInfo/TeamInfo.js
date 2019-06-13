@@ -243,18 +243,20 @@ class TeamInfo extends React.Component {
                     <span className="item">{item.phone}</span>
                     <span className="item">宗教信仰：{item.faith}</span>
                     <span className="item">政治面貌：{item.politicalStatus}</span>
-                    <div className='fr' onClick={(e) => {
-                      this.onDel(e, index)
-                    }}>
-                      <i className="icon-del"/>
-                      <span className="edit">删除</span>
-                    </div>
-                    <i className="split fr"/>
-                    <div className='fr' onClick={(e) => {
-                      this.onEdit(e, index)
-                    }}>
-                      <i className="icon-edit"/>
-                      <span className="edit">编辑</span>
+                    <div>
+                      <div className='fr' onClick={(e) => {
+                        this.onDel(e, index)
+                      }}>
+                        <i className="icon-del"/>
+                        <span className="edit">删除</span>
+                      </div>
+                      <i className="split fr"/>
+                      <div className='fr' onClick={(e) => {
+                        this.onEdit(e, index)
+                      }}>
+                        <i className="icon-edit"/>
+                        <span className="edit">编辑</span>
+                      </div>
                     </div>
                   </div>
                 )

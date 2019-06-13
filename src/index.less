@@ -1168,10 +1168,12 @@
     border-radius:4px;
     line-height: 61px;
     padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
     .item{
-      margin-right: 30px;
       color: @deep-gray;
       font-size: 16px;
+      .ellipsis1();
     }
     .title{
       color: @deep-gray;
@@ -1180,7 +1182,6 @@
     .reward{
       color: @light-gray;
       font-size: 16px;
-      margin-left: 119px;
     }
     .edit, .del{
       font-size: 14px;

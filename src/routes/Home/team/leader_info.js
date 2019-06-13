@@ -410,20 +410,22 @@ class Team extends React.Component {
                             <span className="item">{item.profession}</span>
                             <span className="item">{item.education}</span>
                             <span className="item">{item.learningForm}</span>
-                            <div className='fr' onClick={(e) => {
-                              this.onDel(e, index, 1)
-                            }}>
-                              <i className="icon-del"/>
-                              <span className="edit">删除</span>
+                            <div>
+                              <div className='fr' onClick={(e) => {
+                                this.onDel(e, index, 1)
+                              }}>
+                                <i className="icon-del"/>
+                                <span className="edit">删除</span>
+                              </div>
+                              <i className="split fr"/>
+                              <div className='fr' onClick={(e) => {
+                                this.onEdit(index,1)
+                              }}>
+                                <i className="icon-edit"/>
+                                <span className="edit">编辑</span>
+                              </div>
                             </div>
-                            <i className="split fr"/>
-                            <div className='fr' onClick={(e) => {
-                              this.onEdit(index,1)
-                            }}>
-                              <i className="icon-edit"/>
-                              <span className="edit">编辑</span>
                             </div>
-                          </div>
                           <div className='self-add'>
                             <span className="item">证明人及电话：{item.witness}</span>
                           </div>
@@ -443,18 +445,20 @@ class Team extends React.Component {
                           <div className='self-add'>
                             <span className="item">{item.match}</span>
                             <span className="item">{item.rate}</span>
-                            <div className='fr' onClick={(e) => {
-                              this.onDel(e, index, 2)
-                            }}>
-                              <i className="icon-del"/>
-                              <span className="edit">删除</span>
-                            </div>
-                            <i className="split fr"/>
-                            <div className='fr' onClick={(e) => {
-                              this.onEdit(index, 2)
-                            }}>
-                              <i className="icon-edit"/>
-                              <span className="edit">编辑</span>
+                            <div>
+                              <div className='fr' onClick={(e) => {
+                                this.onDel(e, index, 2)
+                              }}>
+                                <i className="icon-del"/>
+                                <span className="edit">删除</span>
+                              </div>
+                              <i className="split fr"/>
+                              <div className='fr' onClick={(e) => {
+                                this.onEdit(index, 2)
+                              }}>
+                                <i className="icon-edit"/>
+                                <span className="edit">编辑</span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -483,18 +487,20 @@ class Team extends React.Component {
                             <span className="item">{item.date}</span>
                             <span className="item">{item.unit}</span>
                             <span className="item">{item.position}</span>
-                            <div className='fr' onClick={(e) => {
-                              this.onDel(e, index, 3)
-                            }}>
-                              <i className="icon-del"/>
-                              <span className="edit">删除</span>
-                            </div>
-                            <i className="split fr"/>
-                            <div className='fr' onClick={(e) => {
-                              this.onEdit(index,3)
-                            }}>
-                              <i className="icon-edit"/>
-                              <span className="edit">编辑</span>
+                            <div>
+                              <div className='fr' onClick={(e) => {
+                                this.onDel(e, index, 3)
+                              }}>
+                                <i className="icon-del"/>
+                                <span className="edit">删除</span>
+                              </div>
+                              <i className="split fr"/>
+                              <div className='fr' onClick={(e) => {
+                                this.onEdit(index,3)
+                              }}>
+                                <i className="icon-edit"/>
+                                <span className="edit">编辑</span>
+                              </div>
                             </div>
                           </div>
                           <div className='self-add'>
@@ -542,7 +548,7 @@ class Team extends React.Component {
                     rules: [{required: true, message: '请输入社会关系'}],
                   })(
                     <Input.TextArea placeholder='请输入社会关系' style={{height: 240}}
-                              maxLength={200}/>
+                              />
                   )}
                 </Form.Item>
                 <Form.Item
@@ -554,7 +560,7 @@ class Team extends React.Component {
                     rules: [{required: true, message: '请输入其他能力说明'}],
                   })(
                     <Input.TextArea placeholder='请输入其他能力说明' style={{height: 240}}
-                                    maxLength={200}/>
+                                    />
                   )}
                 </Form.Item>
                 <Form.Item
@@ -566,7 +572,7 @@ class Team extends React.Component {
                     rules: [{required: true, message: '请输入创业愿景'}],
                   })(
                     <Input.TextArea placeholder='请输入创业愿景' style={{height: 240}}
-                                    maxLength={200}/>
+                                   />
                   )}
                 </Form.Item>
               </Form>
