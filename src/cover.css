@@ -202,4 +202,7 @@
 :global .ant-modal-confirm-body-wrapper .ant-modal-confirm-btns .ant-btn-primary {
   background: linear-gradient(to right, #00acaf, #0771bb);
 }
+:global .ql-toolbar.ql-snow + .ql-container.ql-snow {
+  height: 200px;
+}
 /*# sourceMappingURL=cover.css.map */

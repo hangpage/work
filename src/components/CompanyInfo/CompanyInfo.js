@@ -13,6 +13,7 @@ import DynamicFieldSet from "../DynamicFieldSet/DynamicFieldSet";
 import moment from "moment";
 import {isEqual} from "lodash";
 import {NUMBER_VALIDATE, validateNoChinese} from "../../utils/validate";
+import RichInput from "../RichInput";
 
 const {TextArea} = Input;
 
@@ -247,7 +248,7 @@ class CompanyInfo extends React.Component {
                 rules: [{required: true, message: '请填写'}],
                 initialValue: initialValueMap.intro
               })(
-                <TextArea placeholder='请输入团队简要介绍...' style={{height: 240}} disabled={formDisabledStatus}/>
+                <RichInput placeholder='请输入团队简要介绍...' style={{height: 240}} disabled={formDisabledStatus}/>
               )}
             </Form.Item>
             <Form.Item
@@ -259,7 +260,7 @@ class CompanyInfo extends React.Component {
                 rules: [{required: true, message: '请填写'}],
                 initialValue: initialValueMap.business
               })(
-                <TextArea placeholder='请输入团队主营业务...' style={{height: 240}} disabled={formDisabledStatus}/>
+                <RichInput placeholder='请输入团队主营业务...' style={{height: 240}} disabled={formDisabledStatus}/>
               )}
             </Form.Item>
             <Form.Item
@@ -271,7 +272,7 @@ class CompanyInfo extends React.Component {
                 rules: [{required: this.state.isRegistRequired, message: '请填写'}],
                 initialValue: initialValueMap.businessRegistration
               })(
-                <TextArea placeholder='请输入团队工商注册情况...' style={{height: 240}} disabled={formDisabledStatus}/>
+                <RichInput placeholder='请输入团队工商注册情况...' style={{height: 240}} disabled={formDisabledStatus}/>
               )}
             </Form.Item>
             <div className="text-align">

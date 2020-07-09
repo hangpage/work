@@ -19,6 +19,8 @@ Const.DEV_URL = 'http://39.104.109.31';
 
 Const.PRO_URL = 'http://58.129.246.43';
 
+const URL = 'http://dcy.bjbys.net.cn/#/index';
+
 
 Const.TEST_COUNT = '13240134970';
 
